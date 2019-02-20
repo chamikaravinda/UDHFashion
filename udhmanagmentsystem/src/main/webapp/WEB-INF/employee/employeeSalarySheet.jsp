@@ -13,29 +13,38 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>View WholeSale Shop</title>
+<title>Salary Sheet</title>
 </head>
 <body>
 
 
-	</br>
-	</br>
-	</br>
-	</br>
+	
 	<div class="content-page">
 
 		<!-- Start content -->
 		<div class="content">
 
 			<div class="container-fluid">
+			
+			<div class="row">
+					<div class="col-xl-12">
+						<div class="breadcrumb-holder">
+							<h1 class="main-title float-left">Employee Salary Sheets</h1>
+							<ol class="breadcrumb float-right">
+								<li class="breadcrumb-item">Home</li>
+								<li class="breadcrumb-item active">SalarySheets</li>
+							</ol>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
 
 				<div class="row">
 
 					<div class="col-md-12">
 						<div class="card mb-3">
 							<div class="col-md-12a">
-								<a href="addShop" class="btn btn-primary" style="margin:10px"
-									role="button" aria-pressed="true">Add</a>
+								
 
 							</div>
 
@@ -45,29 +54,29 @@
 										class="table table-bordered table-hover display">
 										<thead>
 											<tr>
-												<th>Shop No</th>
-												<th>Shop Name</th>
-												<th>Address</th>
-												<th>Telephone</th>
-
-												<td><span><i class="fa fa-pencil-square"
-														aria-hidden="true"></i></span></td>
-												<td><span><i class="fa fa-trash"
-														aria-hidden="true"></i></span></td>
+												<th>Worker No</th>
+												<th>Worker Name</th>
+												<th>AbsentDay</th>
+												<th>Total Business</th>
+												<th>Bonus</th>
+												<th>Monthly Basic</th>
+												<th>Basic Salary</th>
+												<th>Total Salary</th>
 											</tr>
 										</thead>
 										<tbody>
 			
-											<c:forEach var="result" items = "${shopList}">
+											<c:forEach var="result" items = "">
 												<tr>
-         											<td> ${result.shopId} </td>	
-         											<td> ${result.shopName} </td>	
-         											<td> ${result.shopAddress} </td>	
-         											<td> ${result.shopTelephone} </td>
-         											<td> </td>
+         											<td></td>	
+         											<td></td>	
+         											<td></td>	
+         											<td></td>
+         											<td></td>
+         											<td></td>
          											<td> 	
          												<form method = "POST" action = "deleteShop" modelAttribute="shop">
-         													<input name = "shopId" type = "hidden" value = "${result.shopId}" >
+         													<input name = "shopId" type = "hidden" value = "" >
          													<button type="submit" al class="btn btn-primary">Delete</button>
          												</form>
          											</td>	
@@ -96,5 +105,4 @@
 		</div>
 </body>
 </html>
-<%@ include file="../includes/footer.jsp"%>le="../includes/footer.jsp"
-%>
+<%@ include file="../includes/footer.jsp"%>

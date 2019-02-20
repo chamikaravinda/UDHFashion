@@ -112,7 +112,6 @@
 
 
 								<h3 style = "color : red" > ${errorMessage} </h3>
-								<h4 style = "" > Barcode Amount : ${count}</h4>
 								<form method="POST" action="generateBarcode"
 									modelAttribute="barcode">
 									<div class="form-group">

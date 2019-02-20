@@ -7,7 +7,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<title>Pike Admin - Free Bootstrap 4 Admin Template</title>
+		<title>UDM Fashions ,Powered By Nova Solutions</title>
 		<meta name="description" content="Free Bootstrap 4 Admin Theme | Pike Admin">
 		<meta name="author" content="Pike Web Development - https://www.pikephp.com">
 
@@ -51,91 +51,15 @@
 
 		<!-- LOGO -->
         <div class="headerbar-left">
-			<a href="index.html" class="logo"><span><strong>UDH</strong> Fashion</span></a>
+			<a href="#" class="logo"> <span>UDM Fashions</span></a>
         </div>
 
         <nav class="navbar-custom">
 
                     <ul class="list-inline float-right mb-0">
 
-						<li class="list-inline-item dropdown notif">
-                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="fa fa-fw fa-question-circle"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-arrow-success dropdown-lg">
-                                <!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5><small>Help and Support</small></h5>
-                                </div>
-
-                                <!-- item-->
-                                <a target="_blank" href="https://www.pikeadmin.com" class="dropdown-item notify-item">                                    
-                                    <p class="notify-details ml-0">
-                                        <b>Do you want custom development to integrate this theme?</b>
-                                        <span>Contact Us</span>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a target="_blank" href="https://www.pikeadmin.com/pike-admin-pro" class="dropdown-item notify-item">                                    
-                                    <p class="notify-details ml-0">
-                                        <b>Do you want PHP version of the theme that save dozens of hours of work?</b>
-                                        <span>Try Pike Admin PRO</span>
-                                    </p>
-                                </a>                               
-
-                                <!-- All-->
-                                <a title="Clcik to visit Pike Admin Website" target="_blank" href="https://www.pikeadmin.com" class="dropdown-item notify-item notify-all">
-                                    <i class="fa fa-link"></i> Visit Pike Admin Website
-                                </a>
-
-                            </div>
-                        </li>
-						
-                        <li class="list-inline-item dropdown notif">
-                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="fa fa-fw fa-envelope-o"></i><span class="notif-bullet"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-arrow-success dropdown-lg">
-                                <!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5><small><span class="label label-danger pull-xs-right">12</span>Contact Messages</small></h5>
-                                </div>
-
-                                <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">                                    
-                                    <p class="notify-details ml-0">
-                                        <b>Jokn Doe</b>
-                                        <span>New message received</span>
-                                        <small class="text-muted">2 minutes ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">                                    
-                                    <p class="notify-details ml-0">
-                                        <b>Michael Jackson</b>
-                                        <span>New message received</span>
-                                        <small class="text-muted">15 minutes ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">                                    
-                                    <p class="notify-details ml-0">
-                                        <b>Foxy Johnes</b>
-                                        <span>New message received</span>
-                                        <small class="text-muted">Yesterday, 13:30</small>
-                                    </p>
-                                </a>
-
-                                <!-- All-->
-                                <a href="#" class="dropdown-item notify-item notify-all">
-                                    View All
-                                </a>
-
-                            </div>
-                        </li>
+					
+                        
                         
 						<li class="list-inline-item dropdown notif">
                             <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -143,50 +67,10 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-lg">
 								<!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5><small><span class="label label-danger pull-xs-right">5</span>Allerts</small></h5>
-                                </div>
-								
-                                <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-faded">
-                                        <img src="assets/images/avatars/avatar2.png" alt="img" class="rounded-circle img-fluid">
-                                    </div>
-                                    <p class="notify-details">
-                                        <b>John Doe</b>
-                                        <span>User registration</span>
-                                        <small class="text-muted">3 minutes ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-faded">
-                                        <img src="assets/images/avatars/avatar3.png" alt="img" class="rounded-circle img-fluid">
-                                    </div>
-                                    <p class="notify-details">
-                                        <b>Michael Cox</b>
-                                        <span>Task 2 completed</span>
-                                        <small class="text-muted">12 minutes ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-faded">
-                                        <img src="assets/images/avatars/avatar4.png" alt="img" class="rounded-circle img-fluid">
-                                    </div>
-                                    <p class="notify-details">
-                                        <b>Michelle Dolores</b>
-                                        <span>New job completed</span>
-                                        <small class="text-muted">35 minutes ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- All-->
-                                <a href="#" class="dropdown-item notify-item notify-all">
-                                    View All Allerts
-                                </a>
+                              
+                               
+                             
+                               
 
                             </div>
                         </li>
@@ -244,22 +128,59 @@
 			<ul>
 
 					<li class="submenu">
-						<a href="/"><i class="fa fa-fw fa-bars"></i><span>Dashboard</span> </a>
-                    </li>
-
-					<li class="submenu">
-                        <a href="stockView"><i class="fa fa-fw fa-area-chart"></i><span> Stocks </span> </a>
+						<a href="#"><i class="fa fa-fw fa-bars"></i><span>Dashboard</span> </a>
                     </li>
                     
-                    
-                      <li class="submenu">
-                        <a href="#"><i class="fa fa-fw fa-tv"></i> <span> Whole Sales Shop </span> <span class="menu-arrow"></span></a>
+                    <li class="submenu">
+                        <a href="#"><i class="fa fa-users" ></i> <span> Suppliers </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="addShop">Add shop</a></li>
-                                <li><a href="viewShop">View Shop</a></li>
+                                <li><a href="addShop"><i class="fa fa-plus-square"></i>Add Suppliers</a></li>
+                                <li><a href="viewShop"><i class="fa fa-eye"></i>View Suppliers</a></li>
+                    <li class="submenu">
+                        <a href="#"><i class="fa fa-briefcase"></i><span>Accounts</span><span class="menu-arrow"></span></a>
+		                            <ul class="list-unstyled">
+		                                <li><a href="creditBills"><i class="fa fa-credit-card-alt"></i>Credit Bills</a></li>
+		                                <li><a href="#"><i class="fa fa-check-square"></i>Paid Bills</a></li>
+		                                <li><a href="cashPayments"><i class="fa fa-money"></i>Cash Payments</a></li>
+		                                 <li><a href="addCheques"><i class="fa fa-paper-plane"></i>Cheque Pay</a></li>
+		                            
+		                            </ul>
+                    </li>
                             
                             </ul>
                     </li>
+
+					<li class="submenu">
+                        <a href="stockView"><i class="fa fa-cubes"></i><span> Stocks </span> </a>
+                    </li>
+                    
+                    
+                    <li class="submenu">
+                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>Employee</span><span class="menu-arrow"></span></a>
+		                            <ul class="list-unstyled">
+		                                <li><a href="addEmployee"><i class="fa fa-plus-square"></i>Add Employee</a></li>
+                            		    <li><a href="viewEmployee"><i class="fa fa-eye"></i>View Employee</a></li>
+                            		    <li><a href="employeeSalarySheet"><i class="fa fa-eye"></i>Salary Sheets</a></li>
+		                            
+		                            </ul>
+                    </li>
+                    
+                    
+                    
+                    
+                     <li class="submenu">
+                        <a href="#"><i class="fa fa-user" ></i><span>Expenditures</span><span class="menu-arrow"></span></a>
+		                            <ul class="list-unstyled">
+		                                <li><a href="addShopExpenditures"><i class="fa fa-plus-square"></i>Shop Exp:</a></li>
+                            		    <li><a href="addPersonalExpenditures"><i class="fa fa-plus-square"></i>Personal</a></li>
+                            		  
+		                            
+		                            </ul>
+                    </li>
+                    
+                    
+                    
+                      
                 </ul>
 
             <div class="clearfix"></div>

@@ -58,65 +58,77 @@
 						<div class="card-body">
 
 							<form method="POST" autocomplete="off" action="submitStock"
-								modelAttribute="stock" onsubmit="return validator()>
+								modelAttribute="stock"
+								onsubmit="return validator()>
 
 
 
 								<!--div class="form-row">
-							
+
 								</div-->
+								<section>
 
-								<div class="form-group">
-									<label for="sel1">Shop No</label> 
-									<select name = "shopId" class="form-control" id="shopId" required>
-			
-										<c:forEach var="result" items = "${shopList}">
-										
-											<option> ${result.shopId}</option>
+									<div class="form-group">
+										<label for="sel1">Shop No</label> <select name="shopId"
+											class="form-control" id="shopId" required>
 
-										</c:forEach>
-											
-									</select>
-								</div>
-								
-								<div class="form-row">
+											<c:forEach var="result" items="${shopList}">
+
+												<option>${result.shopId}</option>
+
+											</c:forEach>
+
+										</select>
+									</div>
+
+									<div class="form-row">
 										<label for="inputEmail4">Item Description</label> <input
 											name="itemDescription" type="text" class="form-control"
-											id="itemDescription" placeholder="Item Description" autocomplete="off" required>
-									</div>
-
-								<div class="form-row">
-									<div class="form-group col-md-4">
-										<label for="inputEmail4">Gross Price</label> <input
-											name="grossPrice" type="number" class="form-control"
-											id="grossPrice" placeholder="Gross Price" autocomplete="off" required>
-									</div>
-									<div class="form-group col-md-4">
-										<label for="inputPassword4">Price Tag Amount</label> <input
-											name="price" type="number" class="form-control"
-											id="tagAmount" placeholder="Price Tag Amount"
-											autocomplete="off" required>
-									</div>
-									<div class="form-group col-md-4">
-										<label for="inputPassword4">Discount</label> <input
-											name="discount" type="number" class="form-control"
-											id="discount" placeholder="Discount"
-											autocomplete="off" required>
-									</div>
-								</div>
-								<div class="form-row">
-									
-									<div class="form-group col-md-4">
-										<label for="inputPassword4">Qty</label> <input
-											name="itemQuantity" type="number" class="form-control"
-											id="quantity" placeholder="Quantity"
+											id="itemDescription" placeholder="Item Description"
 											autocomplete="off" required>
 									</div>
 
+									<div class="form-row">
+										<div class="form-group col-md-4">
+											<label for="inputEmail4">Gross Price</label> <input
+												name="grossPrice" type="number" class="form-control"
+												id="grossPrice" placeholder="Gross Price" autocomplete="off"
+												required>
+										</div>
+										<div class="form-group col-md-4">
+											<label for="inputPassword4">Price Tag Amount</label> <input
+												name="price" type="number" class="form-control"
+												id="tagAmount" placeholder="Price Tag Amount"
+												autocomplete="off" required>
+										</div>
+										<div class="form-group col-md-4">
+											<label for="inputPassword4">Discount</label> <input
+												name="discount" type="number" class="form-control"
+												id="discount" placeholder="Discount" autocomplete="off"
+												required>
+										</div>
+									</div>
+									<div class="form-row">
 
-								</div>
+										<div class="form-group col-md-4">
+											<label for="inputPassword4">Quantity</label> <input
+												name="itemQuantity" type="number" class="form-control"
+												id="quantity" placeholder="Quantity" autocomplete="off"
+												required>
+										</div>
 
-								<button type="submit" class="btn btn-primary">Add Stock</button>
+
+									</div>
+									<div style="margin-left: 500px">
+										<button type="submit" class="btn btn-primary">Add
+											Stock</button>
+
+									</div>
+
+
+								</section>
+
+
 							</form>
 
 						</div>

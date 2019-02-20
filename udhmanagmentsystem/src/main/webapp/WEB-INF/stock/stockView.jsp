@@ -19,11 +19,11 @@
 					<div class="col-md-12">
 						<div class="card mb-3">
 							<div class="col-md-12a">
-								<a href="addStock" class="btn btn-primary btn-lg active"
+								<a href="addStock" class="btn btn-primary" Style="margin:10px"
 									role="button" aria-pressed="true">Add</a> 
 									
 									<a href="barcodeGenerateView"
-									class="btn btn-primary btn-lg active" role="button"
+									class="btn btn-primary" Style="margin:10px" role="button"
 									aria-pressed="true">Generate Barcodes</a>
 							</div>
 
@@ -64,12 +64,7 @@
 													<td>${result.netProfit}</td>
 													<td>${result.estimatedNetProfit}</td>
 													<td>${result.shopId}</td>
-													<td>
-														<form method = "POST" action = "editItem" modelAttribute="item">
-         													<input name = "itemCode" type = "hidden" value = "${result.itemCode}" >
-         													<button type="submit" al class="btn btn-primary">Update</button>
-         												</form>
-													</td>
+													<td></td>
 													<td>
 														<form method = "POST" action = "deleteItem" modelAttribute="item">
          													<input name = "itemCode" type = "hidden" value = "${result.itemCode}" >

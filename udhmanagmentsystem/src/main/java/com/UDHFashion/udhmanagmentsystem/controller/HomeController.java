@@ -91,21 +91,11 @@ public class HomeController {
 	/*----------------Getting the values of the stock from the form --------------------------*/
 	@RequestMapping(value = "/generateBarcode", method = RequestMethod.POST)
 	public String submitStockDetails(@ModelAttribute("barcode") Barcode barcode, ModelMap model) {
-		int count = 0;
-		
+
 		if( iBarcode.isBarcordRecorded(barcode.getItemCode())) {
 			
 			List<Item> item = iItem.getAllItemDetails();
 
-			List<Barcode> barcodeList = iBarcode.getAllBarcodeDetails();
-			
-			
-			for( Barcode barcodeGetter : barcodeList ) {
-				count += barcodeGetter.getQuantity();
-			}
-			
-			
-			model.addAttribute("count", count);
 			model.addAttribute("itemList", item);
 			model.addAttribute("errorMessage", "*You have already added this item *");
 			
@@ -124,14 +114,6 @@ public class HomeController {
 				
 				List<Item> item = iItem.getAllItemDetails();
 
-				List<Barcode> barcodeList = iBarcode.getAllBarcodeDetails();
-				
-				
-				for( Barcode barcodeGetter : barcodeList ) {
-					count += barcodeGetter.getQuantity();
-				}
-				
-				model.addAttribute("count", count);
 				model.addAttribute("itemList", item);
 				model.addAttribute("errorMessage", "");
 				
@@ -140,15 +122,6 @@ public class HomeController {
 
 				List<Item> item = iItem.getAllItemDetails();
 
-				List<Barcode> barcodeList = iBarcode.getAllBarcodeDetails();
-				
-				
-				for( Barcode barcodeGetter : barcodeList ) {
-					count += barcodeGetter.getQuantity();
-				}
-				
-				
-				model.addAttribute("count", count);
 				model.addAttribute("itemList", item);
 				model.addAttribute("errorMessage", "*Invalid Item Code*");
 				
@@ -197,41 +170,6 @@ public class HomeController {
 		return "shop/viewShop";
 	}
 	
-	/*----------------------------- Ediet Item Data -------------------------*/
-	@RequestMapping(value = "/editItem", method = RequestMethod.POST)
-	public String editItem(@ModelAttribute("item") Item item, ModelMap model ) {
-		
-		String itemCode = item.getItemCode();
-		System.out.println("Returned Item Code : " + itemCode );
-		
-		Item returnItem = iItem.getItemById(itemCode);
-		
-		System.out.println("Returned Item Description : " + returnItem.getItemDescription());
-		
-		List<Shop> shop = iShop.getAllShopsDetails();
-		
-		model.addAttribute("shopList",shop);
-		
-		model.addAttribute("returnItem",returnItem);
-		return "stock/editItem";
-	}
-	
-	@RequestMapping(value = "/updateStock", method = RequestMethod.POST)
-	public String updateItem(@ModelAttribute("item") Item item, ModelMap model ) {
-		
-		iItem.updateItemDetails(item);
-		System.out.println("Description : " + item.getItemCode() );
-		
-		List<Item> itemList = iItem.getAllItemDetails();
-
-		System.out.println("Item LIst : "+itemList.get(0).getItemCode() );
-		
-		model.addAttribute("stockList", itemList);
-		
-		return "stock/stockView";
-	}
-	
-	
 	/*----------------------------- Delete Barcode Item Data -------------------------*/
 	@RequestMapping(value = "/deleteBarcodeItem", method = RequestMethod.POST)
 	public String deleteBarcodeEntry(@ModelAttribute("barcode") Barcode barcode, ModelMap model ) {
@@ -271,6 +209,11 @@ public class HomeController {
 		return "shop/viewShop";
 	}
 
+	
+
+	
+	
+	
 	
 	@RequestMapping(value = "/addStock", method = RequestMethod.GET)
 	public String addStock(Model model) {

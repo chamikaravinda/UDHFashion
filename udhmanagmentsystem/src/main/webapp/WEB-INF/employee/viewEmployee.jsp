@@ -34,7 +34,7 @@
 					<div class="col-md-12">
 						<div class="card mb-3">
 							<div class="col-md-12a">
-								<a href="addShop" class="btn btn-primary" style="margin:10px"
+								<a href="addEmployee" class="btn btn-primary" style="margin:10px"
 									role="button" aria-pressed="true">Add</a>
 
 							</div>
@@ -45,10 +45,11 @@
 										class="table table-bordered table-hover display">
 										<thead>
 											<tr>
-												<th>Shop No</th>
-												<th>Shop Name</th>
+												<th>Employee No</th>
+												<th>Employee Name</th>
 												<th>Address</th>
 												<th>Telephone</th>
+												<th>Guardian Telephone</th>
 
 												<td><span><i class="fa fa-pencil-square"
 														aria-hidden="true"></i></span></td>
@@ -58,16 +59,17 @@
 										</thead>
 										<tbody>
 			
-											<c:forEach var="result" items = "${shopList}">
+											<c:forEach var="result" items = "">
 												<tr>
-         											<td> ${result.shopId} </td>	
-         											<td> ${result.shopName} </td>	
-         											<td> ${result.shopAddress} </td>	
-         											<td> ${result.shopTelephone} </td>
+         											<td>  </td>	
+         											<td>  </td>	
+         											<td> </td>	
+         											<td>  </td>
+         											<td> </td>
          											<td> </td>
          											<td> 	
          												<form method = "POST" action = "deleteShop" modelAttribute="shop">
-         													<input name = "shopId" type = "hidden" value = "${result.shopId}" >
+         													<input name = "shopId" type = "hidden" value = "" >
          													<button type="submit" al class="btn btn-primary">Delete</button>
          												</form>
          											</td>	

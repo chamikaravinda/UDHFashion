@@ -52,10 +52,10 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="breadcrumb-holder">
-							<h1 class="main-title float-left">Add Whole Sale Shop</h1>
+							<h1 class="main-title float-left">Add Employee</h1>
 							<ol class="breadcrumb float-right">
 								<li class="breadcrumb-item">Home</li>
-								<li class="breadcrumb-item active">shop</li>
+								<li class="breadcrumb-item active">Employee</li>
 							</ol>
 							<div class="clearfix"></div>
 						</div>
@@ -70,33 +70,40 @@
 
 							<div class="card-body">
 
-								<form method="POST" action="submitShop" modelAttribute="shop"
+								<form method="POST" action="viewEmployee" modelAttribute="employee"
 									onsubmit="return validator()">
 
 
 									<div class="form-group">
-										<label for="exampleInputEmail1">Shop Name</label> <input
-											type="text" name="shopName" class="form-control"
-											id="shopName" aria-describedby="emailHelp"
-											placeholder="Shop Name" required> <small
-											id="emailHelp" class="form-text text-muted">Whole
-											sales</small>
+										<label for="exampleInputEmail1">Employee No </label> <input
+											type="number" name="empNo" class="form-control"
+											id="employeeNo" aria-describedby="emailHelp"
+											placeholder="Employee No" required> 
 									</div>
 									<div class="form-group">
-										<label for="exampleInputEmail1">Address</label> <input
+										<label for="exampleInputEmail1">Employee Name</label> <input
 											type="text" name="shopAddress" class="form-control"
-											id="shopAddress" aria-describedby="numberlHelp"
-											placeholder="Shop Address" required>
+											id="empName" aria-describedby="numberlHelp"
+											placeholder="Employee Name" required>
 
 									</div>
 									<div class="form-group">
-										<label for="exampleInputPassword1">Telephone</label> <input
-											type="number" name="shopTelephone" class="form-control"
-											id="shopTele" placeholder="Telephone Number" required>
+										<label for="exampleInputPassword1">Address</label> <input
+											type="text" name="shopTelephone" class="form-control"
+											id="address" placeholder="Address" required>
 									</div>
-
+										<div class="form-group">
+										<label for="exampleInputPassword1">Telephone</label> <input
+											type="number" name="eTel" class="form-control"
+											id="eTel" placeholder="Telephone" required>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Guardian Telephone</label> <input
+											type="number" name="gTel" class="form-control"
+											id="gTel" placeholder="Guardian Telephone" required>
+									</div>
 									<div style="margin-left: 500px">
-										<button type="submit" class="btn btn-primary">AddShop</button>
+										<button type="submit" class="btn btn-primary">Add Employee</button>
 									</div>
 
 								</form>
