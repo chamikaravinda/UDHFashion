@@ -35,3 +35,15 @@ CREATE TABLE temp_barcode_data
     CONSTRAINT pk_tem_barcode_data PRIMARY KEY(code),
     CONSTRAINT fk_tem_barcode_data FOREIGN KEY(code) REFERENCES item(code) ON DELETE CASCADE
 );
+
+CREATE TABLE users
+(
+	id INT AUTO_INCREMENT NOT NULL, 
+	fname VARCHAR(30),
+    lname VARCHAR(30),
+    username VARCHAR(30),
+    password VARCHAR(30),
+    role VARCHAR(30),
+ 
+     CONSTRAINT user_pk PRIMARY KEY(id)
+);
