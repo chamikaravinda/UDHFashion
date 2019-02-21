@@ -32,5 +32,9 @@ public class CommonConstants {
 	public final static String GET_ALL_BARCODE_DATA = "SELECT * FROM temp_barcode_data";
 	public final static String DELETE_BARCODE_DATA = "DELETE FROM temp_barcode_data WHERE code = ?";
 	public final static String GET_BARCODE_DATA_BY_ID = "SELECT * FROM temp_barcode_data WHERE code = ?";
+	
+	/*---------------------------User queries-------------------------------*/
+	public final static String GET_USER_IS_VALID = "SELECT * FROM users WHERE username = ? AND password = ?";
+
 }
 

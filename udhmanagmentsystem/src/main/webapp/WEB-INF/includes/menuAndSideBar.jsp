@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,6 +47,18 @@
 
 <body class="adminbody">
 
+	<%
+		response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");//HTTP 1.1
+
+		response.setHeader("Pragma", "no-cache");//HTTP 1.0;
+
+		response.setHeader("Expires", "0");//proxies
+
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect("login");
+		}
+	%>
+
 <div id="main">
 
 	<!-- top bar navigation -->
@@ -82,7 +97,7 @@
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                                 <!-- item-->
                                 <div class="dropdown-item noti-title">
-                                    <h5 class="text-overflow"><small>Hello, admin</small> </h5>
+                                    <h5 class="text-overflow"><small>Hello,<c:out value="${sessionScope.user.fname}"/></small> </h5>
                                 </div>
 
                                 <!-- item-->
@@ -91,7 +106,7 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
+                                <a href="logout" class="dropdown-item notify-item">
                                     <i class="fa fa-power-off"></i> <span>Logout</span>
                                 </a>
 
@@ -116,21 +131,17 @@
 
 	</div>
 	<!-- End Navigation -->
-	
- 
+
 	<!-- Left Sidebar -->
 	<div class="left main-sidebar">
 	
 		<div class="sidebar-inner leftscroll">
 
-			<div id="sidebar-menu">
-        
+			<div id="sidebar-menu">     
 			<ul>
-
 					<li class="submenu">
 						<a href="#"><i class="fa fa-fw fa-bars"></i><span>Dashboard</span> </a>
-                    </li>
-                    
+                    </li>                
                     <li class="submenu">
                         <a href="#"><i class="fa fa-users" ></i> <span> Suppliers </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
@@ -164,32 +175,17 @@
 		                            
 		                            </ul>
                     </li>
-                    
-                    
-                    
-                    
                      <li class="submenu">
                         <a href="#"><i class="fa fa-user" ></i><span>Expenditures</span><span class="menu-arrow"></span></a>
-		                            <ul class="list-unstyled">
-		                                <li><a href="addShopExpenditures"><i class="fa fa-plus-square"></i>Shop Exp:</a></li>
-                            		    <li><a href="addPersonalExpenditures"><i class="fa fa-plus-square"></i>Personal</a></li>
-                            		  
-		                            
-		                            </ul>
-                    </li>
-                    
-                    
-                    
-                      
+		                 <ul class="list-unstyled">
+		                    <li><a href="addShopExpenditures"><i class="fa fa-plus-square"></i>Shop Exp:</a></li>
+                            <li><a href="addPersonalExpenditures"><i class="fa fa-plus-square"></i>Personal</a></li>
+		                 </ul>
+                    </li>                   
                 </ul>
-
             <div class="clearfix"></div>
-
 			</div>
-        
 			<div class="clearfix"></div>
-
 		</div>
-
 	</div>
 	<!-- End Sidebar -->
