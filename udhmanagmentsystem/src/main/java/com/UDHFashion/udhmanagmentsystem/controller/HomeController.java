@@ -1,7 +1,7 @@
 package com.UDHFashion.udhmanagmentsystem.controller;
 
-import java.util.List;
-import java.util.Map;
+import java.util.List; 
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,18 +11,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.UDHFashion.udhmanagmentsystem.model.Barcode;
 import com.UDHFashion.udhmanagmentsystem.model.Item;
 import com.UDHFashion.udhmanagmentsystem.model.Shop;
+import com.UDHFashion.udhmanagmentsystem.model.User;
 import com.UDHFashion.udhmanagmentsystem.service.IBarcodeDAO;
 import com.UDHFashion.udhmanagmentsystem.service.IItemDAO;
 import com.UDHFashion.udhmanagmentsystem.service.IShopDAO;
-import com.UDHFashion.udhmanagmentsystem.service.ShopDAOImpl;
 import com.UDHFashion.udhmanagmentsystem.util.Generator;
 
 @Controller
+@SessionAttributes("user")
 public class HomeController {
 
 	@Autowired
@@ -34,12 +36,6 @@ public class HomeController {
 	@Autowired
 	IBarcodeDAO iBarcode;
 	
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String ShowLoginPage(ModelAndView model) {
-
-		return "home/login";
-	}
 	
 	/*---------------------change to barcode generating view-----------------*/
 	@RequestMapping(value = "/barcodeGenerateView", method = RequestMethod.GET )
