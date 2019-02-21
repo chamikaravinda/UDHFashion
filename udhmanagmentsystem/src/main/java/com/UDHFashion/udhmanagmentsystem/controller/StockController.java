@@ -132,25 +132,7 @@ public class StockController {
 	}
 	
 
-	@RequestMapping(value = "/addShop", method = RequestMethod.GET)
-	public String addWholeSaleShop(ModelAndView model) {
-
-		return "shop/addShop";
-	}
 	
-	/*----------------------------- Delete Shop Data -------------------------*/
-	@RequestMapping(value = "/deleteShop", method = RequestMethod.POST)
-	public String deleteShop(@ModelAttribute("shop") Shop shop, ModelMap model ) {
-		
-		int shopId = shop.getShopId();
-		
-		iShop.deleteShop(shopId);
-		
-		List<Shop> shopList = iShop.getAllShopsDetails();
-		
-		model.addAttribute("shopList",shopList);
-		return "shop/viewShop";
-	}
 	
 	/*----------------------------- Delete Barcode Item Data -------------------------*/
 	@RequestMapping(value = "/deleteBarcodeItem", method = RequestMethod.POST)
@@ -222,18 +204,7 @@ public class StockController {
 		return "stock/stockView";
 	}
 	
-	/*------------------Getting the values of the shop from the Form --------------------------*/
-	@RequestMapping(value = "/submitShop", method = RequestMethod.POST)
-	public String submitShopDetails(@ModelAttribute("shop") Shop shop, ModelMap model) {
-
-		iShop.insertShopDetails(shop);
-		//iShop.getAllShopsDetails();
-		List<Shop> shopList = iShop.getAllShopsDetails();
-		
-		model.addAttribute("shopList",shopList);
-		
-		return "shop/viewShop";
-	}
+	
 
 
 }

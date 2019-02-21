@@ -1,5 +1,6 @@
 package com.UDHFashion.udhmanagmentsystem.model;
 
+
 public class Shop {
 
 	public Integer shopId;

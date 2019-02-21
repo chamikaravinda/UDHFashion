@@ -59,17 +59,17 @@
 										</thead>
 										<tbody>
 			
-											<c:forEach var="result" items = "">
+											<c:forEach var="result" items = "${employeeList}">
 												<tr>
-         											<td>  </td>	
-         											<td>  </td>	
-         											<td> </td>	
-         											<td>  </td>
-         											<td> </td>
-         											<td> </td>
+         											<td>${result.empNo}</td>	
+         											<td>${result.empName}  </td>	
+         											<td>${result.empAddress} </td>	
+         											<td>${result.jobDate}  </td>
+         											<td>${result.contactNum} </td>
+         											<td>${result.gContactNum} </td>
          											<td> 	
-         												<form method = "POST" action = "deleteShop" modelAttribute="shop">
-         													<input name = "shopId" type = "hidden" value = "" >
+         												<form method = "POST" action = "deleteEmployee" modelAttribute="employee">
+         													<input name = "empNo" type = "hidden" value = "${result.empNo}" >
          													<button type="submit" al class="btn btn-primary">Delete</button>
          												</form>
          											</td>	
