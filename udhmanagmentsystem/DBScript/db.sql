@@ -36,6 +36,19 @@ CREATE TABLE temp_barcode_data
     CONSTRAINT fk_tem_barcode_data FOREIGN KEY(code) REFERENCES item(code) ON DELETE CASCADE
 );
 
+CREATE TABLE employee
+(
+	
+    
+    empNo VARCHAR(20),
+    empName VARCHAR(50),
+    empAddress VARCHAR(100),
+    jobDate DATE,
+    contactNum INT,
+    gContactNum INT,
+    
+	CONSTRAINT pk_item PRIMARY KEY(empNo),
+
 CREATE TABLE users
 (
 	id INT AUTO_INCREMENT NOT NULL, 
