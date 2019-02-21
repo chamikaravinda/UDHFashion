@@ -36,7 +36,6 @@ public class HomeController {
 	@Autowired
 	IBarcodeDAO iBarcode;
 	
-	
 	/*---------------------change to barcode generating view-----------------*/
 	@RequestMapping(value = "/barcodeGenerateView", method = RequestMethod.GET )
 	public String showBarcodeGeneratorView(Model model ) {
@@ -127,6 +126,7 @@ public class HomeController {
 		}
 
 	}
+
 	
 
 	@GetMapping("/home")
@@ -135,124 +135,5 @@ public class HomeController {
 
 		return "home/dashboard";
 	}
-
-	@RequestMapping(value = "/stockView", method = RequestMethod.GET)
-	public String ShowStockView(Model model) {
-		List<Item> item =  iItem.getAllItemDetails();
-		
-		model.addAttribute("stockList", item );
-		
-		return "stock/stockView";
-	}
-	
-
-	@RequestMapping(value = "/addShop", method = RequestMethod.GET)
-	public String addWholeSaleShop(ModelAndView model) {
-
-		return "shop/addShop";
-	}
-
-	/*----------------------------- Delete Shop Data -------------------------*/
-	@RequestMapping(value = "/deleteShop", method = RequestMethod.POST)
-	public String deleteShop(@ModelAttribute("shop") Shop shop, ModelMap model ) {
-		
-		int shopId = shop.getShopId();
-		
-		iShop.deleteShop(shopId);
-		
-		List<Shop> shopList = iShop.getAllShopsDetails();
-		
-		model.addAttribute("shopList",shopList);
-		return "shop/viewShop";
-	}
-	
-	/*----------------------------- Delete Barcode Item Data -------------------------*/
-	@RequestMapping(value = "/deleteBarcodeItem", method = RequestMethod.POST)
-	public String deleteBarcodeEntry(@ModelAttribute("barcode") Barcode barcode, ModelMap model ) {
-		
-		String itemCode = barcode.getItemCode();
-
-		iBarcode.deleteBarcodeData(itemCode);
-		
-		List<Barcode> barcodeList = iBarcode.getAllBarcodeDetails();
-		
-		model.addAttribute("barcodeList", barcodeList );
-		
-		return "stock/printBarcode";
-
-	}
-	
-	/*----------------------------- Delete Item Data -------------------------*/
-	@RequestMapping(value = "/deleteItem", method = RequestMethod.POST)
-	public String deleteShop(@ModelAttribute("item") Item item, ModelMap model ) {
-		
-		String itemCode = item.getItemCode();
-	
-		iItem.deleteItem(itemCode);
-		
-		List<Item> itemList = iItem.getAllItemDetails();
-		
-		model.addAttribute("stockList",itemList);
-		return "stock/stockView";
-	}
-	
-	@RequestMapping(value = "/viewShop", method = RequestMethod.GET)
-	public String viewShop(Model model) {
-		List<Shop> shop = iShop.getAllShopsDetails();
-			
-		model.addAttribute("shopList",shop);
-		
-		return "shop/viewShop";
-	}
-
-	
-
-	
-	
-	
-	
-	@RequestMapping(value = "/addStock", method = RequestMethod.GET)
-	public String addStock(Model model) {
-		List<Shop> shop = iShop.getAllShopsDetails();
-			
-		model.addAttribute("shopList",shop);
-			
-		return "stock/addStock";
-	}
-	
-	
-
-	/*----------------Getting the values of the stock from the form --------------------------*/
-	@RequestMapping(value = "/submitStock", method = RequestMethod.POST)
-	public String submitStockDetails(@ModelAttribute("item") Item item, ModelMap model) {
-
-		System.out.println("Net price : " +  item.getNetPrice());
-		
-		iItem.insertStockDetails(item);
-		
-		List<Shop> shop = iShop.getAllShopsDetails();
-		
-		model.addAttribute("shopList",shop);
-		
-		
-		List<Item> itemList = iItem.getAllItemDetails();
-		
-		model.addAttribute("stockList",itemList);
-		return "stock/stockView";
-	}
-	
-	/*------------------Getting the values of the shop from the Form --------------------------*/
-	@RequestMapping(value = "/submitShop", method = RequestMethod.POST)
-	public String submitShopDetails(@ModelAttribute("shop") Shop shop, ModelMap model) {
-
-		iShop.insertShopDetails(shop);
-		//iShop.getAllShopsDetails();
-		List<Shop> shopList = iShop.getAllShopsDetails();
-		
-		model.addAttribute("shopList",shopList);
-		
-		return "shop/viewShop";
-	}
-
 
 }
