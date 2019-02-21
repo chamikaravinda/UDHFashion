@@ -44,9 +44,10 @@ CREATE TABLE employee
     empNo VARCHAR(20),
     empName VARCHAR(50),
     empAddress VARCHAR(100),
-    jobDate DATE,
-    contactNum INT,
-    gContactNum INT,
+    basicSalary DOUBLE,
+    jobDate VARCHAR(20),
+    contactNum VARCHAR(10),
+    gContactNum VARCHAR(10),
     
 	CONSTRAINT pk_item PRIMARY KEY(empNo),
    
