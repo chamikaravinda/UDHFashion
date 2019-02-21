@@ -1,6 +1,8 @@
 package com.UDHFashion.udhmanagmentsystem.controller;
 
-import javax.servlet.http.HttpServletRequest; 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,19 +30,28 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String showDashboard(HttpServletRequest request , @ModelAttribute("user") User user) {
+	public ModelAndView ShowDashboard(HttpServletRequest request,ModelAndView model , @ModelAttribute("user") User user) {
 		User validUser=userService.isValidUser(user);
 		
 		if(validUser != null) {			
 			request.getSession().setAttribute("user",validUser);		
-			return "home/dashboard";
+			model.setViewName("home/dashboard");
+			return model;
 		}else {
-			return "home/login";	
+			model.addObject("error","Invalid User Name or Password");
+			model.setViewName("home/login");
+			return model;
 		}
 		
 	}
 	
-	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String LogOut(HttpServletRequest request) {
+		
+		HttpSession session= request.getSession();
+		session.invalidate();
+		return "redirect:/login";
+	}
 	
 	
 }

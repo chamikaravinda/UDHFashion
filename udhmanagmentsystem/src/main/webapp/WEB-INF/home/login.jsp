@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -144,7 +145,13 @@ body {
               <fieldset class="form-group">
                 <form:input type="password" path="password" class="form-control" placeholder="Password" required="required"/>
               </fieldset>
-
+				
+				<!--  error message -->
+				<c:if test="${error != null}">
+					<div class="alert alert-danger" role="alert">
+					 <c:out value="${error}"/>
+					</div>
+				</c:if>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
               <hr class="my-4">
               </form:form>
