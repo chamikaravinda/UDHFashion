@@ -1,12 +1,146 @@
+
+<%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script>
+	function validator() {
+
+		var shopName = document.getElementById("shopName").value;
+		var shopAddress = document.getElementById("shopAddress").value;
+		var shopTele = document.getElementById("shopTele").value;
+
+		if (shopName == null || shopName == "") {
+			alert("Please Enter a shop name ");
+			return false;
+		}
+
+		if (shopAddress == null || shopAddress == "") {
+			alert("Please Enter a shop name ");
+			return false;
+		}
+
+		if (shopTele == null || shopTele == "") {
+			alert("Please enter a shop telephone number ");
+			return false;
+		}
+
+		if (shopTele.length != 10) {
+			alert("Telephone number must contain 10 characters");
+			return false;
+		}
+	}
+</script>
+
+<meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
 
+
+
+	<div class="content-page">
+
+		<!-- Start content -->
+		<div class="content">
+
+			<div class="container-fluid">
+
+
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="breadcrumb-holder">
+							<h1 class="main-title float-left">Update Employee</h1>
+							<ol class="breadcrumb float-right">
+								<li class="breadcrumb-item">Home</li>
+								<li class="breadcrumb-item active">Update Employee</li>
+							</ol>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+				<!-- end row -->
+
+				<div class="row">
+
+					<div class=" col-md-12">
+						<div class="card mb-3">
+
+							<div class="card-body">
+
+								<form method="POST" action="editEmployee" modelAttribute="employee"
+									onsubmit="return validator()">
+								<div class="form-group">
+									
+									
+										<label for="exampleInputEmail1">Employee No </label> <input
+											type="text" name="empNo" class="form-control"
+											id="empNo" aria-describedby="emailHelp"
+											placeholder="" value="${sessionScop.employee.empNo}" required> 
+									</div>
+
+								<div class="form-row">
+									
+									
+									
+									<div class="form-group col-md-4">
+										<label for="exampleInputEmail1">Employee Name</label> <input
+											type="text" name="empName" class="form-control"
+											id="empName" aria-describedby="numberlHelp"
+											placeholder="" value="${sessionScop.employee.empName}"required>
+
+									</div>
+									<div class="form-group col-md-4">
+										<label for="exampleInputPassword1">Address</label> <input
+											type="text" name="empAddress" class="form-control"
+											id="empAddress" placeholder=""value="${sessionScop.employee.empAddress}" required>
+									</div>
+									
+									<div class="form-group col-md-4">
+										<label for="exampleInputPassword1">BasicSalary</label> <input
+											type="text" name="basicSalary" class="form-control"
+											id="basicSalary" placeholder=""value="${sessionScop.employee.basicSalary}" required>
+									</div>
+									
+								</div>
+								
+										
+								<div class="form-row">
+									<div class="form-group col-md-4">
+										<label for="exampleInputPassword1">Job date</label> <input
+											type="Date" name="jobDate" class="form-control"
+											id="jobDate" placeholder="" value="${sessionScop.employee.jobDate}" required>
+									</div>
+									<div class="form-group col-md-4">
+										<label for="exampleInputPassword1">Telephone</label> <input
+											type="number" name="contactNum" class="form-control"
+											id="contactNum" placeholder="" value="${sessionScop.employee.contactNum}"required>
+									</div>
+									<div class="form-group col-md-4">
+										<label for="exampleInputPassword1">Guardian Telephone</label> <input
+											type="number" name="gContactNum" class="form-control"
+											id="gContactNum" placeholder=""value="${sessionScop.employee.gContactNum}"required>
+									</div>
+								</div>
+									<div style="margin-left: 500px">
+										<button type="submit" class="btn btn-primary">Update Employee</button>
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+						<!-- end card-->
+					</div>
+				</div>
+			</div>
+			<!-- END container-fluid -->
+		</div>
+		<!-- END content -->
+	</div>
+
 </body>
 </html>
+<%@ include file="../includes/footer.jsp"%>

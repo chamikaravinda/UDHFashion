@@ -146,7 +146,7 @@
                         <a href="#"><i class="fa fa-users" ></i> <span> Suppliers </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="addShop"><i class="fa fa-plus-square"></i>Add Suppliers</a></li>
-                                <li><a href="viewShop"><i class="fa fa-eye"></i>View Suppliers</a></li>
+                                <li><a href="viewShop"><i class="fa fa-eye"></i>All Suppliers</a></li>
                     <li class="submenu">
                         <a href="#"><i class="fa fa-briefcase"></i><span>Accounts</span><span class="menu-arrow"></span></a>
 		                            <ul class="list-unstyled">
@@ -168,11 +168,12 @@
                     
                     <li class="submenu">
                         <a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>Employee</span><span class="menu-arrow"></span></a>
-		                 <ul class="list-unstyled">
-		                     <li><a href="addEmployee"><i class="fa fa-plus-square"></i>Add Employee</a></li>
-                             <li><a href="viewEmployee"><i class="fa fa-eye"></i>View Employee</a></li>
-                             <li><a href="employeeSalarySheet"><i class="fa fa-eye"></i>Salary Sheets</a></li>          
-		                 </ul>
+		                            <ul class="list-unstyled">
+		                                <li><a href="addEmployee"><i class="fa fa-plus-square"></i>Add Employee</a></li>
+                            		    <li><a href="viewEmployee"><i class="fa fa-eye"></i>All Employee</a></li>
+                            		    <li><a href="employeeSalarySheet"><i class="fa fa-eye"></i>Salary Sheets</a></li>
+		                            
+		                            </ul>
                     </li>
                      <li class="submenu">
                         <a href="#"><i class="fa fa-user" ></i><span>Expenditures</span><span class="menu-arrow"></span></a>

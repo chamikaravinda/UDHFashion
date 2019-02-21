@@ -1,3 +1,4 @@
+
 CREATE TABLE shop
 (
 	id INT AUTO_INCREMENT NOT NULL,
@@ -60,3 +61,19 @@ CREATE TABLE users
  
      CONSTRAINT user_pk PRIMARY KEY(id)
 );
+  
+  
+CREATE TABLE employee
+(
+	
+    
+    empNo VARCHAR(20),
+    empName VARCHAR(50),
+    empAddress VARCHAR(100),
+    basicSalary DOUBLE,
+    jobDate VARCHAR(20),
+    contactNum VARCHAR(10),
+    gContactNum VARCHAR(10),
+    
+	CONSTRAINT pk_item PRIMARY KEY(empNo)
+ );

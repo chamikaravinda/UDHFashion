@@ -1,15 +1,23 @@
 package com.UDHFashion.udhmanagmentsystem.model;
 
-import java.util.Date;
+
 
 public class Employee {
 
 	private String empNo;
 	private String empName;
 	private String empAddress;
-	private Date jobDate;
+	private String jobDate;
 	private String contactNum;
 	private String gContactNum;
+	private Double basicSalary;
+	
+	public Double getBasicSalary() {
+		return basicSalary;
+	}
+	public void setBasicSalary(Double basicSalary) {
+		this.basicSalary = basicSalary;
+	}
 	// private image photo; >>>>must be added later
 	public String getEmpNo() {
 		return empNo;
@@ -29,10 +37,10 @@ public class Employee {
 	public void setEmpAddress(String empAddress) {
 		this.empAddress = empAddress;
 	}
-	public Date getJobDate() {
+	public String getJobDate() {
 		return jobDate;
 	}
-	public void setJobDate(Date jobDate) {
+	public void setJobDate(String jobDate) {
 		this.jobDate = jobDate;
 	}
 	public String getContactNum() {
