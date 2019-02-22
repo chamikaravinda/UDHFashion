@@ -130,59 +130,82 @@
         </nav>
 
 	</div>
-	<!-- End Navigation -->
+	<!-- End Navigation Bar-->
 
-	<!-- Left Sidebar -->
+	<!-- Left Sidebar Start -->
+
 	<div class="left main-sidebar">
 	
 		<div class="sidebar-inner leftscroll">
 
 			<div id="sidebar-menu">     
 			<ul>
+					<!-- Dashobard -->
 					<li class="submenu">
 						<a href="#"><i class="fa fa-fw fa-bars"></i><span>Dashboard</span> </a>
-                    </li>                
+                    </li>  
+                     
+                    <!-- Sales -->
+					<li class="submenu">
+                        <a href="stockView"><i class="fa fa-shopping-cart "></i><span> Sales </span> </a>
+                    </li>
+                    
+                     <!-- Stocks -->
+					<li class="submenu">
+                        <a href="stockView"><i class="fa fa-cubes"></i><span> Stocks </span> </a>
+                    </li>
+					
+                    <!-- Suppliers -->             
                     <li class="submenu">
-                        <a href="#"><i class="fa fa-users" ></i> <span> Suppliers </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="addShop"><i class="fa fa-plus-square"></i>Add Suppliers</a></li>
-                                <li><a href="viewShop"><i class="fa fa-eye"></i>All Suppliers</a></li>
-                    <li class="submenu">
-                        <a href="#"><i class="fa fa-briefcase"></i><span>Accounts</span><span class="menu-arrow"></span></a>
+                        <a href="#"><i class="fa fa-truck" ></i> <span> Suppliers </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                           <li><a href="addShop"><i class="fa fa-plus-square"></i>Add Suppliers</a></li>
+                           <li><a href="viewShop"><i class="fa fa-eye"></i>View Suppliers</a></li>
+                    	   <li class="submenu"><a href="#"><i class="fa fa-briefcase"></i><span>Accounts</span><span class="menu-arrow"></span></a>
 		                            <ul class="list-unstyled">
 		                                <li><a href="creditBills"><i class="fa fa-credit-card-alt"></i>Credit Bills</a></li>
 		                                <li><a href="#"><i class="fa fa-check-square"></i>Paid Bills</a></li>
 		                                <li><a href="cashPayments"><i class="fa fa-money"></i>Cash Payments</a></li>
 		                                 <li><a href="addCheques"><i class="fa fa-paper-plane"></i>Cheque Pay</a></li>
-		                            
 		                            </ul>
-                    </li>
-                            
-                            </ul>
+                    	  </li>    
+                        </ul>
                     </li>
 
-					<li class="submenu">
-                        <a href="stockView"><i class="fa fa-cubes"></i><span> Stocks </span> </a>
-                    </li>
-                    
-                    
+
+					<!-- Employees -->
                     <li class="submenu">
                         <a href="#"><i class="fa fa-user" aria-hidden="true"></i><span>Employee</span><span class="menu-arrow"></span></a>
-		                            <ul class="list-unstyled">
-		                                <li><a href="addEmployee"><i class="fa fa-plus-square"></i>Add Employee</a></li>
-                            		    <li><a href="viewEmployee"><i class="fa fa-eye"></i>All Employee</a></li>
-                            		    <li><a href="employeeSalarySheet"><i class="fa fa-eye"></i>Salary Sheets</a></li>
-		                            
-		                            </ul>
+		                 <ul class="list-unstyled">
+		                     <li><a href="addEmployee"><i class="fa fa-plus-square"></i>Add Employee</a></li>
+                             <li><a href="viewEmployee"><i class="fa fa-eye"></i>View Employee</a></li>
+                             <li><a href="employeeSalarySheet"><i class="fa fa-eye"></i>Salary Sheets</a></li>          
+		                 </ul>
                     </li>
-                     <li class="submenu">
-                        <a href="#"><i class="fa fa-user" ></i><span>Expenditures</span><span class="menu-arrow"></span></a>
+                    
+                    <!-- Banks-->
+                    <li class="submenu">
+                        <a href="#"><i class="fa fa-university " aria-hidden="true"></i><span>Bank Accounts</span><span class="menu-arrow"></span></a>
+		                 <ul class="list-unstyled">
+		                     <li><a href="allAccounts"><i class="fa fa-line-chart"></i>All Accounts</a></li>
+                             <li><a href="addBanks"><i class="fa fa-plus"></i>Add Account</a></li>
+                             <li><a href="employeeSalarySheet"><i class="fa fa-inr"></i>Deposits</a></li> 
+                             <li><a href="employeeSalarySheet"><i class="fa fa-credit-card "></i>Withdraws</a></li>          
+		                 </ul>
+                    </li>
+                    
+                    
+                    <!-- Expences -->
+                    <li class="submenu">
+                        <a href="#"><i class="fa fa-pie-chart" ></i><span>Expenditures</span><span class="menu-arrow"></span></a>
 		                 <ul class="list-unstyled">
 		                    <li><a href="addShopExpenditures"><i class="fa fa-plus-square"></i>Shop Exp:</a></li>
                             <li><a href="addPersonalExpenditures"><i class="fa fa-plus-square"></i>Personal</a></li>
 		                 </ul>
-                    </li>                   
+                   </li>          
+                               
                 </ul>
+                
             <div class="clearfix"></div>
 			</div>
 			<div class="clearfix"></div>
