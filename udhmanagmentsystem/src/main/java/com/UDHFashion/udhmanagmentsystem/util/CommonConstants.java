@@ -32,6 +32,12 @@ public class CommonConstants {
 	
 	/*---------------------------User queries-------------------------------*/
 	public final static String GET_USER_IS_VALID = "SELECT * FROM users WHERE username = ? AND password = ?";
+	
 
+	/*---------------------------Bank queries-------------------------------*/
+	public final static String INSERT_BANK_DETAILS = "INSERT INTO bank_accounts(bank_name,account_number,account_type,current_balance) VALUES(?,?,?,?)";
+	public final static String GET_ALL_BANK_ACCOUNT_DETAILS = "SELECT * FROM bank_accounts";
+	public final static String GET_BANK_ACCOUNT = "SELECT * FROM bank_accounts WHERE id = ? ";
+	public final static String UPDATE_BANK_ACCOUNT = "UPDATE bank_accounts SET bank_name = ? , account_number = ?, account_type = ?, current_balance = ? WHERE id = ?";
 }
 

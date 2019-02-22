@@ -60,3 +60,14 @@ CREATE TABLE users
  
      CONSTRAINT user_pk PRIMARY KEY(id)
 );
+
+CREATE TABLE bank_accounts
+(
+	id INT AUTO_INCREMENT NOT NULL, 
+	bank_name VARCHAR(30),
+    account_number VARCHAR(30),
+    account_type VARCHAR(30),
+    current_balance VARCHAR(30),
+ 
+     CONSTRAINT bank_account_pk PRIMARY KEY(id,bank_name,account_number)
+);
