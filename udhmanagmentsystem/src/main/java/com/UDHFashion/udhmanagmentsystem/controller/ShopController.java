@@ -61,4 +61,13 @@ public class ShopController {
 		model.addAttribute("shopList",shopList);
 		return "shop/viewShop";
 	}
+	
+	@RequestMapping(value = "/viewShop", method = RequestMethod.GET)
+	public String viewShop(Model model) {
+		List<Shop> shop = iShop.getAllShopsDetails();
+			
+		model.addAttribute("shopList",shop);
+		
+		return "shop/viewShop";
+	}
 }

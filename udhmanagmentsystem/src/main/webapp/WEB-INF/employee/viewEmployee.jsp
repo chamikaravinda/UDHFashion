@@ -48,7 +48,9 @@
 												<th>Employee No</th>
 												<th>Employee Name</th>
 												<th>Address</th>
+												<th>BasicSalary</th>
 												<th>Telephone</th>
+												<th>job Date</th>
 												<th>Guardian Telephone</th>
 
 												<td><span><i class="fa fa-pencil-square"
@@ -64,15 +66,24 @@
          											<td>${result.empNo}</td>	
          											<td>${result.empName}  </td>	
          											<td>${result.empAddress} </td>	
+         											<td>${result.basicSalary} </td>
          											<td>${result.jobDate}  </td>
          											<td>${result.contactNum} </td>
          											<td>${result.gContactNum} </td>
-         											<td> 	
+         											<td>
+         												<form method = "post" action = "editEmployee" modelAttribute="employee">
+         													<input name = "empNo" type = "hidden" value = "${result.empNo}" >
+         													<button type="submit" al class="btn btn-primary">Update</button>
+         												</form>
+         											
+         											</td>
+         											<td> 
          												<form method = "POST" action = "deleteEmployee" modelAttribute="employee">
          													<input name = "empNo" type = "hidden" value = "${result.empNo}" >
          													<button type="submit" al class="btn btn-primary">Delete</button>
          												</form>
-         											</td>	
+         											</td>
+         												
          										</tr>
 											</c:forEach>
 
