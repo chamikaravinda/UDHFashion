@@ -9,9 +9,12 @@ public class CommonConstants {
 	
 	
 	/*-----------------------Employee queries--------------------------*/
-	public final static String INSERT_EMPLOYEE_DETAILS = "INSERT INTO employee(empNo,empName,empAddress,jobDate,contactNum ,gContactNum ) VALUES(?,?,?,?,?,?)";
+	public final static String INSERT_EMPLOYEE_DETAILS = "INSERT INTO employee(empNo,empName,empAddress,basicSalary,jobDate,contactNum,gContactNum ) VALUES(?,?,?,?,?,?,?)";
 	public final static String GET_ALL_EMPLOYEE_DETAILS = "SELECT * FROM employee";
 	public final static String DELETE_EMPLOYEE_DETAILS = "DELETE FROM employee WHERE empNo = ?";
+	public final static String UPDATE_EMPLOYEE_DETAILS = "UPDATE employee SET empName = ? , empAddress = ?,basicSalary = ?, jobDate = ?, contactNum = ?, gContactNum = ? WHERE empNo = ?";
+	public final static String GET_EMPLOYEE_BY_NO = "SELECT * FROM employee WHERE empNo = ?";
+	
 	
 	
 	/*---------------------- Item queries--------------------------------*/

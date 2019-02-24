@@ -70,52 +70,64 @@
 
 							<div class="card-body">
 
-								<form method="POST" action="submitEmployee" modelAttribute="employee"
-									onsubmit="return validator()">
+								<form method="POST" action="submitEmployee"
+									modelAttribute="employee" onsubmit="return validator()">
 
+									<div class="form-group">
 
-								<div class="form-row">
-									<div class="form-group col-md-4">
 										<label for="exampleInputEmail1">Employee No </label> <input
-											type="text" name="empNo" class="form-control"
-											id="empNo" aria-describedby="emailHelp"
-											placeholder="Employee No" required> 
-									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Employee Name</label> <input
-											type="text" name="empName" class="form-control"
-											id="empName" aria-describedby="numberlHelp"
-											placeholder="Employee Name" required>
+											type="text" name="empNo" class="form-control" id="empNo"
+											aria-describedby="emailHelp" placeholder="Employee No"
+											required>
 
 									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Address</label> <input
-											type="text" name="empAddress" class="form-control"
-											id="empAddress" placeholder="empAddress" required>
+
+									<div class="form-row">
+
+
+										<div class="form-group col-md-4">
+											<label for="exampleInputEmail1">Employee Name</label> <input
+												type="text" name="empName" class="form-control" id="empName"
+												aria-describedby="numberlHelp" placeholder="Employee Name"
+												required>
+
+										</div>
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Address</label> <input
+												type="text" name="empAddress" class="form-control"
+												id="empAddress" placeholder="empAddress" required>
+										</div>
+										<div class="form-group col-md-4">
+											<label for="exampleInputEmail1">Basic Salary</label> <input
+												type="number" name="basicSalary" class="form-control"
+												id="basicSalary" aria-describedby="numberlHelp"
+												placeholder="Basic Salary" required>
+
+										</div>
+
 									</div>
-									
-								</div>
-								
-										
-								<div class="form-row">
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Job date</label> <input
-											type="Date" name="#" class="form-control"
-											id="#" placeholder="Date" required>
+
+
+									<div class="form-row">
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Job date</label> <input
+												type="Date" name="jobDate" class="form-control" id="jobDate"
+												placeholder="Date" required>
+										</div>
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Telephone</label> <input
+												type="number" name="contactNum" class="form-control"
+												id="contactNum" placeholder="Guardian Telephone" required>
+										</div>
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Guardian Telephone</label>
+											<input type="number" name="gContactNum" class="form-control"
+												id="gContactNum" placeholder="Guardian Telephone" required>
+										</div>
 									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Telephone</label> <input
-											type="number" name="contactNum" class="form-control"
-											id="contactNum" placeholder="Guardian Telephone" required>
-									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Guardian Telephone</label> <input
-											type="number" name="gContactNum" class="form-control"
-											id="gContactNum" placeholder="Guardian Telephone" required>
-									</div>
-								</div>
 									<div style="margin-left: 500px">
-										<button type="submit" class="btn btn-primary">Add Employee</button>
+										<button type="submit" class="btn btn-primary">Add
+											Employee</button>
 									</div>
 
 								</form>

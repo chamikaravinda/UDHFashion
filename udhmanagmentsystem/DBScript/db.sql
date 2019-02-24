@@ -1,3 +1,4 @@
+
 CREATE TABLE shop
 (
 	id INT AUTO_INCREMENT NOT NULL,
@@ -36,19 +37,6 @@ CREATE TABLE temp_barcode_data
     CONSTRAINT fk_tem_barcode_data FOREIGN KEY(code) REFERENCES item(code) ON DELETE CASCADE
 );
 
-CREATE TABLE employee
-(
-	
-    
-    empNo VARCHAR(20),
-    empName VARCHAR(50),
-    empAddress VARCHAR(100),
-    jobDate DATE,
-    contactNum INT,
-    gContactNum INT,
-    
-	CONSTRAINT pk_item PRIMARY KEY(empNo),
-
 CREATE TABLE users
 (
 	id INT AUTO_INCREMENT NOT NULL, 
@@ -61,6 +49,7 @@ CREATE TABLE users
      CONSTRAINT user_pk PRIMARY KEY(id)
 );
 
+
 CREATE TABLE bank_accounts
 (
 	id INT AUTO_INCREMENT NOT NULL, 
@@ -70,7 +59,8 @@ CREATE TABLE bank_accounts
     current_balance VARCHAR(30),
  
      CONSTRAINT bank_account_pk PRIMARY KEY(id,bank_name,account_number)
-);
+9);
+
 
 CREATE TABLE bank_deposites
 (
@@ -82,3 +72,18 @@ CREATE TABLE bank_deposites
 	CONSTRAINT deposite_pk PRIMARY KEY (id),
 	CONSTRAINT account_fk FOREIGN KEY(account) REFERENCES bank_accounts(id) ON DELETE CASCADE
 )
+
+CREATE TABLE employee
+(
+    empNo VARCHAR(20),
+    empName VARCHAR(50),
+    empAddress VARCHAR(100),
+    basicSalary DOUBLE,
+    jobDate VARCHAR(20),
+    contactNum VARCHAR(10),
+    gContactNum VARCHAR(10),
+    
+	CONSTRAINT pk_item PRIMARY KEY(empNo)
+ );
+
+
