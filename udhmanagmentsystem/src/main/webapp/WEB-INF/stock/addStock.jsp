@@ -24,12 +24,6 @@
 </script>
 </head>
 <body>
-
-	</br>
-	</br>
-
-
-
 	<div class="content-page">
 
 		<!-- Start content -->

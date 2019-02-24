@@ -1,6 +1,7 @@
 package com.UDHFashion.udhmanagmentsystem.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.UDHFashion.udhmanagmentsystem.model.BankAccount;
+import com.UDHFashion.udhmanagmentsystem.model.BankDeposites;
 import com.UDHFashion.udhmanagmentsystem.model.User;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 
@@ -90,6 +92,72 @@ public class BankAccountsDAOImpl implements IBankAccountDAO {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public boolean AddBanKDeposit(BankDeposites deposit) {
+		try {
+			int update = jdbcTemplate.update(CommonConstants.INSERT_BANK_DEPOSIT, deposit.getDate(),
+					deposit.getAmount(), deposit.getAccount());
+
+			if (update == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean UpdateBankBalance(BankDeposites deposit) {
+		try {
+			double newBankBalance =AfterDepositeBalance(deposit);
+			int update = jdbcTemplate.update(CommonConstants.UPDATE_BANK_ACCOUNT_BALANCE,newBankBalance, deposit.getAccount());
+
+			if (update == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public double AfterDepositeBalance(BankDeposites deposit) {
+		
+		BankAccount accountDetailes = GetBankAccount(deposit.getAccount());
+		if(accountDetailes != null) {
+			
+		double newBankBalance = accountDetailes.getCurrentBalance() + deposit.getAmount();
+		return newBankBalance;	
+		}
+		return 0;
+	}
+	
+	
+	@Override
+	public List<BankDeposites> GetAllDeposites() {
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.GET_ALL_DEPOSITE_DETAILS);
+
+		List<BankDeposites> result = new ArrayList<>();
+
+		for (Map<String, Object> row : rows) {
+			BankDeposites deposites = new BankDeposites();
+
+			deposites.setId((Integer) row.get("id"));
+			deposites.setDate(row.get("date").toString());
+			deposites.setAmount((Double) row.get("amount"));
+			deposites.setAccount((Integer) row.get("account"));
+
+			result.add(deposites);
+		}
+
+		return result;
 	}
 
 }
