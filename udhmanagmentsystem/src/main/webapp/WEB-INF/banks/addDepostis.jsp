@@ -21,7 +21,7 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="breadcrumb-holder">
-							<h1 class="main-title float-left">Add Bank Account</h1>
+							<h1 class="main-title float-left">Add Deposit</h1>
 							<ol class="breadcrumb float-right">
 								<li class="breadcrumb-item">Home</li>
 								<li class="breadcrumb-item active">Bank Account</li>
@@ -43,41 +43,36 @@
 							<br>
 							<div class="card-body">
 								<div class="offset-md-2">
-									<form:form method="post" action="addBanks" modelAttribute="bankAccount">
+									<form:form method="post" action="addDeposites" modelAttribute="bankDeposit">
 										<div class="form-row ">
 											<fieldset class="form-group  col-md-4   ">
-												<form:input type="text" path="bankName" class="form-control"
-													placeholder="Bank Name" required="required" />
+												<form:input type="Date" path="date" class="form-control"
+												 required="required" />
 											</fieldset>
 
 											<fieldset class="form-group  col-md-4 offset-md-1  ">
-												<form:input type="text" path="accountNumber"
-													class="form-control" placeholder="Account Number"
+												<form:input type="number" path="amount"
+													class="form-control" placeholder="Amount"
 													required="required" />
 											</fieldset>
 										</div>
 										<br>
 										<div class="form-row ">
 											<fieldset class="form-group col-md-4  ">
-												<form:select path="accountType" class="form-control"
+												<form:select path="account" class="form-control"
 													required="required">
-													<option  selected="true" disabled="disabled">Select account type</option >
-													<form:option value="currentAccount"> Current Account </form:option>
-													<form:option value="savingsAccount"> Savings Account </form:option>
+													<option  selected="true" disabled="disabled">Select an account </option >
+													 <c:forEach var="account" items="${accounts}">
+        													<form:option value="${account.id}"> ${account.bankName} : ${account.accountNumber} </form:option>
+     												 </c:forEach>
 												</form:select>
-											</fieldset>
-
-											<fieldset class="form-group col-md-4  offset-md-1">
-												<form:input type="number" path="currentBalance"
-													class="form-control" placeholder="Current Balance"
-													required="required" />
 											</fieldset>
 										</div>
 										<br>
 
 										<div style="margin-left: 310px">
 											<button type="submit" class="btn btn-primary">Add
-												Account</button>
+												Deposit</button>
 										</div>
 
 									</form:form>

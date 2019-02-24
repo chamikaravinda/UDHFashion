@@ -71,3 +71,14 @@ CREATE TABLE bank_accounts
  
      CONSTRAINT bank_account_pk PRIMARY KEY(id,bank_name,account_number)
 );
+
+CREATE TABLE bank_deposites
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	date DATE,
+	amount double,
+	account int,
+	
+	CONSTRAINT deposite_pk PRIMARY KEY (id),
+	CONSTRAINT account_fk FOREIGN KEY(account) REFERENCES bank_accounts(id) ON DELETE CASCADE
+)
