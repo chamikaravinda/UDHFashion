@@ -20,20 +20,6 @@ public class ShopController {
 	@Autowired
 	IShopDAO iShop;
 	
-
-	@RequestMapping(value="/addShopExpenditures",method=RequestMethod.GET)
-	public String addShopExpenditures(Model model) {
-		
-		return "expenditures/addShopExpenditures";
-	}
-	@RequestMapping(value="/addPersonalExpenditures",method=RequestMethod.GET)
-	public String addPersonalExpenditures(Model model) {
-		
-		return "expenditures/addPersonalExpenditures";
-	}
-
-
-	
 	@RequestMapping(value = "/addShop", method = RequestMethod.GET)
 	public String addWholeSaleShop(ModelAndView model) {
 
@@ -61,15 +47,6 @@ public class ShopController {
 		
 		List<Shop> shopList = iShop.getAllShopsDetails();
 		model.addAttribute("shopList",shopList);
-		return "shop/viewShop";
-	}
-	
-	@RequestMapping(value = "/viewShop", method = RequestMethod.GET)
-	public String viewShop(Model model) {
-		List<Shop> shop = iShop.getAllShopsDetails();
-			
-		model.addAttribute("shopList",shop);
-		
 		return "shop/viewShop";
 	}
 }

@@ -164,7 +164,14 @@ public class StockController {
 		return "stock/stockView";
 	}
 	
-	
+	@RequestMapping(value = "/viewShop", method = RequestMethod.GET)
+	public String viewShop(Model model) {
+		List<Shop> shop = iShop.getAllShopsDetails();
+			
+		model.addAttribute("shopList",shop);
+		
+		return "shop/viewShop";
+	}
 	
 
 	@RequestMapping(value = "/addStock", method = RequestMethod.GET)
