@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-public class AccountsController {
+public class SupplierAccountsController {
 	
 	
 	@RequestMapping(value = "/creditBills", method = RequestMethod.GET)

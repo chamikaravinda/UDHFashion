@@ -23,21 +23,18 @@
 <script src="assets/js/jquery.nicescroll.js"></script>
 <script src="assets/js/jquery.scrollTo.min.js"></script>
 <script src="assets/plugins/switchery/switchery.min.js"></script>
-
-<!-- App js -->
 <script src="assets/js/pikeadmin.js"></script>
-
-<!-- BEGIN Java Script for this page -->
-	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	<script>
 	// START CODE FOR BASIC DATA TABLE 
 	$(document).ready(function() {
 		$('#example1').DataTable();
+	
 	} );
 	// END CODE FOR BASIC DATA TABLE 
-	
 	
 	// START CODE FOR Child rows (show extra / detailed information) DATA TABLE 
 	function format ( d ) {
