@@ -48,6 +48,7 @@ CREATE TABLE employee
     gContactNum INT,
     
 	CONSTRAINT pk_item PRIMARY KEY(empNo),
+);
 
 CREATE TABLE users
 (
@@ -81,4 +82,15 @@ CREATE TABLE bank_deposites
 	
 	CONSTRAINT deposite_pk PRIMARY KEY (id),
 	CONSTRAINT account_fk FOREIGN KEY(account) REFERENCES bank_accounts(id) ON DELETE CASCADE
-)
+);
+
+CREATE TABLE bank_withdraws
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	date DATE,
+	amount double,
+	account int,
+	
+	CONSTRAINT withdraws_pk PRIMARY KEY (id),
+	CONSTRAINT withdraws_fk FOREIGN KEY(account) REFERENCES bank_accounts(id) ON DELETE CASCADE
+);

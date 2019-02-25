@@ -190,7 +190,7 @@
 		                     <li><a href="allAccounts"><i class="fa fa-line-chart"></i>All Accounts</a></li>
                              <li><a href="addBanks"><i class="fa fa-plus"></i>Add Account</a></li>
                              <li><a href="allDeposits"><i class="fa fa-inr"></i>Deposits</a></li> 
-                             <li><a href="employeeSalarySheet"><i class="fa fa-credit-card "></i>Withdraws</a></li>          
+                             <li><a href="allWithdraws"><i class="fa fa-credit-card "></i>Withdraws</a></li>          
 		                 </ul>
                     </li>
                     
