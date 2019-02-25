@@ -85,5 +85,30 @@ CREATE TABLE employee
     
 	CONSTRAINT pk_item PRIMARY KEY(empNo)
  );
-
+ 
+ CREATE TABLE p_expenditures
+(
+	
+    id INT AUTO_INCREMENT NOT NULL, 
+    date VARCHAR(20),
+    reason VARCHAR(50),
+    amount DOUBLE,
+    
+    
+	CONSTRAINT pk_item PRIMARY KEY(id)
+ );
+ 
+  CREATE TABLE shop_expenditures
+(
+	
+    id INT AUTO_INCREMENT NOT NULL, 
+    billNo INT,
+    name VARCHAR(20),
+    date VARCHAR(20),
+    reason VARCHAR(50),
+    amount DOUBLE,
+    
+    
+	CONSTRAINT pk_item PRIMARY KEY(id)
+ );
 

@@ -71,7 +71,7 @@
          											<td>${result.contactNum} </td>
          											<td>${result.gContactNum} </td>
          											<td>
-         												<form method = "post" action = "editEmployee" modelAttribute="employee">
+         												<form method = "GET" action = "editEmployee" modelAttribute="employee">
          													<input name = "empNo" type = "hidden" value = "${result.empNo}" >
          													<button type="submit" al class="btn btn-primary">Update</button>
          												</form>

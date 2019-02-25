@@ -20,6 +20,7 @@ public class ShopController {
 	@Autowired
 	IShopDAO iShop;
 	
+
 	@RequestMapping(value="/addShopExpenditures",method=RequestMethod.GET)
 	public String addShopExpenditures(Model model) {
 		
@@ -30,6 +31,7 @@ public class ShopController {
 		
 		return "expenditures/addPersonalExpenditures";
 	}
+
 
 	
 	@RequestMapping(value = "/addShop", method = RequestMethod.GET)

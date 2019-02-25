@@ -68,21 +68,37 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/updateEmployee", method = RequestMethod.GET)
-	public String updateEmployee(Model model) {
+ 	public String updateEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model) {
 
 		return "employee/editEmployee";
 
 	}
-
-	@RequestMapping(value = "/editEmployee", method = RequestMethod.POST)
+    //Load Data to the forms
+	@RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
 	public ModelAndView editEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model) {
-		model.setViewName("employee/editEmployee");
+		
 		
 		Employee emp = serviceEmp.getEmployeeById(employee.getEmpNo());
 		model.addObject("employee", emp);
+		model.setViewName("employee/editEmployee");
 
 		
 		return model;
 	}
+	
+	//Update the Details
+	
+	@RequestMapping(value = "/submitUpdateEmployee", method = RequestMethod.POST)
+	public String submitUpdateEmployee(@ModelAttribute("employee") Employee employee, ModelMap model) {
+
+		System.out.println(employee.getBasicSalary());
+
+		serviceEmp.updateEmployeeDetails(employee);
+
+		List<Employee> employeeList = serviceEmp.getAllEmployeeDetails();
+		model.addAttribute("employeeList", employeeList);
+		return "employee/viewEmployee";
+	}
+	
 
 }

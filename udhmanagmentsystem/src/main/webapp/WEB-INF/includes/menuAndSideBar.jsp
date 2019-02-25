@@ -199,8 +199,10 @@
                     <li class="submenu">
                         <a href="#"><i class="fa fa-pie-chart" ></i><span>Expenditures</span><span class="menu-arrow"></span></a>
 		                 <ul class="list-unstyled">
-		                    <li><a href="addShopExpenditures"><i class="fa fa-plus-square"></i>Shop Exp:</a></li>
+		                    <li><a href="addShopExpenditures"><i class="fa fa-plus-square"></i>Shop Exp :</a></li>
+		                    <li><a href="viewShopExpenditures"><i class="fa fa-eye"></i></i>All Shop Exp :</a></li>
                             <li><a href="addPersonalExpenditures"><i class="fa fa-plus-square"></i>Personal</a></li>
+                            <li><a href="viewPexpenditures"><i class="fa fa-eye"></i></i>All Personal Exp :</a></li>
 		                 </ul>
                    </li>          
                                
