@@ -2,6 +2,7 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,15 +71,14 @@
 
 							<div class="card-body">
 
-								<form method="POST" action="editEmployee" modelAttribute="employee"
-									onsubmit="return validator()">
+								<form:form method="POST" action="submitUpdateEmployee" modelAttribute="employee" >
 								<div class="form-group">
 									
 									
-										<label for="exampleInputEmail1">Employee No </label> <input
-											type="text" name="empNo" class="form-control"
-											id="empNo" aria-describedby="emailHelp"
-											placeholder="" value="${sessionScop.employee.empNo}" required> 
+										<label for="exampleInputEmail1">Employee No </label> <form:input
+											type="text" path="empNo" class="form-control"
+											 aria-describedby="emailHelp"
+											placeholder=""  required="required"/> 
 									</div>
 
 								<div class="form-row">
@@ -86,22 +86,22 @@
 									
 									
 									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Employee Name</label> <input
-											type="text" name="empName" class="form-control"
-											id="empName" aria-describedby="numberlHelp"
-											placeholder="" value="${sessionScop.employee.empName}"required>
+										<label for="exampleInputEmail1">Employee Name</label> <form:input
+											type="text" path="empName" class="form-control"
+											 aria-describedby="numberlHelp"
+											placeholder="" required="required"/>
 
 									</div>
 									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Address</label> <input
-											type="text" name="empAddress" class="form-control"
-											id="empAddress" placeholder=""value="${sessionScop.employee.empAddress}" required>
+										<label for="exampleInputPassword1">Address</label> <form:input
+											type="text" path="empAddress" class="form-control"
+											 placeholder="" required="required"/>
 									</div>
 									
 									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">BasicSalary</label> <input
-											type="text" name="basicSalary" class="form-control"
-											id="basicSalary" placeholder=""value="${sessionScop.employee.basicSalary}" required>
+										<label for="exampleInputPassword1">BasicSalary</label> <form:input
+											type="text" path="basicSalary" class="form-control"
+											 placeholder="" required="required"/>
 									</div>
 									
 								</div>
@@ -109,26 +109,27 @@
 										
 								<div class="form-row">
 									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Job date</label> <input
-											type="Date" name="jobDate" class="form-control"
-											id="jobDate" placeholder="" value="${sessionScop.employee.jobDate}" required>
+										<label for="exampleInputPassword1">Job date</label> <form:input
+											type="Date" path="jobDate" class="form-control"
+											 placeholder=""  required="required"/>
 									</div>
 									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Telephone</label> <input
-											type="number" name="contactNum" class="form-control"
-											id="contactNum" placeholder="" value="${sessionScop.employee.contactNum}"required>
+										<label for="exampleInputPassword1">Telephone</label> <form:input
+											type="number" path="contactNum" class="form-control"
+											 placeholder="" required="required"/>
 									</div>
 									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Guardian Telephone</label> <input
-											type="number" name="gContactNum" class="form-control"
-											id="gContactNum" placeholder=""value="${sessionScop.employee.gContactNum}"required>
+										<label for="exampleInputPassword1">Guardian Telephone</label> <form:input
+											type="number" path="gContactNum" class="form-control"
+											 placeholder="" required="required"/>
 									</div>
 								</div>
+								
 									<div style="margin-left: 500px">
 										<button type="submit" class="btn btn-primary">Update Employee</button>
 									</div>
 
-								</form>
+								</form:form>
 
 							</div>
 						</div>

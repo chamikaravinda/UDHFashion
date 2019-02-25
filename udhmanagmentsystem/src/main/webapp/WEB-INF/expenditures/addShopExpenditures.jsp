@@ -52,10 +52,10 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="breadcrumb-holder">
-							<h1 class="main-title float-left">Personal Expenditures</h1>
+							<h1 class="main-title float-left">Shop Expenditures</h1>
 							<ol class="breadcrumb float-right">
 								<li class="breadcrumb-item">Home</li>
-								<li class="breadcrumb-item active">Expenditures</li>
+								<li class="breadcrumb-item active">Employee</li>
 							</ol>
 							<div class="clearfix"></div>
 						</div>
@@ -71,32 +71,41 @@
 
 							<div class="card-body">
 
-								<form method="POST" action="viewEmployee"
+								<form method="POST" action="submitShopExpenditures"
 									modelAttribute="employee" onsubmit="return validator()">
 
-									
-										<div class="form-group ">
-											<label for="exampleInputEmail1">Date</label> <input
-												type="text" name="date" class="form-control" id="date"
-												aria-describedby="numberlHelp" placeholder="Date"
-												required>
-
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="exampleInputEmail1">Date </label> <input
+												type="Date" name="date" class="form-control" id="date"
+												aria-describedby="emailHelp" placeholder="Date" required>
 										</div>
-										
-										<div class="form-group ">
-											<label for="exampleInputEmail1">Reason</label> <input
-												type="text" name="reason" class="form-control" id="reason"
-												aria-describedby="numberlHelp" placeholder="Reason"
-												required>
-
-										</div>
-									<div class="form-group ">
-											<label for="exampleInputEmail1">Amount</label> <input
-												type="number" name="amount" class="form-control" id=""amount""
+										<div class="form-group col-md-6">
+											<label for="exampleInputEmail1">Bill No</label> <input
+												type="text" name="billNo" class="form-control" id="billNo"
 												aria-describedby="numberlHelp" placeholder="Bill No"
 												required>
 
 										</div>
+									</div>
+										
+									<div class="form-row">
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Name</label> <input
+												type="text" name="name" class="form-control" id="name"
+												placeholder="Name" required>
+										</div>
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Reason</label> <input
+												type="text" name="reason" class="form-control" id="reason"
+												placeholder="Reason" required>
+										</div>
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Amount</label> <input
+												type="text" name="amount" class="form-control" id="amount"
+												placeholder="Amount" required>
+										</div>
+									</div>
 
 										<div style="margin-left: 500px">
 											<button type="submit" class="btn btn-primary">Add</button>

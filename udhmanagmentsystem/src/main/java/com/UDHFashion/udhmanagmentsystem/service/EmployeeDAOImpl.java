@@ -25,6 +25,7 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
 
 	@Override
 	public void insertEmployeeDetails(Employee employee) {
+		
 		int insertEmployee = jdbcTemplate.update(CommonConstants.INSERT_EMPLOYEE_DETAILS, 
 																employee.getEmpNo(),
 																employee.getEmpName(), 
@@ -59,7 +60,7 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
 			employee.setgContactNum((String)row.get("gContactNum"));
 			
 			
-			System.out.println("Shop Name Debug :  "  +employee.getEmpName());
+			System.out.println("Employee Name :  "  +employee.getEmpName());
 
 			
 			
@@ -84,14 +85,14 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
 	public void updateEmployeeDetails(Employee employee) {
 		
 		int updateEmployee = jdbcTemplate.update(CommonConstants.UPDATE_EMPLOYEE_DETAILS,
-				employee.getEmpNo(),
+				
 				employee.getEmpName(), 
 				employee.getEmpAddress(),
 				employee.getBasicSalary(),
 				employee.getJobDate(), 
 				employee.getContactNum(),
-				employee.getContactNum());
-
+				employee.getContactNum(),
+				employee.getEmpNo());
 				if (updateEmployee == 1) {
 					
 				System.out.println("Employee Detail update to the System");
@@ -115,7 +116,7 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
 				employee.setContactNum(rs.getString("contactNum"));
 				employee.setgContactNum(rs.getString("gContactNum"));
 				
-				System.out.println("Show item code : " + employee.getEmpName());
+				System.out.println("Show Employee Name : " + employee.getEmpName());
 				
 				return employee;
 			}

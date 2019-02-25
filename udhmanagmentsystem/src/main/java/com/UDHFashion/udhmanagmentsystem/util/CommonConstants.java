@@ -15,7 +15,19 @@ public class CommonConstants {
 	public final static String UPDATE_EMPLOYEE_DETAILS = "UPDATE employee SET empName = ? , empAddress = ?,basicSalary = ?, jobDate = ?, contactNum = ?, gContactNum = ? WHERE empNo = ?";
 	public final static String GET_EMPLOYEE_BY_NO = "SELECT * FROM employee WHERE empNo = ?";
 	
-	
+	/*------------------------Personal Expenditures----------------------*/
+	public final static String INSERT_Pexpenditures_DETAILS = "INSERT INTO p_expenditures(date,reason,amount) VALUES(?,?,?)";
+	public final static String GET_ALL_Pexpenditures_DETAILS = "SELECT * FROM p_expenditures";
+	public final static String DELETE_Pexpenditures_DETAILS = "DELETE FROM p_expenditures WHERE id = ?";
+	public final static String UPDATE_Pexpenditures_DETAILS = "UPDATE p_expenditures SET date = ? , reason = ?,amount = ? WHERE id = ?";
+	public final static String GET_Pexpenditures_BY_NO = "SELECT * FROM p_expenditures WHERE id = ?";
+
+	/*------------------------Shop Expenditures----------------------*/
+	public final static String INSERT_SHOP_EXPENDITURES_DETAILS = "INSERT INTO shop_expenditures(date,billNo,name,reason,amount) VALUES(?,?,?,?,?)";
+	public final static String GET_ALL_SHOP_EXPENDITURES_DETAILS = "SELECT * FROM shop_expenditures";
+	public final static String DELETE_SHOP_EXPENDITURES_DETAILS = "DELETE FROM shop_expenditures WHERE id = ?";
+	public final static String UPDATE_SHOP_EXPENDITURES_DETAILS = "UPDATE shop_expenditures SET date = ?,billNo=?,name=? , reason = ?,amount = ? WHERE id = ?";
+	public final static String GET_SHOP_EXPENDITURES_BY_NO = "SELECT * FROM shop_expenditures WHERE id = ?";
 	
 	/*---------------------- Item queries--------------------------------*/
 	public final static String GET_ITEM_CODES_BY_LIKE_OPERATOR = "SELECT code FROM item WHERE code LIKE '?%%?'";
