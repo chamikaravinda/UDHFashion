@@ -9,8 +9,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.UDHFashion.udhmanagmentsystem.model.BankAccount;
 import com.UDHFashion.udhmanagmentsystem.model.Employee;
 import com.UDHFashion.udhmanagmentsystem.service.IEmployeeDAO;
 
@@ -28,34 +31,53 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/submitEmployee", method = RequestMethod.POST)
-	public String submitEmployee(@ModelAttribute("employee") Employee employee, ModelMap model) {
+	public ModelAndView submitEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model,
+			RedirectAttributes redir) {
 
-		serviceEmp.insertEmployeeDetails(employee);
-		return "redirect:/viewEmployee";
+		if (serviceEmp.insertEmployeeDetails(employee)) {
+			redir.addFlashAttribute("success", 1);
+			model.setViewName("redirect:/viewEmployee");
+			return model;
+		} else {
+
+			model.addObject("error", "Employee adding unsuccesfully");
+			model.setViewName("redirect:/addEmployee");
+			return model;
+		}
 
 	}
 
+	//
+
 	@RequestMapping(value = "/viewEmployee", method = RequestMethod.GET)
-	public String viewEmployee(Model model) {
+	public ModelAndView viewEmployee(ModelAndView model) {
 
 		List<Employee> employeeList = serviceEmp.getAllEmployeeDetails();
 
-		model.addAttribute("employeeList", employeeList);
-
-		return "employee/viewEmployee";
+		model.addObject("employeeList", employeeList);
+		model.setViewName("employee/viewEmployee");
+		return model;
 	}
 
 	/*----- Delete the method--- */
 	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.POST)
-	public String deleteEmployee(@ModelAttribute("employee") Employee employee, ModelMap model) {
+	public ModelAndView deleteEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model,
+			RedirectAttributes redir) {
 
 		String employeeNo = employee.getEmpNo();
 
-		serviceEmp.deleteEmployee(employeeNo);
+		if (serviceEmp.deleteEmployee(employeeNo)) {
+			redir.addFlashAttribute("success", 3);
+			model.setViewName("redirect:/viewEmployee");
+			return model;
 
-		List<Employee> employeeList = serviceEmp.getAllEmployeeDetails();
-		model.addAttribute("employeeList", employeeList);
-		return "employee/viewEmployee";
+		} else {
+
+			model.addObject("error", "Employee deleting unsuccesfully");
+			model.setViewName("redirect:/viewEmployee");
+			return model;
+
+		}
 	}
 
 	/*---- -----------*/
@@ -68,37 +90,65 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/updateEmployee", method = RequestMethod.GET)
- 	public String updateEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model) {
+	public String updateEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model) {
 
 		return "employee/editEmployee";
 
 	}
-    //Load Data to the forms
-	@RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
-	public ModelAndView editEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model) {
-		
-		
-		Employee emp = serviceEmp.getEmployeeById(employee.getEmpNo());
-		model.addObject("employee", emp);
-		model.setViewName("employee/editEmployee");
 
+//	// Load Data to the forms
+//	@RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
+//	public ModelAndView editEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model) {
+//
+//		Employee emp = serviceEmp.getEmployeeById(employee.getEmpNo());
+//		model.addObject("employee", emp);
+//		model.setViewName("employee/editEmployee");
+//
+//		return model;
+//	}
+	//Load Data to the From new Way-------------------------------
+	
+	@RequestMapping(value="/editEmployee",method = RequestMethod.GET)
+	public ModelAndView ShowEditEmployee(ModelAndView model,@RequestParam("empNo") String empNo){
 		
+		Employee emp = serviceEmp.getEmployeeById(empNo);
+		model.addObject("employee",emp);
+		model.setViewName("employee/editEmployee");
 		return model;
 	}
-	
-	//Update the Details
-	
-	@RequestMapping(value = "/submitUpdateEmployee", method = RequestMethod.POST)
-	public String submitUpdateEmployee(@ModelAttribute("employee") Employee employee, ModelMap model) {
-
-		System.out.println(employee.getBasicSalary());
-
-		serviceEmp.updateEmployeeDetails(employee);
-
-		List<Employee> employeeList = serviceEmp.getAllEmployeeDetails();
-		model.addAttribute("employeeList", employeeList);
-		return "employee/viewEmployee";
+	// Update the Details in new Way
+	@RequestMapping(value="/submitUpdateEmployee",method = RequestMethod.POST)
+	public ModelAndView submitUpdateEmployee(ModelAndView model,@ModelAttribute("employee") Employee employee,RedirectAttributes redir) {
+		
+		System.out.println("Controller Upadete"+employee.getEmpNo());
+		System.out.println("Controller Upadete"+employee.getEmpAddress());
+		System.out.println("Controller Upadete"+employee.getBasicSalary());
+		System.out.println("Controller Upadete"+employee.getEmpName());
+		System.out.println("Controller Upadete"+employee.getJobDate());
+		System.out.println("Controller Upadete"+employee.getContactNum());
+		
+		
+			serviceEmp.updateEmployeeDetails(employee);
+			//redir.addFlashAttribute("success",2);
+			model.setViewName("redirect:/viewEmployee");
+			return model;
+//		}else {
+//			model.addObject("error","Employee updating unsuccesfully");
+//			model.setViewName("redirect:/editEmployee");
+//			return model;
+//		}
 	}
-	
+	// Update the Details
+
+//	@RequestMapping(value = "/submitUpdateEmployee", method = RequestMethod.POST)
+//	public String submitUpdateEmployee(@ModelAttribute("employee") Employee employee, ModelMap model) {
+//
+//		System.out.println("Salary" + employee.getBasicSalary());
+//
+//		serviceEmp.updateEmployeeDetails(employee);
+//		List<Employee> employeeList = serviceEmp.getAllEmployeeDetails();
+//		model.addAttribute("employeeList", employeeList);
+//		return "employee/viewEmployee";
+//	}
 
 }

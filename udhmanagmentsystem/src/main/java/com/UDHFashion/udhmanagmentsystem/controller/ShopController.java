@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.UDHFashion.udhmanagmentsystem.model.Employee;
 import com.UDHFashion.udhmanagmentsystem.model.Shop;
+import com.UDHFashion.udhmanagmentsystem.model.updateShop;
 import com.UDHFashion.udhmanagmentsystem.service.IShopDAO;
 
 @Controller
@@ -49,4 +51,33 @@ public class ShopController {
 		model.addAttribute("shopList",shopList);
 		return "shop/viewShop";
 	}
+	
+	 //Load Data to the forms
+		@RequestMapping(value = "/editShop", method = RequestMethod.GET)
+		public ModelAndView editShop(@ModelAttribute("shop") updateShop shop, ModelAndView model) {
+			
+			
+			updateShop sp=iShop.getShopById(shop.getId());
+			model.addObject("shop", sp);
+			model.setViewName("shop/editShop");
+			return model;
+			
+		}
+	
+	//Update details to the DB
+		
+		@RequestMapping(value = "/submitUpdateShop", method = RequestMethod.POST)
+		public String submitUpdateShop(@ModelAttribute("shop") Shop shop, ModelMap model) {
+
+			
+
+			iShop.updateShopDetails(shop);
+
+			List<Shop> shopList = iShop.getAllShopsDetails();
+			model.addAttribute("shopList", shopList);
+			return "shop/viewShop";
+		}
+		
+	
+	
 }

@@ -9,19 +9,61 @@
 <%@page import="com.UDHFashion.udhmanagmentsystem.model.Shop"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>View WholeSale Shop</title>
-</head>
-<body>
 
 
-	</br>
-	</br>
-	</br>
-	</br>
+
+
+<!-- added success message -->
+	<script type="text/javascript">
+		function addedsuccesfully() {	
+			swal("Employee Added Succesfully");	
+		}
+	</script>
+
+	<c:if test="${success == 1}">
+		<script type="text/javascript">
+			window.onload = addedsuccesfully;
+		</script>
+	</c:if>
+	
+<!-- update success message -->
+	<script type="text/javascript">
+		function updatesuccesfully() {	
+			swal("Employee updated Succesfully");	
+		}
+	</script>
+
+	<c:if test="${success == 2}">
+		<script type="text/javascript">
+			window.onload = updatesuccesfully;
+		</script>
+	</c:if>
+<!-- delete success message -->
+	<script type="text/javascript">
+		function deletesuccesfully() {	
+			swal("Employee Deleted Succesfully");	
+		}
+	</script>
+
+	<c:if test="${success == 3}">
+		<script type="text/javascript">
+			window.onload = deletesuccesfully;
+		</script>
+	</c:if>
+
+<!-- delete unsuccess message -->
+	<script type="text/javascript">
+		function deleteunsuccesfull() {	
+			swal("Employee Delete Unsuccesfull");	
+		}
+	</script>
+
+	<c:if test="${success == 4}">
+		<script type="text/javascript">
+			window.onload = deleteunsuccesfull;
+		</script>
+	</c:if>
+
 	<div class="content-page">
 
 		<!-- Start content -->
@@ -107,7 +149,6 @@
 			<!-- END content -->
 
 		</div>
-</body>
-</html>
-<%@ include file="../includes/footer.jsp"%>le="../includes/footer.jsp"
-%>
+		</div>
+
+<%@ include file="../includes/footer.jsp"%>

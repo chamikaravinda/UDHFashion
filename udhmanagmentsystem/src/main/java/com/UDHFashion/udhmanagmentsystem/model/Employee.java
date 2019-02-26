@@ -1,4 +1,4 @@
-package com.UDHFashion.udhmanagmentsystem.model;
+	package com.UDHFashion.udhmanagmentsystem.model;
 public class Employee {
 
 	private String empNo;

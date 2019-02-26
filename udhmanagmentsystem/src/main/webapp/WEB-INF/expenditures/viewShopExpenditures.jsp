@@ -69,7 +69,7 @@
          											<td> ${result.reason} </td>
          											<td> ${result.amount} </td>
          											<td> 
-         												<form method = "POST" action = "" modelAttribute="shop_expenditures">
+         												<form method = "POST" action = "editShopExpenditures" modelAttribute="shop_expenditures">
          													<input name = "id" type = "hidden" value = "${result.id}" >
          													<button type="submit"  class="btn btn-primary">Update</button>
          												</form></td>

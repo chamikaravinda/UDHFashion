@@ -7,9 +7,9 @@ import com.UDHFashion.udhmanagmentsystem.model.Item;
 public interface IEmployeeDAO {
 
 	
-	public abstract void insertEmployeeDetails( Employee employee );
+	public abstract boolean insertEmployeeDetails( Employee employee );
 	public abstract List<Employee> getAllEmployeeDetails();
-	public abstract void deleteEmployee(String empNo );
-	public abstract void updateEmployeeDetails( Employee employee);
+	public abstract boolean deleteEmployee(String empNo );
+	public abstract boolean updateEmployeeDetails( Employee employee);
 	public abstract Employee getEmployeeById( String empNo );
 }

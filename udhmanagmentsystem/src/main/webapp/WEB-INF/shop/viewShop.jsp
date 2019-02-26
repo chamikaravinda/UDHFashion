@@ -65,10 +65,10 @@
          											<td> ${result.shopAddress} </td>	
          											<td> ${result.shopTelephone} </td>
          											<td> 
-         											<form method = "POST" action = "updateShop" modelAttribute="shop">
+         											<form method = "GET" action = "editShop" modelAttribute="shop">
          													<input name = "shopId" type = "hidden" value = "${result.shopId}" >
          													<button type="submit"  class="btn btn-primary">Update</button>
-         												</form>
+         											</form>
          											
          											
          											</td>

@@ -2,16 +2,20 @@ package com.UDHFashion.udhmanagmentsystem.controller;
 
 
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.origin.SystemEnvironmentOrigin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.UDHFashion.udhmanagmentsystem.model.Employee;
 import com.UDHFashion.udhmanagmentsystem.model.PersonalExpenditures;
 import com.UDHFashion.udhmanagmentsystem.model.Shop;
 import com.UDHFashion.udhmanagmentsystem.model.ShopExpenditures;
@@ -123,14 +127,51 @@ public class ExpendituresController {
 		return "expenditures/viewShopExpenditures";
 	}
 	
-	
-	//Update ShopEx
-	
-	
-	
-	
-	//
-	
+	 //Load shop expenditures Data to the forms
+		@RequestMapping(value = "/editShopExpenditures", method = RequestMethod.POST)
+		public ModelAndView editShopExpenditures(@ModelAttribute("shop_expenditures") ShopExpenditures ShExpenditures, ModelAndView model) {
+			
+			
+			
+			ShopExpenditures emp = serviceSpexpnditures.getShopExpendituresById(ShExpenditures.getId());
+			
+			
+			model.addObject("shop_expenditures", emp);
+			model.setViewName("expenditures/editShopExpenditures");
+
+			
+			return model;
+			//Already working Properly
+		}
+		
+	//Update shop Expenditures the Details
+		
+		@RequestMapping(value = "/updateShopExpenditures", method = RequestMethod.POST)
+		public String updateShopExpenditures(@ModelAttribute("shop_expenditures") ShopExpenditures ShExpenditures, ModelMap model) {
+
+			System.out.println("controller Name"+ShExpenditures.getName());
+			System.out.println("controller Date"+ShExpenditures.getDate());
+			System.out.println("controller Amount"+ShExpenditures.getAmount());
+			System.out.println("controller Biil"+ShExpenditures.getBillNo());
+			System.out.println("controller Rea"+ShExpenditures.getReason());
+			System.out.println("Int id bug "+ShExpenditures.getId());
+		
+					
+			if(serviceSpexpnditures.updateShopExpenditures(ShExpenditures)) {
+			
+				return "redirect:viewShopExpenditures";
+			}else {
+				
+				return "editShopExpenditures";
+			}
+			
+			
+			
+//			List<ShopExpenditures> shopExList = serviceSpexpnditures.getAllShopExpenditures();
+//			model.addAttribute("shop_expenditures", shopExList);
+			
+		}
+		
 	
 	
 	

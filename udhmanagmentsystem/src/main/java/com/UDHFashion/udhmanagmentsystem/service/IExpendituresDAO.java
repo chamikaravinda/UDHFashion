@@ -18,8 +18,8 @@ public interface IExpendituresDAO {
 	public abstract void insertShopExpenditures(ShopExpenditures SpExpenditures );
 	public abstract List<ShopExpenditures> getAllShopExpenditures();
 	public abstract void deleteShopExpenditures(int id );
-	public abstract void updateShopExpenditures(ShopExpenditures SpExpenditures );
-	public abstract PersonalExpenditures getShopExpendituresById( int id );
+	public abstract boolean updateShopExpenditures(ShopExpenditures SpExpenditures );
+	public abstract ShopExpenditures getShopExpendituresById( int id );
 	
 	
 
