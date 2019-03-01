@@ -35,7 +35,7 @@
 </script>
 
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Edit Shop Expenditures</title>
 </head>
 <body>
 
@@ -55,13 +55,17 @@
 							<h1 class="main-title float-left">Shop Expenditures</h1>
 							<ol class="breadcrumb float-right">
 								<li class="breadcrumb-item">Home</li>
-								<li class="breadcrumb-item active">Employee</li>
+								<li class="breadcrumb-item active">Update</li>
 							</ol>
 							<div class="clearfix"></div>
 						</div>
 					</div>
 				</div>
-				<br><br><br><br><br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
 				<!-- end row -->
 
 				<div class="row">
@@ -71,46 +75,49 @@
 
 							<div class="card-body">
 
-								<form method="POST" action="submitShopExpenditures"
-									modelAttribute="employee" onsubmit="return validator()">
+								<form:form method="POST" action="updateShopExpenditures"
+									modelAttribute="shop_expenditures">
 
 									<div class="form-row">
 										<div class="form-group col-md-6">
-											<label for="exampleInputEmail1">Date </label> <input
-												type="Date" name="date" class="form-control" id="date"
-												aria-describedby="emailHelp" placeholder="Date" required>
+											<label for="exampleInputEmail1">Date </label>
+											<form:input type="Date" path="date" class="form-control"
+												aria-describedby="emailHelp" placeholder=""
+												required="required" />
 										</div>
 										<div class="form-group col-md-6">
-											<label for="exampleInputEmail1">Bill No</label> <input
-												type="text" name="billNo" class="form-control" id="billNo"
-												aria-describedby="numberlHelp" placeholder="Bill No"
-												required>
+											<label for="exampleInputEmail1">Bill No</label>
+											<form:input type="text" path="billNo" class="form-control"
+												aria-describedby="numberlHelp" placeholder=""
+												required="required" />
 
 										</div>
 									</div>
-										
+
 									<div class="form-row">
 										<div class="form-group col-md-4">
-											<label for="exampleInputPassword1">Name</label> <input
-												type="text" name="name" class="form-control" id="name"
-												placeholder="Name" required>
+											<label for="exampleInputPassword1">Name</label>
+											<form:input type="text" path="name" class="form-control"
+												placeholder="" required="required" />
 										</div>
 										<div class="form-group col-md-4">
-											<label for="exampleInputPassword1">Reason</label> <input
-												type="text" name="reason" class="form-control" id="reason"
-												placeholder="Reason" required>
+											<label for="exampleInputPassword1">Reason</label>
+											<form:input type="text" path="reason" class="form-control"
+												placeholder="" required="required" />
 										</div>
 										<div class="form-group col-md-4">
-											<label for="exampleInputPassword1">Amount</label> <input
-												type="text" name="amount" class="form-control" id="amount"
-												placeholder="Amount" required>
+											<label for="exampleInputPassword1">Amount</label>
+											<form:input type="text" path="amount" class="form-control"
+												placeholder="" required="required" />
 										</div>
 									</div>
-
-										<div style="margin-left: 500px">
-											<button type="submit" class="btn btn-primary">Add</button>
-										</div>
-								</form>
+									
+									<form:input type="hidden" path="id"/>
+									
+									<div style="margin-left: 500px">
+										<button type="submit" class="btn btn-primary">Update</button>
+									</div>
+								</form:form>
 
 							</div>
 						</div>

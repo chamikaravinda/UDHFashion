@@ -16,7 +16,7 @@ import com.UDHFashion.udhmanagmentsystem.model.Item;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 
 @Service
-public class BarcodeDAOImpl implements IBarcodeDAO {
+public class IBarcodeDAOImpl implements IBarcodeDAO {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

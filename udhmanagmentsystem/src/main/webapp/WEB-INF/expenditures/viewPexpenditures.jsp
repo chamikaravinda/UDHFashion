@@ -13,15 +13,15 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>View WholeSale Shop</title>
+<title>Personal Expenditures</title>
 </head>
 <body>
 
 
-	</br>
-	</br>
-	</br>
-	</br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<div class="content-page">
 
 		<!-- Start content -->
@@ -34,7 +34,7 @@
 					<div class="col-md-12">
 						<div class="card mb-3">
 							<div class="col-md-12a">
-								<a href="addShop" class="btn btn-primary" style="margin:10px"
+								<a href="addPersonalExpenditures" class="btn btn-primary" style="margin:10px"
 									role="button" aria-pressed="true">Add</a>
 
 							</div>
@@ -45,10 +45,11 @@
 										class="table table-bordered table-hover display">
 										<thead>
 											<tr>
-												<th>Shop No</th>
-												<th>Shop Name</th>
-												<th>Address</th>
-												<th>Telephone</th>
+												<th>ID</th>
+												<th>Date</th>
+												<th>Reason</th>
+												<th>Amount</th>
+												
 
 												<td><span><i class="fa fa-pencil-square"
 														aria-hidden="true"></i></span></td>
@@ -58,30 +59,35 @@
 										</thead>
 										<tbody>
 			
-											<c:forEach var="result" items = "${shopList}">
+											<c:forEach var="result" items ="${pExpendituresList}">
 												<tr>
-         											<td> ${result.shopId} </td>	
-         											<td> ${result.shopName} </td>	
-         											<td> ${result.shopAddress} </td>	
-         											<td> ${result.shopTelephone} </td>
-         											<td> 
-         											<form method = "GET" action = "editShop" modelAttribute="shop">
-         													<input name = "shopId" type = "hidden" value = "${result.shopId}" >
-         													<button type="submit"  class="btn btn-primary">Update</button>
-         											</form>
-         											
+													<td>${result.id}</td>	
+         											<td>${result.date}</td>	
+         											<td>${result.reason}</td>	
+         											<td>${result.amount}</td>	
+         											<td>
+         												<form method = "POST" action = "editEmployee" modelAttribute="p_expenditures">
+         													<input name = "id" type = "hidden" value = "${result.id}" >
+         													<button type="submit" al class="btn btn-primary">Update</button>
+         												</form>
          											
          											</td>
-         											<td> 	
-         												<form method = "POST" action = "deleteShop" modelAttribute="shop">
-         													<input name = "shopId" type = "hidden" value = "${result.shopId}" >
-         													<button type="submit"  class="btn btn-primary">Delete</button>
+         											<td> 
+         												<form method = "POST" action = "deletePerExpenditures" modelAttribute="p_expenditures">
+         													<input name = "id" type = "hidden" value = "${result.id}" >
+         													<button type="submit" al class="btn btn-primary">Delete</button>
          												</form>
-         											</td>	
+         											</td>
+         											
+         												
          										</tr>
 											</c:forEach>
 
 										</tbody>
+										
+										
+										
+										
 									</table>
 									
 								</div>
@@ -100,6 +106,7 @@
 			</div>
 			<!-- END content -->
 
+		</div>
 		</div>
 </body>
 </html>

@@ -41,24 +41,23 @@
 							
 							<div class="card-body">
 								
-								<form>
+								<form:form  method="POST" action="submitUpdateShop" modelAttribute="shop">
 								  <div class="form-group">
 									<label for="exampleInputEmail1">Shop Name</label>
-									<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter ShopName" required>
-									<small id="emailHelp" class="form-text text-muted">Whole sales</small>
+									<form:input type="email" class="form-control" path="name" aria-describedby="emailHelp" placeholder="" required="required"/>
+									
 								  </div>
 								  <div class="form-group">
 									<label for="exampleInputEmail1">Address</label>
-									<input type="number" class="form-control" id="exampleInputNumber1" aria-describedby="numberlHelp" placeholder="Enter number" required>
+									<form:input type="text" class="form-control" path="address" aria-describedby="" placeholder="" required="required"/>
 									
 								  </div>
 								  <div class="form-group">
 									<label for="exampleInputPassword1">Telephone</label>
-									<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+									<form:input type="number" class="form-control" path="telephone" placeholder="" required="required"/>
 								  </div>
-						<button type="submit" al class="btn btn-primary">Update</button>
-								  
-								</form>
+									<button type="submit" class="btn btn-primary">Update</button>
+								  </form:form>
 																
 							</div>														
 						</div><!-- end card-->					

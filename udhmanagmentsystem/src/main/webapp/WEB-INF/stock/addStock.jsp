@@ -63,12 +63,12 @@
 								<section>
 
 									<div class="form-group">
-										<label for="sel1">Shop No</label> <select name="shopId"
+										<label for="sel1">Shop Name</label> <select name="shopId"
 											class="form-control" id="shopId" required>
 
 											<c:forEach var="result" items="${shopList}">
 
-												<option>${result.shopId}</option>
+												<option>${result.shopName}</option>
 
 											</c:forEach>
 
