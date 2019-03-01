@@ -53,7 +53,10 @@ public class CommonConstants {
 	public final static String GET_ALL_BANK_ACCOUNT_DETAILS = "SELECT * FROM bank_accounts";
 	public final static String GET_BANK_ACCOUNT = "SELECT * FROM bank_accounts WHERE id = ? ";
 	public final static String UPDATE_BANK_ACCOUNT = "UPDATE bank_accounts SET bank_name = ? , account_number = ?, account_type = ?, current_balance = ? WHERE id = ?";
-	public final static String INSERT_BANK_DEPOSIT = "INSERT INTO bank_deposites(date,amount,account) VALUES(?,?,?)";
+	public final static String INSERT_BANK_WITHDRAW = "INSERT INTO bank_withdraws(date,amount,account) VALUES(?,?,?)";
 	public final static String UPDATE_BANK_ACCOUNT_BALANCE = "UPDATE bank_accounts SET current_balance = ? WHERE id = ?";
 	public final static String GET_ALL_DEPOSITE_DETAILS = "SELECT * FROM bank_deposites ORDER BY id DESC";
+	public final static String INSERT_BANK_DEPOSIT = "INSERT INTO bank_deposites(date,amount,account) VALUES(?,?,?)";
+	public final static String GET_ALL_WITHDRAW_DETAILS = "SELECT * FROM bank_withdraws ORDER BY id DESC";
+
 }

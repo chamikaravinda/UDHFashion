@@ -2,7 +2,7 @@
 <!-- added success message -->
 <script type="text/javascript">
 	function addedsuccesfully() {
-		swal("Deposite Added Succesfully");
+		swal("Withdraw Added Succesfully");
 	}
 </script>
 
@@ -21,7 +21,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="breadcrumb-holder">
-						<h1 class="main-title float-left">Bank Deposits</h1>
+						<h1 class="main-title float-left">Bank Withdraws</h1>
 						<ol class="breadcrumb float-right">
 							<li class="breadcrumb-item">Home</li>
 							<li class="breadcrumb-item active">Bank Account</li>
@@ -37,7 +37,7 @@
 				<div class="col-md-12">
 					<div class="card mb-3">
 						<div class="col-md-12a">
-							<a href="addDeposites" class="btn btn-primary"
+							<a href="addWithdraw" class="btn btn-primary"
 								style="margin: 10px" role="button" aria-pressed="true">Add</a>
 
 						</div>
@@ -51,12 +51,12 @@
 											<th>Date</th>
 											<th>Bank Name</th>
 											<th>Account Number</th>
-											<th>Deposited Amount</th>
+											<th>Withdrawn Amount</th>
 										</tr>
 									</thead>
 									<tbody>
 
-										<c:forEach var="result" items="${deposites}">
+										<c:forEach var="result" items="${withdraws}">
 											<tr>
 												<td>${result.date}</td>
 												<td>${result.bank}</td>

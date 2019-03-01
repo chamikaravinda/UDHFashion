@@ -190,7 +190,7 @@
 		                     <li><a href="allAccounts"><i class="fa fa-line-chart"></i>All Accounts</a></li>
                              <li><a href="addBanks"><i class="fa fa-plus"></i>Add Account</a></li>
                              <li><a href="allDeposits"><i class="fa fa-inr"></i>Deposits</a></li> 
-                             <li><a href="employeeSalarySheet"><i class="fa fa-credit-card "></i>Withdraws</a></li>          
+                             <li><a href="allWithdraws"><i class="fa fa-credit-card "></i>Withdraws</a></li>          
 		                 </ul>
                     </li>
                     
@@ -199,10 +199,8 @@
                     <li class="submenu">
                         <a href="#"><i class="fa fa-pie-chart" ></i><span>Expenditures</span><span class="menu-arrow"></span></a>
 		                 <ul class="list-unstyled">
-		                    <li><a href="addShopExpenditures"><i class="fa fa-plus-square"></i>Shop Exp :</a></li>
-		                    <li><a href="viewShopExpenditures"><i class="fa fa-eye"></i></i>All Shop Exp :</a></li>
+		                    <li><a href="addShopExpenditures"><i class="fa fa-plus-square"></i>Shop Exp:</a></li>
                             <li><a href="addPersonalExpenditures"><i class="fa fa-plus-square"></i>Personal</a></li>
-                            <li><a href="viewPexpenditures"><i class="fa fa-eye"></i></i>All Personal Exp :</a></li>
 		                 </ul>
                    </li>          
                                
@@ -214,3 +212,4 @@
 		</div>
 	</div>
 	<!-- End Sidebar -->
+
