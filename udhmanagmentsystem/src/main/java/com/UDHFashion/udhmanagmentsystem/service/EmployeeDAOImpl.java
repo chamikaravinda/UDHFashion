@@ -95,35 +95,6 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
 		}
 
 	}
-	/////
-	// @Override
-	// public Employee getEmployeeById(String empNo) {
-	//
-	// return (Employee)
-	///// jdbcTemplate.queryForObject(CommonConstants.GET_EMPLOYEE_BY_NO, new
-	///// Object[] { empNo },
-	// new RowMapper<Employee>() {
-	//
-	// @Override
-	// public Employee mapRow(ResultSet rs, int rwNumber) throws SQLException {
-	// Employee employee = new Employee();
-	//
-	// employee.setEmpNo(rs.getString("empNo"));
-	// employee.setEmpName(rs.getString("empName"));
-	// employee.setEmpAddress(rs.getString("empAddress"));
-	// employee.setBasicSalary(rs.getDouble("basicSalary"));
-	// employee.setJobDate(rs.getString("jobDate"));
-	// employee.setContactNum(rs.getString("contactNum"));
-	// employee.setgContactNum(rs.getString("gContactNum"));
-	//
-	// System.out.println("Show Employee Name : " + employee.getEmpName());
-	//
-	// return employee;
-	// }
-	// });
-	//
-	// }
-	///
 
 	@Override
 	public Employee getEmployeeById(String empNo) {

@@ -3,7 +3,7 @@ package com.UDHFashion.udhmanagmentsystem.service;
 import java.util.List;
 
 import com.UDHFashion.udhmanagmentsystem.model.Employee;
-import com.UDHFashion.udhmanagmentsystem.model.Item;
+
 public interface IEmployeeDAO {
 
 	

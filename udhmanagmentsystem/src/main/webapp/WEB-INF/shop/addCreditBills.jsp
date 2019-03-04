@@ -9,98 +9,90 @@
 <%@page import="com.UDHFashion.udhmanagmentsystem.model.Shop"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Credit Bills</title>
-</head>
-<body>
 
 
-	
-	<div class="content-page">
 
-		<!-- Start content -->
-		<div class="content">
+<div class="content-page">
 
-			<div class="container-fluid">
+	<!-- Start content -->
+	<div class="content">
 
-
-				<div class="row">
-					<div class="col-xl-12">
-						<div class="breadcrumb-holder">
-							<h1 class="main-title float-left">Add Credit Bills</h1>
-							<ol class="breadcrumb float-right">
-								<li class="breadcrumb-item">Home</li>
-								<li class="breadcrumb-item active">CreditBills</li>
-							</ol>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-				</div>
-				<!-- end row -->
-
-				<div class="row">
-
-					<div class=" col-md-12">
-						<div class="card mb-3">
-
-							<div class="card-body">
-
-								<form method="POST" action="creditBills"
-									modelAttribute="creditBills" onsubmit="return validator()">
+		<div class="container-fluid">
 
 
-									<div class="form-group">
-										<label for="exampleInputEmail1">Bill No</label> <input
-											type="text" name="shopName" class="form-control"
-											id="shopName" aria-describedby="emailHelp"
-											placeholder="Bill No" required>
-									</div>
-									<div class="form-group">
-										<label for="exampleInputEmail1">Bill Date</label> <input
-											type="text" name="shopAddress" class="form-control"
-											id="shopAddress" aria-describedby="numberlHelp"
-											placeholder="Bill Date" required>
-
-									</div>
-									<div class="form-group">
-										<label for="exampleInputPassword1">Shop Name</label> <input
-											type="number" name="shopTelephone" class="form-control"
-											id="shopName" placeholder="Shop Name" required>
-									</div>
-									
-									
-									
-									<div class="form-group">
-									  <label for="sel1">Payment Method</label>
-									  <select class="form-control" id="sel1">
-									    <option>1</option>
-									    <option>2</option>
-									    <option>3</option>
-									    <option>4</option>
-									  </select>
-									</div>
-									
-									
-
-									<div style="margin-left: 500px">
-										<button type="submit" class="btn btn-primary">Add Bill</button>
-									</div>
-
-								</form>
-
-							</div>
-						</div>
-						<!-- end card-->
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="breadcrumb-holder">
+						<h1 class="main-title float-left">Add Credit Bills</h1>
+						<ol class="breadcrumb float-right">
+							<li class="breadcrumb-item">Home</li>
+							<li class="breadcrumb-item active">CreditBills</li>
+						</ol>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
-			<!-- END content -->
+			<!-- end row -->
 
+			<div class="row">
+
+				<div class=" col-md-12">
+					<div class="card mb-3">
+
+						<div class="card-body">
+
+							<form method="POST" action="submitCreditBills"
+								modelAttribute="creditBills" onsubmit="return validator()">
+
+
+								<div class="form-row">
+									<label for="exampleInputEmail1">Bill No</label> <input
+										type="text" name="billNo" class="form-control" id="billNo"
+										aria-describedby="emailHelp" placeholder="Bill No" required>
+								</div>
+								<div class="form-row">
+									<label for="exampleInputEmail1">Bill Date</label> <input
+										type="Date" name="billDate" class="form-control" id="billDate"
+										aria-describedby="numberlHelp" placeholder="Bill Date"
+										required>
+
+								</div>
+								<div class="form-row">
+									<label for="sel1">Shop Name</label> <select name="shopName"
+										class="form-control" id="shopId" required>
+
+										<c:forEach var="result" items="${shopList}">
+
+											<option>${result.shopName}</option>
+
+										</c:forEach>
+
+									</select>
+								</div>
+								
+								<div class="form-row">
+									<label for="exampleInputEmail1">Bill Amount</label> <input
+										type="number" name="billAmount" class="form-control" id="billAmount"
+										aria-describedby="numberlHelp" placeholder="Bill Amount"
+										required>
+
+								</div>
+
+								<div style="margin-left: 500px">
+									<button type="submit" class="btn btn-primary">Add Bill</button>
+								</div>
+
+							</form>
+
+						</div>
+					</div>
+					<!-- end card-->
+				</div>
+			</div>
 		</div>
-</body>
-</html>
-<%@ include file="../includes/footer.jsp"%>le="../includes/footer.jsp"
-%>
+		<!-- END content -->
+
+	</div>
+</div>
+
+<%@ include file="../includes/footer.jsp"%>

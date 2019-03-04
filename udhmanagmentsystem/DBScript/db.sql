@@ -1,4 +1,3 @@
-
 CREATE TABLE shop
 (
 	id INT AUTO_INCREMENT NOT NULL,
@@ -112,3 +111,70 @@ CREATE TABLE employee
 	CONSTRAINT pk_item PRIMARY KEY(id)
  );
 
+//Credit Bill
+CREATE TABLE credit_bill
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	billNo VARCHAR(20),
+	billDate VARCHAR(20),
+	shopName VARCHAR(20),
+	
+	
+	CONSTRAINT credit_bill_pk PRIMARY KEY (id),
+	CONSTRAINT credit_bill_fk FOREIGN KEY(shopName) REFERENCES shop(id) ON DELETE CASCADE
+	
+);
+
+
+//create cash payment
+
+
+CREATE TABLE cash_payment
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	billNo VARCHAR(20),
+	billDate VARCHAR(20),
+	shopName VARCHAR(20),
+	billAmount DOUBLE,
+	paymentDate VARCHAR(20),
+	
+	CONSTRAINT cash_payment_pk PRIMARY KEY (id),
+	CONSTRAINT cash_payment_fk FOREIGN KEY(shopName) REFERENCES shop(id) ON DELETE CASCADE
+	
+);
+
+CREATE TABLE paid_bill
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	billNo VARCHAR(20),
+	billDate VARCHAR(20),
+	shopName VARCHAR(20),
+	billAmount DOUBLE,
+	paymentDate VARCHAR(20),
+	paymentMethod VARCHAR(20),
+	
+	CONSTRAINT paid_bill_pk PRIMARY KEY (id),
+	CONSTRAINT paid_bill_fk FOREIGN KEY(shopName) REFERENCES shop(id) ON DELETE CASCADE
+	
+);
+
+
+CREATE TABLE cheque_payment
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	billNo VARCHAR(20),
+	billDate VARCHAR(20),
+	shopNo VARCHAR(20),
+	shopName VARCHAR(20),
+	bankName VARCHAR(20),
+	bankAccountNo VARCHAR(20),
+	chequeNo VARCHAR(20),
+	chequeAmount VARCHAR(20),
+	chequeDate VARCHAR(20),
+	paymentDate VARCHAR(20),
+	paymentAmount DOUBLE,
+	
+	CONSTRAINT cheque_payment_pk PRIMARY KEY (id),
+	CONSTRAINT cheque_payment_fk FOREIGN KEY(shopName) REFERENCES shop(id) ON DELETE CASCADE
+	
+);

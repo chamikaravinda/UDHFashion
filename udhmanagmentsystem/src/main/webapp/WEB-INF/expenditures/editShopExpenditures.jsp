@@ -2,9 +2,7 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
+
 <script>
 	function validator() {
 
@@ -34,102 +32,94 @@
 	}
 </script>
 
-<meta charset="ISO-8859-1">
-<title>Edit Shop Expenditures</title>
-</head>
-<body>
 
 
 
-	<div class="content-page">
 
-		<!-- Start content -->
-		<div class="content">
+<div class="content-page">
 
-			<div class="container-fluid">
+	<!-- Start content -->
+	<div class="content">
+
+		<div class="container-fluid">
 
 
-				<div class="row">
-					<div class="col-xl-12">
-						<div class="breadcrumb-holder">
-							<h1 class="main-title float-left">Shop Expenditures</h1>
-							<ol class="breadcrumb float-right">
-								<li class="breadcrumb-item">Home</li>
-								<li class="breadcrumb-item active">Update</li>
-							</ol>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-				</div>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<!-- end row -->
-
-				<div class="row">
-
-					<div class=" col-md-12">
-						<div class="card mb-3">
-
-							<div class="card-body">
-
-								<form:form method="POST" action="updateShopExpenditures"
-									modelAttribute="shop_expenditures">
-
-									<div class="form-row">
-										<div class="form-group col-md-6">
-											<label for="exampleInputEmail1">Date </label>
-											<form:input type="Date" path="date" class="form-control"
-												aria-describedby="emailHelp" placeholder=""
-												required="required" />
-										</div>
-										<div class="form-group col-md-6">
-											<label for="exampleInputEmail1">Bill No</label>
-											<form:input type="text" path="billNo" class="form-control"
-												aria-describedby="numberlHelp" placeholder=""
-												required="required" />
-
-										</div>
-									</div>
-
-									<div class="form-row">
-										<div class="form-group col-md-4">
-											<label for="exampleInputPassword1">Name</label>
-											<form:input type="text" path="name" class="form-control"
-												placeholder="" required="required" />
-										</div>
-										<div class="form-group col-md-4">
-											<label for="exampleInputPassword1">Reason</label>
-											<form:input type="text" path="reason" class="form-control"
-												placeholder="" required="required" />
-										</div>
-										<div class="form-group col-md-4">
-											<label for="exampleInputPassword1">Amount</label>
-											<form:input type="text" path="amount" class="form-control"
-												placeholder="" required="required" />
-										</div>
-									</div>
-									
-									<form:input type="hidden" path="id"/>
-									
-									<div style="margin-left: 500px">
-										<button type="submit" class="btn btn-primary">Update</button>
-									</div>
-								</form:form>
-
-							</div>
-						</div>
-						<!-- end card-->
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="breadcrumb-holder">
+						<h1 class="main-title float-left">Shop Expenditures</h1>
+						<ol class="breadcrumb float-right">
+							<li class="breadcrumb-item">Home</li>
+							<li class="breadcrumb-item active">Update</li>
+						</ol>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
-			<!-- END container-fluid -->
-		</div>
-		<!-- END content -->
-	</div>
+			<br> <br> <br> <br> <br>
+			<!-- end row -->
 
-</body>
-</html>
+			<div class="row">
+
+				<div class=" col-md-12">
+					<div class="card mb-3">
+
+						<div class="card-body">
+
+							<form:form method="POST" action="updateShopExpenditures"
+								modelAttribute="shop_expenditures">
+
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="exampleInputEmail1">Date </label>
+										<form:input type="Date" path="date" class="form-control"
+											aria-describedby="emailHelp" placeholder=""
+											required="required" />
+									</div>
+									<div class="form-group col-md-6">
+										<label for="exampleInputEmail1">Bill No</label>
+										<form:input type="text" path="billNo" class="form-control"
+											aria-describedby="numberlHelp" placeholder=""
+											required="required" />
+
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="form-group col-md-4">
+										<label for="exampleInputPassword1">Name</label>
+										<form:input type="text" path="name" class="form-control"
+											placeholder="" required="required" />
+									</div>
+									<div class="form-group col-md-4">
+										<label for="exampleInputPassword1">Reason</label>
+										<form:input type="text" path="reason" class="form-control"
+											placeholder="" required="required" />
+									</div>
+									<div class="form-group col-md-4">
+										<label for="exampleInputPassword1">Amount</label>
+										<form:input type="text" path="amount" class="form-control"
+											placeholder="" required="required" />
+									</div>
+								</div>
+
+								<form:input type="hidden" path="id" />
+
+								<div style="margin-left: 500px">
+									<button type="submit" class="btn btn-primary">Update</button>
+								</div>
+							</form:form>
+
+						</div>
+					</div>
+					<!-- end card-->
+				</div>
+			</div>
+		</div>
+		<!-- END container-fluid -->
+	</div>
+	<!-- END content -->
+</div>
+
+
 <%@ include file="../includes/footer.jsp"%>

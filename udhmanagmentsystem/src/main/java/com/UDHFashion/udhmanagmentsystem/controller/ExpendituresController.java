@@ -1,12 +1,9 @@
 package com.UDHFashion.udhmanagmentsystem.controller;
 
-
-
-import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.origin.SystemEnvironmentOrigin;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,172 +11,208 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.UDHFashion.udhmanagmentsystem.model.Employee;
 import com.UDHFashion.udhmanagmentsystem.model.PersonalExpenditures;
-import com.UDHFashion.udhmanagmentsystem.model.Shop;
+
 import com.UDHFashion.udhmanagmentsystem.model.ShopExpenditures;
 import com.UDHFashion.udhmanagmentsystem.service.IExpendituresDAO;
 
-
-
 @Controller
 public class ExpendituresController {
-	
+
 	@Autowired
 	IExpendituresDAO servicePexpnditures;
-	
 
 	@Autowired
 	IExpendituresDAO serviceSpexpnditures;
-		
-	
-	@RequestMapping(value="/addShopExpenditures",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/addShopExpenditures", method = RequestMethod.GET)
 	public String addShopExpenditures(Model model) {
-		
+
 		return "expenditures/addShopExpenditures";
 	}
-	
-	@RequestMapping(value="/addPersonalExpenditures",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/addPersonalExpenditures", method = RequestMethod.GET)
 	public String addPersonalExpenditures(Model model) {
-		
+
 		return "expenditures/addPersonalExpenditures";
 	}
-	
-	
-	
-	//add Personal Expen
+
+	// add Personal Expenditures
 	@RequestMapping(value = "/submitPersonalExpenditures", method = RequestMethod.POST)
-	public String submitPersonalExpenditures(@ModelAttribute("PersonalExpenditures") PersonalExpenditures personalExpenditures, ModelMap model) {
+	public ModelAndView submitPersonalExpenditures(
+			@ModelAttribute("PersonalExpenditures") PersonalExpenditures personalExpenditures, ModelAndView model,
+			RedirectAttributes redir) {
 
-		servicePexpnditures.insertPersonalExpenditures(personalExpenditures);
-		
-		return "redirect:viewPexpenditures";
+		if (servicePexpnditures.insertPersonalExpenditures(personalExpenditures)) {
+			redir.addFlashAttribute("success", 1);
+			model.setViewName("redirect:/viewPexpenditures");
+			return model;
+
+		} else {
+			model.addObject("error", "Personal Expenditures adding unsuccesfully");
+			model.setViewName("redirect:/addPersonalExpenditures");
+			return model;
+
+		}
 
 	}
-	
-	//View Personal Expenditures
-	
-		@RequestMapping(value = "/viewPexpenditures", method = RequestMethod.GET)
-		public String viewPersonalExpenditures(Model model) {
+
+	// View Personal Expenditures
+
+	@RequestMapping(value = "/viewPexpenditures", method = RequestMethod.GET)
+	public String viewPersonalExpenditures(Model model) {
+
+		List<PersonalExpenditures> pExpendituresList = servicePexpnditures.getAllPersonalExpenditures();
+
+		model.addAttribute("pExpendituresList", pExpendituresList);
+
+		return "expenditures/viewPexpenditures";
+
+		// Already working properly
+	}
+
+	// Delete Personal Expenditures
+
+	@RequestMapping(value = "/deletePerExpenditures", method = RequestMethod.POST)
+	public ModelAndView deletePersonalEx(@ModelAttribute("PersonalExpenditures") PersonalExpenditures PerExpenditures,
+			ModelAndView model, RedirectAttributes redir) {
+
+		int id = PerExpenditures.getId();
+
+		if (servicePexpnditures.deletePersonalExpenditures(id)) {
+
+			redir.addFlashAttribute("success", 3);
+			model.setViewName("redirect:/viewPexpenditures");
+			return model;
+
+		}else {
 			
+			model.addObject("error", "Personal  Expeditures deleting unsuccesfully");
+			model.setViewName("redirect:/viewPexpenditures");
+			return model;
 			
-			List<PersonalExpenditures> pExpendituresList = servicePexpnditures.getAllPersonalExpenditures();
-			
-			model.addAttribute("pExpendituresList",pExpendituresList);
-			
-			return "expenditures/viewPexpenditures";
-			
-			//Already working properly
 		}
-		
-		
-		
-		//Delete Personal Expenditures
-		
-		@RequestMapping(value = "/deletePerExpenditures", method = RequestMethod.POST)
-		public String deletePersonalEx(@ModelAttribute("PersonalExpenditures") PersonalExpenditures PerExpenditures, ModelMap model ) {
-			
-			int id = PerExpenditures.getId();
-			
-			servicePexpnditures.deletePersonalExpenditures(id);
-			
-			List<PersonalExpenditures> PrExpenditures = servicePexpnditures.getAllPersonalExpenditures();
-			model.addAttribute("PrExpenditures",PrExpenditures);
-			
-			return "redirect:viewPexpenditures";
+
+	}
+
+	// Load Personal Expenditures Data to the forms
+	@RequestMapping(value = "/editPersonalExpenditures", method = RequestMethod.POST)
+	public ModelAndView editPersonalExpenditures(@ModelAttribute("p_expenditures") PersonalExpenditures perExpenditures,
+			ModelAndView model) {
+
+		PersonalExpenditures PeEx = servicePexpnditures.getPersonalExpendituresById(perExpenditures.getId());
+
+		model.addObject("p_expenditures", PeEx);
+		model.setViewName("expenditures/editPersonalExpenditures");
+
+		return model;
+
+	}
+
+	// Update Personal Expenditures the Details(already working with Sweet alerts)
+
+	@RequestMapping(value = "/updatePersonalExpenditures", method = RequestMethod.POST)
+	public ModelAndView updatePersonalExpenditures(
+			@ModelAttribute("p_expenditures") PersonalExpenditures perExpenditures, ModelAndView model,
+			RedirectAttributes redir) {
+
+		if (servicePexpnditures.updatePersonalExpenditures(perExpenditures)) {
+
+			redir.addFlashAttribute("success", 2);
+			model.setViewName("redirect:/viewPexpenditures");
+			return model;
+		} else {
+			model.addObject("error", "Account adding unsuccesfully");
+			model.setViewName("redirect:/editPersonalExpenditures");
+			return model;
 		}
-	
-	
-	
-	/*--------------------------- Shop Ex --------------------*/
-	//Add Shop Exp
+
+	}
+
+	/*---------------------------  ShopExpenditures Completed totally --------------------*/
+	// Add ShopExpenditures
 	@RequestMapping(value = "/submitShopExpenditures", method = RequestMethod.POST)
-	public String submitShopExpenditures(@ModelAttribute("ShopExpenditures") ShopExpenditures SpExpenditures, ModelMap model) {
+	public ModelAndView submitShopExpenditures(@ModelAttribute("ShopExpenditures") ShopExpenditures SpExpenditures,
+			ModelAndView model, RedirectAttributes redir) {
 
-		serviceSpexpnditures.insertShopExpenditures(SpExpenditures);
-		
-		return "redirect:viewShopExpenditures";
+		if (serviceSpexpnditures.insertShopExpenditures(SpExpenditures)) {
+
+			redir.addFlashAttribute("success", 1);
+			model.setViewName("redirect:/viewShopExpenditures");
+			return model;
+		} else {
+			model.addObject("error", "Shop Expenditures adding unsuccesfully");
+			model.setViewName("redirect:/addShopExpenditures");
+			return model;
+		}
 
 	}
-	//View Shop Exp
-	
+	// View ShopExpenditures
+
 	@RequestMapping(value = "/viewShopExpenditures", method = RequestMethod.GET)
 	public String viewShopExpenditures(Model model) {
-		
-		
+
 		List<ShopExpenditures> ShExpenditures = serviceSpexpnditures.getAllShopExpenditures();
-		model.addAttribute("ShExpenditures",ShExpenditures);
+		model.addAttribute("ShExpenditures", ShExpenditures);
 		return "expenditures/viewShopExpenditures";
 	}
-	
-	//delete ShopEx
-	
+
+	// delete ShopExpenditures
+
 	@RequestMapping(value = "/deleteShopExpenditures", method = RequestMethod.POST)
-	public String deleteShop(@ModelAttribute("ShopExpenditures") ShopExpenditures SpExpenditures, ModelMap model ) {
-		
+	public ModelAndView deleteShop(@ModelAttribute("ShopExpenditures") ShopExpenditures SpExpenditures,
+			ModelAndView model, RedirectAttributes redir) {
+
 		int id = SpExpenditures.getId();
-		
-		serviceSpexpnditures.deleteShopExpenditures(id);
-		
-		List<ShopExpenditures> ShExpenditures = serviceSpexpnditures.getAllShopExpenditures();
-		model.addAttribute("ShExpenditures",ShExpenditures);
-		return "expenditures/viewShopExpenditures";
-	}
-	
-	 //Load shop expenditures Data to the forms
-		@RequestMapping(value = "/editShopExpenditures", method = RequestMethod.POST)
-		public ModelAndView editShopExpenditures(@ModelAttribute("shop_expenditures") ShopExpenditures ShExpenditures, ModelAndView model) {
-			
-			
-			
-			ShopExpenditures emp = serviceSpexpnditures.getShopExpendituresById(ShExpenditures.getId());
-			
-			
-			model.addObject("shop_expenditures", emp);
-			model.setViewName("expenditures/editShopExpenditures");
 
-			
+		if (serviceSpexpnditures.deleteShopExpenditures(id)) {
+			redir.addFlashAttribute("success", 3);
+			model.setViewName("redirect:/viewShopExpenditures");
 			return model;
-			//Already working Properly
-		}
-		
-	//Update shop Expenditures the Details
-		
-		@RequestMapping(value = "/updateShopExpenditures", method = RequestMethod.POST)
-		public String updateShopExpenditures(@ModelAttribute("shop_expenditures") ShopExpenditures ShExpenditures, ModelMap model) {
 
-			System.out.println("controller Name"+ShExpenditures.getName());
-			System.out.println("controller Date"+ShExpenditures.getDate());
-			System.out.println("controller Amount"+ShExpenditures.getAmount());
-			System.out.println("controller Biil"+ShExpenditures.getBillNo());
-			System.out.println("controller Rea"+ShExpenditures.getReason());
-			System.out.println("Int id bug "+ShExpenditures.getId());
-		
-					
-			if(serviceSpexpnditures.updateShopExpenditures(ShExpenditures)) {
-			
-				return "redirect:viewShopExpenditures";
-			}else {
-				
-				return "editShopExpenditures";
-			}
-			
-			
-			
-//			List<ShopExpenditures> shopExList = serviceSpexpnditures.getAllShopExpenditures();
-//			model.addAttribute("shop_expenditures", shopExList);
-			
-		}
-		
-	
-	
-	
-	
-	
+		} else {
 
-	
-	
-	
-	
+			model.addObject("error", "Shop Expenditures deleting unsuccesfully");
+			model.setViewName("redirect:/viewEmployee");
+			return model;
+
+		}
+
+	}
+
+	// Load shop expenditures Data to the forms
+	@RequestMapping(value = "/editShopExpenditures", method = RequestMethod.POST)
+	public ModelAndView editShopExpenditures(@ModelAttribute("shop_expenditures") ShopExpenditures ShExpenditures,
+			ModelAndView model) {
+
+		ShopExpenditures emp = serviceSpexpnditures.getShopExpendituresById(ShExpenditures.getId());
+
+		model.addObject("shop_expenditures", emp);
+		model.setViewName("expenditures/editShopExpenditures");
+
+		return model;
+		// Already working Properly
+	}
+
+	// Update shop Expenditures the Details(already working with Sweet alerts)
+
+	@RequestMapping(value = "/updateShopExpenditures", method = RequestMethod.POST)
+	public ModelAndView updateShopExpenditures(@ModelAttribute("shop_expenditures") ShopExpenditures ShExpenditures,
+			ModelAndView model, RedirectAttributes redir) {
+
+		if (serviceSpexpnditures.updateShopExpenditures(ShExpenditures)) {
+
+			redir.addFlashAttribute("success", 2);
+			model.setViewName("redirect:/viewShopExpenditures");
+			return model;
+		} else {
+			model.addObject("error", "Account adding unsuccesfully");
+			model.setViewName("redirect:/editShopExpenditures");
+			return model;
+		}
+
+	}
+
 }

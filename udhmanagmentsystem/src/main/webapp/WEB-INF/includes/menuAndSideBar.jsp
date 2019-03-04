@@ -163,9 +163,10 @@
                            <li><a href="viewShop"><i class="fa fa-eye"></i>View Suppliers</a></li>
                     	   <li class="submenu"><a href="#"><i class="fa fa-briefcase"></i><span>Accounts</span><span class="menu-arrow"></span></a>
 		                            <ul class="list-unstyled">
-		                                <li><a href="creditBills"><i class="fa fa-credit-card-alt"></i>Credit Bills</a></li>
-		                                <li><a href="#"><i class="fa fa-check-square"></i>Paid Bills</a></li>
-		                                <li><a href="cashPayments"><i class="fa fa-money"></i>Cash Payments</a></li>
+		                                <li><a href="viewCreditBills"><i class="fa fa-credit-card-alt"></i>Credit Bills</a></li>
+		                                <li><a href="paidBills"><i class="fa fa-check-square"></i>Paid Bills</a></li>
+		                                <li><a href="newPayment"><i class="fa fa-money"></i>New Payments</a></li>
+		                                <li><a href="viewCashPayment"><i class="fa fa-money"></i>Cash Payments</a></li>
 		                                 <li><a href="addCheques"><i class="fa fa-paper-plane"></i>Cheque Pay</a></li>
 		                            </ul>
                     	  </li>    
