@@ -147,7 +147,7 @@
                      
                     <!-- Sales -->
 					<li class="submenu">
-                        <a href="stockView"><i class="fa fa-shopping-cart "></i><span> Sales </span> </a>
+                        <a href="viewSales"><i class="fa fa-shopping-cart "></i><span> Sales </span> </a>
                     </li>
                     
                      <!-- Stocks -->

@@ -43,6 +43,8 @@ public class SupplierAccountsController {
 
 	@Autowired
 	IPaidBillDAO servicePaidBill;
+	
+	
 
 	@RequestMapping(value = "/newPayment", method = RequestMethod.GET)
 	public String newPayment(Model model) {
@@ -233,9 +235,11 @@ public class SupplierAccountsController {
 	public ModelAndView submitCashPayment(@ModelAttribute("cashPayment") CashPayments cashPayment,
 			@ModelAttribute("paidBill") PaidBills paidBills, ModelAndView model, RedirectAttributes redir) {
 
+		System.out.println(cashPayment.getBillNo());
+		
 		if (serviceCashPaymet.insertCashPayments(cashPayment)) {
 			paidBills.setPaymentMethod("Cash Payment");
-			if (servicePaidBill.insertPaidBillDetails(paidBills)) {
+			if (servicePaidBill.insertPaidBillDetails(paidBills ) && serviceCreditBill.deleteCreditBillDetails(cashPayment.getBillNo()) ) {
 
 				redir.addFlashAttribute("success", 1);
 				model.setViewName("redirect:/paidBills");

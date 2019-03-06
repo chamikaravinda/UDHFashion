@@ -61,7 +61,8 @@ public class CommonConstants {
 	/*---------------------------Credit Bills-------------------------------*/
 	public final static String INSERT_CREDITBILL_DETAILS = "INSERT INTO credit_bill(billNo,billDate,shopName,billAmount) VALUES(?,?,?,?)";
 	public final static String GET_ALL_CREDITBILL_DETAILS = "SELECT * FROM credit_bill";
-	public final static String DELETE_CREDITBILL_DETAILS = "DELETE FROM credit_bill WHERE id = ?";
+	public final static String DELETE_CREDITBILL_DETAILS = "DELETE FROM credit_bill WHERE billNo = ?";
+	public final static String DELETE_CREDITBILL_DETAILS_ID = "DELETE FROM credit_bill WHERE id = ?";
 	public final static String UPDATE_CREDITBILL_DETAILS = "UPDATE credit_bill SET billNo = ? , billDate = ?,shopName = ?,billAmount=? WHERE empNo = ?";
 	public final static String GET_CREDITBILL_BY_NO = "SELECT * FROM credit_bill WHERE id = ?";
 	

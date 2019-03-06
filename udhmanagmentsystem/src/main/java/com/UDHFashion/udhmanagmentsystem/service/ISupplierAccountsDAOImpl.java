@@ -1,7 +1,6 @@
 package com.UDHFashion.udhmanagmentsystem.service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,16 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+
 import org.springframework.stereotype.Service;
 
 import com.UDHFashion.udhmanagmentsystem.model.CreditBill;
-import com.UDHFashion.udhmanagmentsystem.model.PersonalExpenditures;
-import com.UDHFashion.udhmanagmentsystem.model.ShopExpenditures;
+
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 
 @Service
-public class ISupplierAccountsDAOImpl implements ISupplierAccountsDAO {
+public  class ISupplierAccountsDAOImpl implements ISupplierAccountsDAO {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -65,9 +63,9 @@ public class ISupplierAccountsDAOImpl implements ISupplierAccountsDAO {
 	}
 
 	@Override
-	public boolean deleteCreditBillDetails(int id) {
+	public boolean deleteCreditBillDetails(String billNo) {
 
-		int delete = jdbcTemplate.update(CommonConstants.DELETE_CREDITBILL_DETAILS, id);
+		int delete = jdbcTemplate.update(CommonConstants.DELETE_CREDITBILL_DETAILS, billNo);
 
 		if (delete == 1) {
 			return true;
@@ -119,6 +117,22 @@ public class ISupplierAccountsDAOImpl implements ISupplierAccountsDAO {
 			return false;
 		}
 
+	}
+
+	@Override
+	public boolean deleteCreditBillDetails(int id) {
+		
+		int delete = jdbcTemplate.update(CommonConstants.DELETE_CREDITBILL_DETAILS_ID, id);
+
+		if (delete == 1) {
+			return true;
+
+		} else {
+
+			return false;
+		}
+		
+		
 	}
 
 	
