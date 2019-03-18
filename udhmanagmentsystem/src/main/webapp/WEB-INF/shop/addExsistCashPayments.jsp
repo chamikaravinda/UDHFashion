@@ -1,4 +1,4 @@
-
+aa
 <%@page import="org.springframework.beans.factory.annotation.Autowired"%>
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -25,7 +25,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="breadcrumb-holder">
-						<h1 class="main-title float-left">Add Cash Payments</h1>
+						<h1 class="main-title float-left">Credit Bill pay by Cash</h1>
 						<ol class="breadcrumb float-right">
 							<li class="breadcrumb-item">Home</li>
 							<li class="breadcrumb-item active">CashPayments</li>
@@ -47,11 +47,17 @@
 								modelAttribute="creditBills" >
 
 								<div class="form-row">
-									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Bill No</label> <input
-											type="text" name="billNo" class="form-control"
-											id="billNo" aria-describedby="emailHelp"
-											placeholder="Bill No" required>
+								<div class="form-group col-md-4">
+										<label for="sel1">Bill No</label> <select name="billNo"
+											class="form-control" id="billNo" required>
+
+											<c:forEach var="result" items="${creditBillList}">
+
+												<option>${result.billNo}</option>
+
+											</c:forEach>
+
+										</select>
 									</div>
 									<div class="form-group col-md-4">
 										<label for="exampleInputEmail1">Bill Date</label> <input
@@ -60,14 +66,7 @@
 											placeholder="Bill Date" required>
 
 									</div>
-									<!--  	<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Shop No</label> <input
-											type="number" name="shopTelephone" class="form-control"
-											id="shopNo" placeholder="Shop Name" required>
-									</div>
 									
-									
-									-->
 								</div>
 
 							<div class="form-row">
@@ -99,7 +98,7 @@
 
 								</div>
 								<div class="form-group col-md-8.5">
-									<label for="exampleInputEmail1">Payed Date</label> <input
+									<label for="exampleInputEmail1">Payment Date</label> <input
 										type="Date" name="paymentDate" class="form-control" id="paymentDate"
 										aria-describedby="emailHelp" placeholder="Payed Date" required>
 								</div>

@@ -10,10 +10,15 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
+
+
+<!--  to sweet alerts-->
+
+
 <!-- added success message -->
 	<script type="text/javascript">
 		function addedsuccesfully() {	
-			swal("Shop Expenditures Added Succesfully");	
+			swal("Credit Bill Added Succesfully");	
 		}
 	</script>
 
@@ -26,7 +31,7 @@
 <!-- update success message -->
 	<script type="text/javascript">
 		function updatesuccesfully() {	
-			swal("Shop Expenditures updated Succesfully");	
+			swal("Credit Bill updated Succesfully");	
 		}
 	</script>
 
@@ -38,7 +43,7 @@
 <!-- delete success message -->
 	<script type="text/javascript">
 		function deletesuccesfully() {	
-			swal("Shop Expenditures Deleted Succesfully");	
+			swal("Credit Bill Deleted Succesfully");	
 		}
 	</script>
 
@@ -51,7 +56,7 @@
 <!-- delete unsuccess message -->
 	<script type="text/javascript">
 		function deleteunsuccesfull() {	
-			swal("Shop Expenditures Delete Unsuccesfull");	
+			swal("Credit Bill Delete Unsuccesfull");	
 		}
 	</script>
 
@@ -62,8 +67,7 @@
 	</c:if>
 
 
-
-
+<!--  to sweet alerts-->
 
 
 
@@ -79,7 +83,7 @@
 					<div class="col-md-12">
 						<div class="card mb-3">
 							<div class="col-md-12a">
-								<a href="addShopExpenditures" class="btn btn-primary" style="margin:10px"
+								<a href="creditBills" class="btn btn-primary" style="margin:10px"
 									role="button" aria-pressed="true">Add</a>
 
 							</div>
@@ -91,12 +95,11 @@
 										<thead>
 											<tr>
 												<th>ID</th>
-												<th>BillNo</th>
-												<th>Name</th>
-												<th>Date</th>
-												<th>Reason</th>
-												<th>Amount</th>
-												
+												<th>Bill No</th>
+												<th>Bill Date</th>
+												<th>Shop Name</th>
+												<th>Bill Amount</th>
+
 												<td><span><i class="fa fa-pencil-square"
 														aria-hidden="true"></i></span></td>
 												<td><span><i class="fa fa-trash"
@@ -105,25 +108,26 @@
 										</thead>
 										<tbody>
 			
-											<c:forEach var="result" items = "${ShExpenditures}">
+											<c:forEach var="result" items = "${creditBillList}">
 												<tr>
          											<td> ${result.id} </td>	
          											<td> ${result.billNo} </td>	
-         											<td> ${result.name} </td>	
-         											<td> ${result.date} </td>
-         											<td> ${result.reason} </td>
-         											<td> ${result.amount} </td>
+         											<td> ${result.billDate} </td>	
+         											<td> ${result.shopName } </td>
+         											<td> ${result.billAmount } </td>
          											<td> 
-         												<form method = "POST" action = "editShopExpenditures" modelAttribute="shop_expenditures">
+         											<form method = "POST" action = "editCreditBill" modelAttribute="creditBills">
          													<input name = "id" type = "hidden" value = "${result.id}" >
          													<button type="submit"  class="btn btn-primary">Update</button>
-         												</form></td>
+         											</form>
+         											
+         											
+         											</td>
          											<td> 	
-         												<form method = "POST" action = "deleteShopExpenditures" modelAttribute="shop_expenditures">
+         												<form method = "POST" action = "deleteCreditBills" modelAttribute="creditBill">
          													<input name = "id" type = "hidden" value = "${result.id}" >
          													<button type="submit"  class="btn btn-primary">Delete</button>
          												</form>
-         												
          											</td>	
          										</tr>
 											</c:forEach>
@@ -148,6 +152,5 @@
 			<!-- END content -->
 
 		</div>
-		</div>
-
+</div>
 <%@ include file="../includes/footer.jsp"%>

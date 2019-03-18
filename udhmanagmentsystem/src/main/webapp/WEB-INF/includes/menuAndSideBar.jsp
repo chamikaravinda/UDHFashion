@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -147,7 +148,7 @@
                      
                     <!-- Sales -->
 					<li class="submenu">
-                        <a href="stockView"><i class="fa fa-shopping-cart "></i><span> Sales </span> </a>
+                        <a href="viewSales"><i class="fa fa-shopping-cart "></i><span> Sales </span> </a>
                     </li>
                     
                      <!-- Stocks -->
@@ -163,9 +164,10 @@
                            <li><a href="viewShop"><i class="fa fa-eye"></i>View Suppliers</a></li>
                     	   <li class="submenu"><a href="#"><i class="fa fa-briefcase"></i><span>Accounts</span><span class="menu-arrow"></span></a>
 		                            <ul class="list-unstyled">
-		                                <li><a href="creditBills"><i class="fa fa-credit-card-alt"></i>Credit Bills</a></li>
-		                                <li><a href="#"><i class="fa fa-check-square"></i>Paid Bills</a></li>
-		                                <li><a href="cashPayments"><i class="fa fa-money"></i>Cash Payments</a></li>
+		                                <li><a href="viewCreditBills"><i class="fa fa-credit-card-alt"></i>Credit Bills</a></li>
+		                                <li><a href="paidBills"><i class="fa fa-check-square"></i>Paid Bills</a></li>
+		                                <li><a href="newPayment"><i class="fa fa-money"></i>New Payments</a></li>
+		                                <li><a href="viewCashPayment"><i class="fa fa-money"></i>Cash Payments</a></li>
 		                                 <li><a href="addCheques"><i class="fa fa-paper-plane"></i>Cheque Pay</a></li>
 		                            </ul>
                     	  </li>    
@@ -190,7 +192,7 @@
 		                     <li><a href="allAccounts"><i class="fa fa-line-chart"></i>All Accounts</a></li>
                              <li><a href="addBanks"><i class="fa fa-plus"></i>Add Account</a></li>
                              <li><a href="allDeposits"><i class="fa fa-inr"></i>Deposits</a></li> 
-                             <li><a href="allWithdraws"><i class="fa fa-credit-card "></i>Withdraws</a></li>          
+                             <li><a href="employeeSalarySheet"><i class="fa fa-credit-card "></i>Withdraws</a></li>          
 		                 </ul>
                     </li>
                     
@@ -199,8 +201,10 @@
                     <li class="submenu">
                         <a href="#"><i class="fa fa-pie-chart" ></i><span>Expenditures</span><span class="menu-arrow"></span></a>
 		                 <ul class="list-unstyled">
-		                    <li><a href="addShopExpenditures"><i class="fa fa-plus-square"></i>Shop Exp:</a></li>
+		                    <li><a href="addShopExpenditures"><i class="fa fa-plus-square"></i>Shop Exp :</a></li>
+		                    <li><a href="viewShopExpenditures"><i class="fa fa-eye"></i></i>All Shop Exp :</a></li>
                             <li><a href="addPersonalExpenditures"><i class="fa fa-plus-square"></i>Personal</a></li>
+                            <li><a href="viewPexpenditures"><i class="fa fa-eye"></i></i>All Personal Exp :</a></li>
 		                 </ul>
                    </li>          
                                

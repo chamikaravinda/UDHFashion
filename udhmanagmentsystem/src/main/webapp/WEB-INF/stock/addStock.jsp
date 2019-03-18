@@ -1,10 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../includes/menuAndSideBar.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>StockView</title>
+
 
 <script>
 	function validator(){
@@ -22,8 +18,7 @@
 		}		
 	}
 </script>
-</head>
-<body>
+
 	<div class="content-page">
 
 		<!-- Start content -->
@@ -62,7 +57,7 @@
 								</div-->
 								<section>
 
-									<div class="form-group">
+									<div class="form-row">
 										<label for="sel1">Shop Name</label> <select name="shopId"
 											class="form-control" id="shopId" required>
 
@@ -138,8 +133,5 @@
 		</div>
 		<!-- END content -->
 	</div>
-</body>
 
-
-</html>
 <%@ include file="../includes/footer.jsp"%>

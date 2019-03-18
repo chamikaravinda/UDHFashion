@@ -3,15 +3,17 @@ package com.UDHFashion.udhmanagmentsystem.model;
 
 public class Shop {
 
-	public Integer shopId;
+	public int shopId;
 	public String shopName;
 	public String shopAddress;
 	public String shopTelephone;
 	
-	public Integer getShopId() {
+	
+	
+	public int getShopId() {
 		return shopId;
 	}
-	public void setShopId(Integer shopId) {
+	public void setShopId(int shopId) {
 		this.shopId = shopId;
 	}
 	public String getShopName() {

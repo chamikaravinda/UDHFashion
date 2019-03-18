@@ -36,6 +36,7 @@ CREATE TABLE temp_barcode_data
     CONSTRAINT pk_tem_barcode_data PRIMARY KEY(code),
     CONSTRAINT fk_tem_barcode_data FOREIGN KEY(code) REFERENCES item(code) ON DELETE CASCADE
 );
+
 CREATE TABLE users
 (
 	id INT AUTO_INCREMENT NOT NULL, 
@@ -70,19 +71,7 @@ CREATE TABLE bank_deposites
 	
 	CONSTRAINT deposite_pk PRIMARY KEY (id),
 	CONSTRAINT account_fk FOREIGN KEY(account) REFERENCES bank_accounts(id) ON DELETE CASCADE
-
-);
-
-CREATE TABLE bank_withdraws
-(
-	id INT AUTO_INCREMENT NOT NULL,
-	date DATE,
-	amount double,
-	account int,
-	
-	CONSTRAINT withdraws_pk PRIMARY KEY (id),
-	CONSTRAINT withdraws_fk FOREIGN KEY(account) REFERENCES bank_accounts(id) ON DELETE CASCADE
-);
+)
 
 CREATE TABLE employee
 (
@@ -123,3 +112,70 @@ CREATE TABLE employee
 	CONSTRAINT pk_item PRIMARY KEY(id)
  );
 
+//Credit Bill
+CREATE TABLE credit_bill
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	billNo VARCHAR(20),
+	billDate VARCHAR(20),
+	shopName VARCHAR(20),
+	
+	
+	CONSTRAINT credit_bill_pk PRIMARY KEY (id),
+	CONSTRAINT credit_bill_fk FOREIGN KEY(shopName) REFERENCES shop(id) ON DELETE CASCADE
+	
+);
+
+
+//create cash payment
+
+
+CREATE TABLE cash_payment
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	billNo VARCHAR(20),
+	billDate VARCHAR(20),
+	shopName VARCHAR(20),
+	billAmount DOUBLE,
+	paymentDate VARCHAR(20),
+	
+	CONSTRAINT cash_payment_pk PRIMARY KEY (id),
+	CONSTRAINT cash_payment_fk FOREIGN KEY(shopName) REFERENCES shop(id) ON DELETE CASCADE
+	
+);
+
+CREATE TABLE paid_bill
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	billNo VARCHAR(20),
+	billDate VARCHAR(20),
+	shopName VARCHAR(20),
+	billAmount DOUBLE,
+	paymentDate VARCHAR(20),
+	paymentMethod VARCHAR(20),
+	
+	CONSTRAINT paid_bill_pk PRIMARY KEY (id),
+	CONSTRAINT paid_bill_fk FOREIGN KEY(shopName) REFERENCES shop(id) ON DELETE CASCADE
+	
+);
+
+
+CREATE TABLE cheque_payment
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	billNo VARCHAR(20),
+	billDate VARCHAR(20),
+	shopNo VARCHAR(20),
+	shopName VARCHAR(20),
+	bankName VARCHAR(20),
+	bankAccount VARCHAR(20),
+	chequeNo VARCHAR(20),
+	chequeAmount DOUBLE,
+	chequeDate VARCHAR(20),
+	paymentDate VARCHAR(20),
+	paymentAmount DOUBLE,
+	
+	CONSTRAINT cheque_payment_pk PRIMARY KEY (id),
+	CONSTRAINT cheque_payment_fk FOREIGN KEY(shopName) REFERENCES shop(id) ON DELETE CASCADE
+	
+);

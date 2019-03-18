@@ -9,19 +9,58 @@
 <%@page import="com.UDHFashion.udhmanagmentsystem.model.Shop"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Personal Expenditures</title>
-</head>
-<body>
+<!-- added success message -->
+	<script type="text/javascript">
+		function addedsuccesfully() {	
+			swal("Personal Expenditures Added Succesfully");	
+		}
+	</script>
+
+	<c:if test="${success == 1}">
+		<script type="text/javascript">
+			window.onload = addedsuccesfully;
+		</script>
+	</c:if>
+	
+<!-- update success message -->
+	<script type="text/javascript">
+		function updatesuccesfully() {	
+			swal("Personal Expenditures updated Succesfully");	
+		}
+	</script>
+
+	<c:if test="${success == 2}">
+		<script type="text/javascript">
+			window.onload = updatesuccesfully;
+		</script>
+	</c:if>
+<!-- delete success message -->
+	<script type="text/javascript">
+		function deletesuccesfully() {	
+			swal("Personal Expenditures Deleted Succesfully");	
+		}
+	</script>
+
+	<c:if test="${success == 3}">
+		<script type="text/javascript">
+			window.onload = deletesuccesfully;
+		</script>
+	</c:if>
+
+<!-- delete unsuccess message -->
+	<script type="text/javascript">
+		function deleteunsuccesfull() {	
+			swal("Personal Expenditures Delete Unsuccesfull");	
+		}
+	</script>
+
+	<c:if test="${success == 4}">
+		<script type="text/javascript">
+			window.onload = deleteunsuccesfull;
+		</script>
+	</c:if>
 
 
-	<br>
-	<br>
-	<br>
-	<br>
 	<div class="content-page">
 
 		<!-- Start content -->
@@ -66,7 +105,7 @@
          											<td>${result.reason}</td>	
          											<td>${result.amount}</td>	
          											<td>
-         												<form method = "POST" action = "editEmployee" modelAttribute="p_expenditures">
+         												<form method = "POST" action = "editPersonalExpenditures" modelAttribute="p_expenditures">
          													<input name = "id" type = "hidden" value = "${result.id}" >
          													<button type="submit" al class="btn btn-primary">Update</button>
          												</form>
@@ -108,6 +147,5 @@
 
 		</div>
 		</div>
-</body>
-</html>
+
 <%@ include file="../includes/footer.jsp"%>

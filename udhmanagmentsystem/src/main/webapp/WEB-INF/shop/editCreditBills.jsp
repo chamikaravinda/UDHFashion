@@ -23,7 +23,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="breadcrumb-holder">
-						<h1 class="main-title float-left">Add Credit Bills</h1>
+						<h1 class="main-title float-left">Edit Credit Bills</h1>
 						<ol class="breadcrumb float-right">
 							<li class="breadcrumb-item">Home</li>
 							<li class="breadcrumb-item active">CreditBills</li>
@@ -41,48 +41,35 @@
 
 						<div class="card-body">
 
-							<form method="POST" action="submitCreditBills"
-								modelAttribute="creditBills" onsubmit="return validator()">
+							<form:form method="POST" action="submitCreditBill"
+								modelAttribute="creditBills" >
 
 
 								<div class="form-row">
-									<label for="exampleInputEmail1">Bill No</label> <input
-										type="text" name="billNo" class="form-control" id="billNo"
-										aria-describedby="emailHelp" placeholder="Bill No" required>
+									<label for="exampleInputEmail1">Bill No</label> <form:input
+										type="text" name="billNo" class="form-control" path="billNo"
+										aria-describedby="emailHelp" placeholder="" required="required"/>
 								</div>
 								<div class="form-row">
-									<label for="exampleInputEmail1">Bill Date</label> <input
-										type="Date" name="billDate" class="form-control" id="billDate"
-										aria-describedby="numberlHelp" placeholder="Bill Date"
-										required>
+									<label for="exampleInputEmail1">Bill Date</label> <form:input
+										type="Date" path="billDate" class="form-control" 
+										aria-describedby="numberlHelp" placeholder=""
+										required="required"/>
 
 								</div>
 								<div class="form-row">
-									<label for="sel1">Shop Name</label> <select name="shopName"
-										class="form-control" id="shopId" required>
-
-										<c:forEach var="result" items="${shopList}">
-
-											<option>${result.shopName}</option>
-
-										</c:forEach>
-
-									</select>
-								</div>
-								
-								<div class="form-row">
-									<label for="exampleInputEmail1">Bill Amount</label> <input
-										type="number" name="billAmount" class="form-control" id="billAmount"
-										aria-describedby="numberlHelp" placeholder="Bill Amount"
-										required>
+									<label for="exampleInputEmail1">Shop Name</label> <form:input
+										type="text" path="shopName" class="form-control" 
+										aria-describedby="numberlHelp" placeholder=""
+										required="required"/>
 
 								</div>
 
 								<div style="margin-left: 500px">
-									<button type="submit" class="btn btn-primary">Add Bill</button>
+									<button type="submit" class="btn btn-primary">Update Bill</button>
 								</div>
 
-							</form>
+							</form:form>
 
 						</div>
 					</div>

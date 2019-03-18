@@ -41,7 +41,7 @@
 							
 							<div class="card-body">
 								
-								<form:form  method="POST" action="submitUpdateShop" modelAttribute="shop">
+								<form:form  method="POST" action="submitUpdateShop" modelAttribute="updateShop">
 								  <div class="form-group">
 									<label for="exampleInputEmail1">Shop Name</label>
 									<form:input type="email" class="form-control" path="name" aria-describedby="emailHelp" placeholder="" required="required"/>

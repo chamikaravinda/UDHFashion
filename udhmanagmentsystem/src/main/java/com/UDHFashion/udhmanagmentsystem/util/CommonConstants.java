@@ -56,7 +56,36 @@ public class CommonConstants {
 	public final static String INSERT_BANK_WITHDRAW = "INSERT INTO bank_withdraws(date,amount,account) VALUES(?,?,?)";
 	public final static String UPDATE_BANK_ACCOUNT_BALANCE = "UPDATE bank_accounts SET current_balance = ? WHERE id = ?";
 	public final static String GET_ALL_DEPOSITE_DETAILS = "SELECT * FROM bank_deposites ORDER BY id DESC";
-	public final static String INSERT_BANK_DEPOSIT = "INSERT INTO bank_deposites(date,amount,account) VALUES(?,?,?)";
+  public final static String INSERT_BANK_DEPOSIT = "INSERT INTO bank_deposites(date,amount,account) VALUES(?,?,?)";
 	public final static String GET_ALL_WITHDRAW_DETAILS = "SELECT * FROM bank_withdraws ORDER BY id DESC";
+
+
+	
+	
+	/*---------------------------Credit Bills-------------------------------*/
+	public final static String INSERT_CREDITBILL_DETAILS = "INSERT INTO credit_bill(billNo,billDate,shopName,billAmount) VALUES(?,?,?,?)";
+	public final static String GET_ALL_CREDITBILL_DETAILS = "SELECT * FROM credit_bill";
+	public final static String DELETE_CREDITBILL_DETAILS = "DELETE FROM credit_bill WHERE billNo = ?";
+	public final static String DELETE_CREDITBILL_DETAILS_ID = "DELETE FROM credit_bill WHERE id = ?";
+	public final static String UPDATE_CREDITBILL_DETAILS = "UPDATE credit_bill SET billNo = ? , billDate = ?,shopName = ?,billAmount=? WHERE empNo = ?";
+	public final static String GET_CREDITBILL_BY_NO = "SELECT * FROM credit_bill WHERE id = ?";
+	
+	
+	/*---------------------------Cash Payments-------------------------------*/
+	
+	
+	public final static String INSERT_CASHPAYMENT_DETAILS ="INSERT INTO cash_payment(billNo,billDate,shopName,billAmount,paymentDate) VALUES(?,?,?,?,?)"; 
+	public final static String GET_ALL_CASHPAYMENT_DETAILS = "SELECT * FROM cash_payment";
+	
+	/*--------------------------Cheque Payments-------------------------------*/
+	
+	public final static String INSERT_CHEQUE_DETAILS ="INSERT INTO cheque_payment(billNo,billDate,shopNo,shopName,bankName,bankAccountNo,chequeNo,chequeAmount,chequeDate,paymentDate,paymentAmount ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+	public final static String GET_ALL_CHEQUE_DETAILS = "SELECT * FROM cheque_payment";
+	
+	/*---------------------------Paid Bills Payments-------------------------------*/
+	public final static String INSERT_PAIDBILL_DETAILS ="INSERT INTO paid_bill(billNo,billDate,shopName,billAmount,paymentDate,paymentMethod) VALUES(?,?,?,?,?,?)"; 
+	public final static String GET_ALL_PAIDBILL_DETAILS = "SELECT * FROM paid_bill";
+
+
 
 }

@@ -47,16 +47,15 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="breadcrumb-holder">
-						<h1 class="main-title float-left">Shop Expenditures</h1>
+						<h1 class="main-title float-left">New Payment</h1>
 						<ol class="breadcrumb float-right">
 							<li class="breadcrumb-item">Home</li>
-							<li class="breadcrumb-item active">Update</li>
+							<li class="breadcrumb-item active">payments</li>
 						</ol>
 						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
-			<br> <br> <br> <br> <br>
 			<!-- end row -->
 
 			<div class="row">
@@ -66,49 +65,40 @@
 
 						<div class="card-body">
 
-							<form:form method="POST" action="updateShopExpenditures"
-								modelAttribute="shop_expenditures">
+							<form method="POST" action="check_paymentMethod_redirect"
+								modelAttribute="newPayment">
+
+
 
 								<div class="form-row">
-									<div class="form-group col-md-6">
-										<label for="exampleInputEmail1">Date </label>
-										<form:input type="Date" path="date" class="form-control"
-											aria-describedby="emailHelp" placeholder=""
-											required="required" />
-									</div>
-									<div class="form-group col-md-6">
-										<label for="exampleInputEmail1">Bill No</label>
-										<form:input type="text" path="billNo" class="form-control"
-											aria-describedby="numberlHelp" placeholder=""
-											required="required" />
+									<label for="sel1">Credit Bill Number</label> <select
+										name="billNumber" class="form-control" id="billNumber" required>
 
-									</div>
+
+										<option value="newPayment">New Payment</option>
+										<c:forEach var="result" items="${creditBillList}">
+
+											<option value=" ${result.billNo}">${result.billNo}</option>>
+
+										</c:forEach>
+
+									</select>
 								</div>
-
 								<div class="form-row">
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Name</label>
-										<form:input type="text" path="name" class="form-control"
-											placeholder="" required="required" />
-									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Reason</label>
-										<form:input type="text" path="reason" class="form-control"
-											placeholder="" required="required" />
-									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Amount</label>
-										<form:input type="text" path="amount" class="form-control"
-											placeholder="" required="required" />
-									</div>
+									<label for="sel1">Select Payment Method</label> 
+									<select
+										name="method" class="form-control" id="method"
+										required="required">
+										<option value="cash">Cash</option>
+										<option value="Cheque">Cheque</option>
+									</select>
 								</div>
-
-								<form:input type="hidden" path="id" />
 
 								<div style="margin-left: 500px">
-									<button type="submit" class="btn btn-primary">Update</button>
+									<button type="submit" class="btn btn-primary">Submit</button>
 								</div>
-							</form:form>
+
+							</form>
 
 						</div>
 					</div>
@@ -120,6 +110,5 @@
 	</div>
 	<!-- END content -->
 </div>
-
 
 <%@ include file="../includes/footer.jsp"%>

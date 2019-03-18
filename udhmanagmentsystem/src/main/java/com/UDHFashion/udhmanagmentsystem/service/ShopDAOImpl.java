@@ -24,13 +24,16 @@ public class ShopDAOImpl implements IShopDAO {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void insertShopDetails(Shop shop) {
+	public boolean insertShopDetails(Shop shop) {
 
 		int update = jdbcTemplate.update(CommonConstants.INSERT_SHOP_DETAILS, shop.getShopName(), shop.getShopAddress(),
 				shop.getShopTelephone());
 
 		if (update == 1) {
-			System.out.println("Shop Detail added to the database");
+			return true;
+		} else {
+
+			return false;
 		}
 
 	}
@@ -61,71 +64,60 @@ public class ShopDAOImpl implements IShopDAO {
 
 	// Delete selected Shop by iD
 	@Override
-	public void deleteShop(int shopId) {
+	public boolean deleteShop(int shopId) {
 
 		int update = jdbcTemplate.update(CommonConstants.DELETE_SHOP_DETAILS, shopId);
 
 		if (update == 1) {
-			System.out.println("Shop Detail deleted successfully ");
+			return true;
+		} else {
+
+			return false;
 		}
 	}
 
 	// Update the Shop Details(Currently work with it)....3:57PM 19/2/25
 
 	@Override
-	public void updateShopDetails(updateShop Ushop) {
+	public boolean updateShopDetails(updateShop Ushop) {
 
 		int updateShop = jdbcTemplate.update(CommonConstants.UPDATE_SHOP_DETAILS,
 
-				Ushop.getName(), 
-				Ushop.getAddress(), 
-				Ushop.getTelephone(),
-				Ushop.getId());
+				Ushop.getName(), Ushop.getAddress(), Ushop.getTelephone(), Ushop.getId());
 
 		if (updateShop == 1) {
 
-			System.out.println("Shop Detail update to the System");
+			return true;
 
+		} else {
+
+			return false;
 		}
 	}
 
-	
-	//Get Details by ID
+	// Get Details by ID
 	@Override
 	public updateShop getShopById(int id) {
-		
-		return (updateShop) jdbcTemplate.queryForObject(CommonConstants.GET_SHOP_BY_NO, new Object[] {id},
+
+		return (updateShop) jdbcTemplate.queryForObject(CommonConstants.GET_SHOP_BY_NO, new Object[] { id },
 				new RowMapper<updateShop>() {
 
 					@Override
 					public updateShop mapRow(ResultSet rs, int rwNumber) throws SQLException {
 						updateShop Ushop = new updateShop();
-						
-						Ushop.setId(((Integer)rs.getInt("id")));
-						Ushop.setName((String)rs.getString("name"));
-						Ushop.setAddress((String)rs.getString("address"));
-						Ushop.setTelephone(((String)rs.getString("telephone")));
 
-						
+						Ushop.setId(((Integer) rs.getInt("id")));
+						Ushop.setName((String) rs.getString("name"));
+						Ushop.setAddress((String) rs.getString("address"));
+						Ushop.setTelephone(((String) rs.getString("telephone")));
 
 						return Ushop;
 					}
 				});
-		
 
-//		updateShop ushop=(updateShop)jdbcTemplate.queryForObject(CommonConstants.GET_SHOP_BY_NO, 
-//				new Object[] {id},new BeanPropertyRowMapper<updateShop>(updateShop.class) );
-//		
-//		return null;
-
-		
 		
 	}
 
-	@Override
-	public void updateShopDetails(Shop shop) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

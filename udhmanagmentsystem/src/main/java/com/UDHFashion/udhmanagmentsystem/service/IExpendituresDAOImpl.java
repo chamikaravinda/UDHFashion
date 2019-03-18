@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import com.UDHFashion.udhmanagmentsystem.model.BankAccount;
 import com.UDHFashion.udhmanagmentsystem.model.Employee;
 import com.UDHFashion.udhmanagmentsystem.model.PersonalExpenditures;
 import com.UDHFashion.udhmanagmentsystem.model.Shop;
@@ -24,13 +27,16 @@ public class IExpendituresDAOImpl implements IExpendituresDAO {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void insertPersonalExpenditures(PersonalExpenditures pExpenditures) {
+	public boolean insertPersonalExpenditures(PersonalExpenditures pExpenditures) {
 
 		int addPexpenditures = jdbcTemplate.update(CommonConstants.INSERT_Pexpenditures_DETAILS,
 				pExpenditures.getDate(), pExpenditures.getReason(), pExpenditures.getAmount());
 
 		if (addPexpenditures == 1) {
-			System.out.println("Employee Detail added to the System");
+			return true;
+		} else {
+
+			return false;
 		}
 
 	}
@@ -60,30 +66,61 @@ public class IExpendituresDAOImpl implements IExpendituresDAO {
 	}
 
 	@Override
-	public void deletePersonalExpenditures(int id) {
+	public boolean deletePersonalExpenditures(int id) {
 
 		int update = jdbcTemplate.update(CommonConstants.DELETE_Pexpenditures_DETAILS, id);
 
 		if (update == 1) {
-			System.out.println("PersoanlExpenditure Detail deleted successfully ");
+			return true;
+
+		} else {
+
+			return false;
 		}
 
 	}
 
 	@Override
-	public void updatePersonalExpenditures(PersonalExpenditures pExpenditures) {
+	public boolean updatePersonalExpenditures(PersonalExpenditures pExpenditures) {
+
+		try {
+
+			int updatePersonalExpenditures = jdbcTemplate.update(CommonConstants.UPDATE_Pexpenditures_DETAILS,
+					pExpenditures.getDate(), pExpenditures.getReason(), pExpenditures.getAmount(),
+					pExpenditures.getId());
+
+			if (updatePersonalExpenditures == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 
 	}
 
 	@Override
 	public PersonalExpenditures getPersonalExpendituresById(int id) {
 
-		return null;
+		try {
+
+			PersonalExpenditures perExpenditures = (PersonalExpenditures) jdbcTemplate.queryForObject(
+					CommonConstants.GET_Pexpenditures_BY_NO, new Object[] { id },
+					new BeanPropertyRowMapper(PersonalExpenditures.class));
+
+			return perExpenditures;
+
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+
 	}
 	/*------------------------Shop----------------------*/
 
 	@Override
-	public void insertShopExpenditures(ShopExpenditures SpExpenditures) {
+	public boolean insertShopExpenditures(ShopExpenditures SpExpenditures) {
 
 		int addSpExpenditures = jdbcTemplate.update(CommonConstants.INSERT_SHOP_EXPENDITURES_DETAILS,
 
@@ -91,9 +128,11 @@ public class IExpendituresDAOImpl implements IExpendituresDAO {
 				SpExpenditures.getReason(), SpExpenditures.getAmount());
 
 		if (addSpExpenditures == 1) {
-			System.out.println("Employee Detail added to the System");
+			return true;
+		} else {
+			// already working properly
+			return false;
 		}
-		// already working properly
 	}
 
 	@Override
@@ -120,14 +159,15 @@ public class IExpendituresDAOImpl implements IExpendituresDAO {
 	}
 
 	@Override
-	public void deleteShopExpenditures(int id) {
+	public boolean deleteShopExpenditures(int id) {
 
 		int update = jdbcTemplate.update(CommonConstants.DELETE_SHOP_EXPENDITURES_DETAILS, id);
 
 		if (update == 1) {
-			System.out.println("ShopExpenditure Detail deleted successfully ");
+			return true;
+		} else {
+			return false;
 		}
-
 	}
 
 	// Load Data from Db to Edit Form's feilds

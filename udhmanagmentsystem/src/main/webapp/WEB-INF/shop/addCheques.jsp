@@ -9,13 +9,7 @@
 <%@page import="com.UDHFashion.udhmanagmentsystem.model.Shop"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Credit Bills</title>
-</head>
-<body>
+
 
 
 	<div class="content-page">
@@ -47,8 +41,8 @@
 
 							<div class="card-body">
 
-								<form method="POST" action="viewcreditBills"
-									modelAttribute="creditBills" onsubmit="return validator()">
+								<form method="POST" action="submitChequePayment"
+									modelAttribute="chequePayment" >
 
 								<div class="form-row">
 									<div class="form-group col-md-4">
@@ -59,8 +53,8 @@
 									</div>
 									<div class="form-group col-md-4">
 										<label for="exampleInputEmail1">Billing Date</label> <input
-											type="text" name="bilingDate" class="form-control"
-											id="bilingDate" aria-describedby="numberlHelp"
+											type="Date" name="billDate" class="form-control"
+											id="billDate" aria-describedby="numberlHelp"
 											placeholder="Bill Date" required>
 
 									</div>
@@ -75,19 +69,26 @@
 								<div class="form-row">
 									
 									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Shop Name</label> <input
-											type="test" name="shopName" class="form-control"
-											id="shopName" placeholder="Shop Name" required>
-									</div>
+											<label for="sel1">Shop Name</label> <select name="shopName"
+												class="form-control" id="shopId" required>
+
+												<c:forEach var="result" items="${shopList}">
+
+													<option>${result.shopName}</option>
+
+												</c:forEach>
+
+											</select>
+										</div>
 									<div class="form-group col-md-4">
 										<label for="exampleInputPassword1">Bank Name</label> <input
-											type="text" name=""bankName"" class="form-control"
+											type="text" name="bankName" class="form-control"
 											id="bankName" placeholder="Bank Name" required>
 									</div>
 									<div class="form-group col-md-4">
 										<label for="exampleInputPassword1">Bank Account No</label> <input
-											type="number" name="bankAccNo" class="form-control"
-											id="bankAccNo" placeholder="Bank Account No" required>
+											type="number" name="bankAccount" class="form-control"
+											id=bankAccount placeholder="Bank Account No" required>
 									</div>
 									
 									
@@ -105,7 +106,7 @@
 									</div>
 									<div class="form-group col-md-4">
 										<label for="exampleInputPassword1">Cheque Date</label> <input
-											type="text" name="chequeDate" class="form-control"
+											type="Date" name="chequeDate" class="form-control"
 											id="chequeDate" placeholder="Cheque Date" required>
 									</div>
 									
@@ -113,8 +114,8 @@
 									<div class="form-row">
 									<div class="form-group col-md-4">
 										<label for="exampleInputPassword1">Payment Date</label> <input
-											type="number" name="payDate" class="form-control"
-											id="payDate" placeholder="Payment Date" required>
+											type="Date" name="paymentDate" class="form-control"
+											id="paymentDate" placeholder="Payment Date" required>
 									</div>
 									
 									<div class="form-group col-md-4">
@@ -141,7 +142,5 @@
 			<!-- END content -->
 
 		</div>
-</body>
-</html>
-<%@ include file="../includes/footer.jsp"%>le="../includes/footer.jsp"
-%>
+</div>
+<%@ include file="../includes/footer.jsp"%>
