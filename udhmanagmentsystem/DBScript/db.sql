@@ -58,8 +58,7 @@ CREATE TABLE bank_accounts
     account_type VARCHAR(30),
     current_balance VARCHAR(30),
  
-     CONSTRAINT bank_account_pk PRIMARY KEY(id,bank_name,account_number)
-9);
+     CONSTRAINT bank_account_pk PRIMARY KEY(id,bank_name,account_number));
 
 
 CREATE TABLE bank_deposites
@@ -71,7 +70,7 @@ CREATE TABLE bank_deposites
 	
 	CONSTRAINT deposite_pk PRIMARY KEY (id),
 	CONSTRAINT account_fk FOREIGN KEY(account) REFERENCES bank_accounts(id) ON DELETE CASCADE
-)
+);
 
 CREATE TABLE employee
 (
@@ -112,7 +111,7 @@ CREATE TABLE employee
 	CONSTRAINT pk_item PRIMARY KEY(id)
  );
 
-//Credit Bill
+
 CREATE TABLE credit_bill
 (
 	id INT AUTO_INCREMENT NOT NULL,
@@ -127,7 +126,7 @@ CREATE TABLE credit_bill
 );
 
 
-//create cash payment
+
 
 
 CREATE TABLE cash_payment
@@ -179,3 +178,17 @@ CREATE TABLE cheque_payment
 	CONSTRAINT cheque_payment_fk FOREIGN KEY(shopName) REFERENCES shop(id) ON DELETE CASCADE
 	
 );
+
+CREATE TABLE daily_busssiness (
+	
+	id INT AUTO_INCREMENT NOT NULL,
+	date DATE,
+	expenseAmount DOUBLE,
+	bussinesAmount DOUBLE,
+	returnAmount DOUBLE,
+	netProfite DOUBLE,
+	flag BOOLEAN,
+	CONSTRAINT daily_busssiness_pk PRIMARY KEY (id)
+	
+);
+

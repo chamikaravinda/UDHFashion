@@ -86,6 +86,11 @@ public class CommonConstants {
 	public final static String INSERT_PAIDBILL_DETAILS ="INSERT INTO paid_bill(billNo,billDate,shopName,billAmount,paymentDate,paymentMethod) VALUES(?,?,?,?,?,?)"; 
 	public final static String GET_ALL_PAIDBILL_DETAILS = "SELECT * FROM paid_bill";
 
-
-
+	/*---------------------------Daily Business-----------------------------------*/ 
+	public final static String INSERT_CRITICAL_SECTION  = "INSERT INTO daily_busssiness(id,date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?,?)";
+	public final static String INSERT_DAILY_BUSINESS  = "INSERT INTO daily_busssiness(date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?)";
+	public final static String GET_CRITICAL_SECTION = "SELECT * FROM daily_busssiness WHERE id = 1";
+	public final static String UPDATE_CRITICAL_SECTION = "UPDATE daily_busssiness SET flag = ? WHERE id=1 ";
+	public final static String GET_TODAY_ENTRY = "SELECT * FROM daily_busssiness WHERE date= ?";
+	public final static String UPDATE_TODAT_ENTRY = "UPDATE daily_busssiness SET expenseAmount = ? ,bussinesAmount = ?,returnAmount = ?,netProfite= ? WHERE date = ? "; 
 }
