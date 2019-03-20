@@ -53,10 +53,16 @@ public class CommonConstants {
 	public final static String GET_ALL_BANK_ACCOUNT_DETAILS = "SELECT * FROM bank_accounts";
 	public final static String GET_BANK_ACCOUNT = "SELECT * FROM bank_accounts WHERE id = ? ";
 	public final static String UPDATE_BANK_ACCOUNT = "UPDATE bank_accounts SET bank_name = ? , account_number = ?, account_type = ?, current_balance = ? WHERE id = ?";
-	public final static String INSERT_BANK_DEPOSIT = "INSERT INTO bank_deposites(date,amount,account) VALUES(?,?,?)";
+	public final static String INSERT_BANK_WITHDRAW = "INSERT INTO bank_withdraws(date,amount,account) VALUES(?,?,?)";
 	public final static String UPDATE_BANK_ACCOUNT_BALANCE = "UPDATE bank_accounts SET current_balance = ? WHERE id = ?";
 	public final static String GET_ALL_DEPOSITE_DETAILS = "SELECT * FROM bank_deposites ORDER BY id DESC";
+  
+  public final static String INSERT_BANK_DEPOSIT = "INSERT INTO bank_deposites(date,amount,account) VALUES(?,?,?)";
+	public final static String GET_ALL_WITHDRAW_DETAILS = "SELECT * FROM bank_withdraws ORDER BY id DESC";
 
+
+	
+	
 	/*---------------------------Credit Bills-------------------------------*/
 	public final static String INSERT_CREDITBILL_DETAILS = "INSERT INTO credit_bill(billNo,billDate,shopName,billAmount) VALUES(?,?,?,?)";
 	public final static String GET_ALL_CREDITBILL_DETAILS = "SELECT * FROM credit_bill";
@@ -103,5 +109,11 @@ public class CommonConstants {
 	
 	public final static String GET_BILL_BY_NO = "SELECT * FROM bill WHERE id = ?";
 
-
+	/*---------------------------Daily Business-----------------------------------*/ 
+	public final static String INSERT_CRITICAL_SECTION  = "INSERT INTO daily_busssiness(id,date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?,?)";
+	public final static String INSERT_DAILY_BUSINESS  = "INSERT INTO daily_busssiness(date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?)";
+	public final static String GET_CRITICAL_SECTION = "SELECT * FROM daily_busssiness WHERE id = 1";
+	public final static String UPDATE_CRITICAL_SECTION = "UPDATE daily_busssiness SET flag = ? WHERE id=1 ";
+	public final static String GET_TODAY_ENTRY = "SELECT * FROM daily_busssiness WHERE date= ?";
+	public final static String UPDATE_TODAT_ENTRY = "UPDATE daily_busssiness SET expenseAmount = ? ,bussinesAmount = ?,returnAmount = ?,netProfite= ? WHERE date = ? ";
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.UDHFashion.udhmanagmentsystem.model.BankAccount;
 import com.UDHFashion.udhmanagmentsystem.model.BankDeposites;
+import com.UDHFashion.udhmanagmentsystem.model.BankWithdraws;
 import com.UDHFashion.udhmanagmentsystem.model.User;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 
@@ -128,12 +129,40 @@ public class BankAccountsDAOImpl implements IBankAccountDAO {
 		}
 	}
 	
+	@Override
+	public boolean UpdateBankBalanceAfterWithdraw(BankWithdraws withdraw) {
+		try {
+			double newBankBalance =AfterWithdrawBalance(withdraw);
+			int update = jdbcTemplate.update(CommonConstants.UPDATE_BANK_ACCOUNT_BALANCE,newBankBalance, withdraw.getAccount());
+
+			if (update == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	public double AfterDepositeBalance(BankDeposites deposit) {
 		
 		BankAccount accountDetailes = GetBankAccount(deposit.getAccount());
 		if(accountDetailes != null) {
 			
 		double newBankBalance = accountDetailes.getCurrentBalance() + deposit.getAmount();
+		return newBankBalance;	
+		}
+		return 0;
+	}
+	
+	public double AfterWithdrawBalance(BankWithdraws withdraws) {
+		
+		BankAccount accountDetailes = GetBankAccount(withdraws.getAccount());
+		if(accountDetailes != null) {
+			
+		double newBankBalance = accountDetailes.getCurrentBalance() - withdraws.getAmount();
 		return newBankBalance;	
 		}
 		return 0;
@@ -155,6 +184,45 @@ public class BankAccountsDAOImpl implements IBankAccountDAO {
 			deposites.setAccount((Integer) row.get("account"));
 
 			result.add(deposites);
+		}
+
+		return result;
+	}
+	
+	
+	@Override
+	public boolean AddBanKWithdraws(BankWithdraws withdraws) {
+		try {
+			int update = jdbcTemplate.update(CommonConstants.INSERT_BANK_WITHDRAW, withdraws.getDate(),
+					withdraws.getAmount(), withdraws.getAccount());
+
+			if (update == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	
+	@Override
+	public List<BankWithdraws> GetAllWithdraws() {
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.GET_ALL_WITHDRAW_DETAILS);
+
+		List<BankWithdraws> result = new ArrayList<>();
+
+		for (Map<String, Object> row : rows) {
+			BankWithdraws withdraws = new BankWithdraws();
+
+			withdraws .setId((Integer) row.get("id"));
+			withdraws .setDate(row.get("date").toString());
+			withdraws .setAmount((Double) row.get("amount"));
+			withdraws .setAccount((Integer) row.get("account"));
+
+			result.add(withdraws );
 		}
 
 		return result;
