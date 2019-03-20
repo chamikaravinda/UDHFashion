@@ -1,6 +1,10 @@
 package com.UDHFashion.udhmanagmentsystem.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -37,35 +41,54 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 			if (creticalSection.isFlag()) {
 				if (CriticalSectionFlag()) {
 
-					DailyBussiness todayEntry = (DailyBussiness) jdbcTemplate.queryForObject(
-							CommonConstants.GET_TODAY_ENTRY, new Object[] { entry.getDate() },
-							new BeanPropertyRowMapper(DailyBussiness.class));
+					String date = entry.getDate();
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // your template here
+					java.util.Date dateStr;
+					try {
 
-					if (todayEntry == null) {
+						dateStr = formatter.parse(date);
+						java.sql.Date dateDB = new java.sql.Date(dateStr.getTime());
 
-						insertDailyBussinessEntry(entry);
-						CriticalSectionRemoveFlag();
-						return true;
+						DailyBussiness todayEntry = (DailyBussiness) jdbcTemplate.queryForObject(
+								CommonConstants.GET_TODAY_ENTRY, new Object[] { dateDB },
+								new BeanPropertyRowMapper(DailyBussiness.class));
 
-					} else {
+						if (todayEntry == null) {
+							throw new EmptyResultDataAccessException(1);
 
-						todayEntry.setBussinesAmount(entry.getBussinesAmount() + todayEntry.getBussinesAmount());
-						todayEntry.setExpenseAmount(todayEntry.getExpenseAmount() + entry.getExpenseAmount());
-						todayEntry.setNetProfite(todayEntry.getNetProfite() + entry.getNetProfite());
-						todayEntry.setReturnAmount(todayEntry.getReturnAmount() + entry.getReturnAmount());
-
-						int update = jdbcTemplate.update(CommonConstants.UPDATE_TODAT_ENTRY,
-								todayEntry.getExpenseAmount(), todayEntry.getBussinesAmount(),
-								todayEntry.getReturnAmount(), todayEntry.getNetProfite(),todayEntry.getDate());
-						
-						CriticalSectionRemoveFlag();
-						
-						if (update == 1) {
-							return true;
 						} else {
+
+							todayEntry.setBussinesAmount(entry.getBussinesAmount() + todayEntry.getBussinesAmount());
+							todayEntry.setExpenseAmount(todayEntry.getExpenseAmount() + entry.getExpenseAmount());
+							todayEntry.setNetProfite(todayEntry.getNetProfite() + entry.getNetProfite());
+							todayEntry.setReturnAmount(todayEntry.getReturnAmount() + entry.getReturnAmount());
+
+							int update = jdbcTemplate.update(CommonConstants.UPDATE_TODAT_ENTRY,
+									todayEntry.getExpenseAmount(), todayEntry.getBussinesAmount(),
+									todayEntry.getReturnAmount(), todayEntry.getNetProfite(), todayEntry.getDate());
+
+							CriticalSectionRemoveFlag();
+
+							if (update == 1) {
+								return true;
+							} else {
+								return false;
+							}
+
+						}
+					} catch (EmptyResultDataAccessException e) {
+						
+						if (insertDailyBussinessEntry(entry)) {
+							CriticalSectionRemoveFlag();
+							return true;
+						}else {
+							CriticalSectionRemoveFlag();
 							return false;
 						}
-
+						
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
 			}
@@ -75,10 +98,9 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 
 	@Override
 	public DailyBussiness getEntry(String date) {
-		DailyBussiness todayEntry = (DailyBussiness) jdbcTemplate.queryForObject(
-				CommonConstants.GET_TODAY_ENTRY, new Object[] { date},
-				new BeanPropertyRowMapper(DailyBussiness.class));
-		
+		DailyBussiness todayEntry = (DailyBussiness) jdbcTemplate.queryForObject(CommonConstants.GET_TODAY_ENTRY,
+				new Object[] { date }, new BeanPropertyRowMapper(DailyBussiness.class));
+
 		return todayEntry;
 	}
 
@@ -92,17 +114,37 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 
 			if (creticalSection == null) {
 
-				int insert = jdbcTemplate.update(CommonConstants.INSERT_CRITICAL_SECTION, 1, 2000 / 01 / 01, 0, 0, 0, 0,
-						true);
+				throw new EmptyResultDataAccessException(1);
+
+			} else {
+				return true;
+			}
+
+		} catch (EmptyResultDataAccessException e) {
+
+			String date = "2000-01-01";
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // your template here
+			java.util.Date dateStr;
+			try {
+
+				dateStr = formatter.parse(date);
+
+				java.sql.Date dateDB = new java.sql.Date(dateStr.getTime());
+
+				int insert = jdbcTemplate.update(CommonConstants.INSERT_CRITICAL_SECTION, 1, dateDB, 0, 0, 0, 0, true);
 
 				if (insert == 1) {
 					return true;
 				} else {
 					return false;
 				}
-			} else {
-				return true;
+
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				return false;
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -115,6 +157,7 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 			DailyBussiness creticalSection = (DailyBussiness) jdbcTemplate.queryForObject(
 					CommonConstants.GET_CRITICAL_SECTION, new BeanPropertyRowMapper(DailyBussiness.class));
 			if (creticalSection.isFlag()) {
+
 				int update = jdbcTemplate.update(CommonConstants.UPDATE_CRITICAL_SECTION, false);
 
 				if (update == 1) {
@@ -141,12 +184,12 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 			}
 		}
 	}
-	
-	
+
 	@Override
-	public boolean deleteExpence(double amount,String date) {
+	public boolean deleteExpence(double amount, String date) {
 
 		while (true) {
+
 			DailyBussiness creticalSection = (DailyBussiness) jdbcTemplate.queryForObject(
 					CommonConstants.GET_CRITICAL_SECTION, new BeanPropertyRowMapper(DailyBussiness.class));
 
@@ -154,17 +197,18 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 				if (CriticalSectionFlag()) {
 
 					DailyBussiness todayEntry = (DailyBussiness) jdbcTemplate.queryForObject(
-							CommonConstants.GET_TODAY_ENTRY, new Object[] { date},
+							CommonConstants.GET_TODAY_ENTRY, new Object[] { date },
 							new BeanPropertyRowMapper(DailyBussiness.class));
 
 					if (todayEntry != null) {
+
 						todayEntry.setExpenseAmount(todayEntry.getExpenseAmount() - amount);
 						int update = jdbcTemplate.update(CommonConstants.UPDATE_TODAT_ENTRY,
 								todayEntry.getExpenseAmount(), todayEntry.getBussinesAmount(),
-								todayEntry.getReturnAmount(), todayEntry.getNetProfite(),todayEntry.getDate());
-						
+								todayEntry.getReturnAmount(), todayEntry.getNetProfite(), todayEntry.getDate());
+
 						CriticalSectionRemoveFlag();
-						
+
 						if (update == 1) {
 							return true;
 						} else {
@@ -177,5 +221,5 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 
 		}
 	}
-	
+
 }
