@@ -152,7 +152,7 @@ public class ExpendituresController {
 			entry.setNetProfite(0);
 			entry.setReturnAmount(0);
 			entry.setFlag(true);
-			if (serviceDailyBussines.insertDailyBussinessEntry(entry)) {
+			if (serviceDailyBussines.updateDailyEntry(entry)) {
 				redir.addFlashAttribute("success", 1);
 				model.setViewName("redirect:/viewShopExpenditures");
 				return model;
@@ -184,10 +184,9 @@ public class ExpendituresController {
 	public ModelAndView deleteShop(@ModelAttribute("ShopExpenditures") ShopExpenditures SpExpenditures,
 			ModelAndView model, RedirectAttributes redir) {
 
-		int id = SpExpenditures.getId();
-
-		if (serviceSpexpnditures.deleteShopExpenditures(id)) {
-			if (serviceDailyBussines.deleteExpence(SpExpenditures.getAmount(), SpExpenditures.getDate())) {
+		ShopExpenditures todelete = serviceSpexpnditures.getShopExpendituresById(SpExpenditures.getId()); 
+		if (serviceSpexpnditures.deleteShopExpenditures(todelete.getId())) {
+			if (serviceDailyBussines.deleteExpence(todelete.getAmount(), todelete.getDate())) {
 				redir.addFlashAttribute("success", 3);
 				model.setViewName("redirect:/viewShopExpenditures");
 				return model;
@@ -230,6 +229,7 @@ public class ExpendituresController {
 		if (expence.getAmount() != 0) {
 
 			DailyBussiness todayEntry = new DailyBussiness();
+			todayEntry.setDate(ShExpenditures.getDate());
 			todayEntry.setBussinesAmount(0);
 			todayEntry.setExpenseAmount(ShExpenditures.getAmount() - expence.getAmount());
 			todayEntry.setNetProfite(0);
