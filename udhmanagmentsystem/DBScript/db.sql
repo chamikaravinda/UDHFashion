@@ -1,6 +1,6 @@
 CREATE TABLE shop
 (
-	id INT AUTO_INCREMENT NOT NULL,
+	id INT AUTO_INCREMENT NOT NULL, 
     name VARCHAR(100),
     address VARCHAR(500),
     telephone VARCHAR(10),
@@ -176,5 +176,87 @@ CREATE TABLE cheque_payment
 	
 	CONSTRAINT cheque_payment_pk PRIMARY KEY (id),
 	CONSTRAINT cheque_payment_fk FOREIGN KEY(shopName) REFERENCES shop(id) ON DELETE CASCADE
+	
+);
+
+
+
+
+CREATE TABLE temp_bill
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	date VARCHAR(20),
+	cashireId int,
+	grossAmount DOUBLE,
+	netAmount  DOUBLE,
+	totalDiscount  DOUBLE,
+	balance DOUBLE,
+	noOfItem int,
+	
+	
+	
+	
+	CONSTRAINT temp_bill_pk PRIMARY KEY (id)
+	
+	
+);
+
+
+CREATE TABLE temp_bill_items
+(
+	
+	id INT AUTO_INCREMENT NOT NULL,
+	itemNo VARCHAR(20),
+	price DOUBLE,
+	qty int,
+	billId  int,
+	reduseDiscount  DOUBLE,
+	amount DOUBLE,
+	
+	
+	
+	
+	
+	CONSTRAINT temp_bill_items_pk PRIMARY KEY (id)
+	
+	
+);
+
+CREATE TABLE bill
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	date  VARCHAR(20),
+	cashireId int,
+	grossAmount DOUBLE,
+	netAmount  DOUBLE,
+	totalDiscount  DOUBLE,
+	balance DOUBLE,
+	noOfItem int,
+	
+	
+	
+	
+	CONSTRAINT bill_pk PRIMARY KEY (id)
+	
+	
+);
+
+CREATE TABLE bill_items
+(
+	
+	id INT AUTO_INCREMENT NOT NULL,
+	itemNo VARCHAR(20),
+	price DOUBLE,
+	qty int,
+	billId  int,
+	reduseDiscount  DOUBLE,
+	amount DOUBLE,
+	
+	
+	
+	
+	
+	CONSTRAINT bill_items_pk PRIMARY KEY (id)
+	
 	
 );

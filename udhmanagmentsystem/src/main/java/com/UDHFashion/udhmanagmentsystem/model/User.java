@@ -1,16 +1,25 @@
 package com.UDHFashion.udhmanagmentsystem.model;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+
 
 
 public class User {
 
+	private int id;
 	private String fname;
 	private String lname;
 	private String username;
 	private String password;
 	private String role;
+	
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getFname() {
 		return fname;
 	}
