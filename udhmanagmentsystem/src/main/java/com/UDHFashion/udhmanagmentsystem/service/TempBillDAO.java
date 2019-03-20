@@ -11,7 +11,7 @@ public interface TempBillDAO {
 
 	public abstract List<TempBill> getAllTempBill();
 
-	public abstract boolean deleteTempBill(int cashireId );
+	public abstract boolean deleteTempBill(int cashireId);
 
 	public abstract TempBill getTempBillById(int id);
 

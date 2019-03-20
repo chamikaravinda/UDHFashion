@@ -2,6 +2,7 @@ package com.UDHFashion.udhmanagmentsystem.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +41,20 @@ public class SalesController {
 	@Autowired
 	
 	BillDAO serviceBill;
+	
+	
+	
+	
+	@RequestMapping(value="/viewAllSales", method=RequestMethod.GET)
+	public ModelAndView viewAllSales(ModelAndView model) {
+		
+		List<Bill> getallBill= serviceBill.getAllBill();
+		
+		model.addObject("getallBill", getallBill);
+		model.setViewName("sales/viewAllSales");
+		return model;
+		
+	}
 
 	@RequestMapping(value = "/finalizeBill", method = RequestMethod.POST)
 	public ModelAndView finalizeBill(@ModelAttribute("permanentBill") Bill bill,ModelAndView model) {

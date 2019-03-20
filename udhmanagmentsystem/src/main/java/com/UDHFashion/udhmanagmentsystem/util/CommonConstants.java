@@ -104,7 +104,7 @@ public class CommonConstants {
 	
 	/*---------------------------Bill-------------------------------*/
 	public final static String INSERT_BILL_DETAILS = "INSERT INTO bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem) VALUES(?,?,?,?,?,?,?)";
-	public final static String GET_ALL_BILL_DETAILS = "SELECT * FROM bill where cashireId=?";
+	public final static String GET_ALL_BILL_DETAILS = "SELECT * FROM bill";
 	public final static String DELETE_BILL_DETAILS_ID = "DELETE FROM bill WHERE cashireId= ?";
 	
 	public final static String GET_BILL_BY_NO = "SELECT * FROM bill WHERE id = ?";
