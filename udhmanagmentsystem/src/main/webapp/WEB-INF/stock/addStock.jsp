@@ -63,7 +63,7 @@
 
 											<c:forEach var="result" items="${shopList}">
 
-												<option>${result.shopName}</option>
+												<option value="${result.shopId}">${result.shopName}</option>
 
 											</c:forEach>
 

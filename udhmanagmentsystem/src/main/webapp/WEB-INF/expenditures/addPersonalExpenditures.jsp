@@ -92,7 +92,7 @@
 										</div>
 									<div class="form-group ">
 											<label for="exampleInputEmail1">Amount</label> <input
-												type="number" name="amount" class="form-control" id=""amount""
+												type="number" name="amount" class="form-control" id="amount"
 												aria-describedby="numberlHelp" placeholder="Bill No"
 												required>
 

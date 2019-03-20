@@ -7,8 +7,12 @@
 <%@page import="com.UDHFashion.udhmanagmentsystem.service.IShopDAO"%>
 <%@page import="com.UDHFashion.udhmanagmentsystem.service.ShopDAOImpl"%>
 <%@page import="com.UDHFashion.udhmanagmentsystem.model.Shop"%>
+<%@page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+
+
+
 <!-- added success message -->
 <script type="text/javascript">
 	function addedsuccesfully() {
@@ -74,14 +78,37 @@
 					<div class="card mb-3">
 						<div class="col-md-12a">
 
-							<div class="form-group col-md-4">
-								<label for="exampleInputEmail1">Item No</label> <input
-									type="number" name="itemNo" class="form-control" id="itemNo"
-									aria-describedby="numberlHelp" placeholder="" required>
+							<form action="submitItemQty" method="post">
 
-							</div>
-							<a href="#" class="btn btn-primary" style="margin: 10px"
-								role="button" aria-pressed="true">Submit</a>
+								<div class="form-row">
+									<div class="form-group col-md-4" style="margin: 20px">
+										<label for="exampleInputEmail1">Item No</label> <input
+											type="text" name="itemcode" class="form-control"
+											id="itemcode" aria-describedby="numberlHelp" placeholder=""
+											required>
+
+									</div>
+
+									<div class="form-group col-md-4" style="margin: 20px">
+										<label for="exampleInputEmail1">Quantity</label> <input
+											type="number" name="quantity" class="form-control"
+											id="quantity" aria-describedby="numberlHelp" placeholder=""
+											required>
+
+									</div>
+									<div style="margin: 50px">
+										<button type="submit" class="btn btn-primary">Submit</button>
+
+									</div>
+
+
+								</div>
+
+
+
+							</form>
+
+
 
 						</div>
 
@@ -90,100 +117,93 @@
 								<table class="table table-responsive-xl table-bordered">
 									<thead>
 										<tr>
-									<thead>
-										<th>Item No</th>
-										<th>Price</th>
-										<th>Qty</th>
-										<th>Reduce Discount</th>
-										<th>Amount</th>
+
+											<th>Item No</th>
+											<th>Price</th>
+											<th>Quantity</th>
+											<th>Reduce Discount</th>
+											<th>Amount</th>
 									</thead>
 									<tbody>
-										<tr>
 
-											<td>11001</td>
-											<td>850</td>
-											<td>10</td>
-											<td>50</td>
-											<td>8000</td>
-										</tr>
-										<tr>
+										<c:forEach var="result" items="${itemList1}">
+											<tr>
+												<td>${result.itemNo}</td>
+												<td>${result.price}</td>
+												<td>${result.qty}</td>
+												<td>${result.reduseDiscount}</td>
+												<td>${result.amount}</td>
 
-											<td>11002</td>
-											<td>650</td>
-											<td>5</td>
-											<td>50</td>
-											<td>3000</td>
-										</tr>
+												<c:set var="total" value="${0}" />
 
+												<c:forEach var="result" items="${itemList1}">
+													<c:set var="total" value="${total + result.price}" />
+												</c:forEach>
+												<c:set var="totalDis" value="${0}" />
+												<c:forEach var="resultDis" items="${itemList1}">
+													<c:set var="totalDis"
+														value="${totalDis + resultDis.reduseDiscount}" />
+												</c:forEach>
+
+												<c:set var="totalAmt" value="${0}" />
+												<c:forEach var="resultAmt" items="${itemList1}">
+													<c:set var="totalAmt"
+														value="${totalAmt + resultAmt.amount}" />
+												</c:forEach>
+
+
+
+											</tr>
+										</c:forEach>
 
 									</tbody>
 								</table>
 
 
-								</tr>
-								</thead>
-								<tbody>
+								<form method="POST" action="finalizeBill"
+									modelAttribute="permanentBill">
 
-									<c:forEach var="result" items="${pExpendituresList}">
-										<tr>
-											<td>${result.id}</td>
-											<td>${result.date}</td>
-											<td>${result.reason}</td>
-											<td>${result.amount}</td>
-
-
-
-										</tr>
-									</c:forEach>
-
-								</tbody>
+									<div class="form-row">
 
 
 
 
-								</table>
+										<div class="form-group col-md-4">
+											<label for="exampleInputEmail1">Gross Amount</label> <input
+												type="text" name="grossAmount" class="form-control"
+												id="grossAmount" aria-describedby="numberlHelp"
+												value="<c:out value="${total + result.price}"/>" required>
 
+										</div>
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Total Discount</label> <input
+												type="text" name="totalDiscount" class="form-control"
+												id="totalDiscount"
+												value="<c:out value="${totalDis + resultDis.reduseDiscount}"/>"
+												required>
+										</div>
 
-
-								<div class="form-row">
-
-
-									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Gross Amount</label> <input
-											type="text" name="grossAmount" class="form-control"
-											id="grossAmount" aria-describedby="numberlHelp"
-											placeholder="11750" required>
-
-									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Total Discount</label> <input
-											type="text" name="totalDiscount" class="form-control"
-											id="totalDiscount" placeholder="750" required>
-									</div>
-
-
-								</div>
-
-								<div class="form-row">
-									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Net Amount</label> <input
-											type="number" name="netAmount" class="form-control"
-											id="netAmount" aria-describedby="numberlHelp"
-											placeholder="11000" required>
-
-									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Cash</label> <input
-											type="number" name="cash" class="form-control" id="cash"
-											aria-describedby="numberlHelp" placeholder="15000" required>
 
 									</div>
 
+									<div class="form-row">
+										<div class="form-group col-md-4">
+											<label for="exampleInputEmail1">Net Amount</label> <input
+												type="number" name="netAmount" class="form-control"
+												id="netAmount" aria-describedby="numberlHelp"
+												value="<c:out value="${totalAmt + resultDis.amount}"/>"
+												required>
 
-								</div>
+										</div>
+										<div class="form-group col-md-4">
+											<label for="exampleInputEmail1">Cash</label> <input
+												type="number" name="cash" class="form-control" id="cash"
+												aria-describedby="numberlHelp">
 
+										</div>
 
-								<div>
+									</div>
+
 
 
 									<div class="form-row">
@@ -198,30 +218,38 @@
 										<div class="form-group col-md-4">
 											<label for="exampleInputEmail1">Balance</label> <input
 												type="number" name="balance" class="form-control"
-												id="balance" aria-describedby="numberlHelp"
-												placeholder="4000" required>
+												id="balance" aria-describedby="numberlHelp">
 
 										</div>
 									</div>
-								</div>
+
+									<%
+										User user = (User) session.getAttribute("user");
+
+										out.print(user.getId());
+										out.print(user.getFname());
+									%>
+
+
+
+									<input type="hidden" id="cashireId" path="cashireId"
+										name="cashireId" value="${user.getId()}">
+
+
+
+									<div style="margin-left: 500px">
+										<button type="submit" class="btn btn-primary">Finalize</button>
+									</div>
+
+
+
+								</form>
+
+
 
 							</div>
 						</div>
-						<!-- end card-->
-
-						<div class="col-md-12a">
-							<a href="#" class="btn btn-primary" style="margin: 10px;align-items: flex-end;"
-								role="button" aria-pressed="true">Finalize</a>
-
-
-
-						</div>
 					</div>
-
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-
-					</div>
-
 				</div>
 			</div>
 			<!-- END container-fluid -->
@@ -231,5 +259,22 @@
 
 	</div>
 </div>
+
+<script>
+	document.querySelector('#cash').addEventListener('keypress', function(e) {
+		var key = e.which || e.keyCode;
+		if (key === 13) {
+
+			var netAmount = document.getElementById("netAmount").value;
+
+			var cash = parseInt(document.getElementById("cash").value);
+
+			var balance = cash - netAmount;
+
+			document.getElementById("balance").value = balance;
+
+		}
+	});
+</script>
 
 <%@ include file="../includes/footer.jsp"%>

@@ -112,13 +112,10 @@
          											<td>${result.jobDate}  </td>
          											<td>${result.contactNum} </td>
          											<td>${result.gContactNum} </td>
-         											<td>
-         												<form method = "GET" action = "editEmployee" modelAttribute="employee">
-         													<input name = "empNo" type = "hidden" value = "${result.empNo}" >
-         													<button type="submit" al class="btn btn-primary">Update</button>
-         												</form>
          											
-         											</td>
+         											<td><a href="<c:url value='/editEmployee?empNo=${result.empNo}' />">Edit</a></td>
+         											
+         										
          											<td> 
          												<form method = "POST" action = "deleteEmployee" modelAttribute="employee">
          													<input name = "empNo" type = "hidden" value = "${result.empNo}" >

@@ -1,4 +1,3 @@
-
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 	<!-- added success message -->
 	<script type="text/javascript">
@@ -86,7 +85,7 @@
 														<form method="POST" action="deleteBank"
 															modelAttribute="employee">
 															<input name="empNo" type="hidden" value="${result.id}">
-															<button type="submit" al class="btn btn-link">Delete</button>
+															<button type="submit"  class="btn btn-link">Delete</button>
 														</form>
 													</td>
 												</tr>
