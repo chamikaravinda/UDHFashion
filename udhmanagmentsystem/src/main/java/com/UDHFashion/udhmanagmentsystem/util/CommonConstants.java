@@ -56,13 +56,10 @@ public class CommonConstants {
 	public final static String INSERT_BANK_WITHDRAW = "INSERT INTO bank_withdraws(date,amount,account) VALUES(?,?,?)";
 	public final static String UPDATE_BANK_ACCOUNT_BALANCE = "UPDATE bank_accounts SET current_balance = ? WHERE id = ?";
 	public final static String GET_ALL_DEPOSITE_DETAILS = "SELECT * FROM bank_deposites ORDER BY id DESC";
-  
-  public final static String INSERT_BANK_DEPOSIT = "INSERT INTO bank_deposites(date,amount,account) VALUES(?,?,?)";
+
+	public final static String INSERT_BANK_DEPOSIT = "INSERT INTO bank_deposites(date,amount,account) VALUES(?,?,?)";
 	public final static String GET_ALL_WITHDRAW_DETAILS = "SELECT * FROM bank_withdraws ORDER BY id DESC";
 
-
-	
-	
 	/*---------------------------Credit Bills-------------------------------*/
 	public final static String INSERT_CREDITBILL_DETAILS = "INSERT INTO credit_bill(billNo,billDate,shopName,billAmount) VALUES(?,?,?,?)";
 	public final static String GET_ALL_CREDITBILL_DETAILS = "SELECT * FROM credit_bill";
@@ -91,7 +88,7 @@ public class CommonConstants {
 	public final static String INSERT_TEMPBILL_DETAILS = "INSERT INTO temp_bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance) VALUES(?,?,?,?,?,?)";
 	public final static String GET_ALL_TEMPBILL_DETAILS = "SELECT * FROM temp_bill where cashireId=?";
 	public final static String DELETE_TEMPBILL_DETAILS_ID = "DELETE FROM temp_bill WHERE cashireId= ?";
-	
+
 	public final static String GET_TEMPBILL_BY_NO = "SELECT * FROM temp_bill WHERE id = ?";
 
 	/*---------------------------Temporary Billitems-------------------------------*/
@@ -99,19 +96,19 @@ public class CommonConstants {
 	public final static String INSERT_TEMPBILLITEM_DETAILS = "INSERT INTO temp_bill_items(itemNo,price,qty,billId,reduseDiscount,amount,cashireId)VALUES(?,?,?,?,?,?,?)";
 	public final static String GET_ALL_TEMPBILLITEM_DETAILS = "SELECT * FROM temp_bill_items WHERE cashireId=?";
 	public final static String DELETE_TEMPBILLITEM_DETAILS_ID = "DELETE FROM temp_bill_items WHERE cashireId= ?";
-	
+
 	public final static String GET_TEMPBILLITEM_BY_NO = "SELECT * FROM temp_bill_items WHERE id = ?";
-	
+
 	/*---------------------------Bill-------------------------------*/
 	public final static String INSERT_BILL_DETAILS = "INSERT INTO bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem) VALUES(?,?,?,?,?,?,?)";
 	public final static String GET_ALL_BILL_DETAILS = "SELECT * FROM bill";
 	public final static String DELETE_BILL_DETAILS_ID = "DELETE FROM bill WHERE cashireId= ?";
-	
+
 	public final static String GET_BILL_BY_NO = "SELECT * FROM bill WHERE id = ?";
 
-	/*---------------------------Daily Business-----------------------------------*/ 
-	public final static String INSERT_CRITICAL_SECTION  = "INSERT INTO daily_busssiness(id,date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?,?)";
-	public final static String INSERT_DAILY_BUSINESS  = "INSERT INTO daily_busssiness(date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?)";
+	/*---------------------------Daily Business-----------------------------------*/
+	public final static String INSERT_CRITICAL_SECTION = "INSERT INTO daily_busssiness(id,date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?,?)";
+	public final static String INSERT_DAILY_BUSINESS = "INSERT INTO daily_busssiness(date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?)";
 	public final static String GET_CRITICAL_SECTION = "SELECT * FROM daily_busssiness WHERE id = 1";
 	public final static String UPDATE_CRITICAL_SECTION = "UPDATE daily_busssiness SET flag = ? WHERE id=1 ";
 	public final static String GET_TODAY_ENTRY = "SELECT * FROM daily_busssiness WHERE date= ?";

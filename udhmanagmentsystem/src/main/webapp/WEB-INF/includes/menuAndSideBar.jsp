@@ -192,7 +192,8 @@
 		                 <ul class="list-unstyled">
 		                     <li><a href="addEmployee"><i class="fa fa-plus-square"></i>Add Employee</a></li>
                              <li><a href="viewEmployee"><i class="fa fa-user" aria-hidden="true"></i>View Employee</a></li>
-                             <li><a href="employeeSalarySheet"><i class="fa fa-sticky-note" aria-hidden="true"></i>Salary Sheets</a></li>          
+                             <li><a href="employeeSalarySheet"><i class="fa fa-sticky-note" aria-hidden="true"></i>Salary Sheets</a></li>     
+                              <li><a href="advancePayment"><i class="fa fa-sticky-note" aria-hidden="true"></i>Advance Payment</a></li>             
 		                 </ul>
                     </li>
                     
