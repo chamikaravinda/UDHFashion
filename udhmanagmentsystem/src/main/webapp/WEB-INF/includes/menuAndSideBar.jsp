@@ -213,7 +213,7 @@ tr.shown td.details-control {
 										aria-hidden="true"></i>View Employee</a></li>
 								<li><a href="employeeSalarySheet"><i
 										class="fa fa-sticky-note" aria-hidden="true"></i>Salary Sheets</a></li>
-								<li><a href="advancePayment"><i
+								<li><a href="advancePay"><i
 										class="fa fa-sticky-note" aria-hidden="true"></i>Advance
 										Payment</a></li>
 							</ul></li>
