@@ -108,7 +108,7 @@
 											<th>Amount</th>
 									</thead>
 									<tbody>
-										
+
 										<c:forEach var="result" items="${itemList1}">
 											<tr>
 												<td>${result.itemNo}</td>
@@ -140,35 +140,29 @@
 									</tbody>
 								</table>
 
-
+							</div>
+							<div>
 								<form method="POST" action="finalizeBill"
 									modelAttribute="permanentBill">
-
 									<div class="form-row">
-
-
-
-
-										<div class="form-group col-md-4">
+										<div class="form-group col-md-5">
 											<label for="exampleInputEmail1">Gross Amount</label> <input
 												type="text" name="grossAmount" class="form-control"
 												id="grossAmount" aria-describedby="numberlHelp"
 												value="<c:out value="${total + result.price}"/>" required>
-
 										</div>
-										<div class="form-group col-md-4">
+										<div class="col-md-1"></div>
+										<div class="form-group col-md-5">
 											<label for="exampleInputPassword1">Total Discount</label> <input
 												type="text" name="totalDiscount" class="form-control"
 												id="totalDiscount"
 												value="<c:out value="${totalDis + resultDis.reduseDiscount}"/>"
 												required>
 										</div>
-
-
 									</div>
 
 									<div class="form-row">
-										<div class="form-group col-md-4">
+										<div class="form-group col-md-5">
 											<label for="exampleInputEmail1">Net Amount</label> <input
 												type="number" name="netAmount" class="form-control"
 												id="netAmount" aria-describedby="numberlHelp"
@@ -176,7 +170,9 @@
 												required>
 
 										</div>
-										<div class="form-group col-md-4">
+										<div class="col-md-1"></div>
+
+										<div class="form-group col-md-5">
 											<label for="exampleInputEmail1">Cash</label> <input
 												type="number" name="cash" class="form-control" id="cash"
 												aria-describedby="numberlHelp">
@@ -187,15 +183,16 @@
 
 									<div class="form-row">
 
-										<div class="form-group col-md-4">
+										<div class="form-group col-md-5">
 											<label for="exampleInputEmail1">No of Items</label> <input
 												type="number" name="noOfItem" class="form-control"
 												id="noOfItem" aria-describedby="numberlHelp" placeholder="2"
-												value="<c:out value="${total_items}" />"
-												required>
+												value="<c:out value="${total_items}" />" required>
 
 										</div>
-										<div class="form-group col-md-4">
+										<div class = "col-md-1"></div>
+
+										<div class="form-group col-md-5">
 											<label for="exampleInputEmail1">Balance</label> <input
 												type="number" name="balance" class="form-control"
 												id="balance" aria-describedby="numberlHelp">
@@ -212,7 +209,7 @@
 									<input type="hidden" id="cashireId" path="cashireId"
 										name="cashireId" value="${user.getId()}">
 
-									<div style="margin-left: 500px">
+									<div style="margin-left: 260px">
 										<button type="submit" class="btn btn-primary">Finalize</button>
 									</div>
 
