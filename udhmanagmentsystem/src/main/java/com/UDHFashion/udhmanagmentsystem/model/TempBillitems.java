@@ -15,7 +15,6 @@ public class TempBillitems {
 	public void setCashireId(int cashireId) {
 		this.cashireId = cashireId;
 	}
-	private String billId;
 	private double reduseDiscount;
 	private double amount;
 	
@@ -43,13 +42,6 @@ public class TempBillitems {
 	}
 	public void setQty(int qty) {
 		this.qty = qty;
-	}
-	
-	public String getBillId() {
-		return billId;
-	}
-	public void setBillId(String billId) {
-		this.billId = billId;
 	}
 	public double getReduseDiscount() {
 		return reduseDiscount;

@@ -16,15 +16,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.UDHFashion.udhmanagmentsystem.model.Bill;
+import com.UDHFashion.udhmanagmentsystem.model.Billitems;
+import com.UDHFashion.udhmanagmentsystem.model.DailyBussiness;
 import com.UDHFashion.udhmanagmentsystem.model.Item;
 import com.UDHFashion.udhmanagmentsystem.model.TempBillitems;
 import com.UDHFashion.udhmanagmentsystem.model.User;
 import com.UDHFashion.udhmanagmentsystem.service.BillDAO;
+import com.UDHFashion.udhmanagmentsystem.service.BillItemsDAOImpl;
+import com.UDHFashion.udhmanagmentsystem.service.DailyBussinessDAOImpl;
 import com.UDHFashion.udhmanagmentsystem.service.IItemDAO;
 import com.UDHFashion.udhmanagmentsystem.service.TempBillDAO;
 import com.UDHFashion.udhmanagmentsystem.service.TempBillitemsDAO;
+import com.UDHFashion.udhmanagmentsystem.util.TempItemsToBillItesms;
 
 @Controller
 public class SalesController {
@@ -37,55 +43,99 @@ public class SalesController {
 
 	@Autowired
 	IItemDAO serviceItem;
-	
+
 	@Autowired
-	
 	BillDAO serviceBill;
-	
-	
-	
-	
-	@RequestMapping(value="/viewAllSales", method=RequestMethod.GET)
+
+	@Autowired
+	TempItemsToBillItesms convertor;
+
+	@Autowired
+	BillItemsDAOImpl serviceBillItem;
+
+	@Autowired
+	DailyBussinessDAOImpl serviceDailyBusiness;
+
+	@RequestMapping(value = "/viewAllSales", method = RequestMethod.GET)
 	public ModelAndView viewAllSales(ModelAndView model) {
-		
-		List<Bill> getallBill= serviceBill.getAllBill();
-		
+
+		List<Bill> getallBill = serviceBill.getAllBill();
+
 		model.addObject("getallBill", getallBill);
 		model.setViewName("sales/viewAllSales");
 		return model;
-		
+
 	}
 
 	@RequestMapping(value = "/finalizeBill", method = RequestMethod.POST)
-	public ModelAndView finalizeBill(@ModelAttribute("permanentBill") Bill bill,ModelAndView model) {
+	public ModelAndView finalizeBill(@ModelAttribute("permanentBill") Bill bill, ModelAndView model,RedirectAttributes redir) {
 
-		System.out.println("Bill Total Amount : "+bill.getNetAmount());
-		System.out.println("CashireID : "+bill.getCashireId());
-		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String newDate = dateFormat.format(date);
-		
+
+		Double dailyNetProfite = 0.0;
+
 		bill.setDate(newDate);
-		
-		serviceBill.insertBill(bill);
-		
-		
-		
-		model.setViewName("redirect:/viewAllSales");
+		long billID = serviceBill.insertBill(bill);
+
+		if (billID != 0) {
+			List<TempBillitems> tempItems = serviceTempBillitems.getAllTempBillitems(bill.getCashireId());
+			ArrayList<Billitems> billItems = new ArrayList<>();
+			
+			for (TempBillitems item : tempItems) {
+				billItems.add(convertor.Convert(item, (int) billID));
+				Item billItem = serviceItem.getItemById(item.getItemNo());
+				dailyNetProfite += (billItem.getNetProfit() * item.getQty());
+
+			}
+
+			if (serviceBillItem.insertBillItems(billItems)) {
+
+				DailyBussiness dailyEntry = new DailyBussiness();
+
+				dailyEntry.setDate(newDate);
+				dailyEntry.setExpenseAmount(0);
+				dailyEntry.setBussinesAmount(bill.getNetAmount());
+				dailyEntry.setReturnAmount(0);
+				dailyEntry.setNetProfite(dailyNetProfite);
+				dailyEntry.setFlag(true);
+
+				if (serviceDailyBusiness.insertDailyBussinessEntry(dailyEntry)) {
+					if (serviceTempBillitems.deleteTempBillitems(bill.getCashireId())) {
+
+						redir.addFlashAttribute("success",1);
+						model.setViewName("redirect:/viewAllSales");
+						return model;
+						
+					}
+
+				}
+
+			}
+
+		}
+
+		redir.addFlashAttribute("error",1);
+		model.setViewName("redirect:/viewSales");
 		return model;
+		
+		
 	}
 
 	@RequestMapping(value = "/newSales", method = RequestMethod.GET)
-	public String newSales(HttpServletRequest request, Model model) {
+	public ModelAndView newSales(HttpServletRequest request, ModelAndView model) {
 
 		User user = (User) request.getSession().getAttribute("user");
 		int cashireId = user.getId();
 
 		serviceTempBill.deleteTempBill(cashireId);
 		serviceTempBillitems.deleteTempBillitems(cashireId);
+		List<Item> item = serviceItem.getAllItemDetails();
 
-		return "sales/viewSales";
+		model.addObject("itemList", item);
+		model.setViewName("sales/newSale");
+		return model;
 
 	}
 
@@ -94,11 +144,18 @@ public class SalesController {
 
 		User user = (User) request.getSession().getAttribute("user");
 		int cashireId = user.getId();
-
+		int totalItems=0;
 		List<TempBillitems> itemList1 = serviceTempBillitems.getAllTempBillitems(cashireId);
+		List<Item> item = serviceItem.getAllItemDetails();
 
+		for(TempBillitems items:itemList1) {
+			
+			totalItems += items.getQty();
+		}
+		model.addObject("itemList", item);
 		model.addObject("itemList1", itemList1);
-		model.setViewName("sales/viewSales");
+		model.addObject("total_items",totalItems);
+		model.setViewName("sales/newSale");
 		return model;
 
 	}
@@ -116,7 +173,6 @@ public class SalesController {
 		tempBillitems.setItemNo(itemList.getItemCode());
 		tempBillitems.setPrice(itemList.getPrice());
 		tempBillitems.setQty(quantity);
-		tempBillitems.setBillId(itemList.getItemCode());
 		tempBillitems.setReduseDiscount(itemList.getDiscount());
 		tempBillitems.setAmount(tempBillitems.getPrice() * quantity - tempBillitems.getReduseDiscount() * quantity);
 		tempBillitems.setCashireId(cashireId);

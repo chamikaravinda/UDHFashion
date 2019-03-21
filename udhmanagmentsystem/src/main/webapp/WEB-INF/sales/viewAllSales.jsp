@@ -18,7 +18,7 @@
 <!-- added success message -->
 <script type="text/javascript">
 	function addedsuccesfully() {
-		swal("Shop Added Succesfully");
+		swal("Sale Done Succesfully");
 	}
 </script>
 
@@ -28,56 +28,21 @@
 	</script>
 </c:if>
 
-<!-- update success message -->
-<script type="text/javascript">
-	function updatesuccesfully() {
-		swal("Shop updated Succesfully");
-	}
-</script>
-
-<c:if test="${success == 2}">
-	<script type="text/javascript">
-		window.onload = updatesuccesfully;
-	</script>
-</c:if>
-<!-- delete success message -->
-<script type="text/javascript">
-	function deletesuccesfully() {
-		swal("Shop Deleted Succesfully");
-	}
-</script>
-
-<c:if test="${success == 3}">
-	<script type="text/javascript">
-		window.onload = deletesuccesfully;
-	</script>
-</c:if>
-
-<!-- delete unsuccess message -->
-<script type="text/javascript">
-	function deleteunsuccesfull() {
-		swal("Shop Delete Unsuccesfull");
-	}
-</script>
-
-<c:if test="${success == 4}">
-	<script type="text/javascript">
-		window.onload = deleteunsuccesfull;
-	</script>
-</c:if>
-
-
-<!--  to sweet alerts-->
-
-
-
 <div class="content-page">
 
 	<!-- Start content -->
 	<div class="content">
 
 		<div class="container-fluid">
-
+				<div class="breadcrumb-holder">
+						<h1 class="main-title float-left">All Sales</h1>
+						<ol class="breadcrumb float-right">
+							<li class="breadcrumb-item">Home</li>
+							<li href="viewAllSales" class="breadcrumb-item active">All
+								Sales</li>
+						</ol>
+						<div class="clearfix"></div>
+					</div>
 			<div class="row">
 
 				<div class="col-md-12">

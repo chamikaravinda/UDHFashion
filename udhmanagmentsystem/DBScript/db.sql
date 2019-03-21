@@ -210,16 +210,12 @@ CREATE TABLE temp_bill_items
 	itemNo VARCHAR(20),
 	price DOUBLE,
 	qty int,
-	billId  int,
 	reduseDiscount  DOUBLE,
 	amount DOUBLE,
+	cashireId int, 	
 	
-	
-	
-	
-	
-	CONSTRAINT temp_bill_items_pk PRIMARY KEY (id)
-	
+	CONSTRAINT temp_bill_items_pk PRIMARY KEY (id),
+	CONSTRAINT cashier_fk  FOREIGN KEY (cashireId) REFERENCES users(id) ON DELETE CASCADE
 	
 );
 
@@ -233,10 +229,7 @@ CREATE TABLE bill
 	totalDiscount  DOUBLE,
 	balance DOUBLE,
 	noOfItem int,
-	
-	
-	
-	
+
 	CONSTRAINT bill_pk PRIMARY KEY (id)
 	
 	
@@ -273,4 +266,15 @@ CREATE TABLE daily_busssiness (
 	flag BOOLEAN,
 	CONSTRAINT daily_busssiness_pk PRIMARY KEY (id)
 	
+);
+
+CREATE TABLE bank_withdraws
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	date DATE,
+	amount double,
+	account int,
+	
+	CONSTRAINT withdraws_pk PRIMARY KEY (id),
+	CONSTRAINT withdraws_fk FOREIGN KEY(account) REFERENCES bank_accounts(id) ON DELETE CASCADE
 );

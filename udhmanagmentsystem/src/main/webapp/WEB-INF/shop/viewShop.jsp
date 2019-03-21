@@ -16,140 +16,151 @@
 
 
 <!-- added success message -->
-	<script type="text/javascript">
-		function addedsuccesfully() {	
-			swal("Shop Added Succesfully");	
-		}
-	</script>
+<script type="text/javascript">
+	function addedsuccesfully() {
+		swal("Shop Added Succesfully");
+	}
+</script>
 
-	<c:if test="${success == 1}">
-		<script type="text/javascript">
-			window.onload = addedsuccesfully;
-		</script>
-	</c:if>
-	
+<c:if test="${success == 1}">
+	<script type="text/javascript">
+		window.onload = addedsuccesfully;
+	</script>
+</c:if>
+
 <!-- update success message -->
-	<script type="text/javascript">
-		function updatesuccesfully() {	
-			swal("Shop updated Succesfully");	
-		}
-	</script>
+<script type="text/javascript">
+	function updatesuccesfully() {
+		swal("Shop updated Succesfully");
+	}
+</script>
 
-	<c:if test="${success == 2}">
-		<script type="text/javascript">
-			window.onload = updatesuccesfully;
-		</script>
-	</c:if>
+<c:if test="${success == 2}">
+	<script type="text/javascript">
+		window.onload = updatesuccesfully;
+	</script>
+</c:if>
 <!-- delete success message -->
-	<script type="text/javascript">
-		function deletesuccesfully() {	
-			swal("Shop Deleted Succesfully");	
-		}
-	</script>
+<script type="text/javascript">
+	function deletesuccesfully() {
+		swal("Shop Deleted Succesfully");
+	}
+</script>
 
-	<c:if test="${success == 3}">
-		<script type="text/javascript">
-			window.onload = deletesuccesfully;
-		</script>
-	</c:if>
+<c:if test="${success == 3}">
+	<script type="text/javascript">
+		window.onload = deletesuccesfully;
+	</script>
+</c:if>
 
 <!-- delete unsuccess message -->
-	<script type="text/javascript">
-		function deleteunsuccesfull() {	
-			swal("Shop Delete Unsuccesfull");	
-		}
-	</script>
+<script type="text/javascript">
+	function deleteunsuccesfull() {
+		swal("Shop Delete Unsuccesfull");
+	}
+</script>
 
-	<c:if test="${success == 4}">
-		<script type="text/javascript">
-			window.onload = deleteunsuccesfull;
-		</script>
-	</c:if>
+<c:if test="${success == 4}">
+	<script type="text/javascript">
+		window.onload = deleteunsuccesfull;
+	</script>
+</c:if>
 
 
 <!--  to sweet alerts-->
 
 
 
-	<div class="content-page">
+<div class="content-page">
 
-		<!-- Start content -->
-		<div class="content">
+	<!-- Start content -->
+	<div class="content">
 
-			<div class="container-fluid">
+		<div class="container-fluid">
+			<div class="breadcrumb-holder">
+				<h1 class="main-title float-left">All Suppliers</h1>
+				<ol class="breadcrumb float-right">
+					<li class="breadcrumb-item">Home</li>
+					<li href="viewAllSales" class="breadcrumb-item active">All
+						Suppliers</li>
+				</ol>
+				<div class="clearfix"></div>
+			</div>
+			<div class="row">
 
-				<div class="row">
+				<div class="col-md-12">
+					<div class="card mb-3">
+						<div class="col-md-12a">
+							<a href="addShop" class="btn btn-primary" style="margin: 10px"
+								role="button" aria-pressed="true">Add</a>
 
-					<div class="col-md-12">
-						<div class="card mb-3">
-							<div class="col-md-12a">
-								<a href="addShop" class="btn btn-primary" style="margin:10px"
-									role="button" aria-pressed="true">Add</a>
+						</div>
 
-							</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example1"
+									class="table table-bordered table-hover display">
+									<thead>
+										<tr>
+											<th>Shop No</th>
+											<th>Shop Name</th>
+											<th>Address</th>
+											<th>Telephone</th>
 
-							<div class="card-body">
-								<div class="table-responsive">
-									<table id="example1"
-										class="table table-bordered table-hover display">
-										<thead>
+											<td><span><i class="fa fa-pencil-square"
+													aria-hidden="true"></i></span></td>
+											<td><span><i class="fa fa-trash"
+													aria-hidden="true"></i></span></td>
+										</tr>
+									</thead>
+									<tbody>
+
+										<c:forEach var="result" items="${shopList}">
 											<tr>
-												<th>Shop No</th>
-												<th>Shop Name</th>
-												<th>Address</th>
-												<th>Telephone</th>
+												<td>${result.shopId}</td>
+												<td>${result.shopName}</td>
+												<td>${result.shopAddress}</td>
+												<td>${result.shopTelephone}</td>
+												<td>
+													<form method="GET" action="editShop" modelAttribute="shop">
+														<input name="shopId" type="hidden"
+															value="${result.shopId}">
+														<button type="submit" class="btn btn-primary">Update</button>
+													</form>
 
-												<td><span><i class="fa fa-pencil-square"
-														aria-hidden="true"></i></span></td>
-												<td><span><i class="fa fa-trash"
-														aria-hidden="true"></i></span></td>
+
+												</td>
+												<td>
+													<form method="POST" action="deleteShop"
+														modelAttribute="shop">
+														<input name="shopId" type="hidden"
+															value="${result.shopId}">
+														<button type="submit" class="btn btn-primary">Delete</button>
+													</form>
+												</td>
 											</tr>
-										</thead>
-										<tbody>
-			
-											<c:forEach var="result" items = "${shopList}">
-												<tr>
-         											<td> ${result.shopId} </td>	
-         											<td> ${result.shopName} </td>	
-         											<td> ${result.shopAddress} </td>	
-         											<td> ${result.shopTelephone} </td>
-         											<td> 
-         											<form method = "GET" action = "editShop" modelAttribute="shop">
-         													<input name = "shopId" type = "hidden" value = "${result.shopId}" >
-         													<button type="submit"  class="btn btn-primary">Update</button>
-         											</form>
-         											
-         											
-         											</td>
-         											<td> 	
-         												<form method = "POST" action = "deleteShop" modelAttribute="shop">
-         													<input name = "shopId" type = "hidden" value = "${result.shopId}" >
-         													<button type="submit"  class="btn btn-primary">Delete</button>
-         												</form>
-         											</td>	
-         										</tr>
-											</c:forEach>
+										</c:forEach>
 
-										</tbody>
-									</table>
-									
-								</div>
+									</tbody>
+								</table>
+
 							</div>
-							<!-- end card-->
 						</div>
+						<!-- end card-->
+					</div>
 
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-
-						</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
 
 					</div>
-				</div>
-				<!-- END container-fluid -->
 
+				</div>
 			</div>
-			<!-- END content -->
+			<!-- END container-fluid -->
 
 		</div>
-</body>
-</html>
-<%@ include file="../includes/footer.jsp"%>
+		<!-- END content -->
+
+	</div>
+	</body>
+	</html>
+	<%@ include file="../includes/footer.jsp"%>

@@ -7,7 +7,7 @@ import com.UDHFashion.udhmanagmentsystem.model.Bill;
 
 public interface BillDAO {
 
-	public abstract boolean insertBill(Bill bill);
+	public abstract long insertBill(Bill bill);
 
 	public abstract List<Bill> getAllBill();
 

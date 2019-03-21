@@ -164,9 +164,7 @@ public class ItemDAOImpl implements IItemDAO {
 				item.setShopId(rs.getInt("shop_id"));
 				item.setDiscount(rs.getInt("discount_amount"));
 				item.setPrice(Double.parseDouble(rs.getString("price")));
-				
-				System.out.println("Show item code : " + item.getItemCode() );
-				
+				item.setNetProfit(rs.getDouble("net_profit"));				
 				return item;
 			}
 		});

@@ -13,57 +13,18 @@
 
 
 
-<!-- added success message -->
+<!-- added unsuccesfull message -->
 <script type="text/javascript">
-	function addedsuccesfully() {
-		swal("Personal Expenditures Added Succesfully");
+	function unsuccesfull() {
+		swal("Sale is Unsuccesfull");
 	}
 </script>
 
-<c:if test="${success == 1}">
+<c:if test="${error == 1}">
 	<script type="text/javascript">
-		window.onload = addedsuccesfully;
+		window.onload = unsuccesfull;
 	</script>
 </c:if>
-
-<!-- update success message -->
-<script type="text/javascript">
-	function updatesuccesfully() {
-		swal("Personal Expenditures updated Succesfully");
-	}
-</script>
-
-<c:if test="${success == 2}">
-	<script type="text/javascript">
-		window.onload = updatesuccesfully;
-	</script>
-</c:if>
-<!-- delete success message -->
-<script type="text/javascript">
-	function deletesuccesfully() {
-		swal("Personal Expenditures Deleted Succesfully");
-	}
-</script>
-
-<c:if test="${success == 3}">
-	<script type="text/javascript">
-		window.onload = deletesuccesfully;
-	</script>
-</c:if>
-
-<!-- delete unsuccess message -->
-<script type="text/javascript">
-	function deleteunsuccesfull() {
-		swal("Personal Expenditures Delete Unsuccesfull");
-	}
-</script>
-
-<c:if test="${success == 4}">
-	<script type="text/javascript">
-		window.onload = deleteunsuccesfull;
-	</script>
-</c:if>
-
 
 <div class="content-page">
 
@@ -71,6 +32,21 @@
 	<div class="content">
 
 		<div class="container-fluid">
+
+
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="breadcrumb-holder">
+						<h1 class="main-title float-left">New Sale</h1>
+						<ol class="breadcrumb float-right">
+							<li class="breadcrumb-item">Home</li>
+							<li href="viewAllSales" class="breadcrumb-item active">New
+								Sales</li>
+						</ol>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
 
 			<div class="row">
 
@@ -83,16 +59,23 @@
 								<div class="form-row">
 									<div class="form-group col-md-4" style="margin: 20px">
 										<label for="exampleInputEmail1">Item No</label> <input
-											type="text" name="itemcode" class="form-control"
-											id="itemcode" aria-describedby="numberlHelp" placeholder=""
-											required>
+											list="hosting-plan" type="text" name="itemcode"
+											class="form-control" id="itemcode"
+											aria-describedby="numberlHelp" placeholder="" required>
+
+										<datalist id="hosting-plan">
+											<c:forEach var="result" items="${itemList}">
+
+												<option value="${result.itemCode}" />
+											</c:forEach>
+										</datalist>
 
 									</div>
 
 									<div class="form-group col-md-4" style="margin: 20px">
 										<label for="exampleInputEmail1">Quantity</label> <input
 											type="number" name="quantity" class="form-control"
-											id="quantity" aria-describedby="numberlHelp" placeholder=""
+											id="quantity" aria-describedby="numberlHelp" Value="1"
 											required>
 
 									</div>
@@ -125,7 +108,7 @@
 											<th>Amount</th>
 									</thead>
 									<tbody>
-
+										
 										<c:forEach var="result" items="${itemList1}">
 											<tr>
 												<td>${result.itemNo}</td>
@@ -150,8 +133,6 @@
 													<c:set var="totalAmt"
 														value="${totalAmt + resultAmt.amount}" />
 												</c:forEach>
-
-
 
 											</tr>
 										</c:forEach>
@@ -204,14 +185,13 @@
 
 									</div>
 
-
-
 									<div class="form-row">
 
 										<div class="form-group col-md-4">
 											<label for="exampleInputEmail1">No of Items</label> <input
 												type="number" name="noOfItem" class="form-control"
 												id="noOfItem" aria-describedby="numberlHelp" placeholder="2"
+												value="<c:out value="${total_items}" />"
 												required>
 
 										</div>
@@ -225,17 +205,12 @@
 
 									<%
 										User user = (User) session.getAttribute("user");
-
-										out.print(user.getId());
-										out.print(user.getFname());
 									%>
 
 
 
 									<input type="hidden" id="cashireId" path="cashireId"
 										name="cashireId" value="${user.getId()}">
-
-
 
 									<div style="margin-left: 500px">
 										<button type="submit" class="btn btn-primary">Finalize</button>

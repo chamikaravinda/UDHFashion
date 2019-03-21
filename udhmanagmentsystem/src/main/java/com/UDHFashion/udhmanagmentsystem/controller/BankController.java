@@ -74,7 +74,7 @@ public class BankController {
 			model.setViewName("redirect:/allAccounts");
 			return model;
 		}else {
-			model.addObject("error","Account adding unsuccesfully");
+			redir.addFlashAttribute("error","Account adding unsuccesfully");
 			model.setViewName("redirect:/addBanks");
 			return model;
 		}

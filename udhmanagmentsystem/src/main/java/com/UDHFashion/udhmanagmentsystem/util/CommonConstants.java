@@ -91,9 +91,9 @@ public class CommonConstants {
 
 	public final static String GET_TEMPBILL_BY_NO = "SELECT * FROM temp_bill WHERE id = ?";
 
-	/*---------------------------Temporary Billitems-------------------------------*/
+	/*---------------------------Temporary Bill Items-------------------------------*/
 
-	public final static String INSERT_TEMPBILLITEM_DETAILS = "INSERT INTO temp_bill_items(itemNo,price,qty,billId,reduseDiscount,amount,cashireId)VALUES(?,?,?,?,?,?,?)";
+	public final static String INSERT_TEMPBILLITEM_DETAILS = "INSERT INTO temp_bill_items(itemNo,price,qty,reduseDiscount,amount,cashireId)VALUES(?,?,?,?,?,?)";
 	public final static String GET_ALL_TEMPBILLITEM_DETAILS = "SELECT * FROM temp_bill_items WHERE cashireId=?";
 	public final static String DELETE_TEMPBILLITEM_DETAILS_ID = "DELETE FROM temp_bill_items WHERE cashireId= ?";
 
@@ -105,7 +105,10 @@ public class CommonConstants {
 	public final static String DELETE_BILL_DETAILS_ID = "DELETE FROM bill WHERE cashireId= ?";
 
 	public final static String GET_BILL_BY_NO = "SELECT * FROM bill WHERE id = ?";
-
+	
+	/*-------------------------- Bill items --------------------------------------*/
+	public final static String INSERT_BILL_ITEMS = "INSERT INTO bill_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
+	
 	/*---------------------------Daily Business-----------------------------------*/
 	public final static String INSERT_CRITICAL_SECTION = "INSERT INTO daily_busssiness(id,date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?,?)";
 	public final static String INSERT_DAILY_BUSINESS = "INSERT INTO daily_busssiness(date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?)";
