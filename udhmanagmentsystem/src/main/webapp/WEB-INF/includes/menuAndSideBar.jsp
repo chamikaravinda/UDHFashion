@@ -80,7 +80,7 @@ tr.shown td.details-control {
 
 			<nav class="navbar-custom">
 
-			<ul class="list-inline float-right mb-0">	
+			<ul class="list-inline float-right mb-0">
 				<li class="list-inline-item dropdown notif"><a
 					class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"
 					href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -130,8 +130,8 @@ tr.shown td.details-control {
 			</ul>
 
 			<ul class="list-inline menu-left mb-0">
-				
-				<li class="float-left" style="margin-top:10px">
+
+				<li class="float-left" style="margin-top: 10px">
 					<button class="button-menu-mobile open-left">
 						<i class="fa fa-fw fa-bars"></i>
 					</button>
@@ -213,9 +213,10 @@ tr.shown td.details-control {
 										aria-hidden="true"></i>View Employee</a></li>
 								<li><a href="employeeSalarySheet"><i
 										class="fa fa-sticky-note" aria-hidden="true"></i>Salary Sheets</a></li>
-								<li><a href="advancePay"><i
-										class="fa fa-sticky-note" aria-hidden="true"></i>Advance
-										Payment</a></li>
+								<li><a href="advancePay"><i class="fa fa-sticky-note"
+										aria-hidden="true"></i>Advance Payment</a></li>
+								<li><a href="attendance"><i class="fa fa-sticky-note"
+										aria-hidden="true"></i>Attendance</a></li>
 							</ul></li>
 
 						<!-- Banks-->
