@@ -125,5 +125,28 @@ public class EmployeeController {
 		
 		//update working but sweet alerts not working
 	}
+	
+	
+	//advance payment mapping
+	
+	@RequestMapping(value="/advancePay", method= RequestMethod.GET)
+	public String advancePayment(Model model) {
+		
+		return "employee/advancePayment";
+	}
 
+	
+	//Attendance
+	
+	@RequestMapping(value="/attendance", method= RequestMethod.GET)
+	public ModelAndView attendance(ModelAndView model) {
+		
+
+		List<Employee> employeeList = serviceEmp.getAllEmployeeDetails();
+
+		model.addObject("employeeList", employeeList);
+		model.setViewName("employee/attendance");
+		return model;
+	}
+	
 }

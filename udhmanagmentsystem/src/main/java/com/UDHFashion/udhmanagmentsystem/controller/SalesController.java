@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.UDHFashion.udhmanagmentsystem.model.Bill;
+import com.UDHFashion.udhmanagmentsystem.model.Billitems;
 import com.UDHFashion.udhmanagmentsystem.model.Item;
 import com.UDHFashion.udhmanagmentsystem.model.TempBillitems;
 import com.UDHFashion.udhmanagmentsystem.model.User;
@@ -57,11 +58,14 @@ public class SalesController {
 	}
 
 	@RequestMapping(value = "/finalizeBill", method = RequestMethod.POST)
-	public ModelAndView finalizeBill(@ModelAttribute("permanentBill") Bill bill,ModelAndView model) {
+	public ModelAndView finalizeBill(@ModelAttribute("permanentBill") Bill bill,@ModelAttribute("permanentBillitem") Billitems billitem,  ModelAndView model) {
 
 		System.out.println("Bill Total Amount : "+bill.getNetAmount());
 		System.out.println("CashireID : "+bill.getCashireId());
+		System.out.println("item No : "+billitem.getItemNo());
 		
+		
+	
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String newDate = dateFormat.format(date);
