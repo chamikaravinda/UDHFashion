@@ -116,4 +116,8 @@ public class CommonConstants {
 	public final static String UPDATE_CRITICAL_SECTION = "UPDATE daily_busssiness SET flag = ? WHERE id=1 ";
 	public final static String GET_TODAY_ENTRY = "SELECT * FROM daily_busssiness WHERE date= ?";
 	public final static String UPDATE_TODAT_ENTRY = "UPDATE daily_busssiness SET expenseAmount = ? ,bussinesAmount = ?,returnAmount = ?,netProfite= ? WHERE date = ? ";
+	
+	//Return note Quearys
+	public final static String UPDATE_RETURN_ITEM = "UPDATE item SET quantity = ? WHERE code = ?";
+
 }

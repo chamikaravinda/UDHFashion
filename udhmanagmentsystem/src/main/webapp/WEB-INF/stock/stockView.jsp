@@ -23,11 +23,9 @@
 				<div class="col-md-12">
 					<div class="card mb-3">
 						<div class="col-md-12a">
-							<a href="addStock" class="btn btn-primary" Style="margin: 10px"
-								role="button" aria-pressed="true">Add</a> <a
-								href="barcodeGenerateView" class="btn btn-primary"
-								Style="margin: 10px" role="button" aria-pressed="true">Generate
-								Barcodes</a>
+			<a href="addStock" class="btn btn-primary" Style="margin: 10px" role="button" aria-pressed="true">Add</a> 
+			<a href="return" class="btn btn-primary" Style="margin: 10px" role="button" aria-pressed="true">Return Item</a> 
+			<a href="barcodeGenerateView" class="btn btn-primary" Style="margin: 10px" role="button" aria-pressed="true">Generate Barcodes</a>
 						</div>
 
 

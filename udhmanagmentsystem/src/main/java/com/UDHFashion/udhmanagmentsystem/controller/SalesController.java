@@ -70,6 +70,8 @@ public class SalesController {
 	@RequestMapping(value = "/finalizeBill", method = RequestMethod.POST)
 	public ModelAndView finalizeBill(@ModelAttribute("permanentBill") Bill bill, ModelAndView model,RedirectAttributes redir) {
 
+		
+		Item item1= new Item();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String newDate = dateFormat.format(date);
@@ -88,6 +90,24 @@ public class SalesController {
 				Item billItem = serviceItem.getItemById(item.getItemNo());
 				dailyNetProfite += (billItem.getNetProfit() * item.getQty());
 
+				System.out.println("Item number"+item.getItemNo());
+				System.out.println("Item quntity:"+ item.getQty());
+				int itemQty= item.getQty();
+				String itemCode=item.getItemNo();
+				
+				item1=serviceItem.getItemByCode(itemCode);
+				
+				int updateQuantityvalue = item1.getItemQuantity() - item.getQty();
+				
+				item1.setItemQuantity(updateQuantityvalue);
+				serviceItem.updateReturnItem(item1);
+				
+				
+				
+			
+				
+				//serviceItem.updateItemDetails(item);
+				
 			}
 
 			if (serviceBillItem.insertBillItems(billItems)) {
