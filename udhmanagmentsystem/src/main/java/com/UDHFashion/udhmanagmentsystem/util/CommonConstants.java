@@ -105,10 +105,10 @@ public class CommonConstants {
 	public final static String DELETE_BILL_DETAILS_ID = "DELETE FROM bill WHERE cashireId= ?";
 
 	public final static String GET_BILL_BY_NO = "SELECT * FROM bill WHERE id = ?";
-	
+
 	/*-------------------------- Bill items --------------------------------------*/
 	public final static String INSERT_BILL_ITEMS = "INSERT INTO bill_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
-	
+
 	/*---------------------------Daily Business-----------------------------------*/
 	public final static String INSERT_CRITICAL_SECTION = "INSERT INTO daily_busssiness(id,date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?,?)";
 	public final static String INSERT_DAILY_BUSINESS = "INSERT INTO daily_busssiness(date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?)";
@@ -116,7 +116,22 @@ public class CommonConstants {
 	public final static String UPDATE_CRITICAL_SECTION = "UPDATE daily_busssiness SET flag = ? WHERE id=1 ";
 	public final static String GET_TODAY_ENTRY = "SELECT * FROM daily_busssiness WHERE date= ?";
 	public final static String UPDATE_TODAT_ENTRY = "UPDATE daily_busssiness SET expenseAmount = ? ,bussinesAmount = ?,returnAmount = ?,netProfite= ? WHERE date = ? ";
+
+	/*--------------------------- Attendance -----------------------------------*/
+
+	public final static String GET_TODAY_ATTENDENCE = "SELECT * FROM attendence WHERE date = ?";
+	public final static String GET_TODAY_ATTENDENCE_LIST = "SELECT * FROM attendence_list WHERE date = ?";
+	public final static String GET_TODAY_EMP_ATTENDENCE_LIST = "SELECT * FROM attendence_list WHERE id = ?";
+	public final static String INSERT_DAILY_ATTENDENCE = "INSERT INTO attendence(date,present,absent) VALUES(?,?,?)";
+	public final static String INSERT_EMP_ATTENDENCE = "INSERT INTO attendence_list(date,empNo,attendence_ID,status,reason) VALUES(?,?,?,?,?)";
+	public final static String UPDATE_EMP_ATTENDENCE = "UPDATE attendence_list SET date =?,empNo=?,attendence_ID=?,status=?,reason=?  WHERE id=? ";
+	public final static String UPDATE_DAILY_ATTENDENCE = "UPDATE attendence SET date =?,present=?,absent=? WHERE id=?";
 	
+	/*-------------------------- Salary ---------------------------------------*/
+	public final static String INSERT_EMP_SALARY = "INSERT INTO salary (empNo,empName,absent,present,totalBussines,monthlyBasic,basicSalary,bonus,TotalSalray ) VALUES(?,?,?,?,?,?,?,?,?) ";
+	public final static String UPDATE_EMP_SALARY = "UPDATE salary set empNo=?,empName=?,absent=?,present=?,totalBussines=?,monthlyBasic=?,basicSalary=?,bonus=?,TotalSalray=? WHERE id=?";
+	public final static String GET_EMP_SALARY  = "SELECT * FROM salary WHERE empNo=?";
+
 	//Return note Quearys
 	public final static String UPDATE_RETURN_ITEM = "UPDATE item SET quantity = ? WHERE code = ?";
 

@@ -27,17 +27,27 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public boolean insertEmployeeDetails(Employee employee) {
+	public int insertEmployeeDetails(Employee employee) {
 
-		int insertEmployee = jdbcTemplate.update(CommonConstants.INSERT_EMPLOYEE_DETAILS, employee.getEmpNo(),
-				employee.getEmpName(), employee.getEmpAddress(), employee.getBasicSalary(), employee.getJobDate(),
-				employee.getContactNum(), employee.getContactNum());
+		try {
+			Employee validateEmp = (Employee) jdbcTemplate.queryForObject(CommonConstants.GET_EMPLOYEE_BY_NO,
+					new Object[] { employee.getEmpNo() }, new BeanPropertyRowMapper(Employee.class));
 
-		if (insertEmployee == 1) {
-			return true;
-		} else {
-			return false;
+			if (validateEmp != null) {
+				return 2;
+			}
+		} catch (EmptyResultDataAccessException e) {
+
+			int insertEmployee = jdbcTemplate.update(CommonConstants.INSERT_EMPLOYEE_DETAILS, employee.getEmpNo(),
+					employee.getEmpName(), employee.getEmpAddress(), employee.getBasicSalary(), employee.getJobDate(),
+					employee.getContactNum(), employee.getContactNum());
+			if (insertEmployee == 1) {
+				return 1;
+			} else {
+				return 3;
+			}
 		}
+		return 0;
 	}
 
 	@Override

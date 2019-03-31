@@ -34,14 +34,19 @@ public class EmployeeController {
 	@RequestMapping(value = "/submitEmployee", method = RequestMethod.POST)
 	public ModelAndView submitEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model,
 			RedirectAttributes redir) {
-
-		if (serviceEmp.insertEmployeeDetails(employee)) {
+		
+		int result =serviceEmp.insertEmployeeDetails(employee);
+		if (result ==1) {
 			redir.addFlashAttribute("success", 1);
 			model.setViewName("redirect:/viewEmployee");
 			return model;
-		} else {
-
-			model.addObject("error", "Employee adding unsuccesfully");
+		}
+		else if(result == 2){
+			model.addObject("error",2);
+			model.setViewName("redirect:/addEmployee");
+			return model;
+		}else {
+			model.addObject("error",1);
 			model.setViewName("redirect:/addEmployee");
 			return model;
 		}
@@ -134,16 +139,5 @@ public class EmployeeController {
 	}
 
 	
-	//Attendance
-	
-	@RequestMapping(value="/attendance", method= RequestMethod.GET)
-	public ModelAndView attendance(ModelAndView model) {
-		
-		List<Employee> employeeList = serviceEmp.getAllEmployeeDetails();
-
-		model.addObject("employeeList", employeeList);
-		model.setViewName("employee/attendance");
-		return model;
-	}
 	
 }
