@@ -40,6 +40,31 @@
 <body>
 
 
+<!-- Add employee unsuccess message -->
+<script type="text/javascript">
+	function unsuccesfull() {
+		swal("Employee Adding Unsuccesfull");
+	}
+</script>
+
+<c:if test="${error == 1}">
+	<script type="text/javascript">
+		window.onload =unsuccesfull;
+	</script>
+</c:if>
+
+<!-- employee number exsists message -->
+<script type="text/javascript">
+	function EmpNumberTaken() {
+		swal("Employee Number Already taken");
+	}
+</script>
+
+<c:if test="${error == 2}">
+	<script type="text/javascript">
+		window.onload =EmpNumberTaken;
+	</script>
+</c:if>
 
 	<div class="content-page">
 
@@ -47,7 +72,6 @@
 		<div class="content">
 
 			<div class="container-fluid">
-
 
 				<div class="row">
 					<div class="col-xl-12">
@@ -95,7 +119,7 @@
 										<div class="form-group col-md-4">
 											<label for="exampleInputPassword1">Address</label> <input
 												type="text" name="empAddress" class="form-control"
-												id="empAddress" placeholder="empAddress" required>
+												id="empAddress" placeholder="Address" required>
 										</div>
 										<div class="form-group col-md-4">
 											<label for="exampleInputEmail1">Basic Salary</label> <input
@@ -117,7 +141,7 @@
 										<div class="form-group col-md-4">
 											<label for="exampleInputPassword1">Telephone</label> <input
 												type="number" name="contactNum" class="form-control"
-												id="contactNum" placeholder="Guardian Telephone" required>
+												id="contactNum" placeholder="Telephone" required>
 										</div>
 										<div class="form-group col-md-4">
 											<label for="exampleInputPassword1">Guardian Telephone</label>

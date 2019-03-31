@@ -278,3 +278,44 @@ CREATE TABLE bank_withdraws
 	CONSTRAINT withdraws_pk PRIMARY KEY (id),
 	CONSTRAINT withdraws_fk FOREIGN KEY(account) REFERENCES bank_accounts(id) ON DELETE CASCADE
 );
+
+CREATE TABLE attendence
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	date DATE,
+	present INT,
+	absent INT,
+	
+	CONSTRAINT attendence_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE attendence_list
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	date DATE,
+	empNo VARCHAR(255),
+	attendence_ID INT,
+	status VARCHAR(255),
+	reason VARCHAR(255),
+	
+	CONSTRAINT attendence_list_pk PRIMARY KEY (id),
+	CONSTRAINT attendence_list_fk FOREIGN KEY(attendence_ID) REFERENCES attendence(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE salary
+(
+	id INT AUTO_INCREMENT NOT NULL,
+    empNo VARCHAR(20),
+    empName VARCHAR(50),
+	absent INT,
+	present INT,
+	totalBussines DOUBLE,
+	monthlyBasic DOUBLE,
+	basicSalary DOUBLE,
+	bonus DOUBLE,
+	TotalSalray DOUBLE,
+	
+	CONSTRAINT salary_pk PRIMARY KEY (id)
+
+);

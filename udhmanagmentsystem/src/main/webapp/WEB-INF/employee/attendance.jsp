@@ -1,7 +1,9 @@
 
 <%@page import="org.springframework.beans.factory.annotation.Autowired"%>
 <%@ include file="../includes/menuAndSideBar.jsp"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.UDHFashion.udhmanagmentsystem.service.IShopDAO"%>
@@ -16,7 +18,7 @@
 <!-- added success message -->
 <script type="text/javascript">
 	function addedsuccesfully() {
-		swal("Employee Added Succesfully");
+		swal("Attendence Added Succesfully");
 	}
 </script>
 
@@ -26,10 +28,24 @@
 	</script>
 </c:if>
 
+<!-- added unsuccess message -->
+<script type="text/javascript">
+	function addedunsuccesfull() {
+		swal("Attendence Adding Unsuccesful");
+	}
+</script>
+
+<c:if test="${unsuccess == 1}">
+	<script type="text/javascript">
+		window.onload = addedunsuccesfull;
+	</script>
+</c:if>
+
+
 <!-- update success message -->
 <script type="text/javascript">
 	function updatesuccesfully() {
-		swal("Employee updated Succesfully");
+		swal("Attendence updated Succesfully");
 	}
 </script>
 
@@ -70,7 +86,14 @@
 	<div class="content">
 
 		<div class="container-fluid">
-
+			<div class="breadcrumb-holder">
+				<h1 class="main-title float-left">Today's Attendance</h1>
+				<ol class="breadcrumb float-right">
+					<li class="breadcrumb-item">Home</li>
+					<li class="breadcrumb-item active">Attendance</li>
+				</ol>
+				<div class="clearfix"></div>
+			</div>
 			<div class="row">
 
 				<div class="col-md-12">
@@ -79,7 +102,7 @@
 
 						<div class="card-body">
 							<div class="table-responsive">
-								<form>
+								<form:form method="post" action="saveattendance" modelAttribute="attendenceForm" >
 									<table id="example1"
 										class="table table-bordered table-hover display">
 										<thead>
@@ -95,24 +118,27 @@
 										</thead>
 										<tbody>
 
-											<c:forEach var="result" items="${employeeList}">
+											<c:forEach items="${attendenceForm.attendence}" var="attend" varStatus="status">
 												<tr>
-													<td>${result.empNo}</td>
-													<td>${result.empName}</td>
-													<td><select name="attendance" id="attendance"
-														onchange="showfield(this.options[this.selectedIndex].value)">
-															<option value="1" selected="selected">Present</option>
-															<option value="2">Absant</option>
+													<td>${attend.empNo}</td>
+													<td>${attend.empName}</td>
+													<td><select name="attendence[${status.index}].status" id="attendance" class="form-control">
+															<option value="PRESENT" <c:if test="${attend.status == 'PRESENT' }"> selected="selected" </c:if>> Present</option>
+															<option value="ABSENT"  <c:if test="${attend.status== 'ABSENT' }"> selected="selected" </c:if>> Absent</option>
 
 													</select>
 														<div id="div1"></div></td>
 
-													<td><input type="text" name="reason"
+													<td><input type="text" name="attendence[${status.index}].Reason"
 														class="form-control" id="reason"
-														placeholder="Reason for absant" required></td>
-
-
-
+														placeholder="Reason for absent" value ="${attend.reason}"></td>
+														
+														<input type="hidden" name="attendence[${status.index}].id" value="${attend.id}">
+														<input type="hidden" name="attendence[${status.index}].empNo" value="${attend.empNo}">
+														<input type="hidden" name="attendence[${status.index}].empName" value="${attend.empName}">
+														<input type="hidden" name="attendence[${status.index}].attendence_ID" value="${attend.attendence_ID}">
+														<input type="hidden" name="attendence[${status.index}].date" value="${attend.date}">
+														
 												</tr>
 											</c:forEach>
 
@@ -124,14 +150,13 @@
 
 									<div>
 
-										<button class="btn btn-primary" style="margin-left:700px">
-											<span class="spinner-border spinner-border-sm"></span>
-											Submit
+										<button class="btn btn-primary" style="margin-left: 700px">
+											<span class="spinner-border spinner-border-sm"></span> Submit
 										</button>
 									</div>
 
 
-								</form>
+								</form:form>
 
 							</div>
 						</div>
