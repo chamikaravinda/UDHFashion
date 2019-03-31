@@ -131,6 +131,8 @@ public class CommonConstants {
 	public final static String INSERT_EMP_SALARY = "INSERT INTO salary (empNo,empName,absent,present,totalBussines,monthlyBasic,basicSalary,bonus,TotalSalray ) VALUES(?,?,?,?,?,?,?,?,?) ";
 	public final static String UPDATE_EMP_SALARY = "UPDATE salary set empNo=?,empName=?,absent=?,present=?,totalBussines=?,monthlyBasic=?,basicSalary=?,bonus=?,TotalSalray=? WHERE id=?";
 	public final static String GET_EMP_SALARY  = "SELECT * FROM salary WHERE empNo=?";
-	
-		
+
+	//Return note Quearys
+	public final static String UPDATE_RETURN_ITEM = "UPDATE item SET quantity = ? WHERE code = ?";
+
 }

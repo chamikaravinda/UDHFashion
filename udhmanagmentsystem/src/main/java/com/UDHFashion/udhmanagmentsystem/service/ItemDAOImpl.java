@@ -20,14 +20,14 @@ import com.UDHFashion.udhmanagmentsystem.util.Generator;
 public class ItemDAOImpl implements IItemDAO {
 
 	private static DecimalFormat df2 = new DecimalFormat(".##");
-	
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public void insertStockDetails(Item item) {
 
-		System.out.println("item desc : " + item.getItemDescription() );
+		System.out.println("item desc : " + item.getItemDescription());
 		// get the ID
 		String itemCode = getNextItemCode(item.getPrice(), item.getShopId());
 
@@ -36,14 +36,13 @@ public class ItemDAOImpl implements IItemDAO {
 		double estimatedNetProfit = calculateEstimatedNetProfit(netProfit, item.getItemQuantity());
 
 		double priceRoundOff = Math.round(item.getPrice() * 100.0) / 100.0;
-		
+
 		System.out.println("Item Code : " + itemCode);
 
-		int update = jdbcTemplate.update(CommonConstants.INSERT_STOCK_DETAILS, itemCode, item.getItemQuantity(), item.getItemDescription(),
-				item.getGrossPrice(), df2.format(netPrice), df2.format(priceRoundOff), item.getDiscount(), df2.format(estimatedNetProfit), df2.format(netProfit),
-				item.getShopId());
+		int update = jdbcTemplate.update(CommonConstants.INSERT_STOCK_DETAILS, itemCode, item.getItemQuantity(),
+				item.getItemDescription(), item.getGrossPrice(), df2.format(netPrice), df2.format(priceRoundOff),
+				item.getDiscount(), df2.format(estimatedNetProfit), df2.format(netProfit), item.getShopId());
 
-		
 		if (update == 1) {
 			System.out.println("Stock Details added to the database");
 		}
@@ -65,16 +64,15 @@ public class ItemDAOImpl implements IItemDAO {
 
 		String query = "SELECT code FROM item WHERE code LIKE 'I" + Integer.toString(shopId) + "%%"
 				+ Integer.toString(intPrice) + "'";
-		
-		System.out.println("Query befor : " + query );
-		
+
+		System.out.println("Query befor : " + query);
+
 		List<Map<String, Object>> rows = jdbcTemplate.queryForList(query);
 
 		if (rows.isEmpty()) {
 			if (intPrice == 0) { // check whether the price stripped value is 0
 
 				return "I" + shopId + "100" + "00";
-
 
 			} else {
 
@@ -149,64 +147,65 @@ public class ItemDAOImpl implements IItemDAO {
 
 	@Override
 	public Item getItemById(String id) {
-		
-		return (Item)jdbcTemplate.queryForObject(CommonConstants.GET_ITEM_BY_ID, new Object[]{id}, new RowMapper<Item>(){
-		
-			@Override
-			public Item mapRow(ResultSet rs, int rwNumber) throws SQLException {
-				Item item = new Item();
-				item.setItemCode(rs.getString("code"));
-				item.setItemDescription(rs.getString("description"));
-				item.setItemQuantity(rs.getInt("quantity"));
-				item.setGrossPrice(rs.getDouble("gross_price"));
-				item.setNetPrice(rs.getDouble("net_price"));
-				item.setPrice(rs.getDouble("price"));
-				item.setShopId(rs.getInt("shop_id"));
-				item.setDiscount(rs.getInt("discount_amount"));
-				item.setPrice(Double.parseDouble(rs.getString("price")));
-				item.setNetProfit(rs.getDouble("net_profit"));				
-				return item;
-			}
-		});
-		
+
+		return (Item) jdbcTemplate.queryForObject(CommonConstants.GET_ITEM_BY_ID, new Object[] { id },
+				new RowMapper<Item>() {
+
+					@Override
+					public Item mapRow(ResultSet rs, int rwNumber) throws SQLException {
+						Item item = new Item();
+						item.setItemCode(rs.getString("code"));
+						item.setItemDescription(rs.getString("description"));
+						item.setItemQuantity(rs.getInt("quantity"));
+						item.setGrossPrice(rs.getDouble("gross_price"));
+						item.setNetPrice(rs.getDouble("net_price"));
+						item.setPrice(rs.getDouble("price"));
+						item.setShopId(rs.getInt("shop_id"));
+						item.setDiscount(rs.getInt("discount_amount"));
+						item.setPrice(Double.parseDouble(rs.getString("price")));
+						item.setNetProfit(rs.getDouble("net_profit"));
+						return item;
+					}
+				});
+
 	}
 
 	@Override
 	public void deleteItem(String itemCode) {
-	
-		int update = jdbcTemplate.update(CommonConstants.DELETE_ITEM_DETAILS, itemCode );
-		
-		if( update == 1 ) {
+
+		int update = jdbcTemplate.update(CommonConstants.DELETE_ITEM_DETAILS, itemCode);
+
+		if (update == 1) {
 			System.out.println("Item detail deleted ! ");
 		}
-		
+
 	}
 
 	@Override
 	public boolean isItemRecorded(String itemCode) {
-		
-		List<Map<String,Object>> rows = jdbcTemplate.queryForList(CommonConstants.GET_ITEM_DATA_BY_ID, itemCode);
-		
+
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.GET_ITEM_DATA_BY_ID, itemCode);
+
 		List<Item> result = new ArrayList<Item>();
-		
+
 		Item item = new Item();
-		
-		for( Map<String,Object> row : rows ) {
-			
-			item.setItemCode((String)row.get("code"));
+
+		for (Map<String, Object> row : rows) {
+
+			item.setItemCode((String) row.get("code"));
 			result.add(item);
 		}
-		
-		if( result.size() == 0 ) {
+
+		if (result.size() == 0) {
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}
 
 	@Override
 	public void updateItemDetails(Item item) {
-		
+
 		double netPrice = calculateNetPrice(item.getPrice(), item.getDiscount());
 		double netProfit = calculateNetProfit(item.getGrossPrice(), netPrice);
 		double estimatedNetProfit = calculateEstimatedNetProfit(netProfit, item.getItemQuantity());
@@ -214,19 +213,66 @@ public class ItemDAOImpl implements IItemDAO {
 		netPrice = Math.round(netPrice * 100.0) / 100.0;
 		netProfit = Math.round(netProfit * 100.0) / 100.0;
 		estimatedNetProfit = Math.round(estimatedNetProfit * 100.0) / 100.0;
-		
+
 		double priceRoundOff = Math.round(item.getPrice() * 100.0) / 100.0;
-		
-		
-		int update = jdbcTemplate.update(CommonConstants.UPDATE_ITEM_DATA, item.getItemQuantity(), item.getItemDescription(),
-				item.getGrossPrice(), df2.format(netPrice), df2.format(priceRoundOff), item.getDiscount(), df2.format(estimatedNetProfit), df2.format(netProfit),
-				item.getShopId(), item.getItemCode());
-	
+
+		int update = jdbcTemplate.update(CommonConstants.UPDATE_ITEM_DATA, item.getItemQuantity(),
+				item.getItemDescription(), item.getGrossPrice(), df2.format(netPrice), df2.format(priceRoundOff),
+				item.getDiscount(), df2.format(estimatedNetProfit), df2.format(netProfit), item.getShopId(),
+				item.getItemCode());
+
 		System.out.println("Updated : " + item.getItemCode());
-		
-		if( update == 1 ) {
+
+		if (update == 1) {
 			System.out.println("Item Updated successfully ");
 		}
 	}
 
+	@Override
+	public boolean updateReturnItem(Item item) {
+
+		try {
+
+			int updateReturnItem = jdbcTemplate.update(CommonConstants.UPDATE_RETURN_ITEM,
+
+					item.getItemQuantity(), 
+					item.getItemCode());
+
+			if (updateReturnItem == 2) {
+
+				return true;
+
+			} else {
+				return false;
+			}
+
+		} finally {
+
+		}
+	}
+
+	@Override
+	public Item getItemByCode(String itemCode) {
+		
+		return (Item) jdbcTemplate.queryForObject(CommonConstants.GET_ITEM_BY_ID, new Object[] { itemCode },
+				new RowMapper<Item>() {
+
+					@Override
+					public Item mapRow(ResultSet rs, int rwNumber) throws SQLException {
+						Item itemdb = new Item();
+						itemdb.setItemCode(rs.getString("code"));
+						itemdb.setItemDescription(rs.getString("description"));
+						itemdb.setItemQuantity(rs.getInt("quantity"));
+						itemdb.setGrossPrice(rs.getDouble("gross_price"));
+						itemdb.setNetPrice(rs.getDouble("net_price"));
+						itemdb.setPrice(rs.getDouble("price"));
+						itemdb.setShopId(rs.getInt("shop_id"));
+						itemdb.setDiscount(rs.getInt("discount_amount"));
+						itemdb.setPrice(Double.parseDouble(rs.getString("price")));
+						itemdb.setNetProfit(rs.getDouble("net_profit"));
+						
+						return itemdb;
+					}
+				});
+	}
 }
