@@ -108,6 +108,8 @@ public class CommonConstants {
 
 	/*-------------------------- Bill items --------------------------------------*/
 	public final static String INSERT_BILL_ITEMS = "INSERT INTO bill_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
+	public final static String GET_BILLITEM_DETAILS = "SELECT * FROM bill_items WHERE billId=?";
+	
 
 	/*---------------------------Daily Business-----------------------------------*/
 	public final static String INSERT_CRITICAL_SECTION = "INSERT INTO daily_busssiness(id,date,expenseAmount,bussinesAmount,returnAmount,netProfite,flag ) VALUES(?,?,?,?,?,?,?)";

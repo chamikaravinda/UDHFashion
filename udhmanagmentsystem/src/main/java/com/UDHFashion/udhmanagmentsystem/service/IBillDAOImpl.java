@@ -1,16 +1,20 @@
 package com.UDHFashion.udhmanagmentsystem.service;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 import com.UDHFashion.udhmanagmentsystem.model.Bill;
+import com.UDHFashion.udhmanagmentsystem.model.Item;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 import com.mysql.jdbc.Statement;
 
@@ -26,7 +30,8 @@ public class IBillDAOImpl implements BillDAO {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
 		jdbcTemplate.update(connection -> {
-			PreparedStatement ps = connection.prepareStatement(CommonConstants.INSERT_BILL_DETAILS, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = connection.prepareStatement(CommonConstants.INSERT_BILL_DETAILS,
+					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, bill.getDate());
 			ps.setInt(2, bill.getCashireId());
 			ps.setDouble(3, bill.getGrossAmount());
@@ -76,7 +81,26 @@ public class IBillDAOImpl implements BillDAO {
 	@Override
 	public Bill getBillById(int id) {
 
-		return null;
+		return (Bill) jdbcTemplate.queryForObject(CommonConstants.GET_BILL_BY_NO, new Object[] { id },
+				new RowMapper<Bill>() {
+
+					@Override
+					public Bill mapRow(ResultSet rs, int rwNumber) throws SQLException {
+						Bill bill = new Bill();
+
+						bill.setId(rs.getInt("id"));
+						bill.setDate(rs.getString("date"));
+						bill.setCashireId(rs.getInt("cashireId"));
+						bill.setGrossAmount(rs.getDouble("grossAmount"));
+						bill.setNetAmount(rs.getDouble("netAmount"));
+						bill.setTotalDiscount(rs.getDouble("totalDiscount"));
+						bill.setBalance(rs.getDouble("balance"));
+						bill.setNoOfItem(rs.getInt("noOfItem"));
+
+						return bill;
+					}
+				});
+
 	}
 
 }

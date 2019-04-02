@@ -19,8 +19,6 @@ import com.UDHFashion.udhmanagmentsystem.service.IItemDAO;
 import com.UDHFashion.udhmanagmentsystem.service.IShopDAO;
 import com.UDHFashion.udhmanagmentsystem.util.Generator;
 
-import net.bytebuddy.matcher.ModifierMatcher.Mode;
-
 @Controller
 public class StockController {
 
@@ -37,21 +35,7 @@ public class StockController {
 	// in here you have to create a new sevice class that have two params such that
 	// int amount and String itemNo
 
-	
-	@RequestMapping(value="/returnNote", method=RequestMethod.GET)
-	public String returnNote(Model model) {
-		
-		
-		return "stock/returnNote";
-	}
-	@RequestMapping(value = "/return", method = RequestMethod.GET)
-	public String returnItemView(Model model) {
 
-		List<Item> item = iItem.getAllItemDetails();
-		model.addAttribute("itemList", item);
-
-		return "stock/returnItem";
-	}
 
 	@RequestMapping(value = "/returnItem", method = RequestMethod.POST)
 	public ModelAndView returnItem(@ModelAttribute("Item") Item item, ModelAndView model) {
@@ -72,7 +56,7 @@ public class StockController {
 
 		model.setViewName("redirect:/stockView");
 		return model;
-	
+
 	}
 
 	/*---------------------change to barcode generating view-----------------*/

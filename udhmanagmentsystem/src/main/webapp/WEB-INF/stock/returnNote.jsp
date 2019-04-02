@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../includes/menuAndSideBar.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <script>
@@ -31,73 +32,191 @@
 				<div class="col-xl-12">
 					<div class="breadcrumb-holder">
 						<h1 class="main-title float-left">Return Note</h1>
-						
+
 						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
 			<!-- end row -->
 
-			
-									
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-				<div class="card mb-3">
+			<div class="row">
+				<!-- To divide the page in two forms -->
+				<div class="col-md-6">
+					<div class="card mb-3">
 
 
-					<div class="card-body">
-
-						<form action=""></form>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Bill Number</label> <input
-								type="email" class="form-control" id="exampleInputEmail1"
-								aria-describedby="emailHelp" placeholder="Enter Bill Number"
-								required>
-							<button type="submit" class="btn btn-primary">Search</button>
-						</div>
-
-						<form>
-							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-								<div class="card mb-3">
-
-
-									<div class="card-body">
-
-										<table class="table table-responsive-xl table-bordered">
-											<thead>
-												<tr>
-													<th scope="col">#</th>
-													<th scope="col">Item Number</th>
-													<th scope="col">Quantity</th>
-													<th scope="col">add to return Note</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<th scope="row">1</th>
-													<td>Mark</td>
-													<td>Otto</td>
-													<td>@mdo</td>
-												</tr>
-
-											</tbody>
-										</table>
-
+						<div class="card-body">
+							<form method="POST" action="billSearch">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Bill Number</label> <input
+										type="number" class="form-control" id="billNumber"
+										name="billId" aria-describedby="emailHelp"
+										placeholder="Enter Bill Number" required>
+									<div style="margin: 10px;">
+										<button type="submit" class="btn btn-primary">Search</button>
 									</div>
+
 								</div>
-								<!-- end card-->
+
+							</form>
+
+							<!-- Start to show the details about Bill  -->
+
+
+							<div class="row">
+
+								<div class=" col-md-12">
+									<div class="card mb-3">
+
+										<div class="card-body">
+
+
+
+											<div class="row">
+
+												<table class="table table-borderless">
+
+												
+														<tr>
+															<td> <p> Bill ID : ${billSearch.id} </p></td>
+															<td> <p> Bill Date : ${billSearch.date} </p></td>
+															<td> <p> Cashier ID : ${billSearch.cashireId} </p></td>
+															
+															
+														</tr>
+
+
+														<tr>
+															<td>
+																 <p>Gross Amount: ${billSearch.grossAmount}</p>
+															</td>
+															<td>
+																<p>Net Amount : ${billSearch.netAmount}</p>
+
+															</td>
+															<td>
+																<p>Total Discount : ${billSearch.totalDiscount}</p>
+
+
+															</td>
+														</tr>
+
+													
+												</table>
+
+											</div>
+
+										</div>
+									</div>
+									<!-- end card-->
+								</div>
 							</div>
 
-						</form>
 
+							<!--  End the Details about of the Bill -->
+							<form>
+								<div class="col-12">
+									<div class="card mb-3">
+
+
+										<div class="card-body">
+											<table class="table table-responsive-xl table-bordered">
+												<thead>
+
+													<tr>
+
+														<th scope="col">Item Number</th>
+														<th scope="col">Quantity</th>
+														<th scope="col">Amount</th>
+														<th scope="col">Return</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach var="result" items="${bill_item}">
+														<tr>
+
+															<td>${result.itemNo}</td>
+															<td>${result.qty}</td>
+															<td>${result.amount}</td>
+															<td><button type="submit" class="btn btn-primary">Return</button></td>
+														</tr>
+
+
+
+													</c:forEach>
+												</tbody>
+
+											</table>
+
+
+										</div>
+									</div>
+									<!-- end card-->
+								</div>
+
+							</form>
+
+						</div>
 					</div>
 				</div>
-				<!-- end card-->
+
+				<!--  End the Table -->
+
+				<!-- Start the  Return  Note  -->
+
+				<form method="POST" action="returnNote">
+
+					<div class="col-12" style="margin: 60px">
+						<div class="card mb-3">
+
+
+							<div class="card-body">
+								<table class="table table-responsive-xl table-bordered">
+									<thead>
+										<tr>
+
+											<th scope="col">Item Number</th>
+											<th scope="col">Quantity</th>
+											<th scope="col">Amount</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+
+											<td>I210050</td>
+											<td>1</td>
+											<td>4500</td>
+
+										</tr>
+										<tr>
+
+											<td>I210150</td>
+											<td>1</td>
+											<td>2300</td>
+
+										</tr>
+
+
+									</tbody>
+								</table>
+								<div style="margin-left: 150px">
+									<button type="submit" class="btn btn-primary">Print
+										Note</button>
+								</div>
+
+
+
+
+
+							</div>
+						</div>
+					</div>
+
+				</form>
+
+				<!--End Return Note Table -->
 			</div>
-				<!-- end card-->
-			</div>
-
-
-
 
 		</div>
 		<!-- END container-fluid -->
