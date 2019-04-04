@@ -145,4 +145,26 @@ public class CommonConstants {
   
 	/*-------------------------- Return note Quearys ---------------------------------------*/
 	public final static String UPDATE_RETURN_ITEM = "UPDATE item SET quantity = ? WHERE code = ?";
+  
+  /*-------------PritnNoteReturnItems---------------------------------*/
+	
+	public final static String INSERT_PRINT_RETURN_BILL_ITEM_DETAILS = "INSERT INTO  print_note_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
+	public final static String GET_PRINT_RETURN_BILL_ITEM_DETAILS = "SELECT * FROM  print_note_items ";
+	
+	public final static String DELETE_PRINT_RETURN_BILL_ITEM_DETAILS="DELETE FROM  print_note_items";
+	
 }
+
+/*---------------------------Temporary return Bill-------------------------------*/
+	public final static String INSERT_TEMP_RETURN_BILL_DETAILS = "INSERT INTO temp_return_bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem) VALUES(?,?,?,?,?,?,?)";
+	public final static String GET_ALL_TEMP_RETURN_BILL_DETAILS = "SELECT * FROM temp_return_bill where cashireId=?";
+	public final static String DELETE_TEMP_RETURN_BILL_DETAILS_ID = "DELETE FROM temp_return_bill WHERE cashireId= ?";
+
+	/*---------------------------Temporary Return Bill Items-------------------------------*/
+	
+	
+	public final static String INSERT_TEMP_RETURN_BILL_ITEM_DETAILS = "INSERT INTO temp_return_bill_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
+	public final static String GET_TEMP_RETURN_BILL_ITEM_DETAILS = "SELECT * FROM temp_return_bill_items WHERE billId=?";
+	
+	public final static String DELETE_TEMP_RETURN_BILL_ITEM_DETAILS="DELETE FROM temp_return_bill_items WHERE itemNo= ?";
+
