@@ -212,11 +212,14 @@ tr.shown td.details-control {
 								<li><a href="viewEmployee"><i class="fa fa-user"
 										aria-hidden="true"></i>All Employee</a></li>
 								<li><a href="employeeSalarySheet"><i
-										class="fa fa-sticky-note" aria-hidden="true"></i>Salary Sheets</a></li>
-								<li><a href="advancePay"><i class="fa fa-sticky-note"
+										class="fa fa-money" aria-hidden="true"></i>Salary Payments</a></li>
+								<li><a href="advancePay"><i class="fa fa-ticket"
 										aria-hidden="true"></i>Advance Payment</a></li>
 								<li><a href="attendance"><i class="fa fa-list-alt"
 										aria-hidden="true"></i>Attendance</a></li>
+								<li><a href="employeePaidSalarySheet"><i class="fa fa-check" aria-hidden="true"></i>Paid Salaries</a></li>
+
+
 							</ul></li>
 
 						<!-- Banks-->

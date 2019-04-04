@@ -47,7 +47,11 @@ public class CommonConstants {
 
 	/*---------------------------User queries-------------------------------*/
 	public final static String GET_USER_IS_VALID = "SELECT * FROM users WHERE username = ? AND password = ?";
-
+	public final static String INSERT_USER = "INSERT INTO users (fname,lname,username ,password,role) VALUES(?,?,?,?,?)";
+	public final static String UPDATE_USER = "UPDATE  users SET fname=?,lname=?,username=? ,password=?,role=? WHERE id = ?";
+	public final static String DELETE_USER = "DELETE FROM users WHERE id = ?";
+	public final static String GET_USERS   = "SELECT * FROM users";
+	
 	/*---------------------------Bank queries-------------------------------*/
 	public final static String INSERT_BANK_DETAILS = "INSERT INTO bank_accounts(bank_name,account_number,account_type,current_balance) VALUES(?,?,?,?)";
 	public final static String GET_ALL_BANK_ACCOUNT_DETAILS = "SELECT * FROM bank_accounts";
@@ -85,26 +89,12 @@ public class CommonConstants {
 	/*---------------------------All SQL about Sales-------------------------------::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::;*/
 
 	/*---------------------------Temporary Bill-------------------------------*/
-	public final static String INSERT_TEMPBILL_DETAILS = "INSERT INTO temp_bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem) VALUES(?,?,?,?,?,?,?)";
+	public final static String INSERT_TEMPBILL_DETAILS = "INSERT INTO temp_bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance) VALUES(?,?,?,?,?,?)";
 	public final static String GET_ALL_TEMPBILL_DETAILS = "SELECT * FROM temp_bill where cashireId=?";
 	public final static String DELETE_TEMPBILL_DETAILS_ID = "DELETE FROM temp_bill WHERE cashireId= ?";
 
 	public final static String GET_TEMPBILL_BY_NO = "SELECT * FROM temp_bill WHERE id = ?";
-	
-	/*---------------------------Temporary return Bill-------------------------------*/
-	public final static String INSERT_TEMP_RETURN_BILL_DETAILS = "INSERT INTO temp_return_bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem) VALUES(?,?,?,?,?,?,?)";
-	public final static String GET_ALL_TEMP_RETURN_BILL_DETAILS = "SELECT * FROM temp_return_bill where cashireId=?";
-	public final static String DELETE_TEMP_RETURN_BILL_DETAILS_ID = "DELETE FROM temp_return_bill WHERE cashireId= ?";
 
-	/*---------------------------Temporary Return Bill Items-------------------------------*/
-	
-	
-	public final static String INSERT_TEMP_RETURN_BILL_ITEM_DETAILS = "INSERT INTO temp_return_bill_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
-	public final static String GET_TEMP_RETURN_BILL_ITEM_DETAILS = "SELECT * FROM temp_return_bill_items WHERE billId=?";
-	
-	public final static String DELETE_TEMP_RETURN_BILL_ITEM_DETAILS="DELETE FROM temp_return_bill_items WHERE itemNo= ?";
-	
-	
 	/*---------------------------Temporary Bill Items-------------------------------*/
 
 	public final static String INSERT_TEMPBILLITEM_DETAILS = "INSERT INTO temp_bill_items(itemNo,price,qty,reduseDiscount,amount,cashireId)VALUES(?,?,?,?,?,?)";
@@ -144,21 +134,37 @@ public class CommonConstants {
 	public final static String UPDATE_DAILY_ATTENDENCE = "UPDATE attendence SET date =?,present=?,absent=? WHERE id=?";
 	
 	/*-------------------------- Salary ---------------------------------------*/
-	public final static String INSERT_EMP_SALARY = "INSERT INTO salary (empNo,empName,absent,present,totalBussines,monthlyBasic,basicSalary,bonus,TotalSalray ) VALUES(?,?,?,?,?,?,?,?,?) ";
-	public final static String UPDATE_EMP_SALARY = "UPDATE salary set empNo=?,empName=?,absent=?,present=?,totalBussines=?,monthlyBasic=?,basicSalary=?,bonus=?,TotalSalray=? WHERE id=?";
+	public final static String INSERT_EMP_SALARY = "INSERT INTO salary (empNo,empName,absent,present,totalBussines,monthlyBasic,basicSalary,bonus,advance_payment ,TotalSalray ) VALUES(?,?,?,?,?,?,?,?,?,?) ";
+	public final static String UPDATE_EMP_SALARY = "UPDATE salary set empNo=?,empName=?,absent=?,present=?,totalBussines=?,monthlyBasic=?,basicSalary=?,bonus=?,advance_payment=?,TotalSalray=? WHERE id=?";
 	public final static String GET_EMP_SALARY  = "SELECT * FROM salary WHERE empNo=?";
-
-	/*--------------------------Return note Quearys---------------------------------------*/
+	public final static String GET_EMP_SALARY_ID  = "SELECT * FROM salary WHERE id=?";
+	public final static String GET_ALL_EMP_SALARY  = "SELECT * FROM salary";
+	public final static String GET_ALL_PAID_SALARY  = "SELECT * FROM payied_salary ORDER BY id DESC;";
+	public final static String INSERT_PAID_EMP_SALARY = "INSERT INTO payied_salary (empNo,empName,absent,present,totalBussines,monthlyBasic,basicSalary,bonus,advance_payment ,TotalSalray,date) VALUES(?,?,?,?,?,?,?,?,?,?,?) ";
+	public final static String DELETE_SALARY = "DELETE FROM salary WHERE id= ?";
+  
+	/*-------------------------- Return note Quearys ---------------------------------------*/
 	public final static String UPDATE_RETURN_ITEM = "UPDATE item SET quantity = ? WHERE code = ?";
-	
-	/*-------------PritnNoteReturnItems---------------------------------*/
+  
+  /*-------------PritnNoteReturnItems---------------------------------*/
 	
 	public final static String INSERT_PRINT_RETURN_BILL_ITEM_DETAILS = "INSERT INTO  print_note_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
 	public final static String GET_PRINT_RETURN_BILL_ITEM_DETAILS = "SELECT * FROM  print_note_items ";
 	
 	public final static String DELETE_PRINT_RETURN_BILL_ITEM_DETAILS="DELETE FROM  print_note_items";
 	
-	
-	
-
 }
+
+/*---------------------------Temporary return Bill-------------------------------*/
+	public final static String INSERT_TEMP_RETURN_BILL_DETAILS = "INSERT INTO temp_return_bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem) VALUES(?,?,?,?,?,?,?)";
+	public final static String GET_ALL_TEMP_RETURN_BILL_DETAILS = "SELECT * FROM temp_return_bill where cashireId=?";
+	public final static String DELETE_TEMP_RETURN_BILL_DETAILS_ID = "DELETE FROM temp_return_bill WHERE cashireId= ?";
+
+	/*---------------------------Temporary Return Bill Items-------------------------------*/
+	
+	
+	public final static String INSERT_TEMP_RETURN_BILL_ITEM_DETAILS = "INSERT INTO temp_return_bill_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
+	public final static String GET_TEMP_RETURN_BILL_ITEM_DETAILS = "SELECT * FROM temp_return_bill_items WHERE billId=?";
+	
+	public final static String DELETE_TEMP_RETURN_BILL_ITEM_DETAILS="DELETE FROM temp_return_bill_items WHERE itemNo= ?";
+
