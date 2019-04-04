@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../includes/menuAndSideBar.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <script>
@@ -76,32 +76,38 @@
 
 												<table class="table table-borderless">
 
-												
-														<tr>
-															<td> <p> Bill ID : ${billSearch.id} </p></td>
-															<td> <p> Bill Date : ${billSearch.date} </p></td>
-															<td> <p> Cashier ID : ${billSearch.cashireId} </p></td>
-															
-															
-														</tr>
+
+													<tr>
+														<td>
+															<p>Bill ID : ${billSearch.id}</p>
+														</td>
+														<td>
+															<p>Bill Date : ${billSearch.date}</p>
+														</td>
+														<td>
+															<p>Cashier ID : ${billSearch.cashireId}</p>
+														</td>
 
 
-														<tr>
-															<td>
-																 <p>Gross Amount: ${billSearch.grossAmount}</p>
-															</td>
-															<td>
-																<p>Net Amount : ${billSearch.netAmount}</p>
-
-															</td>
-															<td>
-																<p>Total Discount : ${billSearch.totalDiscount}</p>
+													</tr>
 
 
-															</td>
-														</tr>
+													<tr>
+														<td>
+															<p>Gross Amount: ${billSearch.grossAmount}</p>
+														</td>
+														<td>
+															<p>Net Amount : ${billSearch.netAmount}</p>
 
-													
+														</td>
+														<td>
+															<p>Total Discount : ${billSearch.totalDiscount}</p>
+
+
+														</td>
+													</tr>
+
+
 												</table>
 
 											</div>
@@ -114,47 +120,71 @@
 
 
 							<!--  End the Details about of the Bill -->
-							<form>
-								<div class="col-12">
-									<div class="card mb-3">
+
+							<div class="col-12">
+								<div class="card mb-3">
 
 
-										<div class="card-body">
-											<table class="table table-responsive-xl table-bordered">
-												<thead>
+									<div class="card-body">
+
+										<table class="table table-responsive-xl table-bordered">
+											<thead>
+
+												<tr>
+
+													<th scope="col">Item Number</th>
+													<th scope="col">Quantity</th>
+													<th scope="col">Amount</th>
+													<th scope="col">Return</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="result" items="${bill_item}">
 
 													<tr>
 
-														<th scope="col">Item Number</th>
-														<th scope="col">Quantity</th>
-														<th scope="col">Amount</th>
-														<th scope="col">Return</th>
+														<td>${result.itemNo}</td>
+														<td>${result.qty}</td>
+														<td>${result.amount}</td>
+														<td>
+															<form method="POST" action="clickReturn"
+																modelAttribute="click_return">
+
+																<input type="hidden" name="itemNo"
+																	value="${result.itemNo}"> <input type="hidden"
+																	name="qty" value="${result.qty}"> <input
+																	type="hidden" name="amount" value="${result.amount}">
+																<input type="hidden" name="price"
+																	value="${result.price}"> <input type="hidden"
+																	name="reduseDiscount" value="${result.reduseDiscount}">
+
+
+
+																<button type="submit" class="btn btn-primary"
+																	name="billId" value="${billSearch.id}">Return</button>
+
+															</form>
+
+														</td>
 													</tr>
-												</thead>
-												<tbody>
-													<c:forEach var="result" items="${bill_item}">
-														<tr>
-
-															<td>${result.itemNo}</td>
-															<td>${result.qty}</td>
-															<td>${result.amount}</td>
-															<td><button type="submit" class="btn btn-primary">Return</button></td>
-														</tr>
 
 
 
-													</c:forEach>
-												</tbody>
-
-											</table>
 
 
-										</div>
+
+												</c:forEach>
+											</tbody>
+
+										</table>
+
+
 									</div>
-									<!-- end card-->
 								</div>
+								<!-- end card-->
+							</div>
 
-							</form>
+
 
 						</div>
 					</div>
@@ -164,7 +194,7 @@
 
 				<!-- Start the  Return  Note  -->
 
-				<form method="POST" action="returnNote">
+				<form method="POST" action="printNote">
 
 					<div class="col-12" style="margin: 60px">
 						<div class="card mb-3">
@@ -182,33 +212,29 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
+									
+										<c:forEach var="result" items="${printNote_item}">
+											<tr>
 
-											<td>I210050</td>
-											<td>1</td>
-											<td>4500</td>
+												<td>${result.itemNo}</td>
+												<td>${result.qty}</td>
+												<td>${result.amount}</td>
 
-										</tr>
-										<tr>
-
-											<td>I210150</td>
-											<td>1</td>
-											<td>2300</td>
-
-										</tr>
+											</tr>
 
 
+										</c:forEach>
 									</tbody>
 								</table>
+								
 								<div style="margin-left: 150px">
+								
 									<button type="submit" class="btn btn-primary">Print
 										Note</button>
+										
 								</div>
-
-
-
-
-
+								
+								
 							</div>
 						</div>
 					</div>

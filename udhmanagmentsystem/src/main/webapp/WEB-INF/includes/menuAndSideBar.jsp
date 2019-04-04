@@ -171,7 +171,7 @@ tr.shown td.details-control {
 							<ul class="list-unstyled">
 								<li><a href="viewAllSales"><i class="fa fa-table"
 										aria-hidden="true"></i></i>All Sale</a></li>
-								<li><a href="viewShop"><i class="fa fa-sticky-note"
+								<li><a href="returnNote"><i class="fa fa-sticky-note"
 										aria-hidden="true"></i>Return Note</a></li>
 
 							</ul></li>

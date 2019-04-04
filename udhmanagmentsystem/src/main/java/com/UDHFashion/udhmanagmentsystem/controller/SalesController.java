@@ -68,10 +68,10 @@ public class SalesController {
 	}
 
 	@RequestMapping(value = "/finalizeBill", method = RequestMethod.POST)
-	public ModelAndView finalizeBill(@ModelAttribute("permanentBill") Bill bill, ModelAndView model,RedirectAttributes redir) {
+	public ModelAndView finalizeBill(@ModelAttribute("permanentBill") Bill bill, ModelAndView model,
+			RedirectAttributes redir) {
 
-		
-		Item item1= new Item();
+		Item item1 = new Item();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String newDate = dateFormat.format(date);
@@ -84,30 +84,24 @@ public class SalesController {
 		if (billID != 0) {
 			List<TempBillitems> tempItems = serviceTempBillitems.getAllTempBillitems(bill.getCashireId());
 			ArrayList<Billitems> billItems = new ArrayList<>();
-			
+
 			for (TempBillitems item : tempItems) {
 				billItems.add(convertor.Convert(item, (int) billID));
 				Item billItem = serviceItem.getItemById(item.getItemNo());
 				dailyNetProfite += (billItem.getNetProfit() * item.getQty());
 
-				System.out.println("Item number"+item.getItemNo());
-				System.out.println("Item quntity:"+ item.getQty());
-				int itemQty= item.getQty();
-				String itemCode=item.getItemNo();
-				
-				item1=serviceItem.getItemByCode(itemCode);
-				
+				System.out.println("Item number" + item.getItemNo());
+				System.out.println("Item quntity:" + item.getQty());
+				int itemQty = item.getQty();
+				String itemCode = item.getItemNo();
+
+				item1 = serviceItem.getItemByCode(itemCode);
+
 				int updateQuantityvalue = item1.getItemQuantity() - item.getQty();
-				
+
 				item1.setItemQuantity(updateQuantityvalue);
 				serviceItem.updateReturnItem(item1);
-				
-				
-				
-			
-				
-				//serviceItem.updateItemDetails(item);
-				
+
 			}
 
 			if (serviceBillItem.insertBillItems(billItems)) {
@@ -124,10 +118,10 @@ public class SalesController {
 				if (serviceDailyBusiness.insertDailyBussinessEntry(dailyEntry)) {
 					if (serviceTempBillitems.deleteTempBillitems(bill.getCashireId())) {
 
-						redir.addFlashAttribute("success",1);
+						redir.addFlashAttribute("success", 1);
 						model.setViewName("redirect:/viewAllSales");
 						return model;
-						
+
 					}
 
 				}
@@ -136,11 +130,10 @@ public class SalesController {
 
 		}
 
-		redir.addFlashAttribute("error",1);
+		redir.addFlashAttribute("error", 1);
 		model.setViewName("redirect:/viewSales");
 		return model;
-		
-		
+
 	}
 
 	@RequestMapping(value = "/newSales", method = RequestMethod.GET)
@@ -164,17 +157,17 @@ public class SalesController {
 
 		User user = (User) request.getSession().getAttribute("user");
 		int cashireId = user.getId();
-		int totalItems=0;
+		int totalItems = 0;
 		List<TempBillitems> itemList1 = serviceTempBillitems.getAllTempBillitems(cashireId);
 		List<Item> item = serviceItem.getAllItemDetails();
 
-		for(TempBillitems items:itemList1) {
-			
+		for (TempBillitems items : itemList1) {
+
 			totalItems += items.getQty();
 		}
 		model.addObject("itemList", item);
 		model.addObject("itemList1", itemList1);
-		model.addObject("total_items",totalItems);
+		model.addObject("total_items", totalItems);
 		model.setViewName("sales/newSale");
 		return model;
 

@@ -10,15 +10,15 @@ import com.UDHFashion.udhmanagmentsystem.model.TempBill;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 
 @Service
-public class ITempBillDAOImpl implements TempBillDAO {
+public class ITempReturnBillDAOImpl implements TempReturnBillDAO {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public boolean insertTempBill(TempBill tempBill) {
+	public boolean insertTempReturnBill(TempBill tempBill) {
 
-		int insertTempBill = jdbcTemplate.update(CommonConstants.INSERT_TEMPBILL_DETAILS, 
+		int insertTempBill = jdbcTemplate.update(CommonConstants.INSERT_TEMP_RETURN_BILL_DETAILS, 
 				tempBill.getDate(),
 				tempBill.getCashireId(),
 				tempBill.getGrossAmount(),
@@ -36,15 +36,15 @@ public class ITempBillDAOImpl implements TempBillDAO {
 	}
 
 	@Override
-	public List<TempBill> getAllTempBill() {
+	public List<TempBill> getAllTempReturnBill() {
 
 		return null;
 	}
 
 	@Override
-	public boolean deleteTempBill(int cashireId) {
+	public boolean deleteTempReturnBill(int cashireId) {
 		
-		int update = jdbcTemplate.update(CommonConstants.DELETE_TEMPBILL_DETAILS_ID, cashireId);
+		int update = jdbcTemplate.update(CommonConstants.DELETE_TEMP_RETURN_BILL_DETAILS_ID, cashireId);
 
 		if (update == 1) {
 			return true;
@@ -56,7 +56,7 @@ public class ITempBillDAOImpl implements TempBillDAO {
 	}
 
 	@Override
-	public TempBill getTempBillById(int id) {
+	public TempBill getTempReturnBillById(int id) {
 
 		return null;
 	}
