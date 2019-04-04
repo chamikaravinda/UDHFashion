@@ -17,16 +17,16 @@
 </head>
 <body>
 
-	<!-- advance payment succesfull message -->
+	<!-- Salary payment succesfull message -->
 	<script type="text/javascript">
-		function succesfull() {
+		function salarySuccesfull() {
 			swal("Advance Paied Succesfuly");
 		}
 	</script>
 
-	<c:if test="${success== 3}">
+	<c:if test="${success== 1}">
 		<script type="text/javascript">
-			window.onload = succesfull;
+			window.onload = salarySuccesfull;
 		</script>
 	</c:if>
 
@@ -53,10 +53,10 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="breadcrumb-holder">
-							<h1 class="main-title float-left">Employee Salary Sheets</h1>
+							<h1 class="main-title float-left">Paid Salaries</h1>
 							<ol class="breadcrumb float-right">
 								<li class="breadcrumb-item">Home</li>
-								<li class="breadcrumb-item active">SalarySheets</li>
+								<li class="breadcrumb-item active">Salary Sheets</li>
 							</ol>
 							<div class="clearfix"></div>
 						</div>
@@ -75,6 +75,7 @@
 										class="table table-bordered table-hover display">
 										<thead>
 											<tr>
+												<th>Paid Date</th>
 												<th>Worker No</th>
 												<th>Worker Name</th>
 												<th>Absent Days</th>
@@ -85,13 +86,13 @@
 												<th>Advance Payments</th>
 												<th>Total Salary</th>
 
-												<th></th>
 											</tr>
 										</thead>
 										<tbody>
 
 											<c:forEach var="salary" items="${salaryList}">
 												<tr>
+													<td>${salary.date}</td>
 													<td>${salary.empNo}</td>
 													<td>${salary.empName}</td>
 													<td>${salary.absent}</td>
@@ -107,7 +108,7 @@
 															pattern="###.##" value="${salary.advancePayment}" /></td>
 													<td>Rs.<fmt:formatNumber type="number"
 															pattern="###.##" value="${salary.totalSalray}" /></td>
-													<td>
+													<!-- <td>
 														<form method="POST" action="viewSalarySheet"
 															modelAttribute="Salary">
 															<input name="id" type="hidden" value="${salary.id}">
@@ -115,7 +116,7 @@
 																<span class="fa fa-share-square-o" aria-hidden="true"></span>
 															</button>
 														</form>
-													</td>
+													</td> -->
 												</tr>
 											</c:forEach>
 

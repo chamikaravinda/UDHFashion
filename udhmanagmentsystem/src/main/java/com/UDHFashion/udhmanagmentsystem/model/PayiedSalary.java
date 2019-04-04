@@ -1,7 +1,7 @@
 package com.UDHFashion.udhmanagmentsystem.model;
 
-public class Salary {
-	
+public class PayiedSalary {
+
 	private int id;
 	private String empNo;
 	private String empName;
@@ -13,6 +13,7 @@ public class Salary {
 	private double bonus;
 	private double advancePayment;
 	private double totalSalray;
+	private String date;
 
 	
 	public int getId() {
@@ -103,8 +104,14 @@ public class Salary {
 		this.totalSalray = totalSalray;
 	}
 
+	public String getDate() {
+		return date;
+	}
 
-
+	public void setDate(String date) {
+		this.date = date;
+	}
 	
-
+	
+	
 }

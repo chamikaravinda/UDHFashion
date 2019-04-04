@@ -79,7 +79,7 @@
 													<td>${result.bankName}</td>
 													<td>${result.accountNumber}</td>
 													<td>${result.accountType}</td>
-													<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.currentBalance}" /></p></td>
+													<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.currentBalance}" /></td>
 													<td><a href="<c:url value='/editBanks?id=${result.id}' />">Edit</a></td>
 													<td>
 														<form method="POST" action="deleteBank"

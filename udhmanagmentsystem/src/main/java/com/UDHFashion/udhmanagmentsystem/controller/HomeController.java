@@ -16,6 +16,12 @@ public class HomeController {
 
 	@GetMapping("/home")
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String ShowDashboardHome(Model model) {
+
+		return "home/dashboard";
+	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String ShowDashboard(Model model) {
 
 		return "home/dashboard";
