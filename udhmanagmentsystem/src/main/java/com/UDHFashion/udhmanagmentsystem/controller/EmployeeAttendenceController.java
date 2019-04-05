@@ -89,9 +89,7 @@ public class EmployeeAttendenceController {
 
 						attend.setDate(newDate);
 						attend.setAttendence_ID((int) attendenceId);
-						
-						System.out.println("Employee details : " + attend.getEmpName()+attend.getEmpNo());
-						
+												
 						if (attendenceService.AddEmployeeAttendence(attend)) {
 
 							Salary salarySheet = serviceSalary.getEmployeeSalary(attend.getEmpNo());
@@ -115,7 +113,8 @@ public class EmployeeAttendenceController {
 								}
 								salarySheet.setTotalBussines(0);		
 								salarySheet.setBonus(0);
-								salarySheet.setTotalSalray(salarySheet.getBonus() + salarySheet.getBasicSalary());
+								salarySheet.setAdvancePayment(0);
+								salarySheet.setTotalSalray((salarySheet.getBonus() + salarySheet.getBasicSalary())-salarySheet.getAdvancePayment());
 
 								serviceSalary.AddNewSalarySheet(salarySheet);
 							} else {
@@ -125,7 +124,7 @@ public class EmployeeAttendenceController {
 									
 									Employee employee = serviceEmployee.getEmployeeById(attend.getEmpNo());
 									salarySheet.setBasicSalary(salarySheet.getBasicSalary()+employee.getBasicSalary() / 30);
-									salarySheet.setTotalSalray(salarySheet.getBonus() + salarySheet.getBasicSalary());
+									salarySheet.setTotalSalray((salarySheet.getBonus() + salarySheet.getBasicSalary())-salarySheet.getAdvancePayment());
 								} else {
 									salarySheet.setAbsent(salarySheet.getAbsent() + 1);
 								}
@@ -157,14 +156,14 @@ public class EmployeeAttendenceController {
 					if (salarySheet == null) {
 						salarySheet = new Salary();
 						
-						salarySheet.setEmpNo(attend.getEmpName());
+						salarySheet.setEmpNo(attend.getEmpNo());
 						salarySheet.setEmpName(attend.getEmpName());
 						Employee employee = serviceEmployee.getEmployeeById(attend.getEmpNo());
 						salarySheet.setMonthlyBasic(employee.getBasicSalary());
 						if (attend.getStatus().equals("PRESENT")) {
 							salarySheet.setAbsent(0);
-							salarySheet.setPresent(1);
-							salarySheet.setBasicSalary(employee.getBasicSalary() / 30);
+							salarySheet.setPresent(0);
+							salarySheet.setBasicSalary(0);
 						} else {
 							salarySheet.setAbsent(1);
 							salarySheet.setPresent(0);
@@ -172,7 +171,8 @@ public class EmployeeAttendenceController {
 						}
 						salarySheet.setTotalBussines(0);						
 						salarySheet.setBonus(0);
-						salarySheet.setTotalSalray(salarySheet.getBonus() + salarySheet.getBasicSalary());
+						salarySheet.setAdvancePayment(0);
+						salarySheet.setTotalSalray((salarySheet.getBonus() + salarySheet.getBasicSalary())-salarySheet.getAdvancePayment());
 
 						serviceSalary.AddNewSalarySheet(salarySheet);
 					} else {
@@ -180,9 +180,7 @@ public class EmployeeAttendenceController {
 						AttendenceList empTodayAttendence= new AttendenceList();
 						empTodayAttendence = attendenceService
 								.getEmpDailyAttendence(attend.getId());
-						System.out.println("Attendence ID " + attend.getAttendence_ID() );
-						System.out.println("Attendence Status" + empTodayAttendence.getStatus() );
-						
+
 						if (empTodayAttendence.getStatus().equals("PRESENT")) {
 							if (attend.getStatus().equals("ABSENT")) {
 								salarySheet.setPresent(salarySheet.getPresent() - 1);
@@ -190,7 +188,7 @@ public class EmployeeAttendenceController {
 								
 								Employee employee = serviceEmployee.getEmployeeById(attend.getEmpNo());
 								salarySheet.setBasicSalary(salarySheet.getBasicSalary()-employee.getBasicSalary() / 30);
-								salarySheet.setTotalSalray(salarySheet.getBonus() + salarySheet.getBasicSalary());
+								salarySheet.setTotalSalray((salarySheet.getBonus() + salarySheet.getBasicSalary())-salarySheet.getAdvancePayment());
 							}
 						} else {
 							if (attend.getStatus().equals("PRESENT")) {
@@ -199,7 +197,7 @@ public class EmployeeAttendenceController {
 								
 								Employee employee = serviceEmployee.getEmployeeById(attend.getEmpNo());
 								salarySheet.setBasicSalary(salarySheet.getBasicSalary()+employee.getBasicSalary() / 30);
-								salarySheet.setTotalSalray(salarySheet.getBonus() + salarySheet.getBasicSalary());
+								salarySheet.setTotalSalray((salarySheet.getBonus() + salarySheet.getBasicSalary())-salarySheet.getAdvancePayment());
 							}
 						}
 

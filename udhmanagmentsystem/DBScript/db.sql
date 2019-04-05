@@ -314,8 +314,28 @@ CREATE TABLE salary
 	monthlyBasic DOUBLE,
 	basicSalary DOUBLE,
 	bonus DOUBLE,
+	advance_payment DOUBLE,
 	TotalSalray DOUBLE,
 	
+	CONSTRAINT salary_pk PRIMARY KEY (id)
+
+);
+
+
+CREATE TABLE payied_salary
+(
+	id INT AUTO_INCREMENT NOT NULL,
+    empNo VARCHAR(20),
+    empName VARCHAR(50),
+	absent INT,
+	present INT,
+	totalBussines DOUBLE,
+	monthlyBasic DOUBLE,
+	basicSalary DOUBLE,
+	bonus DOUBLE,
+	advance_payment DOUBLE,
+	TotalSalray DOUBLE,
+	date DATE,
 	CONSTRAINT salary_pk PRIMARY KEY (id)
 
 );
