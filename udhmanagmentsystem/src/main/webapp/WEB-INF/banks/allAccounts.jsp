@@ -44,15 +44,13 @@
 					</div>
 				</div>
 				<!-- end row -->
-				<br>
-				<br>
-				<br>
+			
 				<div class="row">
 
 					<div class="col-md-12">
 						<div class="card mb-3">
 							<div class="col-md-12a">
-								<a href="addEmployee" class="btn btn-primary"
+								<a href="addBanks" class="btn btn-primary"
 									style="margin: 10px" role="button" aria-pressed="true">Add</a>
 
 							</div>

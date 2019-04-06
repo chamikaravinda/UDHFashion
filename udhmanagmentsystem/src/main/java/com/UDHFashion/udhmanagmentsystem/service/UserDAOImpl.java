@@ -62,7 +62,19 @@ public class UserDAOImpl implements IUserDAO {
 			return false;
 		}
 	}
+	
+	@Override
+	public boolean UpdatePassword(User user) {
+		int update = jdbcTemplate.update(CommonConstants.UPDATE_USER, user.getFname(), user.getLname(),
+				user.getUsername(), user.getNpassword(), user.getRole(), user.getId());
 
+		if (update == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	@Override
 	public boolean deleteUSer(int id) {
 		
@@ -97,5 +109,17 @@ public class UserDAOImpl implements IUserDAO {
 		}
 
 		return result;
+	}
+	
+	@Override
+	public User getUser(int id) {
+
+		try {
+			User validUser = (User) jdbcTemplate.queryForObject(CommonConstants.GET_USER,
+					new Object[] {id}, new BeanPropertyRowMapper(User.class));
+			return validUser;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 }

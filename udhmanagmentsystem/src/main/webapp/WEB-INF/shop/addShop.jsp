@@ -36,40 +36,40 @@
 
 
 
-	<div class="content-page">
+<div class="content-page">
 
-		<!-- Start content -->
-		<div class="content">
+	<!-- Start content -->
+	<div class="content">
 
-			<div class="container-fluid">
+		<div class="container-fluid">
 
 
-				<div class="row">
-					<div class="col-xl-12">
-						<div class="breadcrumb-holder">
-							<h1 class="main-title float-left">Add Whole Sale Shop</h1>
-							<ol class="breadcrumb float-right">
-								<li class="breadcrumb-item">Home</li>
-								<li class="breadcrumb-item active">shop</li>
-							</ol>
-							<div class="clearfix"></div>
-						</div>
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="breadcrumb-holder">
+						<h1 class="main-title float-left">New Supplier</h1>
+						<ol class="breadcrumb float-right">
+							<li class="breadcrumb-item">Home</li>
+							<li class="breadcrumb-item active">Suppliers</li>
+						</ol>
+						<div class="clearfix"></div>
 					</div>
 				</div>
-				<!-- end row -->
+			</div>
+			<!-- end row -->
 
-				<div class="row">
+			<div class="row">
+				<br>
+				<div class=" col-md-12">
+					<div class="card mb-3">
 
-					<div class=" col-md-12">
-						<div class="card mb-3">
+						<div class="card-body">
 
-							<div class="card-body">
+							<form method="POST" action="submitShop" modelAttribute="shop"
+								onsubmit="return validator()">
 
-								<form method="POST" action="submitShop" modelAttribute="shop"
-									onsubmit="return validator()">
-
-
-									<div class="form-group">
+								<div class="row">
+									<div class="form-group col-md-5">
 										<label for="exampleInputEmail1">Shop Name</label> <input
 											type="text" name="shopName" class="form-control"
 											id="shopName" aria-describedby="emailHelp"
@@ -77,34 +77,35 @@
 											id="emailHelp" class="form-text text-muted">Whole
 											sales</small>
 									</div>
-									<div class="form-group">
+									<div class="form-group offset-md-1 col-md-5">
 										<label for="exampleInputEmail1">Address</label> <input
 											type="text" name="shopAddress" class="form-control"
 											id="shopAddress" aria-describedby="numberlHelp"
 											placeholder="Shop Address" required>
 
 									</div>
-									<div class="form-group">
+									<div class="form-group col-md-5">
 										<label for="exampleInputPassword1">Telephone</label> <input
 											type="number" name="shopTelephone" class="form-control"
 											id="shopTele" placeholder="Telephone Number" required>
 									</div>
+								</div>
+								<br>
+								<div style="margin-left: 500px">
+									<button type="submit" class="btn btn-primary">AddShop</button>
+								</div>
 
-									<div style="margin-left: 500px">
-										<button type="submit" class="btn btn-primary">AddShop</button>
-									</div>
+							</form>
 
-								</form>
-
-							</div>
 						</div>
-						<!-- end card-->
 					</div>
+					<!-- end card-->
 				</div>
 			</div>
-			<!-- END container-fluid -->
 		</div>
-		<!-- END content -->
+		<!-- END container-fluid -->
 	</div>
+	<!-- END content -->
+</div>
 
 <%@ include file="../includes/footer.jsp"%>
