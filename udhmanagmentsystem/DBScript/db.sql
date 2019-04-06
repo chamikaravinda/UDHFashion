@@ -322,6 +322,65 @@ CREATE TABLE salary
 );
 
 
+CREATE TABLE temp_return_bill
+(
+	id INT AUTO_INCREMENT NOT NULL,
+	date  VARCHAR(20),
+	cashireId int,
+	grossAmount DOUBLE,
+	netAmount  DOUBLE,
+	totalDiscount  DOUBLE,
+	balance DOUBLE,
+	noOfItem int,
+
+	CONSTRAINT temp_return_bill_pk PRIMARY KEY (id)
+	
+	
+);
+
+CREATE TABLE temp_return_bill_items
+(
+	
+	id INT AUTO_INCREMENT NOT NULL,
+	itemNo VARCHAR(20),
+	price DOUBLE,
+	qty int,
+	billId  int,
+	reduseDiscount  DOUBLE,
+	amount DOUBLE,
+	
+	
+	
+	
+	
+	CONSTRAINT temp_return_bill_items_pk PRIMARY KEY (id)
+	
+	
+);
+
+CREATE TABLE print_note_items
+(
+	
+	id INT AUTO_INCREMENT NOT NULL,
+	itemNo VARCHAR(20),
+	price DOUBLE,
+	qty int,
+	billId  int,
+	reduseDiscount  DOUBLE,
+	amount DOUBLE,
+	
+	
+	
+	
+	
+	
+	CONSTRAINT printNote_items_pk PRIMARY KEY (id)
+	
+	
+);
+
+
+
 CREATE TABLE payied_salary
 (
 	id INT AUTO_INCREMENT NOT NULL,

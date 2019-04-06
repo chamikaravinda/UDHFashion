@@ -152,7 +152,7 @@ tr.shown td.details-control {
 				<div id="sidebar-menu">
 					<ul>
 						<!-- Dashobard -->
-						<li class="submenu"><a href="#"><i
+						<li class="submenu"><a href="/"><i
 								class="fa fa-fw fa-bars"></i><span>Dashboard</span> </a></li>
 
 						<!-- Sales -->

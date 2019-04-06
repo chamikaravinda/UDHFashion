@@ -74,7 +74,6 @@ public class ReturnController {
 
 		Bill billSearch = new Bill();
 		billSearch = serviceBill.getBillById(billId);
-
 		TempBill tempBill = new TempBill();
 		tempBill.setId(billSearch.getId());
 		tempBill.setDate(billSearch.getDate());
@@ -83,11 +82,11 @@ public class ReturnController {
 		tempBill.setNetAmount(billSearch.getNetAmount());
 		tempBill.setTotalDiscount(billSearch.getTotalDiscount());
 		tempBill.setNoOfItem(billSearch.getNoOfItem());
+
 		serviceInsertReturnBill.insertTempReturnBill(tempBill);
 
 		List<Billitems> billSearchitem = new ArrayList<Billitems>();
 		billSearchitem = serviceBillitem.getBillitem(billId);
-
 		for (Billitems billitems : billSearchitem) {
 			billitems.setBillId(billId);
 
@@ -95,11 +94,11 @@ public class ReturnController {
 
 		serviceInsertReturnBillitem.insertTempReturnBillItems(billSearchitem);
 
-		// List<Billitems> bill_item = serviceBillitem.getBillitem(billId);
+		 List<Billitems> bill_item = serviceBillitem.getBillitem(billId);
 
-		List<Billitems> return_bill_item = serviceReturnbillitem.getTempReturnBillitem(billId);
+	//	List<Billitems> return_bill_item = serviceReturnbillitem.getTempReturnBillitem(billId);
 
-		redir.addFlashAttribute("bill_item", return_bill_item);
+		redir.addFlashAttribute("bill_item", bill_item);
 		redir.addFlashAttribute("billSearch", billSearch);
 		model.setViewName("redirect:/returnNote");
 		return model;
@@ -123,22 +122,20 @@ public class ReturnController {
 
 		List<Billitems> return_bill_item = serviceReturnbillitem.getTempReturnBillitem(returnBillItem.getBillId());
 		List<Billitems> printNote_item = servicereturnPrintNoteitem.getAllPrintNoteItem();
-		
+
 		redir.addFlashAttribute("bill_item", return_bill_item);
 		redir.addFlashAttribute("printNote_item", printNote_item);
 		model.setViewName("redirect:/returnNote");
 		return model;
 
 	}
-	
-	
-	@RequestMapping(value="/printNote", method =RequestMethod.POST)
+
+	@RequestMapping(value = "/printNote", method = RequestMethod.POST)
 	public String printNote(Model model) {
-		
-		
+
 		servicereturnPrintNoteitem.deleteTempReturnBillitem();
-		
-		return "sales/viewAllSales";
+
+		return "home/dashboard";
 	}
 
 }

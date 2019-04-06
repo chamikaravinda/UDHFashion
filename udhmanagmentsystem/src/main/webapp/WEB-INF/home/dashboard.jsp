@@ -32,38 +32,92 @@
 						<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
 							<div class="card-box noradius noborder bg-default">
 								<i class="fa fa-file-text-o float-right text-white"></i>
-								<h6 class="text-white text-uppercase m-b-20">Orders</h6>
-								<h1 class="m-b-20 text-white counter">1,587</h1>
-								<span class="text-white">15 New Orders</span>
+								<h6 class="text-white text-uppercase m-b-20">Items</h6>
+								<h1 class="m-b-20 text-white counter">3</h1>
+								<a href="addStock" class="text-white"> <span>Add New</span></a>
+
 							</div>
 						</div>
 
 						<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
 							<div class="card-box noradius noborder bg-warning">
-								<i class="fa fa-bar-chart float-right text-white"></i>
-								<h6 class="text-white text-uppercase m-b-20">Visitors</h6>
-								<h1 class="m-b-20 text-white counter">250</h1>
-								<span class="text-white">Bounce rate: 25%</span>
+								<i class="fa fa-building-o float-right text-white"></i>
+								<h6 class="text-white text-uppercase m-b-20">Suppliers</h6>
+								<h1 class="m-b-20 text-white counter">4</h1>
+								<a href="addShop" class="text-white"> <span>Add New</span></a>
+
 							</div>
 						</div>
 
 						<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
 							<div class="card-box noradius noborder bg-info">
 								<i class="fa fa-user-o float-right text-white"></i>
-								<h6 class="text-white text-uppercase m-b-20">Users</h6>
-								<h1 class="m-b-20 text-white counter">120</h1>
-								<span class="text-white">25 New Users</span>
+								<h6 class="text-white text-uppercase m-b-20">Today Working
+									Employees</h6>
+
+
+								<h1 class="m-b-20 text-white counter">18</h1>
+								<a href="addEmployee" class="text-white"> <span>Add
+										New</span></a>
 							</div>
 						</div>
 
 						<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
 							<div class="card-box noradius noborder bg-danger">
-								<i class="fa fa-bell-o float-right text-white"></i>
-								<h6 class="text-white text-uppercase m-b-20">Alerts</h6>
-								<h1 class="m-b-20 text-white counter">58</h1>
-								<span class="text-white">5 New Alerts</span>
+								<i class="fa fa-bar-chart float-right text-white"></i>
+								<h6 class="text-white text-uppercase m-b-20">Daily Profit</h6>
+								<h1 class="m-b-20 text-white counter">7980.00</h1>
+								</br>
 							</div>
 						</div>
+
+						<!-- Bar Chart -->
+						<div class="col-12">
+							<div class="card mb-3">
+								<div class="card-header">
+									<h3>
+										<i class="fa fa-users"></i> Daily profit
+									</h3>
+
+
+								</div>
+
+								<div class="card-body">
+
+									<table id="example1"
+										class="table table-bordered table-responsive-xl table-hover display">
+										<thead>
+											<tr>
+												<th>Date</th>
+												<th>Expenditure Amount</th>
+												<th>Business Amount</th>
+												<th>Net Profit</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											
+												<c:forEach var="result" items="${getDailyBusiness}">
+												<tr>
+
+													<td>${result.date}</td>
+													<td>${result.expenseAmount}</td>
+													<td>${result.bussinesAmount}</td>
+													<td>${result.netProfite}</td>
+
+												</tr>
+
+												<tr>
+											</c:forEach>
+										</tbody>
+									</table>
+
+								</div>
+							</div>
+							<!-- end card-->
+						</div>
+						<!-- end it -->
+
 					</div>
 
 					<h1>${msg}</h1>
@@ -80,6 +134,13 @@
 
 </div>
 <!-- END content-page -->
+
+<!-- JS -->
+
+
+<!-- END Java Script for this page -->
+
+<!-- End JS -->
 
 <%@ include file="../includes/footer.jsp"%>
 
