@@ -100,7 +100,7 @@ tr.shown td.details-control {
 					class="nav-link dropdown-toggle nav-user" data-toggle="dropdown"
 					href="#" role="button" aria-haspopup="false" aria-expanded="false">
 						<img src="assets/images/avatars/admin.png" alt="Profile image"
-						class="avatar-rounded">
+						class="avatar-rounded" style="margin-top:4px">
 				</a>
 					<div class="dropdown-menu dropdown-menu-right profile-dropdown">
 						<!-- item-->
@@ -111,7 +111,7 @@ tr.shown td.details-control {
 						</div>
 
 						<!-- item-->
-						<a href="pro-profile.html" class="dropdown-item notify-item">
+						<a href="editUser?id=${sessionScope.user.id}" class="dropdown-item notify-item">
 							<i class="fa fa-user"></i> <span>Profile</span>
 						</a>
 
@@ -253,6 +253,10 @@ tr.shown td.details-control {
 										class="fa fa-info-circle" aria-hidden="true"></i>All Personal
 										Exp :</a></li>
 							</ul></li>
+							<!-- Settings -->
+							<li class="submenu"><a href="settings"><i
+								class="fa fa-wrench"></i><span> Settings </span> </a></li>
+							
 
 					</ul>
 

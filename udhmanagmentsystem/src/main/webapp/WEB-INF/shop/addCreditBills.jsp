@@ -33,7 +33,7 @@
 				</div>
 			</div>
 			<!-- end row -->
-
+			<br>
 			<div class="row">
 
 				<div class=" col-md-12">
@@ -44,44 +44,48 @@
 							<form method="POST" action="submitCreditBills"
 								modelAttribute="creditBills" onsubmit="return validator()">
 
+								<div class="row">
+									<div class="form-group col-md-5">
+										<label for="exampleInputEmail1">Bill No</label> <input
+											type="text" name="billNo" class="form-control" id="billNo"
+											aria-describedby="emailHelp" placeholder="Bill No" required>
+									</div>
+									<div class="form-group offset-md-1 col-md-5">
+										<label for="exampleInputEmail1">Bill Date</label> <input
+											type="Date" name="billDate" class="form-control"
+											id="billDate" aria-describedby="numberlHelp"
+											placeholder="Bill Date" required>
 
-								<div class="form-row">
-									<label for="exampleInputEmail1">Bill No</label> <input
-										type="text" name="billNo" class="form-control" id="billNo"
-										aria-describedby="emailHelp" placeholder="Bill No" required>
+									</div>
+									<div class="form-group col-md-5">
+										<label for="sel1">Shop Name</label> <select name="shopName"
+											class="form-control" id="shopId" required>
+
+											<c:forEach var="result" items="${shopList}">
+
+												<option>${result.shopName}</option>
+
+											</c:forEach>
+
+										</select>
+									</div>
+
+									<div class="form-group offset-md-1 col-md-5">
+										<label for="exampleInputEmail1">Bill Amount</label> <input
+											type="number" name="billAmount" class="form-control"
+											id="billAmount" aria-describedby="numberlHelp"
+											placeholder="Bill Amount" required>
+
+									</div>
+
+									<div style="margin-left: 500px">
+										<br>
+										<button type="submit" class="btn btn-primary">
+											<i class="fa fa-plus"></i> Add Bill
+										</button>
+										<br>
+									</div>
 								</div>
-								<div class="form-row">
-									<label for="exampleInputEmail1">Bill Date</label> <input
-										type="Date" name="billDate" class="form-control" id="billDate"
-										aria-describedby="numberlHelp" placeholder="Bill Date"
-										required>
-
-								</div>
-								<div class="form-row">
-									<label for="sel1">Shop Name</label> <select name="shopName"
-										class="form-control" id="shopId" required>
-
-										<c:forEach var="result" items="${shopList}">
-
-											<option>${result.shopName}</option>
-
-										</c:forEach>
-
-									</select>
-								</div>
-								
-								<div class="form-row">
-									<label for="exampleInputEmail1">Bill Amount</label> <input
-										type="number" name="billAmount" class="form-control" id="billAmount"
-										aria-describedby="numberlHelp" placeholder="Bill Amount"
-										required>
-
-								</div>
-
-								<div style="margin-left: 500px">
-									<button type="submit" class="btn btn-primary">Add Bill</button>
-								</div>
-
 							</form>
 
 						</div>

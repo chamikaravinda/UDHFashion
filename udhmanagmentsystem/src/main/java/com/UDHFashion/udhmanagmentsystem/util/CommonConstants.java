@@ -51,6 +51,8 @@ public class CommonConstants {
 	public final static String UPDATE_USER = "UPDATE  users SET fname=?,lname=?,username=? ,password=?,role=? WHERE id = ?";
 	public final static String DELETE_USER = "DELETE FROM users WHERE id = ?";
 	public final static String GET_USERS   = "SELECT * FROM users";
+	public final static String GET_USER = "SELECT * FROM users WHERE id=?";
+
 	
 	/*---------------------------Bank queries-------------------------------*/
 	public final static String INSERT_BANK_DETAILS = "INSERT INTO bank_accounts(bank_name,account_number,account_type,current_balance) VALUES(?,?,?,?)";
