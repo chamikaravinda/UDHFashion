@@ -40,7 +40,7 @@ public class LoginController {
 		if (validUser != null) {
 			if (bussinessService.settingCreticalPoint()) {
 				request.getSession().setAttribute("user", validUser);
-				model.setViewName("home/dashboard");
+				model.setViewName("redirect:/home");
 				return model;
 			}else{
 				model.addObject("error", "Cloud'nt create the data base access");

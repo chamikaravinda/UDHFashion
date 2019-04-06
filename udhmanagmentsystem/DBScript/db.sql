@@ -372,6 +372,7 @@ CREATE TABLE print_note_items
 	
 	
 	
+	
 	CONSTRAINT printNote_items_pk PRIMARY KEY (id)
 	
 	

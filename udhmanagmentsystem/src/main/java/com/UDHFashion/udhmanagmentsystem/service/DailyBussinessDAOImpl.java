@@ -1,7 +1,11 @@
 package com.UDHFashion.udhmanagmentsystem.service;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -9,6 +13,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import com.UDHFashion.udhmanagmentsystem.model.Billitems;
 import com.UDHFashion.udhmanagmentsystem.model.DailyBussiness;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 
@@ -221,5 +226,38 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 
 		}
 	}
+
+	@Override
+	public List<DailyBussiness> getDailyBusiness() {
+		
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.GET_DAILY_BUSINESS);
+
+		List<DailyBussiness> result = new ArrayList<DailyBussiness>();
+
+		for (Map<String, Object> row : rows) {
+			DailyBussiness daily_bussiness = new DailyBussiness();
+			
+			Date date=  (Date)row.get("date");
+
+			daily_bussiness.setDate(date.toString());
+
+			daily_bussiness.setExpenseAmount((Double) row.get("expenseAmount"));
+
+			
+			daily_bussiness.setBussinesAmount((Double) row.get("bussinesAmount"));
+
+			daily_bussiness.setNetProfite((Double) row.get("netProfite"));
+
+			result.add(daily_bussiness);
+		}
+
+	  System.out.println("Get Daily business details");
+
+		return result;
+		
+		
+	}
+
+	
 
 }

@@ -122,7 +122,8 @@ public class CommonConstants {
 	public final static String UPDATE_CRITICAL_SECTION = "UPDATE daily_busssiness SET flag = ? WHERE id=1 ";
 	public final static String GET_TODAY_ENTRY = "SELECT * FROM daily_busssiness WHERE date= ?";
 	public final static String UPDATE_TODAT_ENTRY = "UPDATE daily_busssiness SET expenseAmount = ? ,bussinesAmount = ?,returnAmount = ?,netProfite= ? WHERE date = ? ";
-
+	public final static String GET_DAILY_BUSINESS = "SELECT * FROM daily_busssiness" ;
+			
 	/*--------------------------- Attendance -----------------------------------*/
 
 	public final static String GET_TODAY_ATTENDENCE = "SELECT * FROM attendence WHERE date = ?";
@@ -153,12 +154,13 @@ public class CommonConstants {
 	
 	public final static String DELETE_PRINT_RETURN_BILL_ITEM_DETAILS="DELETE FROM  print_note_items";
 	
-}
+
 
 /*---------------------------Temporary return Bill-------------------------------*/
 	public final static String INSERT_TEMP_RETURN_BILL_DETAILS = "INSERT INTO temp_return_bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem) VALUES(?,?,?,?,?,?,?)";
 	public final static String GET_ALL_TEMP_RETURN_BILL_DETAILS = "SELECT * FROM temp_return_bill where cashireId=?";
 	public final static String DELETE_TEMP_RETURN_BILL_DETAILS_ID = "DELETE FROM temp_return_bill WHERE cashireId= ?";
+	public final static String GET_TEMP_RETURN_BILL_BY_NO = "SELECT * FROM bill WHERE id = ?";
 
 	/*---------------------------Temporary Return Bill Items-------------------------------*/
 	
@@ -168,3 +170,4 @@ public class CommonConstants {
 	
 	public final static String DELETE_TEMP_RETURN_BILL_ITEM_DETAILS="DELETE FROM temp_return_bill_items WHERE itemNo= ?";
 
+}
