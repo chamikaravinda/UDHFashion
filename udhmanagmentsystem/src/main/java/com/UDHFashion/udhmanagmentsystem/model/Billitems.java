@@ -11,6 +11,7 @@ public class Billitems {
 	private int billId;
 	private double reduseDiscount;
 	private double amount;
+	
 	public int getId() {
 		return id;
 	}
