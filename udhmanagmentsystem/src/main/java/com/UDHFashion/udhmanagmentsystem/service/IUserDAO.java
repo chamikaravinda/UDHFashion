@@ -15,4 +15,8 @@ public interface IUserDAO {
 	boolean deleteUSer(int id);
 
 	List<User> getUSers();
+
+	User getUser(int id);
+
+	boolean UpdatePassword(User user);
 }

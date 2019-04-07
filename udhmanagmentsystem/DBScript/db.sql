@@ -46,7 +46,8 @@ CREATE TABLE users
     password VARCHAR(30),
     role VARCHAR(30),
  
-     CONSTRAINT user_pk PRIMARY KEY(id)
+     CONSTRAINT user_pk PRIMARY KEY(id),
+     CONSTRAINT UC_user UNIQUE (username)
 );
 
 

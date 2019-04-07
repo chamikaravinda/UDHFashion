@@ -139,7 +139,7 @@ body {
             
             <form:form method="post" action ="login" class="form-signin"  modelAttribute="user">
               <fieldset class="form-group">
-                <form:input type="email" path="username" class="form-control" placeholder="Email address" required="required" />               
+                <form:input type="text" path="username" class="form-control" placeholder="Username" required="required" />               
               </fieldset>
 
               <fieldset class="form-group">
