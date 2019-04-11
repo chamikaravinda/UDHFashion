@@ -39,6 +39,7 @@ public class IBillDAOImpl implements BillDAO {
 			ps.setDouble(5, bill.getTotalDiscount());
 			ps.setDouble(6, bill.getBalance());
 			ps.setInt(7, bill.getNoOfItem());
+			ps.setDouble(8, bill.getReturnAmount());
 			return ps;
 
 		}, keyHolder);

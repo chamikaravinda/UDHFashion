@@ -45,19 +45,26 @@ public class SettingsController {
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public ModelAndView updateUser(ModelAndView model, @ModelAttribute("user") User user, RedirectAttributes redir) {
 
-		if (serviceUser.UpdateUser(user)) {
+		int result = serviceUser.UpdateUser(user);
+		if (result == 1) {
 
 			redir.addFlashAttribute("success", 2);
 			model.setViewName("redirect:/settings");
 			return model;
 
-		} else {
+		} else if (result == 2) {
 
+			model.addObject("user", user);
+			model.addObject("error", 2);
+			model.setViewName("settings/editUser");
+			return model;
+
+		} else {
+			
 			model.addObject("user", user);
 			model.addObject("error", 1);
 			model.setViewName("settings/editUser");
 			return model;
-
 		}
 	}
 
@@ -72,12 +79,18 @@ public class SettingsController {
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public ModelAndView saveUser(ModelAndView model, @ModelAttribute("user") User user, RedirectAttributes redir) {
 		if (user.getPassword().equals(user.getCpassword())) {
-			if (serviceUser.AddNewUser(user)) {
+			int result = serviceUser.AddNewUser(user);
+			if (result == 1) {
 
 				redir.addFlashAttribute("success", 1);
 				model.setViewName("redirect:/settings");
 				return model;
 
+			} else if (result == 2) {
+				model.addObject("user", user);
+				model.addObject("error", 3);
+				model.setViewName("settings/addUser");
+				return model;
 			} else {
 				model.addObject("user", user);
 				model.addObject("error", 1);
@@ -140,7 +153,7 @@ public class SettingsController {
 		if (user.getPassword().equals(userDB.getPassword())) {
 			if (user.getNpassword().equals(user.getCpassword())) {
 				if (serviceUser.UpdatePassword(user)) {
-					redir.addFlashAttribute("success",4);
+					redir.addFlashAttribute("success", 4);
 					model.setViewName("redirect:/settings");
 					return model;
 				} else {

@@ -1,6 +1,6 @@
 package com.UDHFashion.udhmanagmentsystem.util;
 
-import com.UDHFashion.udhmanagmentsystem.model.Salary;
+import com.UDHFashion.udhmanagmentsystem.model.Salary; 
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -60,7 +60,7 @@ public class SalarySheetPDF extends AbstractView {
 		pdfDocument.add(title);
 
 		// Adress
-		Paragraph address = new Paragraph("No : 12, Main Street, Anuradhapura");
+		Paragraph address = new Paragraph("UDM FASHION, THALAWA ROAD, EPPAWALA");
 		address.setFont(PdfFontFactory.createFont(FontConstants.HELVETICA));
 		address.setFontSize(10f);
 		address.setItalic();
@@ -70,7 +70,7 @@ public class SalarySheetPDF extends AbstractView {
 		pdfDocument.add(address);
 
 		// tp number
-		Paragraph tpNumber = new Paragraph("Contact Number : 077 234 5678 / 071 232 2223");
+		Paragraph tpNumber = new Paragraph("0714020007 \\ 0712920989");
 		tpNumber.setFont(PdfFontFactory.createFont(FontConstants.HELVETICA));
 		tpNumber.setFontSize(10f);
 		tpNumber.setItalic();

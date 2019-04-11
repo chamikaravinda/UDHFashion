@@ -19,6 +19,7 @@ public class TempItemsToBillItesms {
 		converted.setReduseDiscount(toConvert.getReduseDiscount());
 		converted.setAmount(toConvert.getAmount());
 		converted.setBillId(billID);
+		converted.setItemName(toConvert.getItemName());
 		return converted;
 	}
 }
