@@ -8,9 +8,9 @@ public interface IUserDAO {
 
 	public User isValidUser(User user);
 
-	boolean AddNewUser(User user);
+	int AddNewUser(User user);
 
-	boolean UpdateUser(User user);
+	int UpdateUser(User user);
 
 	boolean deleteUSer(int id);
 

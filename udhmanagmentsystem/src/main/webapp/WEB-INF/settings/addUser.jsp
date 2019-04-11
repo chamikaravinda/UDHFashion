@@ -35,6 +35,19 @@
 		</script>
 	</c:if>
 
+	<!-- Username taken error message -->
+	<script type="text/javascript">
+		function usernameerror() {
+			swal("Unsuccessful","Username already in use.Choose another username","error");
+		}
+	</script>
+
+	<c:if test="${error == 3}">
+		<script type="text/javascript">
+			window.onload = usernameerror;
+		</script>
+	</c:if>
+
 	<!-- Password miss match error message -->
 	<script type="text/javascript">
 		function passwordmissmatch() {

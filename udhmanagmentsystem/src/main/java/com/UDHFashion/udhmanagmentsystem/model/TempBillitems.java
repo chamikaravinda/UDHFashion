@@ -8,9 +8,10 @@ public class TempBillitems {
 	private double price;
 	private int qty;
 	private int cashireId;
-
+	
 	private int billId;
-
+	private String itemName;
+	
 	public int getCashireId() {
 		return cashireId;
 	}
@@ -78,4 +79,13 @@ public class TempBillitems {
 		this.billId = billId;
 	}
 
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	
 }

@@ -229,7 +229,8 @@ CREATE TABLE bill
 	totalDiscount  DOUBLE,
 	balance DOUBLE,
 	noOfItem int,
-
+	returnAmount DOUBLE,
+	
 	CONSTRAINT bill_pk PRIMARY KEY (id)
 	
 	

@@ -61,7 +61,8 @@
 										<label for="exampleInputEmail1">Item No</label> <input
 											list="hosting-plan" type="text" name="itemcode"
 											class="form-control" id="itemcode"
-											aria-describedby="numberlHelp" placeholder="" required>
+											aria-describedby="numberlHelp" placeholder="" autofocus
+											required>
 
 										<datalist id="hosting-plan">
 											<c:forEach var="result" items="${itemList}">
@@ -144,6 +145,18 @@
 							<div>
 								<form method="POST" action="finalizeBill"
 									modelAttribute="permanentBill">
+
+									<div class="form-row">
+
+										<div class="form-group col-md-5">
+											<label for="exampleInputEmail1">No of Items</label> <input
+												type="number" name="noOfItem" class="form-control"
+												id="noOfItem" aria-describedby="numberlHelp" placeholder="2"
+												value="<c:out value="${total_items}" />" required>
+										</div>
+										<div class="col-md-1"></div>
+
+									</div>
 									<div class="form-row">
 										<div class="form-group col-md-5">
 											<label for="exampleInputEmail1">Gross Amount</label> <input
@@ -171,31 +184,37 @@
 
 										</div>
 										<div class="col-md-1"></div>
-
 										<div class="form-group col-md-5">
-											<label for="exampleInputEmail1">Cash</label> <input
-												type="number" name="cash" class="form-control" id="cash"
-												aria-describedby="numberlHelp">
+											<label for="exampleInputEmail1">Return Note Amount</label> <input
+												type="number" name="returnAmount" class="form-control"
+												id="returnAmount" aria-describedby="numberlHelp"
+												placeholder="2" value="0" onkeyup='balance1();' />
 
 										</div>
+
 
 									</div>
 
 									<div class="form-row">
+										<br> <br>
+										<h6 id="remain"></h6>
+										<br> <br>
+									</div>
 
+									<div class="form-row">
 										<div class="form-group col-md-5">
-											<label for="exampleInputEmail1">No of Items</label> <input
-												type="number" name="noOfItem" class="form-control"
-												id="noOfItem" aria-describedby="numberlHelp" placeholder="2"
-												value="<c:out value="${total_items}" />" required>
-
+											<label for="exampleInputEmail1">Cash</label> <input
+												type="number" name="cash" class="form-control" id="cash"
+												onkeyup='balance1();' aria-describedby="numberlHelp"
+												required />
 										</div>
-										<div class = "col-md-1"></div>
+										<div class="col-md-1"></div>
 
 										<div class="form-group col-md-5">
 											<label for="exampleInputEmail1">Balance</label> <input
 												type="number" name="balance" class="form-control"
-												id="balance" aria-describedby="numberlHelp">
+												onkeyup='balance1();' id="balance"
+												aria-describedby="numberlHelp" required />
 
 										</div>
 									</div>
@@ -207,18 +226,22 @@
 
 
 									<input type="hidden" id="cashireId" path="cashireId"
-										name="cashireId" value="${user.getId()}">
-
-									<div style="margin-left: 260px">
-										<button type="submit" class="btn btn-primary">Finalize</button>
+										name="cashireId" value="${user.getId()}"> <br> <br>
+									<div>
+										<br>
+										<div class="row">
+											<div class="offset-md-5 col-md-1 ">
+												<button type="submit" style="width: 100px"
+													class="btn btn-primary" name="finallize"
+													formtarget="_blank">
+													<span class="fa fa-print" aria-hidden="true"
+														></span>
+													Finalize
+												</button>
+											</div>
+										</div>
 									</div>
-
-
-
 								</form>
-
-
-
 							</div>
 						</div>
 					</div>
@@ -232,21 +255,49 @@
 	</div>
 </div>
 
+
+
 <script>
-	document.querySelector('#cash').addEventListener('keypress', function(e) {
-		var key = e.which || e.keyCode;
-		if (key === 13) {
-
-			var netAmount = document.getElementById("netAmount").value;
-
+	var balance1 = function() {
+		if (document.getElementById('returnAmount').value !== '') {
+			var netAmount = document.getElementById('netAmount').value;
+			var returnAmount = document.getElementById('returnAmount').value
 			var cash = parseInt(document.getElementById("cash").value);
 
+			var more = netAmount - returnAmount;
+
+			if (more < 0) {
+				more = 0;
+
+				if (returnAmount != 0) {
+					document.getElementById('remain').innerHTML = ' \t Customer Need to pay Rs.'
+							+ more + ' more';
+				}
+				var balance = cash - more;
+
+				document.getElementById("balance").value = 0;
+
+				document.getElementById("cash").value = 0;
+			} else {
+				if (returnAmount != 0) {
+					document.getElementById('remain').innerHTML = ' \t Customer Need to pay Rs.'
+							+ more + ' more';
+				}
+				var balance = cash - more;
+
+				document.getElementById("balance").value = balance;
+
+			}
+
+		} else if (document.getElementById('netAmount').value !== 0) {
+
+			var netAmount = document.getElementById('netAmount').value;
+			var cash = parseInt(document.getElementById("cash").value);
 			var balance = cash - netAmount;
 
 			document.getElementById("balance").value = balance;
-
 		}
-	});
+	}
 </script>
 
 <%@ include file="../includes/footer.jsp"%>

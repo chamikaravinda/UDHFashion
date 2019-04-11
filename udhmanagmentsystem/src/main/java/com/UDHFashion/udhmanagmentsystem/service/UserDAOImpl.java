@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,35 +35,46 @@ public class UserDAOImpl implements IUserDAO {
 	}
 
 	@Override
-	public boolean AddNewUser(User user) {
+	public int AddNewUser(User user) {
 
 		try {
 			int update = jdbcTemplate.update(CommonConstants.INSERT_USER, user.getFname(), user.getLname(),
 					user.getUsername(), user.getPassword(), user.getRole());
 
 			if (update == 1) {
-				return true;
+				return 1;
 			} else {
-				return false;
+				return 0;
 			}
+		} catch (DuplicateKeyException e) {
+			e.printStackTrace();
+			return 2;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		}
 	}
 
 	@Override
-	public boolean UpdateUser(User user) {
-		int update = jdbcTemplate.update(CommonConstants.UPDATE_USER, user.getFname(), user.getLname(),
-				user.getUsername(), user.getPassword(), user.getRole(), user.getId());
+	public int UpdateUser(User user) {
+		try {
+			int update = jdbcTemplate.update(CommonConstants.UPDATE_USER, user.getFname(), user.getLname(),
+					user.getUsername(), user.getPassword(), user.getRole(), user.getId());
 
-		if (update == 1) {
-			return true;
-		} else {
-			return false;
+			if (update == 1) {
+				return 1;
+			} else {
+				return 0;
+			}
+		} catch (DuplicateKeyException e) {
+			e.printStackTrace();
+			return 2;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
 		}
 	}
-	
+
 	@Override
 	public boolean UpdatePassword(User user) {
 		int update = jdbcTemplate.update(CommonConstants.UPDATE_USER, user.getFname(), user.getLname(),
@@ -74,10 +86,10 @@ public class UserDAOImpl implements IUserDAO {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public boolean deleteUSer(int id) {
-		
+
 		int update = jdbcTemplate.update(CommonConstants.DELETE_USER, id);
 
 		if (update == 1) {
@@ -88,7 +100,7 @@ public class UserDAOImpl implements IUserDAO {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public List<User> getUSers() {
 
@@ -110,13 +122,13 @@ public class UserDAOImpl implements IUserDAO {
 
 		return result;
 	}
-	
+
 	@Override
 	public User getUser(int id) {
 
 		try {
-			User validUser = (User) jdbcTemplate.queryForObject(CommonConstants.GET_USER,
-					new Object[] {id}, new BeanPropertyRowMapper(User.class));
+			User validUser = (User) jdbcTemplate.queryForObject(CommonConstants.GET_USER, new Object[] { id },
+					new BeanPropertyRowMapper(User.class));
 			return validUser;
 		} catch (EmptyResultDataAccessException e) {
 			return null;

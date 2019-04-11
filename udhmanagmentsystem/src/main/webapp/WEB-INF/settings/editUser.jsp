@@ -25,7 +25,7 @@
 	<!-- update error message -->
 	<script type="text/javascript">
 		function updateerror() {
-			swal("Account updated Unsuccesful");
+			swal("Unsuccessful","Unexpected Error occured","error");
 		}
 	</script>
 
@@ -34,6 +34,21 @@
 			window.onload = updateerror;
 		</script>
 	</c:if>
+	
+		<!-- username taken error message -->
+	<!-- Username taken error message -->
+	<script type="text/javascript">
+		function usernameerror() {
+			swal("Unsuccessful","Username already in use.Choose another username","error");
+		}
+	</script>
+
+	<c:if test="${error == 2}">
+		<script type="text/javascript">
+			window.onload = usernameerror;
+		</script>
+	</c:if>
+
 	<div class="content-page">
 
 		<!-- Start content -->
