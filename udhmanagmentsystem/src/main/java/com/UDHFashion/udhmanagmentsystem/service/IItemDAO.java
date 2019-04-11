@@ -22,4 +22,9 @@ public interface IItemDAO {
 	public abstract Item getItemByCode( String itemCode );
 	
     public abstract boolean updateReturnItem(Item item);
+    
+    //Calculate the count of the row
+    
+  
+    
 }

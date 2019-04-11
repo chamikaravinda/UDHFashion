@@ -21,6 +21,7 @@ import com.UDHFashion.udhmanagmentsystem.model.AttendenceList;
 import com.UDHFashion.udhmanagmentsystem.model.BankAccount;
 import com.UDHFashion.udhmanagmentsystem.model.DailyBussiness;
 import com.UDHFashion.udhmanagmentsystem.model.Employee;
+import com.UDHFashion.udhmanagmentsystem.model.Item;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 import com.mysql.jdbc.Statement;
 
@@ -43,7 +44,7 @@ public class AttendendenceDAOImpl implements IAttendenceDAO {
 			dateStr = formatter.parse(date);
 			java.sql.Date dateDB = new java.sql.Date(dateStr.getTime());
 
-			System.out.println(date);
+		//	System.out.println(date);
 
 			Attendence todayAttendence = (Attendence) jdbcTemplate.queryForObject(CommonConstants.GET_TODAY_ATTENDENCE,
 					new Object[] { dateDB }, new BeanPropertyRowMapper(Attendence.class));
@@ -167,4 +168,30 @@ public class AttendendenceDAOImpl implements IAttendenceDAO {
 			return null;
 		}
 	}
+
+	@Override
+	public List<AttendenceList> getAttendenceListByStatus() {
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.GET_TODAY_ATTENDENCE_LIST_BY_STATUS);
+
+		List<AttendenceList> result = new ArrayList<AttendenceList>();
+
+		for (Map<String, Object> row : rows) {
+
+			AttendenceList attendanceList = new AttendenceList();
+
+			attendanceList.setId((Integer) row.get("id"));
+			
+			attendanceList.setEmpNo((String) row.get("empNo"));
+			attendanceList.setAttendence_ID( (Integer) row.get("attendence_ID"));
+	
+
+			result.add(attendanceList);
+		}
+		return  result;
+
+		
+		
+	}
+
+	
 }

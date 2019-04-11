@@ -147,22 +147,17 @@
 														<td>${result.qty}</td>
 														<td>${result.amount}</td>
 														<td>
-															<form method="POST" action="clickReturn"
-																modelAttribute="click_return">
-
-																<input type="hidden" name="itemNo"
-																	value="${result.itemNo}"> <input type="hidden"
-																	name="qty" value="${result.qty}"> <input
-																	type="hidden" name="amount" value="${result.amount}">
-																<input type="hidden" name="price"
-																	value="${result.price}"> <input type="hidden"
-																	name="reduseDiscount" value="${result.reduseDiscount}">
-
-
-
-																<button type="submit" class="btn btn-primary"
-																	name="billId" value="${billSearch.id}">Return</button>
-
+															<form method="POST" action="toReturnNote"
+																modelAttribute="item">
+																
+																<input type="hidden" name="id" value="${result.id}"> 
+																<input type="hidden" name="billId" value="${result.billId}"> 
+																<input type="hidden" name="itemNo" value="${result.itemNo}">
+																<input type="hidden" name="qty" value="${result.qty}">
+																<input type="hidden" name="amount" value="${result.amount}"> 
+																<input type="hidden" name="price" value="${result.price}"> 
+																<input type="hidden" name="reduseDiscount" value="${result.reduseDiscount}">
+																<button type="submit" class="btn btn-primary">Return</button>
 															</form>
 
 														</td>
@@ -212,7 +207,7 @@
 										</tr>
 									</thead>
 									<tbody>
-									
+
 										<c:forEach var="result" items="${printNote_item}">
 											<tr>
 
@@ -226,15 +221,15 @@
 										</c:forEach>
 									</tbody>
 								</table>
-								
+
 								<div style="margin-left: 150px">
-								
+
 									<button type="submit" class="btn btn-primary">Print
 										Note</button>
-										
+
 								</div>
-								
-								
+
+
 							</div>
 						</div>
 					</div>
