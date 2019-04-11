@@ -44,9 +44,8 @@ public class BillItemsDAOImpl implements IBillItemDAO {
 		for (Map<String, Object> row : rows) {
 			Billitems billItems = new Billitems();
 
-			billItems.setId((int) row.get("id"));
 			billItems.setItemNo((String) row.get("itemNo"));
-			billItems.setBillId((int) row.get("billId"));
+
 			billItems.setPrice((Double) row.get("price"));
 
 			billItems.setQty((Integer) row.get("qty"));

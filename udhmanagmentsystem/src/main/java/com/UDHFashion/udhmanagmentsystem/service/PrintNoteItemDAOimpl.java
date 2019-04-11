@@ -20,7 +20,7 @@ public class PrintNoteItemDAOimpl implements PrintNoteItemDAO {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public boolean insertPrintNoteItem(TempBillitems item) {
+	public boolean insertPrintNoteItem(Billitems item) {
 
 			try {
 				jdbcTemplate.update(CommonConstants.INSERT_PRINT_RETURN_BILL_ITEM_DETAILS, 
