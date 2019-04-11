@@ -38,7 +38,8 @@ public class CommonConstants {
 	public final static String DELETE_ITEM_DETAILS = "DELETE FROM item WHERE code = ?";
 	public final static String GET_ITEM_DATA_BY_ID = "SELECT * FROM item WHERE code = ?";
 	public final static String UPDATE_ITEM_DATA = "UPDATE item SET quantity = ? , description = ?, gross_price = ?, net_price = ?, price = ?, discount_amount = ?, est_net_profit = ?, net_profit = ?, shop_id = ? WHERE code = ?";
-
+	public final static String CALCUALTE_ROW_IN_TABLE = "SELECT COUNT(*) FROM item";
+	
 	/*---------------------------Bar-code queries-------------------------------*/
 	public final static String INSERT_BARCODE_DETAILS = "INSERT INTO temp_barcode_data(code,price,quantity) VALUES(?,?,?)";
 	public final static String GET_ALL_BARCODE_DATA = "SELECT * FROM temp_barcode_data";
@@ -135,6 +136,7 @@ public class CommonConstants {
 	public final static String INSERT_EMP_ATTENDENCE = "INSERT INTO attendence_list(date,empNo,attendence_ID,status,reason) VALUES(?,?,?,?,?)";
 	public final static String UPDATE_EMP_ATTENDENCE = "UPDATE attendence_list SET date =?,empNo=?,attendence_ID=?,status=?,reason=?  WHERE id=? ";
 	public final static String UPDATE_DAILY_ATTENDENCE = "UPDATE attendence SET date =?,present=?,absent=? WHERE id=?";
+	public final static String GET_TODAY_ATTENDENCE_LIST_BY_STATUS= "SELECT * FROM attendence_list WHERE status = 'PRESENT' ";
 	
 	/*-------------------------- Salary ---------------------------------------*/
 	public final static String INSERT_EMP_SALARY = "INSERT INTO salary (empNo,empName,absent,present,totalBussines,monthlyBasic,basicSalary,bonus,advance_payment ,TotalSalray ) VALUES(?,?,?,?,?,?,?,?,?,?) ";
@@ -149,7 +151,7 @@ public class CommonConstants {
 	/*-------------------------- Return note Quearys ---------------------------------------*/
 	public final static String UPDATE_RETURN_ITEM = "UPDATE item SET quantity = ? WHERE code = ?";
   
-  /*-------------PritnNoteReturnItems---------------------------------*/
+	/*-------------PritnNoteReturnItems---------------------------------*/
 	
 	public final static String INSERT_PRINT_RETURN_BILL_ITEM_DETAILS = "INSERT INTO  print_note_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
 	public final static String GET_PRINT_RETURN_BILL_ITEM_DETAILS = "SELECT * FROM  print_note_items ";
@@ -158,18 +160,18 @@ public class CommonConstants {
 	
 
 
-/*---------------------------Temporary return Bill-------------------------------*/
-	public final static String INSERT_TEMP_RETURN_BILL_DETAILS = "INSERT INTO temp_return_bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem) VALUES(?,?,?,?,?,?,?)";
+	/*---------------------------Temporary return Bill-------------------------------*/
+	public final static String INSERT_TEMP_RETURN_BILL_DETAILS = "INSERT INTO temp_return_bill(id,date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem) VALUES(?,?,?,?,?,?,?,?)";
 	public final static String GET_ALL_TEMP_RETURN_BILL_DETAILS = "SELECT * FROM temp_return_bill where cashireId=?";
 	public final static String DELETE_TEMP_RETURN_BILL_DETAILS_ID = "DELETE FROM temp_return_bill WHERE cashireId= ?";
-	public final static String GET_TEMP_RETURN_BILL_BY_NO = "SELECT * FROM bill WHERE id = ?";
+	public final static String GET_TEM_BILL_BY_ID = "SELECT * FROM temp_return_bill WHERE id = ?";
+
 
 	/*---------------------------Temporary Return Bill Items-------------------------------*/
 	
 	
 	public final static String INSERT_TEMP_RETURN_BILL_ITEM_DETAILS = "INSERT INTO temp_return_bill_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
-	public final static String GET_TEMP_RETURN_BILL_ITEM_DETAILS = "SELECT * FROM temp_return_bill_items WHERE billId=?";
-	
-	public final static String DELETE_TEMP_RETURN_BILL_ITEM_DETAILS="DELETE FROM temp_return_bill_items WHERE itemNo= ?";
+	public final static String GET_TEMP_RETURN_BILL_ITEM_DETAILS = "SELECT * FROM temp_return_bill_items WHERE billId=?";	
+	public final static String DELETE_TEMP_RETURN_BILL_ITEM_DETAILS="DELETE FROM temp_return_bill_items WHERE id= ?";
 
 }
