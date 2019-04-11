@@ -235,7 +235,8 @@ public class ItemDAOImpl implements IItemDAO {
 
 			int updateReturnItem = jdbcTemplate.update(CommonConstants.UPDATE_RETURN_ITEM,
 
-					item.getItemQuantity(), item.getItemCode());
+					item.getItemQuantity(), 
+					item.getItemCode());
 
 			if (updateReturnItem == 2) {
 
@@ -252,7 +253,7 @@ public class ItemDAOImpl implements IItemDAO {
 
 	@Override
 	public Item getItemByCode(String itemCode) {
-
+		
 		return (Item) jdbcTemplate.queryForObject(CommonConstants.GET_ITEM_BY_ID, new Object[] { itemCode },
 				new RowMapper<Item>() {
 
@@ -269,11 +270,9 @@ public class ItemDAOImpl implements IItemDAO {
 						itemdb.setDiscount(rs.getInt("discount_amount"));
 						itemdb.setPrice(Double.parseDouble(rs.getString("price")));
 						itemdb.setNetProfit(rs.getDouble("net_profit"));
-
+						
 						return itemdb;
 					}
 				});
 	}
-
-	
 }

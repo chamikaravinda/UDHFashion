@@ -53,9 +53,6 @@ public class ReturnController {
 
 	@Autowired
 	PrintNoteItemDAO servicereturnPrintNoteitem;
-	
-	@Autowired
-	TempReturnBillDAO tempReturnbill;
 
 	@RequestMapping(value = "/returnNote", method = RequestMethod.GET)
 	public String returnNote(Model model) {
@@ -77,10 +74,6 @@ public class ReturnController {
 
 		Bill billSearch = new Bill();
 		billSearch = serviceBill.getBillById(billId);
-		
-//		TempBill tempreturnBill= new TempBill();
-//		tempreturnBill =tempReturnbill.getTempReturnBillById(billId); //to update the UI after click return button
-		
 		TempBill tempBill = new TempBill();
 		tempBill.setId(billSearch.getId());
 		tempBill.setDate(billSearch.getDate());
@@ -90,39 +83,47 @@ public class ReturnController {
 		tempBill.setTotalDiscount(billSearch.getTotalDiscount());
 		tempBill.setNoOfItem(billSearch.getNoOfItem());
 
-		long tempId=serviceInsertReturnBill.insertTempReturnBill(tempBill);
+		serviceInsertReturnBill.insertTempReturnBill(tempBill);
 
 		List<Billitems> billSearchitem = new ArrayList<Billitems>();
 		billSearchitem = serviceBillitem.getBillitem(billId);
+		for (Billitems billitems : billSearchitem) {
+			billitems.setBillId(billId);
+
+		}
 
 		serviceInsertReturnBillitem.insertTempReturnBillItems(billSearchitem);
 
-		List<TempBillitems> bill_item = serviceInsertReturnBillitem.getTempReturnBillitem(billId);
+		 List<Billitems> bill_item = serviceBillitem.getBillitem(billId);
 
-		TempBill bill = serviceInsertReturnBillitem.getTemBillById((int)tempId);
+	//	List<Billitems> return_bill_item = serviceReturnbillitem.getTempReturnBillitem(billId);
 
 		redir.addFlashAttribute("bill_item", bill_item);
-		redir.addFlashAttribute("billSearch", bill);
+		redir.addFlashAttribute("billSearch", billSearch);
 		model.setViewName("redirect:/returnNote");
 		return model;
 	}
 
-	@RequestMapping(value = "/toReturnNote", method = RequestMethod.POST)
-	public ModelAndView addToReturnNote(@ModelAttribute("item") TempBillitems returnBillItem, ModelAndView model,
+	@RequestMapping(value = "/clickReturn", method = RequestMethod.POST)
+	public ModelAndView clickreturn(@ModelAttribute("click_return") Billitems returnBillItem, ModelAndView model,
 			RedirectAttributes redir) {
 
-		serviceDeleteReturnBillitem.deleteTempReturnBillitem(returnBillItem.getId());
+		System.out.println("Click Working");
+		System.out.println("return bill item No:" + returnBillItem.getItemNo());
+		System.out.println("Return Bill item quantity: " + returnBillItem.getQty());
+		System.out.println("Return Bill item  Amount" + returnBillItem.getAmount());
+		System.out.println("Bill ID: " + returnBillItem.getBillId());
+
+		serviceDeleteReturnBillitem.deleteTempReturnBillitem(returnBillItem.getItemNo());
 
 		// insert delete item to the printNote table have to write code
 
 		servicereturnPrintNoteitem.insertPrintNoteItem(returnBillItem);
 
-		List<TempBillitems> return_bill_item = serviceReturnbillitem.getTempReturnBillitem(returnBillItem.getBillId());
+		List<Billitems> return_bill_item = serviceReturnbillitem.getTempReturnBillitem(returnBillItem.getBillId());
 		List<Billitems> printNote_item = servicereturnPrintNoteitem.getAllPrintNoteItem();
-		TempBill bill = serviceInsertReturnBillitem.getTemBillById(returnBillItem.getBillId());
-		
+
 		redir.addFlashAttribute("bill_item", return_bill_item);
-		redir.addFlashAttribute("billSearch", bill);
 		redir.addFlashAttribute("printNote_item", printNote_item);
 		model.setViewName("redirect:/returnNote");
 		return model;

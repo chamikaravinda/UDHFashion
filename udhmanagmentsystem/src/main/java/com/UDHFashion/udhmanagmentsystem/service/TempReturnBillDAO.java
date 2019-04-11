@@ -7,7 +7,7 @@ import com.UDHFashion.udhmanagmentsystem.model.TempBill;
 
 public interface TempReturnBillDAO {
 
-	public abstract long insertTempReturnBill(TempBill tempBill);
+	public abstract boolean insertTempReturnBill(TempBill tempBill);
 
 	public abstract List<TempBill> getAllTempReturnBill();
 
