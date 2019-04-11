@@ -12,6 +12,6 @@ public interface IDailyBussinessDAO {
 	public DailyBussiness getEntry(String date);
 	public boolean settingCreticalPoint();
 	public boolean deleteExpence(double amount,String date);
-	public abstract List<DailyBussiness>getDailyBusiness();
+	public abstract List<DailyBussiness> getDailyBusiness();
 	
 }

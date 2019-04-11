@@ -57,6 +57,10 @@ public class ITempBillDAOImpl implements TempBillDAO {
 
 	@Override
 	public TempBill getTempBillById(int id) {
+		
+		
+		
+		
 
 		return null;
 	}
