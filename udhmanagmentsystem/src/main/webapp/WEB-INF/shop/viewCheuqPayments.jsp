@@ -1,4 +1,3 @@
-
 <%@page import="org.springframework.beans.factory.annotation.Autowired"%>
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -72,31 +71,25 @@
 
 
 <div class="content-page">
-
 	<!-- Start content -->
 	<div class="content">
-
 		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xl-12">
-					<div class="breadcrumb-holder">
-						<h1 class="main-title float-left">Credit Bills</h1>
-						<ol class="breadcrumb float-right">
-							<li class="breadcrumb-item">Home</li>
-							<li class="breadcrumb-item active">Accounts</li>
-						</ol>
-						<div class="clearfix"></div>
-					</div>
-				</div>
+
+			<div class="breadcrumb-holder">
+				<h1 class="main-title float-left">Cheque Payments</h1>
+				<ol class="breadcrumb float-right">
+					<li class="breadcrumb-item">Home</li>
+					<li class="breadcrumb-item active">Accounts</li>
+				</ol>
+				<div class="clearfix"></div>
 			</div>
 
 			<div class="row">
-
 				<div class="col-md-12">
 					<div class="card mb-3">
 						<div class="col-md-12a">
-							<a href="addCreditBills" class="btn btn-primary"
-								style="margin: 10px" role="button" aria-pressed="true">Add</a>
+							<a href="addCheques" class="btn btn-primary" style="margin: 10px"
+								role="button" aria-pressed="true">Add</a>
 
 						</div>
 
@@ -109,8 +102,10 @@
 											<th>ID</th>
 											<th>Bill No</th>
 											<th>Bill Date</th>
-											<th>Shop Name</th>
 											<th>Bill Amount</th>
+											<th>Bank Name</th>
+											<th>Cheque No</th>
+											<th>Payed Date</th>
 
 											<td><span><i class="fa fa-pencil-square"
 													aria-hidden="true"></i></span></td>
@@ -120,27 +115,29 @@
 									</thead>
 									<tbody>
 
-										<c:forEach var="result" items="${creditBillList}">
+										<c:forEach var="result" items="${chequPaymentList}">
 											<tr>
 												<td>${result.id}</td>
 												<td>${result.billNo}</td>
 												<td>${result.billDate}</td>
-												<td>${result.shopName }</td>
-												<td>${result.billAmount }</td>
+												<td>${result.billAmount}</td>
+												<td>${result.bankName}</td>
+												<td>${result.chequeNo }</td>
+												<td>${result.paymentDate}</td>
 												<td>
-													<form method="POST" action="editCreditBill"
+													<form method="POST" action="ediCashPayment"
 														modelAttribute="creditBills">
 														<input name="id" type="hidden" value="${result.id}">
-														<button type="submit" class="btn btn-link"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+														<button type="submit" class="btn btn-primary">Update</button>
 													</form>
 
 
 												</td>
 												<td>
-													<form method="POST" action="deleteCreditBills"
+													<form method="POST" action="deleteCashPayments"
 														modelAttribute="creditBill">
 														<input name="id" type="hidden" value="${result.id}">
-														<button type="submit" class="btn btn-link"> <i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+														<button type="submit" class="btn btn-primary">Delete</button>
 													</form>
 												</td>
 											</tr>

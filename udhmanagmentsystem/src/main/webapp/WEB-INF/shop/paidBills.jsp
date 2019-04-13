@@ -14,16 +14,55 @@
 <!--  to sweet alerts-->
 
 
-<!-- added success message -->
+<!-- cash pay success message -->
 <script type="text/javascript">
-	function addedsuccesfully() {
-		swal("Credit Bill Added Succesfully");
+	function CreditBillCashPaySuccesfull() {
+		swal("Successful","Credit Bill Paid By Cash Succesfully","success");
 	}
 </script>
 
 <c:if test="${success == 1}">
 	<script type="text/javascript">
-		window.onload = addedsuccesfully;
+		window.onload = CreditBillCashPaySuccesfull;
+	</script>
+</c:if>
+
+<!-- cash pay success message -->
+<script type="text/javascript">
+	function CashPaySuccesfull() {
+		swal("Successful","Cash Payment Succesfull","success");
+	}
+</script>
+
+<c:if test="${success == 6}">
+	<script type="text/javascript">
+		window.onload = CashPaySuccesfull;
+	</script>
+</c:if>
+
+<!-- cheque pay success message -->
+<script type="text/javascript">
+	function ChequePaySuccesfull() {
+		swal("Successful","Cheque Payment Succesfull","success");
+	}
+</script>
+
+<c:if test="${success == 7}">
+	<script type="text/javascript">
+		window.onload = ChequePaySuccesfull;
+	</script>
+</c:if>
+
+<!-- cheque pay success message -->
+<script type="text/javascript">
+	function CreditBillChequePaySuccesfull() {
+		swal("Successful","Credit Bill Paid By Cheque Succesfully","success");
+	}
+</script>
+
+<c:if test="${success == 5}">
+	<script type="text/javascript">
+		window.onload = CreditBillChequePaySuccesfull;
 	</script>
 </c:if>
 

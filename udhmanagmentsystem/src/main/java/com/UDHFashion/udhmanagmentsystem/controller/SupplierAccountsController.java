@@ -43,69 +43,21 @@ public class SupplierAccountsController {
 
 	@Autowired
 	IPaidBillDAO servicePaidBill;
-	
-	
 
-	@RequestMapping(value = "/newPayment", method = RequestMethod.GET)
-	public String newPayment(Model model) {
+	// view All credit bills
+	@RequestMapping(value = "/allCreditBills", method = RequestMethod.GET)
+	public String viewCreditBills(Model model) {
 
 		List<CreditBill> creditBillList = serviceCreditBill.getAllCreditBillDetails();
 
 		model.addAttribute("creditBillList", creditBillList);
 
-		return "shop/newPayment";
-	}
-	// Check whether all details are corercct
-
-	@RequestMapping(value = "/check_paymentMethod_redirect", method = RequestMethod.POST)
-	public ModelAndView check_paymentMethod_redirect(@RequestParam("billNumber") String billNumber,
-			@RequestParam("method") String method, ModelAndView model) {
-
-		System.out.println(billNumber);
-		System.out.println(method);
-
-		if (billNumber.equals("newPayment")) {
-			if (method.equals("cash")) {
-
-				List<Shop> shop = iShop.getAllShopsDetails();
-				model.addObject("shopList", shop);
-
-				model.setViewName("shop/addCashPayments");
-
-			}
-			if (method.equals("Cheque")) {
-				List<Shop> shop = iShop.getAllShopsDetails();
-				model.addObject("shopList", shop);
-
-				model.setViewName("shop/addCheques");
-			}
-
-		} else {
-
-			if (method.equals("cash")) {
-				List<Shop> shop = iShop.getAllShopsDetails();
-				List<CreditBill> creditBillList = serviceCreditBill.getAllCreditBillDetails();
-
-				model.addObject("creditBillList", creditBillList);
-				model.addObject("shopList", shop);
-
-				model.setViewName("shop/addExsistCashPayments");
-			}
-			if (method.equals("Cheque")) {
-				List<Shop> shop = iShop.getAllShopsDetails();
-				model.addObject("shopList", shop);
-
-				model.setViewName("shop/addCheques");
-			}
-
-		}
-
-		// model.setViewName("shop/addCheques");
-		return model;
+		return "shop/viewCreditBills";
 
 	}
 
-	@RequestMapping(value = "/creditBills", method = RequestMethod.GET)
+	// show add new credit bill page
+	@RequestMapping(value = "/addCreditBills", method = RequestMethod.GET)
 	public String addCreditBill(Model model) {
 
 		List<Shop> shop = iShop.getAllShopsDetails();
@@ -114,15 +66,15 @@ public class SupplierAccountsController {
 
 		return "shop/addCreditBills";
 	}
-	// credit bill adding to db
 
-	@RequestMapping(value = "/submitCreditBills", method = RequestMethod.POST)
+	// add new credit bill
+	@RequestMapping(value = "/addCreditBills", method = RequestMethod.POST)
 	public ModelAndView submitCreditBills(@ModelAttribute("creditBill") CreditBill creditBill, ModelAndView model,
 			RedirectAttributes redir) {
 
 		if (serviceCreditBill.insertCreditBillDetails(creditBill)) {
 			redir.addFlashAttribute("success", 1);
-			model.setViewName("redirect:/viewCreditBills");
+			model.setViewName("redirect:/allCreditBills");
 			return model;
 		} else {
 
@@ -133,20 +85,42 @@ public class SupplierAccountsController {
 
 	}
 
-	// View from Db
-	@RequestMapping(value = "/viewCreditBills", method = RequestMethod.GET)
-	public String viewCreditBills(Model model) {
+	// show edit credit bill page
+	@RequestMapping(value = "/editCreditBill", method = RequestMethod.POST)
+	public ModelAndView editCreditBillShow(@ModelAttribute("creditBills") CreditBill creditBill, ModelAndView model) {
 
-		List<CreditBill> creditBillList = serviceCreditBill.getAllCreditBillDetails();
+		CreditBill showCdtbill = serviceCreditBill.getCreditBillById(creditBill.getId());
 
-		model.addAttribute("creditBillList", creditBillList);
+		List<Shop> shop = iShop.getAllShopsDetails();
 
-		return "shop/viewCreditBills";
+		model.addObject("shopList", shop);
+		model.addObject("creditBill", showCdtbill);
+		model.setViewName("shop/editCreditBills");
 
-		// working properly
+		return model;
+
 	}
 
-	// delete from DB
+	// save edited credit bill
+	@RequestMapping(value = "/updateCreditBill", method = RequestMethod.POST)
+	public ModelAndView submitUpdateEmployee(ModelAndView model, @ModelAttribute("creditBills") CreditBill creditBill,
+			RedirectAttributes redir) {
+
+		if (serviceCreditBill.updateCreditBillDetails(creditBill)) {
+			redir.addFlashAttribute("success", 2);
+			model.setViewName("redirect:/allCreditBills");
+			return model;
+
+		} else {
+
+			model.addObject("error", "Credit Bill updating unsuccesfully");
+			model.setViewName("redirect:/editCreditBill");
+			return model;
+		}
+
+	}
+
+	// delete the credit bill
 	@RequestMapping(value = "/deleteCreditBills", method = RequestMethod.POST)
 	public ModelAndView deleteCreditBills(@ModelAttribute("creditBill") CreditBill creditBill, ModelAndView model,
 			RedirectAttributes redir) {
@@ -169,44 +143,245 @@ public class SupplierAccountsController {
 
 	}
 
-	// update data to the DB
+	// show new payment page
+	@RequestMapping(value = "/newPayment", method = RequestMethod.GET)
+	public String newPayment(Model model) {
 
-	// Load Data to the From -------------------------------
+		List<CreditBill> creditBillList = serviceCreditBill.getAllCreditBillDetails();
 
-	@RequestMapping(value = "/editCreditBill", method = RequestMethod.POST)
-	public ModelAndView editCreditBillShow(@ModelAttribute("creditBills") CreditBill creditBill, ModelAndView model) {
+		model.addAttribute("creditBillList", creditBillList);
 
-		CreditBill showCdtbill = serviceCreditBill.getCreditBillById(creditBill.getId());
+		return "shop/newPayment";
+	}
 
-		model.addObject("creditBill", showCdtbill);
-		model.setViewName("shop/editCreditBills");
+	// redirect to relevent payment page
+	@RequestMapping(value = "/newPayment", method = RequestMethod.POST)
+	public ModelAndView check_paymentMethod_redirect(@RequestParam("billNumber") String billNumber,
+			@RequestParam("method") String method, ModelAndView model) {
 
+		if (billNumber.equals("newPayment")) {
+			if (method.equals("cash")) {
+
+				model.setViewName("redirect:/addcashPayments");
+
+			}
+			if (method.equals("Cheque")) {
+				List<Shop> shop = iShop.getAllShopsDetails();
+				model.addObject("shopList", shop);
+
+				model.setViewName("shop/addCheques");
+			}
+
+		} else {
+
+			if (method.equals("cash")) {
+
+				CreditBill bill = new CreditBill();
+				bill = serviceCreditBill.getCreditBillByBillNo(billNumber);
+				model.addObject("creditBills", bill);
+				model.setViewName("shop/addExsistCashPayments");
+
+				return model;
+			}
+			if (method.equals("Cheque")) {
+				CreditBill bill = new CreditBill();
+				bill = serviceCreditBill.getCreditBillByBillNo(billNumber);
+				model.addObject("creditBills", bill);
+				model.setViewName("shop/addExsistChequePayment");
+			}
+
+		}
 		return model;
 
 	}
 
-	// Update the Details in new Way
-	@RequestMapping(value = "/submitCreditBill", method = RequestMethod.POST)
-	public ModelAndView submitUpdateEmployee(ModelAndView model, @ModelAttribute("creditBills") CreditBill creditBill,
+	// pay existing credit bill by cash
+	@RequestMapping(value = "/existCreditBillCashPayments", method = RequestMethod.POST)
+	public ModelAndView creditBillCashPay(ModelAndView model, @ModelAttribute("creditBills") CashPayments payment,
 			RedirectAttributes redir) {
 
-		if (serviceCreditBill.updateCreditBillDetails(creditBill)) {
-			redir.addFlashAttribute("success", 2);
-			model.setViewName("redirect:/viewCreditBills");
-			return model;
+		if (serviceCashPaymet.insertCashPayments(payment)) {
+
+			PaidBills paidbill = new PaidBills();
+			paidbill.setBillAmount(payment.getBillAmount());
+			paidbill.setBillDate(payment.getBillDate());
+			paidbill.setBillNo(payment.getBillNo());
+			paidbill.setPaymentDate(payment.getPaymentDate());
+			paidbill.setPaymentMethod("Cash Payment");
+			paidbill.setShopName(payment.getShopName());
+
+			if (servicePaidBill.insertPaidBillDetails(paidbill)
+					&& serviceCreditBill.deleteCreditBillDetails(payment.getBillNo())) {
+
+				redir.addFlashAttribute("success", 1);
+				model.setViewName("redirect:/paidBills");
+			}
 
 		} else {
 
-			model.addObject("error", "Credit Bill updating unsuccesfully");
-			model.setViewName("redirect:/editCreditBill");
-			return model;
+			model.addObject("error", 1);
+			model.addObject("creditBills", payment);
+			model.setViewName("addExsistCashPayments");
 		}
+		return model;
 
 	}
 
-	// End of all access with DB in Credit Bills------------------------------------------------------------------------------------
+	// pay existing credit bill by cheque
+	@RequestMapping(value = "/existCreditBillChequePayments", method = RequestMethod.POST)
+	public ModelAndView creditBillChequePay(ModelAndView model, @ModelAttribute("creditBills") ChequePayment payment,
+			RedirectAttributes redir) {
 
-	// if we going to pay exist bill
+		if (serviceChequePaument.insertChequePayment(payment)) {
+
+			PaidBills paidbill = new PaidBills();
+			paidbill.setBillAmount(payment.getBillAmount());
+			paidbill.setBillDate(payment.getBillDate());
+			paidbill.setBillNo(payment.getBillNo());
+			paidbill.setPaymentDate(payment.getPaymentDate());
+			paidbill.setPaymentMethod("Cheque Payment");
+			paidbill.setShopName(payment.getShopName());
+
+			if (servicePaidBill.insertPaidBillDetails(paidbill)
+					&& serviceCreditBill.deleteCreditBillDetails(payment.getBillNo())) {
+
+				redir.addFlashAttribute("success", 5);
+				model.setViewName("redirect:/paidBills");
+			}
+
+		} else {
+
+			model.addObject("error", 1);
+			model.addObject("creditBills", payment);
+			model.setViewName("shop/addExsistChequePayment");
+		}
+		return model;
+
+	}
+
+	// Show Cash payments
+	@RequestMapping(value = "/cashPayments", method = RequestMethod.GET)
+	public String viewCashPayment(Model model) {
+
+		List<CashPayments> cashPaymentList = serviceCashPaymet.getAllCashPaymentsDetails();
+
+		model.addAttribute("cashPaymentList", cashPaymentList);
+
+		return "shop/viewCashPayments";
+
+		// working properly
+	}
+
+	// show cheque payments
+	@RequestMapping(value = "/cheqPayments", method = RequestMethod.GET)
+	public String viewCheqPayment(Model model) {
+
+		List<ChequePayment> CheqPaymentList = serviceChequePaument.getAllChequePaymentDetails();
+
+		model.addAttribute("chequPaymentList", CheqPaymentList);
+
+		return "shop/viewCheuqPayments";
+
+	}
+
+	// show paid bills
+	@RequestMapping(value = "/paidBills", method = RequestMethod.GET)
+	public String viewPaidbill(Model model) {
+
+		List<PaidBills> paidbills = servicePaidBill.getAllPaidBillDetails();
+		model.addAttribute("paidbills", paidbills);
+
+		return "shop/paidBills";
+
+		// working properly
+	}
+
+	// new Cash Payment
+	@RequestMapping(value = "/addcashPayments", method = RequestMethod.GET)
+	public String showCashPayment(Model model) {
+
+		List<Shop> shop = iShop.getAllShopsDetails();
+		CashPayments payment = new CashPayments();
+
+		model.addAttribute("cashPayment", payment);
+		model.addAttribute("shopList", shop);
+
+		return "shop/addCashPayments";
+	}
+
+	// add new Cash payment
+	@RequestMapping(value = "/addcashPayments", method = RequestMethod.POST)
+	public ModelAndView addCashPayment(ModelAndView model, @ModelAttribute("cashPayment") CashPayments payment,
+			RedirectAttributes redir) {
+
+		if (serviceCashPaymet.insertCashPayments(payment)) {
+
+			PaidBills paidbill = new PaidBills();
+			paidbill.setBillAmount(payment.getBillAmount());
+			paidbill.setBillDate(payment.getBillDate());
+			paidbill.setBillNo(payment.getBillNo());
+			paidbill.setPaymentDate(payment.getPaymentDate());
+			paidbill.setPaymentMethod("Cash Payment");
+			paidbill.setShopName(payment.getShopName());
+
+			if (servicePaidBill.insertPaidBillDetails(paidbill)) {
+
+				redir.addFlashAttribute("success", 6);
+				model.setViewName("redirect:/paidBills");
+			}
+
+		} else {
+
+			model.addObject("error", 1);
+			model.addObject("cashPayment", payment);
+			model.setViewName("addCashPayments");
+		}
+		return model;
+	}
+
+	// new cheq payament
+	@RequestMapping(value = "/addCheques", method = RequestMethod.GET)
+	public String showChequePayment(Model model) {
+		List<Shop> shop = iShop.getAllShopsDetails();
+		ChequePayment payment = new ChequePayment();
+
+		model.addAttribute("shopList", shop);
+		model.addAttribute("chequePayment", payment);
+		return "shop/addCheques";
+	}
+
+	// add new Cheque payment
+	@RequestMapping(value = "/addCheques", method = RequestMethod.POST)
+	public ModelAndView newChequePayment(ModelAndView model, @ModelAttribute("chequePayment") ChequePayment payment,
+			RedirectAttributes redir) {
+
+		if (serviceChequePaument.insertChequePayment(payment)) {
+
+			PaidBills paidbill = new PaidBills();
+			paidbill.setBillAmount(payment.getBillAmount());
+			paidbill.setBillDate(payment.getBillDate());
+			paidbill.setBillNo(payment.getBillNo());
+			paidbill.setPaymentDate(payment.getPaymentDate());
+			paidbill.setPaymentMethod("Cheque Payment");
+			paidbill.setShopName(payment.getShopName());
+
+			if (servicePaidBill.insertPaidBillDetails(paidbill)) {
+
+				redir.addFlashAttribute("success", 7);
+				model.setViewName("redirect:/paidBills");
+			}
+
+		} else {
+
+			model.addObject("error", 1);
+			model.addObject("chequePayment", payment);
+			model.setViewName("shop/addCheques");
+		}
+		return model;
+
+	}
+
+	///////////////////// complete till this point
 	@RequestMapping(value = "/ExistcashPayments", method = RequestMethod.GET)
 	public String ExistcashPayments(Model model) {
 
@@ -220,26 +395,16 @@ public class SupplierAccountsController {
 		return "shop/addExsistCashPayments";
 	}
 
-	// CashPayments Details---------------------------------------------------------
-	@RequestMapping(value = "/cashPayments", method = RequestMethod.GET)
-	public String addCashPayment(Model model) {
-
-		List<Shop> shop = iShop.getAllShopsDetails();
-
-		model.addAttribute("shopList", shop);
-
-		return "shop/addCashPayments";
-	}
-
 	@RequestMapping(value = "/submitCashPayment", method = RequestMethod.POST)
 	public ModelAndView submitCashPayment(@ModelAttribute("cashPayment") CashPayments cashPayment,
 			@ModelAttribute("paidBill") PaidBills paidBills, ModelAndView model, RedirectAttributes redir) {
 
 		System.out.println(cashPayment.getBillNo());
-		
+
 		if (serviceCashPaymet.insertCashPayments(cashPayment)) {
 			paidBills.setPaymentMethod("Cash Payment");
-			if (servicePaidBill.insertPaidBillDetails(paidBills ) && serviceCreditBill.deleteCreditBillDetails(cashPayment.getBillNo()) ) {
+			if (servicePaidBill.insertPaidBillDetails(paidBills)
+					&& serviceCreditBill.deleteCreditBillDetails(cashPayment.getBillNo())) {
 
 				redir.addFlashAttribute("success", 1);
 				model.setViewName("redirect:/paidBills");
@@ -254,45 +419,9 @@ public class SupplierAccountsController {
 
 	}
 
-	// View Cash Payment
-	@RequestMapping(value = "/viewCashPayment", method = RequestMethod.GET)
-	public String viewCashPayment(Model model) {
-
-		List<CashPayments> cashPaymentList = serviceCashPaymet.getAllCashPaymentsDetails();
-
-		model.addAttribute("cashPaymentList", cashPaymentList);
-
-		return "shop/viewCashPayments";
-
-		// working properly
-	}
-
-	@RequestMapping(value = "/paidBills", method = RequestMethod.GET)
-	public String viewPaidbill(Model model) {
-
-		List<PaidBills> paidbills = servicePaidBill.getAllPaidBillDetails();
-		model.addAttribute("paidbills", paidbills);
-
-		return "shop/paidBills";
-
-		// working properly
-	}
-
-	// All things with Cheque addings
-	@RequestMapping(value = "/addCheques", method = RequestMethod.GET)
-	public String addCheque(Model model) {
-		List<Shop> shop = iShop.getAllShopsDetails();
-
-		model.addAttribute("shopList", shop);
-
-		return "shop/addCheques";
-	}
-
 	@RequestMapping(value = "/submitChequePayment", method = RequestMethod.POST)
 	public ModelAndView submitChequePayment(@ModelAttribute("chequePayment") ChequePayment chequePayment,
 			@ModelAttribute("paidBills") PaidBills paidBills, ModelAndView model, RedirectAttributes redir) {
-
-		paidBills.setBillAmount(chequePayment.getChequeAmount());
 
 		if (serviceChequePaument.insertChequePayment(chequePayment)) {
 			paidBills.setPaymentMethod("Cheque Payment");

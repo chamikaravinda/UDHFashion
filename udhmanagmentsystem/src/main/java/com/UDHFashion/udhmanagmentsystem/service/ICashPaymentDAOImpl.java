@@ -1,12 +1,15 @@
 package com.UDHFashion.udhmanagmentsystem.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.UDHFashion.udhmanagmentsystem.model.CashPayments;
+import com.UDHFashion.udhmanagmentsystem.model.CreditBill;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 
 @Service
@@ -38,9 +41,25 @@ public class ICashPaymentDAOImpl implements ICashPaymentDAO {
 	public List<CashPayments> getAllCashPaymentsDetails() {
 		
 		
-		
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.GET_ALL_CASHPAYMENT_DETAILS);
 
-		return null;
+		List<CashPayments> result = new ArrayList<CashPayments>();
+
+		for (Map<String, Object> row : rows) {
+			CashPayments payment = new CashPayments();
+
+			payment.setId((Integer) row.get("id"));
+			payment.setBillNo((String) row.get("billNo"));
+			payment.setBillDate((String) row.get("billDate"));
+			payment.setShopName((String) row.get("shopName"));
+			payment.setBillAmount((Double) row.get("billAmount"));
+			payment.setPaymentDate("paymentDate");
+			result.add(payment);
+		}
+
+		return result;
+
+		
 	}
 
 }

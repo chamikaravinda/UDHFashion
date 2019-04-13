@@ -41,34 +41,54 @@
 
 						<div class="card-body">
 
-							<form:form method="POST" action="submitCreditBill"
-								modelAttribute="creditBills" >
+							<form:form method="POST" action="updateCreditBill"
+								modelAttribute="creditBill">
 
+								<div class="row">
+									<div class="form-row col-md-5 ">
+										<label for="exampleInputEmail1">Bill No</label>
+										<form:input type="text"  class="form-control"
+											path="billNo" aria-describedby="emailHelp" placeholder=""
+											required="required" />
+									</div>
+									<div class="form-row offset-md-1 col-md-5 ">
+										<label for="exampleInputEmail1">Bill Date</label>
+										<form:input type="Date" path="billDate" class="form-control"
+											aria-describedby="numberlHelp" placeholder=""
+											required="required" />
 
-								<div class="form-row">
-									<label for="exampleInputEmail1">Bill No</label> <form:input
-										type="text" name="billNo" class="form-control" path="billNo"
-										aria-describedby="emailHelp" placeholder="" required="required"/>
+									</div>
+									
+									<div class="form-group col-md-5"><br>
+										<label for="sel1">Shop Name</label> <form:select path="shopName"
+											class="form-control" id="shopId" required="required">
+
+											<c:forEach var="result" items="${shopList}">
+
+												<form:option value="${result.shopName}"> ${result.shopName} </form:option>
+
+											</c:forEach>
+
+										</form:select>
+									</div>
+
+									<div class="form-row offset-md-1 col-md-5 "><br>										
+										<label for="exampleInputEmail1">Amount</label>
+										<form:input type="text" path="billAmount" class="form-control"
+											aria-describedby="numberlHelp" placeholder=""
+											required="required" />
+
+									</div>
+									
+									<form:input type="hidden" path="id"/>
+									
+									<br/><br/>
+									
+									<div class="offset-md-5">
+										<button type="submit" class="btn btn-primary">Update
+											Bill</button>
+									</div>
 								</div>
-								<div class="form-row">
-									<label for="exampleInputEmail1">Bill Date</label> <form:input
-										type="Date" path="billDate" class="form-control" 
-										aria-describedby="numberlHelp" placeholder=""
-										required="required"/>
-
-								</div>
-								<div class="form-row">
-									<label for="exampleInputEmail1">Shop Name</label> <form:input
-										type="text" path="shopName" class="form-control" 
-										aria-describedby="numberlHelp" placeholder=""
-										required="required"/>
-
-								</div>
-
-								<div style="margin-left: 500px">
-									<button type="submit" class="btn btn-primary">Update Bill</button>
-								</div>
-
 							</form:form>
 
 						</div>

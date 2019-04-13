@@ -41,7 +41,7 @@
 
 						<div class="card-body">
 
-							<form method="POST" action="submitCreditBills"
+							<form method="POST" action="addCreditBills"
 								modelAttribute="creditBills" onsubmit="return validator()">
 
 								<div class="row">
@@ -78,7 +78,7 @@
 
 									</div>
 
-									<div style="margin-left: 500px">
+									<div class="offset-md-5">
 										<br>
 										<button type="submit" class="btn btn-primary">
 											<i class="fa fa-plus"></i> Add Bill

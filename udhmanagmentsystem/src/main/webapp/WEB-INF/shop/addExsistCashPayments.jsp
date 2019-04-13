@@ -1,4 +1,3 @@
-aa
 <%@page import="org.springframework.beans.factory.annotation.Autowired"%>
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -10,9 +9,18 @@ aa
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
+<!-- update error message -->
+<script type="text/javascript">
+	function cashPaymentError() {
+		swal("Unsuccessful", "Unexpected Error occured", "error");
+	}
+</script>
 
-
-
+<c:if test="${error == 1}">
+	<script type="text/javascript">
+		window.onload = cashPaymentError;
+	</script>
+</c:if>
 
 <div class="content-page">
 
@@ -25,7 +33,7 @@ aa
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="breadcrumb-holder">
-						<h1 class="main-title float-left">Credit Bill pay by Cash</h1>
+						<h1 class="main-title float-left">Credit Bill Cash Payment</h1>
 						<ol class="breadcrumb float-right">
 							<li class="breadcrumb-item">Home</li>
 							<li class="breadcrumb-item active">CashPayments</li>
@@ -42,72 +50,56 @@ aa
 					<div class="card mb-3">
 
 						<div class="card-body">
+							<form:form method="POST" action="existCreditBillCashPayments"
+								modelAttribute="creditBills">
+								<div class="form-row">
+									<div class="form-group col-md-5 offset-md-1">
+										<label>Bill No</label>
 
-							<form method="POST" action="submitCashPayment"
-								modelAttribute="creditBills" >
+										<form:input type="text" path="billNo" class="form-control"
+											id="billNo" required="required" />
+									</div>
+
+									<div class="form-group col-md-5">
+										<label for="exampleInputEmail1">Bill Date</label>
+										<form:input type="Date" path="billDate" class="form-control"
+											id="billDate" aria-describedby="numberlHelp"
+											placeholder="Bill Date" required="required" />
+
+									</div>
+
+								</div>
 
 								<div class="form-row">
-								<div class="form-group col-md-4">
-										<label for="sel1">Bill No</label> <select name="billNo"
-											class="form-control" id="billNo" required>
-
-											<c:forEach var="result" items="${creditBillList}">
-
-												<option>${result.billNo}</option>
-
-											</c:forEach>
-
-										</select>
+									<div class="form-group col-md-5 offset-md-1">
+										<label for="sel1">Shop Name</label>
+										<form:input type="text " path="shopName" class="form-control"
+											id="shopName" required="required" />
 									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Bill Date</label> <input
-											type="Date" name="billDate" class="form-control"
-											id="billDate" aria-describedby="numberlHelp"
-											placeholder="Bill Date" required>
-
-									</div>
-									
-								</div>
-
-							<div class="form-row">
-									<div class="form-group col-md-4">
-										<label for="sel1">Shop Name</label> <select name="shopName"
-											class="form-control" id="shopName" required>
-
-											<c:forEach var="result" items="${shopList}">
-
-												<option>${result.shopName}</option>
-
-											</c:forEach>
-
-										</select>
-									</div>
-									
-									
-									
-									
-									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Bill Amount</label> <input
-											type="number" name="billAmount" class="form-control"
-											id="billAmount" aria-describedby="emailHelp"
-											placeholder="Bill Amount" required>
+									<div class="form-group col-md-5">
+										<label for="exampleInputEmail1">Bill Amount</label>
+										<form:input type="number" path="billAmount"
+											class="form-control" id="billAmount"
+											aria-describedby="emailHelp" placeholder="Bill Amount"
+											required="required" />
 									</div>
 
 
-
+									<form:input type="hidden" path="id" />
 
 								</div>
-								<div class="form-group col-md-8.5">
+								<div class="form-group col-md-5 offset-md-1">
 									<label for="exampleInputEmail1">Payment Date</label> <input
-										type="Date" name="paymentDate" class="form-control" id="paymentDate"
-										aria-describedby="emailHelp" placeholder="Payed Date" required>
+										type="Date" name="paymentDate" class="form-control"
+										id="paymentDate" aria-describedby="emailHelp"
+										placeholder="Payed Date" required>
 								</div>
-								<div style="margin-left: 500px">
-									<button type="submit" class="btn btn-primary">Add</button>
+								<br />
+								<div class="offset-md-5">
+									<button type="submit" class="btn btn-primary col-md-2">Pay</button>
 								</div>
 
-							</form>
-
+							</form:form>
 						</div>
 					</div>
 					<!-- end card-->
