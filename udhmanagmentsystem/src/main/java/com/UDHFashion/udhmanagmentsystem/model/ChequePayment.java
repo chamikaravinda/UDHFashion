@@ -5,15 +5,14 @@ public class ChequePayment {
 	private int id;
 	private String billNo;
 	private String billDate;
-	private String shopNo;
+	private double billAmount;
 	private String shopName;
 	private String bankName;
 	private String bankAccount;
 	private String chequeNo;
-	private double chequeAmount;
 	private String chequeDate;
 	private String paymentDate;
-	private double paymentAmount;
+
 	public int getId() {
 		return id;
 	}
@@ -31,12 +30,6 @@ public class ChequePayment {
 	}
 	public void setBillDate(String billDate) {
 		this.billDate = billDate;
-	}
-	public String getShopNo() {
-		return shopNo;
-	}
-	public void setShopNo(String shopNo) {
-		this.shopNo = shopNo;
 	}
 	public String getShopName() {
 		return shopName;
@@ -75,19 +68,12 @@ public class ChequePayment {
 	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
 	}
-	public double getChequeAmount() {
-		return chequeAmount;
+	public double getBillAmount() {
+		return billAmount;
 	}
-	public void setChequeAmount(double chequeAmount) {
-		this.chequeAmount = chequeAmount;
+	public void setBillAmount(double billAmount) {
+		this.billAmount = billAmount;
 	}
-	public double getPaymentAmount() {
-		return paymentAmount;
-	}
-	public void setPaymentAmount(double paymentAmount) {
-		this.paymentAmount = paymentAmount;
-	}
-	
 	
 	
 

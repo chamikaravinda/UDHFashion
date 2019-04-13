@@ -9,23 +9,27 @@
 
 		<div class="container-fluid">
 
-				<div class="breadcrumb-holder">
-					<h1 class="main-title float-left">Stocks</h1>
-					<ol class="breadcrumb float-right">
-						<li class="breadcrumb-item">Home</li>
-						<li href="addStock" class="breadcrumb-item active">Stocks</li>
-					</ol>
-					<div class="clearfix"></div>
-				</div>
+			<div class="breadcrumb-holder">
+				<h1 class="main-title float-left">Stocks</h1>
+				<ol class="breadcrumb float-right">
+					<li class="breadcrumb-item">Home</li>
+					<li href="addStock" class="breadcrumb-item active">Stocks</li>
+				</ol>
+				<div class="clearfix"></div>
+			</div>
 
 			<div class="row">
 
 				<div class="col-md-12">
 					<div class="card mb-3">
 						<div class="col-md-12a">
-			<a href="addStock" class="btn btn-primary" Style="margin: 10px" role="button" aria-pressed="true">Add</a> 
-			<a href="return" class="btn btn-primary" Style="margin: 10px" role="button" aria-pressed="true">Return Item</a> 
-			<a href="barcodeGenerateView" class="btn btn-primary" Style="margin: 10px" role="button" aria-pressed="true">Generate Barcodes</a>
+							<a href="addStock" class="btn btn-primary" Style="margin: 10px"
+								role="button" aria-pressed="true">Add</a> <a href="return"
+								class="btn btn-primary" Style="margin: 10px" role="button"
+								aria-pressed="true">Return Item</a> <a
+								href="barcodeGenerateView" class="btn btn-primary"
+								Style="margin: 10px" role="button" aria-pressed="true">Generate
+								Barcodes</a>
 						</div>
 
 

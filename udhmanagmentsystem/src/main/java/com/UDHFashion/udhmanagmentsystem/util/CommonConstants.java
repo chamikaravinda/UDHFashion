@@ -71,18 +71,19 @@ public class CommonConstants {
 	public final static String GET_ALL_CREDITBILL_DETAILS = "SELECT * FROM credit_bill";
 	public final static String DELETE_CREDITBILL_DETAILS = "DELETE FROM credit_bill WHERE billNo = ?";
 	public final static String DELETE_CREDITBILL_DETAILS_ID = "DELETE FROM credit_bill WHERE id = ?";
-	public final static String UPDATE_CREDITBILL_DETAILS = "UPDATE credit_bill SET billNo = ? , billDate = ?,shopName = ?,billAmount=? WHERE empNo = ?";
+	public final static String UPDATE_CREDITBILL_DETAILS = "UPDATE credit_bill SET billNo = ? , billDate = ?,shopName = ?,billAmount=? WHERE id = ?";
 	public final static String GET_CREDITBILL_BY_NO = "SELECT * FROM credit_bill WHERE id = ?";
+	public final static String GET_CREDITBILL_BY_BILL_NO = "SELECT * FROM credit_bill WHERE billNo = ?";
 
 	/*---------------------------Cash Payments-------------------------------*/
 
 	public final static String INSERT_CASHPAYMENT_DETAILS = "INSERT INTO cash_payment(billNo,billDate,shopName,billAmount,paymentDate) VALUES(?,?,?,?,?)";
-	public final static String GET_ALL_CASHPAYMENT_DETAILS = "SELECT * FROM cash_payment";
+	public final static String GET_ALL_CASHPAYMENT_DETAILS = "SELECT * FROM cash_payment ORDER BY id DESC";
 
 	/*--------------------------Cheque Payments-------------------------------*/
 
-	public final static String INSERT_CHEQUE_DETAILS = "INSERT INTO cheque_payment(billNo,billDate,shopNo,shopName,bankName,bankAccountNo,chequeNo,chequeAmount,chequeDate,paymentDate,paymentAmount ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-	public final static String GET_ALL_CHEQUE_DETAILS = "SELECT * FROM cheque_payment";
+	public final static String INSERT_CHEQUE_DETAILS = "INSERT INTO cheque_payment(billNo,billDate,billAmount,shopName,bankName,bankAccount,chequeNo,chequeDate,paymentDate) VALUES(?,?,?,?,?,?,?,?,?)";
+	public final static String GET_ALL_CHEQUE_DETAILS = "SELECT * FROM cheque_payment ORDER BY id DESC";
 
 	/*---------------------------Paid Bills Payments-------------------------------*/
 	public final static String INSERT_PAIDBILL_DETAILS = "INSERT INTO paid_bill(billNo,billDate,shopName,billAmount,paymentDate,paymentMethod) VALUES(?,?,?,?,?,?)";
@@ -124,7 +125,7 @@ public class CommonConstants {
 	public final static String UPDATE_CRITICAL_SECTION = "UPDATE daily_busssiness SET flag = ? WHERE id=1 ";
 	public final static String GET_TODAY_ENTRY = "SELECT * FROM daily_busssiness WHERE date= ?";
 	public final static String UPDATE_TODAT_ENTRY = "UPDATE daily_busssiness SET expenseAmount = ? ,bussinesAmount = ?,returnAmount = ?,netProfite= ? WHERE date = ? ";
-	public final static String GET_DAILY_BUSINESS = "SELECT * FROM daily_busssiness" ;
+	public final static String GET_DAILY_BUSINESS = "SELECT * FROM daily_busssiness ORDER BY id DESC;" ;
 			
 	/*--------------------------- Attendance -----------------------------------*/
 

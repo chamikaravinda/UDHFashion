@@ -43,71 +43,62 @@
 
 						<div class="card-body">
 
-							<form method="POST" action="submitCashPayment"
-								modelAttribute="creditBills" >
-
+							<form:form method="POST" action="addcashPayments"
+								modelAttribute="cashPayment">
 								<div class="form-row">
-									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Bill No</label> <input
-											type="text" name="billNo" class="form-control"
-											id="billNo" aria-describedby="emailHelp"
-											placeholder="Bill No" required>
+									<div class="form-group col-md-5 offset-md-1">
+										<label>Bill No</label>
+
+										<form:input type="text" path="billNo" class="form-control"
+											id="billNo" required="required" />
 									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Bill Date</label> <input
-											type="Date" name="billDate" class="form-control"
+
+									<div class="form-group col-md-5">
+										<label for="exampleInputEmail1">Bill Date</label>
+										<form:input type="Date" path="billDate" class="form-control"
 											id="billDate" aria-describedby="numberlHelp"
-											placeholder="Bill Date" required>
+											placeholder="Bill Date" required="required" />
 
 									</div>
-									<!--  	<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Shop No</label> <input
-											type="number" name="shopTelephone" class="form-control"
-											id="shopNo" placeholder="Shop Name" required>
-									</div>
-									
-									
-									-->
+
 								</div>
 
-							<div class="form-row">
-									<div class="form-group col-md-4">
-										<label for="sel1">Shop Name</label> <select name="shopName"
-											class="form-control" id="shopName" required>
-
+								<div class="form-row">
+									<div class="form-group col-md-5 offset-md-1">
+										<label for="sel1">Shop Name</label>
+										<form:select type="text " path="shopName" class="form-control"
+											id="shopName" required="required">
 											<c:forEach var="result" items="${shopList}">
 
 												<option>${result.shopName}</option>
 
 											</c:forEach>
-
-										</select>
+										</form:select>
 									</div>
-									
-									
-									
-									
-									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Bill Amount</label> <input
-											type="number" name="billAmount" class="form-control"
-											id="billAmount" aria-describedby="emailHelp"
-											placeholder="Bill Amount" required>
+									<div class="form-group col-md-5">
+										<label for="exampleInputEmail1">Bill Amount</label>
+										<form:input type="number" path="billAmount"
+											class="form-control" id="billAmount"
+											aria-describedby="emailHelp" placeholder="Bill Amount"
+											required="required" />
 									</div>
 
 
-
+									<form:input type="hidden" path="id" />
 
 								</div>
-								<div class="form-group col-md-8.5">
-									<label for="exampleInputEmail1">Payed Date</label> <input
-										type="Date" name="paymentDate" class="form-control" id="paymentDate"
-										aria-describedby="emailHelp" placeholder="Payed Date" required>
+								<div class="form-group col-md-5 offset-md-1">
+									<label for="exampleInputEmail1">Payment Date</label> <input
+										type="Date" name="paymentDate" class="form-control"
+										id="paymentDate" aria-describedby="emailHelp"
+										placeholder="Payed Date" required>
 								</div>
-								<div style="margin-left: 500px">
-									<button type="submit" class="btn btn-primary">Add</button>
+								<br />
+								<div class="offset-md-5">
+									<button type="submit" class="btn btn-primary col-md-2">Pay</button>
 								</div>
 
-							</form>
+							</form:form>
 
 						</div>
 					</div>

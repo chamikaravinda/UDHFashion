@@ -60,41 +60,40 @@
 
 			<div class="row">
 
-				<div class=" col-md-12">
+				<div class=" col-md-6 offset-md-3">
+					<br /> <br /> <br />
 					<div class="card mb-3">
 
 						<div class="card-body">
 
-							<form method="POST" action="check_paymentMethod_redirect"
-								modelAttribute="newPayment">
-
-
-
+							<form method="POST" action="newPayment">
 								<div class="form-row">
 									<label for="sel1">Credit Bill Number</label> <select
-										name="billNumber" class="form-control" id="billNumber" required>
+										name="billNumber" class="form-control" id="billNumber"
+										required>
 
 
 										<option value="newPayment">New Payment</option>
 										<c:forEach var="result" items="${creditBillList}">
 
-											<option value=" ${result.billNo}">${result.billNo}</option>>
+											<option value="${result.billNo}">${result.billNo}</option>>
 
 										</c:forEach>
 
 									</select>
 								</div>
+
+								<br>
 								<div class="form-row">
-									<label for="sel1">Select Payment Method</label> 
-									<select
+									<label for="sel1">Select Payment Method</label> <select
 										name="method" class="form-control" id="method"
 										required="required">
 										<option value="cash">Cash</option>
 										<option value="Cheque">Cheque</option>
 									</select>
 								</div>
-
-								<div style="margin-left: 500px">
+								<br />
+								<div class="offset-md-5">
 									<button type="submit" class="btn btn-primary">Submit</button>
 								</div>
 

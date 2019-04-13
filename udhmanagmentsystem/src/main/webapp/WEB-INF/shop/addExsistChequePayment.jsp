@@ -23,7 +23,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="breadcrumb-holder">
-						<h1 class="main-title float-left">Add Cheque</h1>
+						<h1 class="main-title float-left">Credit Bill Cheque Payment</h1>
 						<ol class="breadcrumb float-right">
 							<li class="breadcrumb-item">Home</li>
 							<li class="breadcrumb-item active">Cheque</li>
@@ -33,7 +33,7 @@
 				</div>
 			</div>
 			<!-- end row -->
-
+			<br>
 			<div class="row">
 
 				<div class=" col-md-12">
@@ -41,8 +41,8 @@
 
 						<div class="card-body">
 
-							<form:form method="POST" action="addCheques"
-								modelAttribute="chequePayment">
+							<form:form method="POST" action="existCreditBillChequePayments"
+								modelAttribute="creditBills">
 
 								<div class="form-row">
 									<div class="form-group col-md-4">
@@ -61,14 +61,8 @@
 
 									<div class="form-group col-md-4">
 										<label for="sel1">Shop Name</label>
-										<form:select type="text " path="shopName" class="form-control"
-											id="shopName" required="required">
-											<c:forEach var="result" items="${shopList}">
-
-												<option>${result.shopName}</option>
-
-											</c:forEach>
-										</form:select>
+										<form:input type="text" path="shopName" class="form-control"
+											id="shopId" required="required" />
 									</div>
 								</div>
 

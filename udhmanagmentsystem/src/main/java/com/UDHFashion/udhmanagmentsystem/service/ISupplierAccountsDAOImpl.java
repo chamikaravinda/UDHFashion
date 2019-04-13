@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.UDHFashion.udhmanagmentsystem.model.CreditBill;
-
+import com.UDHFashion.udhmanagmentsystem.model.Employee;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 
 @Service
@@ -90,6 +90,22 @@ public  class ISupplierAccountsDAOImpl implements ISupplierAccountsDAO {
 			return creditBill;
 
 		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	@Override
+	public CreditBill getCreditBillByBillNo(String no) {
+
+		try {
+
+			CreditBill creditBill  = (CreditBill) jdbcTemplate.queryForObject(CommonConstants.GET_CREDITBILL_BY_BILL_NO,
+					new Object[] { no }, new BeanPropertyRowMapper(CreditBill.class));
+			
+			return creditBill;
+
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("Empty results Bill number" + no);
 			return null;
 		}
 	}
