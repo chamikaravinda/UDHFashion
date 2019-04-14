@@ -269,11 +269,12 @@ public class ItemDAOImpl implements IItemDAO {
 						itemdb.setDiscount(rs.getInt("discount_amount"));
 						itemdb.setPrice(Double.parseDouble(rs.getString("price")));
 						itemdb.setNetProfit(rs.getDouble("net_profit"));
-
+						itemdb.setEstimatedNetProfit(Double.parseDouble(rs.getString("est_net_profit")));		
 						return itemdb;
 					}
 				});
 	}
+	
 
 	
 }

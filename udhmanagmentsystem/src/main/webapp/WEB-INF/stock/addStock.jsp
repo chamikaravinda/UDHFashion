@@ -19,45 +19,46 @@
 	}
 </script>
 
-	<div class="content-page">
+<div class="content-page">
 
-		<!-- Start content -->
-		<div class="content">
+	<!-- Start content -->
+	<div class="content">
 
-			<div class="container-fluid">
+		<div class="container-fluid">
 
 
-				<div class="row">
-					<div class="col-xl-12">
-						<div class="breadcrumb-holder">
-							<h1 class="main-title float-left">Add Stock</h1>
-							<ol class="breadcrumb float-right">
-								<li class="breadcrumb-item">Home</li>
-								<li class="breadcrumb-item active">Forms</li>
-							</ol>
-							<div class="clearfix"></div>
-						</div>
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="breadcrumb-holder">
+						<h1 class="main-title float-left">Add Stock</h1>
+						<ol class="breadcrumb float-right">
+							<li class="breadcrumb-item">Home</li>
+							<li class="breadcrumb-item active">Forms</li>
+						</ol>
+						<div class="clearfix"></div>
 					</div>
 				</div>
-				<!-- end row -->
+			</div>
+			<!-- end row -->
+			<br><br>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+				<div class="card mb-3">
 
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-					<div class="card mb-3">
+					<div class="card-body">
 
-						<div class="card-body">
-
-							<form method="POST" autocomplete="off" action="submitStock"
-								modelAttribute="stock"
-								onsubmit="return validator()>
+						<form method="POST" autocomplete="off" action="submitStock"
+							modelAttribute="stock"
+							onsubmit="return validator()>
 
 
 
 								<!--div class="form-row">
 
-								</div-->
-								<section>
+							</div-->
+							<section>
 
-									<div class="form-row">
+								<div class="form-row">
+									<div class="form-group col-md-4">
 										<label for="sel1">Shop Name</label> <select name="shopId"
 											class="form-control" id="shopId" required>
 
@@ -70,68 +71,65 @@
 										</select>
 									</div>
 
-									<div class="form-row">
+									<div class="form-group col-md-4">
 										<label for="inputEmail4">Item Description</label> <input
 											name="itemDescription" type="text" class="form-control"
 											id="itemDescription" placeholder="Item Description"
 											autocomplete="off" required>
 									</div>
 
-									<div class="form-row">
-										<div class="form-group col-md-4">
-											<label for="inputEmail4">Gross Price</label> <input
-												name="grossPrice" type="number" class="form-control"
-												id="grossPrice" placeholder="Gross Price" autocomplete="off"
-												required>
-										</div>
-										<div class="form-group col-md-4">
-											<label for="inputPassword4">Price Tag Amount</label> <input
-												name="price" type="number" class="form-control"
-												id="tagAmount" placeholder="Price Tag Amount"
-												autocomplete="off" required>
-										</div>
-										<div class="form-group col-md-4">
-											<label for="inputPassword4">Discount</label> <input
-												name="discount" type="number" class="form-control"
-												id="discount" placeholder="Discount" autocomplete="off"
-												required>
-										</div>
+									<div class="form-group col-md-4">
+										<label for="inputPassword4">Quantity</label> <input
+											name="itemQuantity" type="number" class="form-control"
+											id="quantity" placeholder="Quantity" autocomplete="off"
+											required>
 									</div>
-									<div class="form-row">
-
-										<div class="form-group col-md-4">
-											<label for="inputPassword4">Quantity</label> <input
-												name="itemQuantity" type="number" class="form-control"
-												id="quantity" placeholder="Quantity" autocomplete="off"
-												required>
-										</div>
-
-
+								</div>
+								<div class="form-row">
+									<div class="form-group col-md-4">
+										<label for="inputEmail4">Gross Price</label> <input
+											name="grossPrice" type="number" class="form-control"
+											id="grossPrice" placeholder="Gross Price" autocomplete="off"
+											required>
 									</div>
-									<div style="margin-left: 500px">
-										<button type="submit" class="btn btn-primary">Add
-											Stock</button>
-
+									<div class="form-group col-md-4">
+										<label for="inputPassword4">Price Tag Amount</label> <input
+											name="price" type="number" class="form-control"
+											id="tagAmount" placeholder="Price Tag Amount"
+											autocomplete="off" required>
 									</div>
+									<div class="form-group col-md-4">
+										<label for="inputPassword4">Discount</label> <input
+											name="discount" type="number" class="form-control"
+											id="discount" placeholder="Discount" autocomplete="off"
+											required>
+									</div>
+								</div>
+								<br><br>
+								<div style="margin-left: 500px">
+									<button type="submit" class="btn btn-primary">Add
+										Stock</button>
+
+								</div>
 
 
-								</section>
+							</section>
 
 
-							</form>
+						</form>
 
-						</div>
 					</div>
-					<!-- end card-->
 				</div>
-
-
-
-
+				<!-- end card-->
 			</div>
-			<!-- END container-fluid -->
+
+
+
+
 		</div>
-		<!-- END content -->
+		<!-- END container-fluid -->
 	</div>
+	<!-- END content -->
+</div>
 
 <%@ include file="../includes/footer.jsp"%>

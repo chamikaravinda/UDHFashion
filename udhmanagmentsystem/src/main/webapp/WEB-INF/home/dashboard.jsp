@@ -52,9 +52,7 @@
 						<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
 							<div class="card-box noradius noborder bg-info">
 								<i class="fa fa-user-o float-right text-white"></i>
-								<h6 class="text-white text-uppercase m-b-20">Prasent Emploree</h6>
-
-
+								<h6 class="text-white text-uppercase m-b-20">Prasent Employees</h6>
 								<h1 class="m-b-20 text-white counter">${currentSize}</h1>
 								<a href="addEmployee" class="text-white"> <span>Add
 										New</span></a>
@@ -65,7 +63,7 @@
 							<div class="card-box noradius noborder bg-danger">
 								<i class="fa fa-bar-chart float-right text-white"></i>
 								<h6 class="text-white text-uppercase m-b-20">Daily Profit</h6>
-								<h1 class="m-b-20 text-white counter">${total_profit}</h1>
+								<h1 class="m-b-20 text-white counter">${todaysProfite}</h1>
 								</br>
 							</div>
 						</div>

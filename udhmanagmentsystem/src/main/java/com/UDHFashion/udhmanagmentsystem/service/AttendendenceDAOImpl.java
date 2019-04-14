@@ -44,7 +44,7 @@ public class AttendendenceDAOImpl implements IAttendenceDAO {
 			dateStr = formatter.parse(date);
 			java.sql.Date dateDB = new java.sql.Date(dateStr.getTime());
 
-		//	System.out.println(date);
+			// System.out.println(date);
 
 			Attendence todayAttendence = (Attendence) jdbcTemplate.queryForObject(CommonConstants.GET_TODAY_ATTENDENCE,
 					new Object[] { dateDB }, new BeanPropertyRowMapper(Attendence.class));
@@ -159,8 +159,9 @@ public class AttendendenceDAOImpl implements IAttendenceDAO {
 	public AttendenceList getEmpDailyAttendence(int id) {
 		try {
 
-			AttendenceList attend = (AttendenceList) jdbcTemplate.queryForObject(CommonConstants.GET_TODAY_EMP_ATTENDENCE_LIST,
-					new Object[] { id }, new BeanPropertyRowMapper(AttendenceList.class));
+			AttendenceList attend = (AttendenceList) jdbcTemplate.queryForObject(
+					CommonConstants.GET_TODAY_EMP_ATTENDENCE_LIST, new Object[] { id },
+					new BeanPropertyRowMapper(AttendenceList.class));
 
 			return attend;
 
@@ -180,18 +181,33 @@ public class AttendendenceDAOImpl implements IAttendenceDAO {
 			AttendenceList attendanceList = new AttendenceList();
 
 			attendanceList.setId((Integer) row.get("id"));
-			
+
 			attendanceList.setEmpNo((String) row.get("empNo"));
-			attendanceList.setAttendence_ID( (Integer) row.get("attendence_ID"));
-	
+			attendanceList.setAttendence_ID((Integer) row.get("attendence_ID"));
 
 			result.add(attendanceList);
 		}
-		return  result;
-
-		
-		
+		return result;
 	}
 
-	
+	public Attendence todayAttendence(String date) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // your template here
+		java.util.Date dateStr;
+		try {
+
+			dateStr = formatter.parse(date);
+			java.sql.Date dateDB = new java.sql.Date(dateStr.getTime());
+			Attendence todayAttendence = (Attendence) jdbcTemplate.queryForObject(CommonConstants.GET_TODAY_ATTENDENCE,
+					new Object[] { dateDB }, new BeanPropertyRowMapper(Attendence.class));
+			return todayAttendence;
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

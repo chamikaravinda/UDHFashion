@@ -82,15 +82,15 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 
 						}
 					} catch (EmptyResultDataAccessException e) {
-						
+
 						if (insertDailyBussinessEntry(entry)) {
 							CriticalSectionRemoveFlag();
 							return true;
-						}else {
+						} else {
 							CriticalSectionRemoveFlag();
 							return false;
 						}
-						
+
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -103,10 +103,27 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 
 	@Override
 	public DailyBussiness getEntry(String date) {
-		DailyBussiness todayEntry = (DailyBussiness) jdbcTemplate.queryForObject(CommonConstants.GET_TODAY_ENTRY,
-				new Object[] { date }, new BeanPropertyRowMapper(DailyBussiness.class));
 
-		return todayEntry;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // your template here
+		java.util.Date dateStr;
+
+		try {
+			dateStr = formatter.parse(date);
+
+			java.sql.Date dateDB = new java.sql.Date(dateStr.getTime());
+
+			DailyBussiness todayEntry = (DailyBussiness) jdbcTemplate.queryForObject(CommonConstants.GET_TODAY_ENTRY,
+					new Object[] { dateDB }, new BeanPropertyRowMapper(DailyBussiness.class));
+
+			return todayEntry;
+
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -229,21 +246,20 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 
 	@Override
 	public List<DailyBussiness> getDailyBusiness() {
-		
+
 		List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.GET_DAILY_BUSINESS);
 
 		List<DailyBussiness> result = new ArrayList<DailyBussiness>();
 
 		for (Map<String, Object> row : rows) {
 			DailyBussiness daily_bussiness = new DailyBussiness();
-			
-			Date date=  (Date)row.get("date");
+
+			Date date = (Date) row.get("date");
 
 			daily_bussiness.setDate(date.toString());
 
 			daily_bussiness.setExpenseAmount((Double) row.get("expenseAmount"));
 
-			
 			daily_bussiness.setBussinesAmount((Double) row.get("bussinesAmount"));
 
 			daily_bussiness.setNetProfite((Double) row.get("netProfite"));
@@ -251,13 +267,10 @@ public class DailyBussinessDAOImpl implements IDailyBussinessDAO {
 			result.add(daily_bussiness);
 		}
 
-	  System.out.println("Get Daily business details");
+		System.out.println("Get Daily business details");
 
 		return result;
-		
-		
-	}
 
-	
+	}
 
 }

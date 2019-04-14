@@ -73,9 +73,7 @@
 										<label for="exampleInputEmail1">Shop Name</label> <input
 											type="text" name="shopName" class="form-control"
 											id="shopName" aria-describedby="emailHelp"
-											placeholder="Shop Name" required> <small
-											id="emailHelp" class="form-text text-muted">Whole
-											sales</small>
+											placeholder="Shop Name" required>
 									</div>
 									<div class="form-group offset-md-1 col-md-5">
 										<label for="exampleInputEmail1">Address</label> <input

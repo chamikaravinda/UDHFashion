@@ -2,6 +2,59 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
+<!-- Item delete success message -->
+<script type="text/javascript">
+	function deletesuccesfully() {
+		swal("Successful","Item Deleted Succesfully","success");
+	}
+</script>
+
+<c:if test="${success == 1}">
+	<script type="text/javascript">
+		window.onload = deletesuccesfully;
+	</script>
+</c:if>
+
+<!-- Item edit success message -->
+<script type="text/javascript">
+	function updateSuccesfully() {
+		swal("Successful","Item Updated Succesfully","success");
+	}
+</script>
+
+<c:if test="${success == 2}">
+	<script type="text/javascript">
+		window.onload = updateSuccesfully;
+	</script>
+</c:if>
+
+<!-- Returned Items added successful message -->
+<script type="text/javascript">
+	function returnItemsAddedSuccesfully() {
+		swal("Successful","Retruned Items Added Succesfully","success");
+	}
+</script>
+
+<c:if test="${success == 3}">
+	<script type="text/javascript">
+		window.onload = returnItemsAddedSuccesfully;
+	</script>
+</c:if>
+
+<!--  Items added successful message -->
+<script type="text/javascript">
+	function ItemsAddedSuccesfully() {
+		swal("Successful","Item Added Succesfully","success");
+	}
+</script>
+
+<c:if test="${success == 4}">
+	<script type="text/javascript">
+		window.onload = ItemsAddedSuccesfully;
+	</script>
+</c:if>
+
 <div class="content-page">
 
 	<!-- Start content -->
@@ -26,7 +79,7 @@
 							<a href="addStock" class="btn btn-primary" Style="margin: 10px"
 								role="button" aria-pressed="true">Add</a> <a href="return"
 								class="btn btn-primary" Style="margin: 10px" role="button"
-								aria-pressed="true">Return Item</a> <a
+								aria-pressed="true">Add Return Item</a> <a
 								href="barcodeGenerateView" class="btn btn-primary"
 								Style="margin: 10px" role="button" aria-pressed="true">Generate
 								Barcodes</a>
@@ -69,13 +122,18 @@
 												<td>${result.netProfit}</td>
 												<td>${result.estimatedNetProfit}</td>
 												<td>${result.shopId}</td>
-												<td></td>
+												<td><form method="POST" action="editItem"
+														modelAttribute="item">
+														<input name="itemCode" type="hidden"
+															value="${result.itemCode}">
+														<button type="submit" al class="btn btn-link">Edit</button>
+													</form></td>
 												<td>
 													<form method="POST" action="deleteItem"
 														modelAttribute="item">
 														<input name="itemCode" type="hidden"
 															value="${result.itemCode}">
-														<button type="submit" al class="btn btn-primary">Delete</button>
+														<button type="submit" al class="btn btn-link">Delete</button>
 													</form>
 												</td>
 											</tr>

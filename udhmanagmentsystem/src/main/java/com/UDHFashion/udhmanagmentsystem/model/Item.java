@@ -12,6 +12,7 @@ public class Item {
 	private Double netProfit;
 	private Double estimatedNetProfit;
 	private String itemDescription;
+	private int quntity;
 	
 	public String getItemDescription() {
 		return itemDescription;
@@ -76,6 +77,13 @@ public class Item {
 	public void setShopId(Integer shopId) {
 		this.shopId = shopId;
 	}
-	
+
+	public int getQuntity() {
+		return quntity;
+	}
+
+	public void setQuntity(int quntity) {
+		this.quntity = quntity;
+	}
 	
 }

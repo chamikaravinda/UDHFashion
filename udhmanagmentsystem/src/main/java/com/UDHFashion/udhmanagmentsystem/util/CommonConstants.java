@@ -108,7 +108,7 @@ public class CommonConstants {
 	public final static String GET_TEMPBILLITEM_BY_NO = "SELECT * FROM temp_bill_items WHERE id = ?";
 
 	/*---------------------------Bill-------------------------------*/
-	public final static String INSERT_BILL_DETAILS = "INSERT INTO bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem) VALUES(?,?,?,?,?,?,?)";
+	public final static String INSERT_BILL_DETAILS = "INSERT INTO bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem,returnAmount ) VALUES(?,?,?,?,?,?,?,?)";
 	public final static String GET_ALL_BILL_DETAILS = "SELECT * FROM bill";
 	public final static String DELETE_BILL_DETAILS_ID = "DELETE FROM bill WHERE cashireId= ?";
 

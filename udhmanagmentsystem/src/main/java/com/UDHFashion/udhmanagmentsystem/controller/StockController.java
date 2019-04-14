@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.UDHFashion.udhmanagmentsystem.model.Barcode;
 import com.UDHFashion.udhmanagmentsystem.model.Item;
@@ -38,22 +39,14 @@ public class StockController {
 
 
 	@RequestMapping(value = "/returnItem", method = RequestMethod.POST)
-	public ModelAndView returnItem(@ModelAttribute("Item") Item item, ModelAndView model) {
+	public ModelAndView returnItem(@ModelAttribute("Item") Item item, ModelAndView model,RedirectAttributes redir) {
 
-		String ulr_itemcode = item.getItemCode();
-		Item itemSave = new Item();
+		Item itemSave =iItem.getItemByCode(item.getItemCode());
 
-		itemSave = iItem.getItemByCode(ulr_itemcode);
+		itemSave.setItemQuantity(itemSave.getItemQuantity() + item.getItemQuantity());
+		iItem.updateItemDetails(itemSave);
 
-		int updateQuantityvalue = itemSave.getItemQuantity() + item.getItemQuantity();
-
-		// Get Current Quantity
-
-		System.out.println("Updated Value is:" + updateQuantityvalue);
-
-		item.setItemQuantity(updateQuantityvalue);
-		iItem.updateReturnItem(item);
-
+		redir.addFlashAttribute("success",3);
 		model.setViewName("redirect:/stockView");
 		return model;
 
@@ -175,7 +168,7 @@ public class StockController {
 
 	/*----------------------------- Delete Item Data -------------------------*/
 	@RequestMapping(value = "/deleteItem", method = RequestMethod.POST)
-	public String deleteShop(@ModelAttribute("item") Item item, ModelMap model) {
+	public String deleteItem(@ModelAttribute("item") Item item, ModelMap model) {
 
 		String itemCode = item.getItemCode();
 
@@ -184,8 +177,37 @@ public class StockController {
 		List<Item> itemList = iItem.getAllItemDetails();
 
 		model.addAttribute("stockList", itemList);
+		model.addAttribute("success",1);
 		return "stock/stockView";
 	}
+	
+	/*----------------------------- show edit Item Data -------------------------*/
+	@RequestMapping(value = "/editItem", method = RequestMethod.POST)
+	public ModelAndView editItem(@ModelAttribute("item") Item item, ModelAndView model) {
+
+		String itemCode = item.getItemCode();
+
+		Item editItem=iItem.getItemByCode(itemCode);
+		List<Shop> shop = iShop.getAllShopsDetails();
+
+		model.addObject("shopList", shop);
+		model.addObject("item", editItem);
+		model.setViewName("stock/editItem");
+		return model;
+	}
+	
+	
+	
+	/*----------------update the stock details--------------------------*/
+	@RequestMapping(value = "/updateStock", method = RequestMethod.POST)
+	public ModelAndView updateStockDetails(@ModelAttribute("item") Item item, ModelAndView model,RedirectAttributes redir) {
+
+		iItem.updateItemDetails(item);
+		redir.addFlashAttribute("success",2);
+		model.setViewName("redirect:/stockView");
+		return model;
+	}
+	
 
 	@RequestMapping(value = "/viewShop", method = RequestMethod.GET)
 	public String viewShop(Model model) {
@@ -218,9 +240,10 @@ public class StockController {
 		model.addAttribute("shopList", shop);
 
 		List<Item> itemList = iItem.getAllItemDetails();
-
+		model.addAttribute("success",4);
 		model.addAttribute("stockList", itemList);
 		return "stock/stockView";
 	}
+
 
 }

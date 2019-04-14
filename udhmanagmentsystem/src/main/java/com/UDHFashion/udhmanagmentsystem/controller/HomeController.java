@@ -1,6 +1,8 @@
 package com.UDHFashion.udhmanagmentsystem.controller;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,6 +22,7 @@ import com.UDHFashion.udhmanagmentsystem.model.AttendenceList;
 import com.UDHFashion.udhmanagmentsystem.model.DailyBussiness;
 import com.UDHFashion.udhmanagmentsystem.model.Item;
 import com.UDHFashion.udhmanagmentsystem.model.Shop;
+import com.UDHFashion.udhmanagmentsystem.service.AttendendenceDAOImpl;
 import com.UDHFashion.udhmanagmentsystem.service.IAttendenceDAO;
 import com.UDHFashion.udhmanagmentsystem.service.IDailyBussinessDAO;
 import com.UDHFashion.udhmanagmentsystem.service.IItemDAO;
@@ -32,16 +35,19 @@ public class HomeController {
 	@Autowired
 
 	IDailyBussinessDAO serviceDailyBusiness;
-	
+
 	@Autowired
-	
+
 	IItemDAO serviceGetAllitem;
-	
+
 	@Autowired
 	IShopDAO serviceAllSuppliers;
-	
+
 	@Autowired
-	
+	AttendendenceDAOImpl serviceAttendence;
+
+	@Autowired
+
 	IAttendenceDAO serviceGetCrrentEmp;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -52,36 +58,54 @@ public class HomeController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String DashbordDetails(Model model) {
+		NumberFormat formatter = new DecimalFormat("#0.00");
 
 		List<DailyBussiness> getDailyBusiness = serviceDailyBusiness.getDailyBusiness();
 		model.addAttribute("getDailyBusiness", getDailyBusiness);
 
-		double total_profit = 0;
-		for (DailyBussiness dailyBussiness : getDailyBusiness) {
-
-			total_profit += dailyBussiness.getNetProfite();
+		DailyBussiness today = serviceDailyBusiness.getEntry(getCurrentDate());
+		if (today != null) {
+			model.addAttribute("todaysProfite", formatter.format(today.getNetProfite()));
+		} else {
+			model.addAttribute("todaysProfite", 0.00);
 		}
-		model.addAttribute("total_profit",total_profit);
-		
+
 		List<Item> items = serviceGetAllitem.getAllItemDetails();
-		int num= items.size();
-		model.addAttribute("num",num);
-		
-		List<Shop> suppliers=serviceAllSuppliers.getAllShopsDetails();
-		int allSuppliers= suppliers.size();
-		
-		model.addAttribute("allSuppliers",allSuppliers);
-		
-//		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//		Date date = new Date();
-//		String newDate = dateFormat.format(date);
 
-		
-		List<AttendenceList> current_emp=serviceGetCrrentEmp.getAttendenceListByStatus();
-		int currentSize=current_emp.size();
+		if (items != null) {
+			int num = items.size();
+			model.addAttribute("num", num);
+		} else {
+			model.addAttribute("num", 0);
+		}
+		List<Shop> suppliers = serviceAllSuppliers.getAllShopsDetails();
 
-		model.addAttribute("currentSize",currentSize);
+		if (suppliers != null) {
+			int allSuppliers = suppliers.size();
+			model.addAttribute("allSuppliers", allSuppliers);
+		} else {
+			model.addAttribute("allSuppliers", 0);
+		}
+
+		Attendence attendence = serviceAttendence.todayAttendence(getCurrentDate());
+		if (attendence != null) {
+			int currentSize = attendence.getPresent();
+
+			model.addAttribute("currentSize", currentSize);
+		} else {
+			model.addAttribute("currentSize", 0);
+
+		}
 		return "home/dashboard";
 	}
 
+	private String getCurrentDate() {
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String newDate = dateFormat.format(date);
+
+		return newDate;
+
+	}
 }

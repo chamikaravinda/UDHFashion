@@ -232,10 +232,8 @@
 										<div class="row">
 											<div class="offset-md-5 col-md-1 ">
 												<button type="submit" style="width: 100px"
-													class="btn btn-primary" name="finallize"
-													formtarget="_blank">
-													<span class="fa fa-print" aria-hidden="true"
-														></span>
+													class="btn btn-primary" name="finallize">
+													<span class="fa fa-print" aria-hidden="true"></span>
 													Finalize
 												</button>
 											</div>
