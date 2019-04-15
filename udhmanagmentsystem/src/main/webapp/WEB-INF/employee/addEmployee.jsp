@@ -40,31 +40,31 @@
 <body>
 
 
-<!-- Add employee unsuccess message -->
-<script type="text/javascript">
-	function unsuccesfull() {
-		swal("Employee Adding Unsuccesfull");
-	}
-</script>
-
-<c:if test="${error == 1}">
+	<!-- Add employee unsuccess message -->
 	<script type="text/javascript">
-		window.onload =unsuccesfull;
+		function unsuccesfull() {
+			swal("Employee Adding Unsuccesfull");
+		}
 	</script>
-</c:if>
 
-<!-- employee number exsists message -->
-<script type="text/javascript">
-	function EmpNumberTaken() {
-		swal("Employee Number Already taken");
-	}
-</script>
+	<c:if test="${error == 1}">
+		<script type="text/javascript">
+			window.onload = unsuccesfull;
+		</script>
+	</c:if>
 
-<c:if test="${error == 2}">
+	<!-- employee number exsists message -->
 	<script type="text/javascript">
-		window.onload =EmpNumberTaken;
+		function EmpNumberTaken() {
+			swal("Employee Number Already taken");
+		}
 	</script>
-</c:if>
+
+	<c:if test="${error == 2}">
+		<script type="text/javascript">
+			window.onload = EmpNumberTaken;
+		</script>
+	</c:if>
 
 	<div class="content-page">
 
@@ -86,7 +86,8 @@
 					</div>
 				</div>
 				<!-- end row -->
-
+				<br>
+				<br>
 				<div class="row">
 
 					<div class=" col-md-12">
@@ -141,17 +142,20 @@
 										<div class="form-group col-md-4">
 											<label for="exampleInputPassword1">Telephone</label> <input
 												type="number" name="contactNum" class="form-control"
-												id="contactNum" placeholder="Telephone" max="9999999999" required>
+												id="contactNum" placeholder="Telephone" max="9999999999"
+												required>
 										</div>
 										<div class="form-group col-md-4">
 											<label for="exampleInputPassword1">Guardian Telephone</label>
 											<input type="number" name="gContactNum" class="form-control"
-												id="gContactNum" placeholder="Guardian Telephone" max="9999999999" required>
+												id="gContactNum" placeholder="Guardian Telephone"
+												max="9999999999" required>
 										</div>
 									</div>
-									<div style="margin-left: 500px">
-										<button type="submit" class="btn btn-primary">Add
-											Employee</button>
+									<br><br>
+									<div class="offset-md-5">
+										<button type="submit" class="btn btn-primary col-md-2">Add
+											</button>
 									</div>
 
 								</form>
