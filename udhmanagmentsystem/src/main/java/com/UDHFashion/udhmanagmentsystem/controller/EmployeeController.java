@@ -42,7 +42,7 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/addEmployee", method = RequestMethod.GET)
 	public String addEmployee(Model model) {
-
+		model.addAttribute("employee", new Employee());
 		return "employee/addEmployee";
 
 	}
@@ -52,14 +52,20 @@ public class EmployeeController {
 			RedirectAttributes redir) {
 
 		int result = serviceEmp.insertEmployeeDetails(employee);
+
 		if (result == 1) {
+
 			redir.addFlashAttribute("success", 1);
 			model.setViewName("redirect:/viewEmployee");
 			return model;
+			
 		} else if (result == 2) {
-			model.addObject("error", 2);
+
+			redir.addFlashAttribute("error", 2);
+			redir.addFlashAttribute("employee", employee);
 			model.setViewName("redirect:/addEmployee");
 			return model;
+
 		} else {
 			model.addObject("error", 1);
 			model.setViewName("redirect:/addEmployee");
@@ -67,8 +73,6 @@ public class EmployeeController {
 		}
 
 	}
-
-	//
 
 	@RequestMapping(value = "/viewEmployee", method = RequestMethod.GET)
 	public ModelAndView viewEmployee(ModelAndView model) {
@@ -224,7 +228,7 @@ public class EmployeeController {
 		return model;
 	}
 
-	@RequestMapping(value="/empSalarySheet" ,params = "SalarySheetUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/empSalarySheet", params = "SalarySheetUpdate", method = RequestMethod.POST)
 	public ModelAndView updateSalarySheet(ModelAndView model, @ModelAttribute("salary") Salary salarySheet,
 			RedirectAttributes redir, BindingResult result, SessionStatus status) {
 
@@ -240,11 +244,11 @@ public class EmployeeController {
 		}
 	}
 
-	@RequestMapping(value="/empSalarySheet" ,params = "SalarySheetPay", method = RequestMethod.POST)
+	@RequestMapping(value = "/empSalarySheet", params = "SalarySheetPay", method = RequestMethod.POST)
 	public ModelAndView paySalary(ModelAndView model, @ModelAttribute("salary") Salary salarySheet,
 			RedirectAttributes redir, BindingResult result, SessionStatus status) {
 
-		SalaryToPayiedSalary conv= new SalaryToPayiedSalary();
+		SalaryToPayiedSalary conv = new SalaryToPayiedSalary();
 		if (serviceSalary.AddPaidSalary(conv.toPayiedSalary(salarySheet))) {
 			if (serviceSalary.deleteSalary(salarySheet.getId())) {
 
@@ -260,7 +264,7 @@ public class EmployeeController {
 		return model;
 	}
 
-	@RequestMapping(value="/empSalarySheet" ,params = "SalarySheetPrint", method = RequestMethod.POST)
+	@RequestMapping(value = "/empSalarySheet", params = "SalarySheetPrint", method = RequestMethod.POST)
 	public String downloadPDFsalarySheet(Model model, @ModelAttribute("salary") Salary salarySheet,
 			RedirectAttributes redir, BindingResult result, SessionStatus status) {
 		model.addAttribute("report", getReport(salarySheet.getId()));

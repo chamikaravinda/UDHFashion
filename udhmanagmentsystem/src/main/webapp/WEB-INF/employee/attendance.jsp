@@ -18,7 +18,8 @@
 <!-- added success message -->
 <script type="text/javascript">
 	function addedsuccesfully() {
-		swal("Attendence Added Succesfully");
+		swal("S	uccessful", "Attendence Added Succesfully", "success");
+
 	}
 </script>
 
@@ -31,7 +32,8 @@
 <!-- added unsuccess message -->
 <script type="text/javascript">
 	function addedunsuccesfull() {
-		swal("Attendence Adding Unsuccesful");
+		swal("Unsuccessful", "Attendence Adding Unsuccesful", "error");
+
 	}
 </script>
 
@@ -45,7 +47,8 @@
 <!-- update success message -->
 <script type="text/javascript">
 	function updatesuccesfully() {
-		swal("Attendence updated Succesfully");
+		swal("Unsuccessful", "Attendence updated Succesfully", "success");
+
 	}
 </script>
 

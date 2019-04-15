@@ -5,35 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-	function validator() {
-
-		var shopName = document.getElementById("shopName").value;
-		var shopAddress = document.getElementById("shopAddress").value;
-		var shopTele = document.getElementById("shopTele").value;
-
-		if (shopName == null || shopName == "") {
-			alert("Please Enter a shop name ");
-			return false;
-		}
-
-		if (shopAddress == null || shopAddress == "") {
-			alert("Please Enter a shop name ");
-			return false;
-		}
-
-		if (shopTele == null || shopTele == "") {
-			alert("Please enter a shop telephone number ");
-			return false;
-		}
-
-		if (shopTele.length != 10) {
-			alert("Telephone number must contain 10 characters");
-			return false;
-		}
-	}
-</script>
-
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -43,7 +14,7 @@
 	<!-- Add employee unsuccess message -->
 	<script type="text/javascript">
 		function unsuccesfull() {
-			swal("Employee Adding Unsuccesfull");
+			swal("Unsuccessful", "Employee Adding Unsuccesfull", "error");
 		}
 	</script>
 
@@ -56,7 +27,7 @@
 	<!-- employee number exsists message -->
 	<script type="text/javascript">
 		function EmpNumberTaken() {
-			swal("Employee Number Already taken");
+			swal("Unsuccessful", "Employee Number Already taken", "error");
 		}
 	</script>
 
@@ -86,8 +57,7 @@
 					</div>
 				</div>
 				<!-- end row -->
-				<br>
-				<br>
+				<br> <br>
 				<div class="row">
 
 					<div class=" col-md-12">
@@ -95,15 +65,15 @@
 
 							<div class="card-body">
 
-								<form method="POST" action="submitEmployee"
-									modelAttribute="employee" onsubmit="return validator()">
+								<form:form method="POST" action="submitEmployee"
+									modelAttribute="employee">
 
 									<div class="form-group">
 
-										<label for="exampleInputEmail1">Employee No </label> <input
-											type="text" name="empNo" class="form-control" id="empNo"
-											aria-describedby="emailHelp" placeholder="Employee No"
-											required>
+										<label for="exampleInputEmail1">Employee No </label>
+										<form:input type="text" path="empNo" class="form-control"
+											id="empNo" aria-describedby="emailHelp"
+											placeholder="Employee No" required="required" />
 
 									</div>
 
@@ -111,23 +81,24 @@
 
 
 										<div class="form-group col-md-4">
-											<label for="exampleInputEmail1">Employee Name</label> <input
-												type="text" name="empName" class="form-control" id="empName"
-												aria-describedby="numberlHelp" placeholder="Employee Name"
-												required>
+											<label for="exampleInputEmail1">Employee Name</label>
+											<form:input type="text" path="empName" class="form-control"
+												id="empName" aria-describedby="numberlHelp"
+												placeholder="Employee Name" required="required" />
 
 										</div>
 										<div class="form-group col-md-4">
-											<label for="exampleInputPassword1">Address</label> <input
-												type="text" name="empAddress" class="form-control"
-												id="empAddress" placeholder="Address" required>
+											<label for="exampleInputPassword1">Address</label>
+											<form:input type="text" path="empAddress"
+												class="form-control" id="empAddress" placeholder="Address"
+												required="required" />
 										</div>
 										<div class="form-group col-md-4">
-											<label for="exampleInputEmail1">Basic Salary</label> <input
-												type="number" name="basicSalary" class="form-control"
-												id="basicSalary" aria-describedby="numberlHelp"
-												placeholder="Basic Salary" required>
-
+											<label for="exampleInputEmail1">Basic Salary</label>
+											<form:input type="number" path="basicSalary"
+												class="form-control" id="basicSalary"
+												aria-describedby="numberlHelp" placeholder="Basic Salary"
+												required="required" />
 										</div>
 
 									</div>
@@ -135,30 +106,32 @@
 
 									<div class="form-row">
 										<div class="form-group col-md-4">
-											<label for="exampleInputPassword1">Job date</label> <input
-												type="Date" name="jobDate" class="form-control" id="jobDate"
-												placeholder="Date" required>
+											<label for="exampleInputPassword1">Job date</label>
+											<form:input type="Date" path="jobDate" class="form-control"
+												id="jobDate" placeholder="Date" required="required" />
 										</div>
 										<div class="form-group col-md-4">
-											<label for="exampleInputPassword1">Telephone</label> <input
-												type="number" name="contactNum" class="form-control"
-												id="contactNum" placeholder="Telephone" max="9999999999"
-												required>
+											<label for="exampleInputPassword1">Telephone</label>
+											<form:input type="number" path="contactNum"
+												class="form-control" id="contactNum" placeholder="Telephone"
+												max="9999999999" required="required" />
 										</div>
 										<div class="form-group col-md-4">
 											<label for="exampleInputPassword1">Guardian Telephone</label>
-											<input type="number" name="gContactNum" class="form-control"
-												id="gContactNum" placeholder="Guardian Telephone"
-												max="9999999999" required>
+											<form:input type="number" path="gContactNum"
+												class="form-control" id="gContactNum"
+												placeholder="Guardian Telephone" max="9999999999"
+												required="required" />
 										</div>
 									</div>
-									<br><br>
+									<br>
+									<br>
 									<div class="offset-md-5">
 										<button type="submit" class="btn btn-primary col-md-2">Add
-											</button>
+										</button>
 									</div>
 
-								</form>
+								</form:form>
 
 							</div>
 						</div>

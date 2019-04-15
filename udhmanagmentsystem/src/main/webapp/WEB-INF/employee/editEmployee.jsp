@@ -78,7 +78,7 @@
 										<label for="exampleInputEmail1">Employee No </label> <form:input
 											type="text" path="empNo" class="form-control"
 											 aria-describedby="emailHelp"
-											placeholder=""  required="required"/> 
+											placeholder="" readonly="true" required="required"/> 
 									</div>
 
 								<div class="form-row">

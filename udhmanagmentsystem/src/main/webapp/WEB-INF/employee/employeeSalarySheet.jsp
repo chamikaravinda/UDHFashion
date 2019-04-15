@@ -20,7 +20,8 @@
 	<!-- advance payment succesfull message -->
 	<script type="text/javascript">
 		function succesfull() {
-			swal("Advance Paied Succesfuly");
+			swal("Successful","Advance Paied Succesfuly", "success");
+
 		}
 	</script>
 
@@ -33,7 +34,8 @@
 	<!-- Update salarySheet successfull message -->
 	<script type="text/javascript">
 		function succesfull() {
-			swal("Salary Update Succesfull");
+			swal("Successful","Salary Update Succesfull", "success");
+
 		}
 	</script>
 
