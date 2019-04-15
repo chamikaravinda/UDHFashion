@@ -18,7 +18,8 @@
 <!-- added success message -->
 <script type="text/javascript">
 	function addedsuccesfully() {
-		swal("Shop Added Succesfully");
+		swal("Successful","Shop Added Succesfully","success");
+
 	}
 </script>
 
@@ -31,7 +32,8 @@
 <!-- update success message -->
 <script type="text/javascript">
 	function updatesuccesfully() {
-		swal("Shop updated Succesfully");
+		swal("Successful","Shop updated Succesfully","success");
+
 	}
 </script>
 
@@ -43,7 +45,8 @@
 <!-- delete success message -->
 <script type="text/javascript">
 	function deletesuccesfully() {
-		swal("Shop Deleted Succesfully");
+		swal("Successful","Shop Deleted Succesfully","success");
+
 	}
 </script>
 
@@ -56,7 +59,7 @@
 <!-- delete unsuccess message -->
 <script type="text/javascript">
 	function deleteunsuccesfull() {
-		swal("Shop Delete Unsuccesfull");
+		swal("Unsuccessful","Shop Deleted Succesfully","error");
 	}
 </script>
 
@@ -122,10 +125,10 @@
 												<td>${result.shopAddress}</td>
 												<td>${result.shopTelephone}</td>
 												<td>
-													<form method="GET" action="editShop" modelAttribute="shop">
+													<form method="POST" action="editShop" modelAttribute="shop">
 														<input name="shopId" type="hidden"
 															value="${result.shopId}">
-														<button type="submit" class="btn btn-primary">Update</button>
+														<button type="submit" class="btn btn-link">Edit</button>
 													</form>
 
 
@@ -135,7 +138,7 @@
 														modelAttribute="shop">
 														<input name="shopId" type="hidden"
 															value="${result.shopId}">
-														<button type="submit" class="btn btn-primary">Delete</button>
+														<button type="submit" class="btn btn-link">Delete</button>
 													</form>
 												</td>
 											</tr>

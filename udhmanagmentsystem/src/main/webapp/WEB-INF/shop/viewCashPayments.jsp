@@ -42,7 +42,7 @@
 <!-- delete success message -->
 <script type="text/javascript">
 	function deletesuccesfully() {
-		swal("Credit Bill Deleted Succesfully");
+		swal("Successful","Cash Payment Deleted Succesfully","success");
 	}
 </script>
 
@@ -55,7 +55,7 @@
 <!-- delete unsuccess message -->
 <script type="text/javascript">
 	function deleteunsuccesfull() {
-		swal("Credit Bill Delete Unsuccesfull");
+		swal("Unsuccessful", "Cash Payment Delete Unsuccesfull", "error");
 	}
 </script>
 
@@ -104,9 +104,6 @@
 											<th>Shop Name</th>
 											<th>Bill Amount</th>
 											<th>Payed Date</th>
-
-											<td><span><i class="fa fa-pencil-square"
-													aria-hidden="true"></i></span></td>
 											<td><span><i class="fa fa-trash"
 													aria-hidden="true"></i></span></td>
 										</tr>
@@ -122,19 +119,10 @@
 												<td>${result.billAmount }</td>
 												<td>${result.paymentDate }</td>
 												<td>
-													<form method="POST" action="ediCashPayment"
-														modelAttribute="creditBills">
+													<form method="POST" action="deleteCashPayment"
+														modelAttribute="cashPayment">
 														<input name="id" type="hidden" value="${result.id}">
-														<button type="submit" class="btn btn-primary">Update</button>
-													</form>
-
-
-												</td>
-												<td>
-													<form method="POST" action="deleteCashPayments"
-														modelAttribute="creditBill">
-														<input name="id" type="hidden" value="${result.id}">
-														<button type="submit" class="btn btn-primary">Delete</button>
+														<button type="submit" class="btn btn-link">Delete</button>
 													</form>
 												</td>
 											</tr>

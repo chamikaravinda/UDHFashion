@@ -141,12 +141,12 @@
 										<div class="form-group col-md-4">
 											<label for="exampleInputPassword1">Telephone</label> <input
 												type="number" name="contactNum" class="form-control"
-												id="contactNum" placeholder="Telephone" required>
+												id="contactNum" placeholder="Telephone" max="9999999999" required>
 										</div>
 										<div class="form-group col-md-4">
 											<label for="exampleInputPassword1">Guardian Telephone</label>
 											<input type="number" name="gContactNum" class="form-control"
-												id="gContactNum" placeholder="Guardian Telephone" required>
+												id="gContactNum" placeholder="Guardian Telephone" max="9999999999" required>
 										</div>
 									</div>
 									<div style="margin-left: 500px">

@@ -10,4 +10,6 @@ public interface IPaidBillDAO {
 
 	public abstract List<PaidBills> getAllPaidBillDetails();
 
+	boolean deletePaidBill(int id);
+
 }

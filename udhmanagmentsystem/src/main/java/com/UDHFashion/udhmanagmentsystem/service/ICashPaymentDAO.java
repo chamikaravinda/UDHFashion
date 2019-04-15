@@ -11,7 +11,8 @@ public interface ICashPaymentDAO {
 	
 	
 	public abstract boolean insertCashPayments( CashPayments cashPayment );
-	public abstract List<CashPayments> getAllCashPaymentsDetails(); 
+	public abstract List<CashPayments> getAllCashPaymentsDetails();
+	boolean deleteCashPayment(int id); 
 	
 
 }

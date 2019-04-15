@@ -65,4 +65,19 @@ public class IPaidBillDAOImpl implements IPaidBillDAO {
 		return result;
 	}
 
+	@Override
+	public boolean deletePaidBill(int id) {
+		
+		int delete = jdbcTemplate.update(CommonConstants.DELETE_PAIDBILL_FROM_ID, id);
+
+		if (delete == 1) {
+			return true;
+
+		} else {
+
+			return false;
+		}
+		
+		
+	}
 }

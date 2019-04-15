@@ -29,6 +29,8 @@ import com.UDHFashion.udhmanagmentsystem.service.ISalaryDAO;
 import com.UDHFashion.udhmanagmentsystem.util.SalaryToPayiedSalary;
 import com.mysql.fabric.Response;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 @Controller
 public class EmployeeController {
 
@@ -135,8 +137,7 @@ public class EmployeeController {
 			return model;
 
 		} else {
-
-			model.addObject("error", "Employee updating unsuccesfully");
+			redir.addFlashAttribute("error", 2);
 			model.setViewName("redirect:/viewEmployee");
 			return model;
 		}

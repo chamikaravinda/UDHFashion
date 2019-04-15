@@ -60,5 +60,21 @@ public class IChequeBillDAOImpl implements IChequeBillDAO {
 
 		return result;
 	}
+	
+	@Override
+	public boolean deleteChequePayment(int id) {
+		
+		int delete = jdbcTemplate.update(CommonConstants.DELETE_CHEQUE_PAYMENT_FROM_ID, id);
+
+		if (delete == 1) {
+			return true;
+
+		} else {
+
+			return false;
+		}
+		
+		
+	}
 
 }

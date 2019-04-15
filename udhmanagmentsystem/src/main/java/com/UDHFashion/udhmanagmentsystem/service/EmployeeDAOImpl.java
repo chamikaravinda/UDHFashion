@@ -96,7 +96,7 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
 
 				employee.getEmpName(), employee.getEmpAddress(), employee.getBasicSalary(), employee.getJobDate(),
 				employee.getContactNum(), employee.getContactNum(), employee.getEmpNo());
-		if (updateEmployee == 2) {
+		if (updateEmployee == 1) {
 
 			return true;
 

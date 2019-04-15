@@ -80,15 +80,17 @@ public class CommonConstants {
 
 	public final static String INSERT_CASHPAYMENT_DETAILS = "INSERT INTO cash_payment(billNo,billDate,shopName,billAmount,paymentDate) VALUES(?,?,?,?,?)";
 	public final static String GET_ALL_CASHPAYMENT_DETAILS = "SELECT * FROM cash_payment ORDER BY id DESC";
-
+	public final static String DELETE_CASH_PAYMENT_FROM_ID = "DELETE FROM cash_payment WHERE id = ?";
+	
 	/*--------------------------Cheque Payments-------------------------------*/
 
 	public final static String INSERT_CHEQUE_DETAILS = "INSERT INTO cheque_payment(billNo,billDate,billAmount,shopName,bankName,bankAccount,chequeNo,chequeDate,paymentDate) VALUES(?,?,?,?,?,?,?,?,?)";
 	public final static String GET_ALL_CHEQUE_DETAILS = "SELECT * FROM cheque_payment ORDER BY id DESC";
-
+	public final static String DELETE_CHEQUE_PAYMENT_FROM_ID = "DELETE FROM cheque_payment WHERE id = ?";
 	/*---------------------------Paid Bills Payments-------------------------------*/
 	public final static String INSERT_PAIDBILL_DETAILS = "INSERT INTO paid_bill(billNo,billDate,shopName,billAmount,paymentDate,paymentMethod) VALUES(?,?,?,?,?,?)";
 	public final static String GET_ALL_PAIDBILL_DETAILS = "SELECT * FROM paid_bill";
+	public final static String DELETE_PAIDBILL_FROM_ID = "DELETE FROM paid_bill WHERE id = ?";
 
 	/*---------------------------All SQL about Sales-------------------------------::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::;*/
 

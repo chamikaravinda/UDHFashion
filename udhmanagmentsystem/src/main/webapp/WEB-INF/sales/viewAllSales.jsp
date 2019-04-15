@@ -74,10 +74,10 @@
 											<tr>
 												<td>${result.date}</td>
 												<td>${result.cashireId}</td>
-												<td>${result.grossAmount}</td>
-												<td>${result.netAmount}</td>
-												<td>${result.totalDiscount}</td>
-												<td>${result.balance}</td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.grossAmount}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.netAmount}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.totalDiscount}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.balance}" /></td>
 												<td>${result.noOfItem}</td>
 
 

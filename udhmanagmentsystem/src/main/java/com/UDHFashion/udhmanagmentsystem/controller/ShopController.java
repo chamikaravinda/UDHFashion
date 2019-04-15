@@ -68,11 +68,10 @@ public class ShopController {
 	}
 
 	// Load Data to the forms
-	@RequestMapping(value = "/editShop", method = RequestMethod.GET)
-	public ModelAndView editShop(@ModelAttribute("shop") updateShop updateshop, ModelAndView model) {
-
-		updateShop sp = iShop.getShopById(updateshop.getId());
-		model.addObject("shop", sp);
+	@RequestMapping(value = "/editShop", method = RequestMethod.POST)
+	public ModelAndView editShop(@ModelAttribute("shop") Shop updateshop, ModelAndView model) {
+		updateShop sp = iShop.getShopById(updateshop.getShopId());
+		model.addObject("updateShop", sp);
 		model.setViewName("shop/editShop");
 		return model;
 

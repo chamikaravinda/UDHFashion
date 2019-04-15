@@ -44,7 +44,7 @@
 								<form:form  method="POST" action="submitUpdateShop" modelAttribute="updateShop">
 								  <div class="form-group">
 									<label for="exampleInputEmail1">Shop Name</label>
-									<form:input type="email" class="form-control" path="name" aria-describedby="emailHelp" placeholder="" required="required"/>
+									<form:input type="text" class="form-control" path="name" aria-describedby="emailHelp" placeholder="" required="required"/>
 									
 								  </div>
 								  <div class="form-group">
@@ -56,6 +56,8 @@
 									<label for="exampleInputPassword1">Telephone</label>
 									<form:input type="number" class="form-control" path="telephone" placeholder="" required="required"/>
 								  </div>
+								  
+								  <form:input type="hidden" path="id"/>
 									<button type="submit" class="btn btn-primary">Update</button>
 								  </form:form>
 																

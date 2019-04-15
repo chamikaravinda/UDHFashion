@@ -18,7 +18,7 @@
 <!-- added success message -->
 <script type="text/javascript">
 	function addedsuccesfully() {
-		swal("Credit Bill Added Succesfully");
+		swal("Successful", "Credit Bill Added Succesfully", "success");
 	}
 </script>
 
@@ -31,7 +31,7 @@
 <!-- update success message -->
 <script type="text/javascript">
 	function updatesuccesfully() {
-		swal("Credit Bill updated Succesfully");
+		swal("Successful", "Credit Bill updated Succesfully", "success");
 	}
 </script>
 
@@ -43,7 +43,7 @@
 <!-- delete success message -->
 <script type="text/javascript">
 	function deletesuccesfully() {
-		swal("Credit Bill Deleted Succesfully");
+		swal("Successful", "Credit Bill Deleted Succesfully", "success");
 	}
 </script>
 
@@ -56,7 +56,7 @@
 <!-- delete unsuccess message -->
 <script type="text/javascript">
 	function deleteunsuccesfull() {
-		swal("Credit Bill Delete Unsuccesfull");
+		swal("Unsuccessful", "Credit Bill Delete Unsuccesfull", "error");
 	}
 </script>
 
@@ -126,12 +126,15 @@
 												<td>${result.billNo}</td>
 												<td>${result.billDate}</td>
 												<td>${result.shopName }</td>
-												<td>${result.billAmount }</td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.billAmount }" /></td>
 												<td>
 													<form method="POST" action="editCreditBill"
 														modelAttribute="creditBills">
 														<input name="id" type="hidden" value="${result.id}">
-														<button type="submit" class="btn btn-link"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+														<button type="submit" class="btn btn-link">
+															<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+															Edit
+														</button>
 													</form>
 
 
@@ -140,7 +143,9 @@
 													<form method="POST" action="deleteCreditBills"
 														modelAttribute="creditBill">
 														<input name="id" type="hidden" value="${result.id}">
-														<button type="submit" class="btn btn-link"> <i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+														<button type="submit" class="btn btn-link">
+															<i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+														</button>
 													</form>
 												</td>
 											</tr>

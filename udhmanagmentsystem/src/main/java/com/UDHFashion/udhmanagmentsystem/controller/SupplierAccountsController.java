@@ -130,13 +130,13 @@ public class SupplierAccountsController {
 		if (serviceCreditBill.deleteCreditBillDetails(id)) {
 
 			redir.addFlashAttribute("success", 3);
-			model.setViewName("redirect:/viewCreditBills");
+			model.setViewName("redirect:/allCreditBills");
 			return model;
 
 		} else {
 
 			model.addObject("error", "Credit Bills deleting unsuccesfully");
-			model.setViewName("redirect:/viewCreditBills");
+			model.setViewName("redirect:/allCreditBills");
 			return model;
 
 		}
@@ -381,63 +381,68 @@ public class SupplierAccountsController {
 
 	}
 
-	///////////////////// complete till this point
-	@RequestMapping(value = "/ExistcashPayments", method = RequestMethod.GET)
-	public String ExistcashPayments(Model model) {
+	// delete the paid bill
+	@RequestMapping(value = "/deletePaidBills", method = RequestMethod.POST)
+	public ModelAndView deletePaidBills(@ModelAttribute("paidBill") PaidBills paidBill, ModelAndView model,
+			RedirectAttributes redir) {
 
-		List<CreditBill> exCreditBillPay = serviceCreditBill.getAllCreditBillDetails();
-		List<Shop> shop = iShop.getAllShopsDetails();
+		if (servicePaidBill.deletePaidBill(paidBill.getId())) {
 
-		model.addAttribute("shopList", shop);
-
-		model.addAttribute("creditBillList", exCreditBillPay);
-
-		return "shop/addExsistCashPayments";
-	}
-
-	@RequestMapping(value = "/submitCashPayment", method = RequestMethod.POST)
-	public ModelAndView submitCashPayment(@ModelAttribute("cashPayment") CashPayments cashPayment,
-			@ModelAttribute("paidBill") PaidBills paidBills, ModelAndView model, RedirectAttributes redir) {
-
-		System.out.println(cashPayment.getBillNo());
-
-		if (serviceCashPaymet.insertCashPayments(cashPayment)) {
-			paidBills.setPaymentMethod("Cash Payment");
-			if (servicePaidBill.insertPaidBillDetails(paidBills)
-					&& serviceCreditBill.deleteCreditBillDetails(cashPayment.getBillNo())) {
-
-				redir.addFlashAttribute("success", 1);
-				model.setViewName("redirect:/paidBills");
-			}
+			redir.addFlashAttribute("success", 3);
+			model.setViewName("redirect:/paidBills");
+			return model;
 
 		} else {
 
-			model.addObject("error", "CashPayment adding unsuccesfully");
-			model.setViewName("redirect:/addCreditBills");
+			model.addObject("error", "Credit Bills deleting unsuccesfully");
+			model.setViewName("redirect:/paidBills");
+			return model;
+
 		}
-		return model;
 
 	}
+	
+	// delete the cash payment bill
+	@RequestMapping(value = "/deleteCashPayment", method = RequestMethod.POST)
+	public ModelAndView deleteCashPayment(@ModelAttribute("cashPayment") CashPayments payment, ModelAndView model,
+			RedirectAttributes redir) {
 
-	@RequestMapping(value = "/submitChequePayment", method = RequestMethod.POST)
-	public ModelAndView submitChequePayment(@ModelAttribute("chequePayment") ChequePayment chequePayment,
-			@ModelAttribute("paidBills") PaidBills paidBills, ModelAndView model, RedirectAttributes redir) {
+		if (serviceCashPaymet.deleteCashPayment(payment.getId())) {
 
-		if (serviceChequePaument.insertChequePayment(chequePayment)) {
-			paidBills.setPaymentMethod("Cheque Payment");
-			if (servicePaidBill.insertPaidBillDetails(paidBills)) {
-
-				redir.addFlashAttribute("success", 1);
-				model.setViewName("redirect:/paidBills");
-			}
+			redir.addFlashAttribute("success", 3);
+			model.setViewName("redirect:/cashPayments");
+			return model;
 
 		} else {
 
-			model.addObject("error", "Cheque Payment adding unsuccesfully");
-			model.setViewName("redirect:/addCreditBills");
+			model.addObject("error", "Credit Bills deleting unsuccesfully");
+			model.setViewName("redirect:/cashPayments");
+			return model;
+
 		}
-		return model;
 
 	}
+	
+	// delete the chequex payment bill
+		@RequestMapping(value = "/deleteChequePayments", method = RequestMethod.POST)
+		public ModelAndView deleteChequePayment(@ModelAttribute("chequePayment") CashPayments payment, ModelAndView model,
+				RedirectAttributes redir) {
+
+			if (serviceChequePaument.deleteChequePayment(payment.getId())) {
+
+				redir.addFlashAttribute("success", 3);
+				model.setViewName("redirect:/cheqPayments");
+				return model;
+
+			} else {
+
+				model.addObject("error", "Credit Bills deleting unsuccesfully");
+				model.setViewName("redirect:/cheqPayments");
+				return model;
+
+			}
+
+		}
+	
 
 }

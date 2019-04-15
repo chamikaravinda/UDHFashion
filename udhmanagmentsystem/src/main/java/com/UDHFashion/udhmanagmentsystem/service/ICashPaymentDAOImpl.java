@@ -61,5 +61,21 @@ public class ICashPaymentDAOImpl implements ICashPaymentDAO {
 
 		
 	}
+	
+	@Override
+	public boolean deleteCashPayment(int id) {
+		
+		int delete = jdbcTemplate.update(CommonConstants.DELETE_CASH_PAYMENT_FROM_ID, id);
+
+		if (delete == 1) {
+			return true;
+
+		} else {
+
+			return false;
+		}
+		
+		
+	}
 
 }

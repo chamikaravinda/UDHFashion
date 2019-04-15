@@ -114,13 +114,13 @@
 											<tr>
 												<td>${result.itemCode}</td>
 												<td>${result.itemDescription}</td>
-												<td>${result.grossPrice}</td>
-												<td>${result.price}</td>
-												<td>${result.discount}</td>
-												<td>${result.netPrice}</td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.grossPrice}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.price}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.discount}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.netPrice}" /></td>
 												<td>${result.itemQuantity}</td>
-												<td>${result.netProfit}</td>
-												<td>${result.estimatedNetProfit}</td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.netProfit}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.estimatedNetProfit}" /></td>
 												<td>${result.shopId}</td>
 												<td><form method="POST" action="editItem"
 														modelAttribute="item">

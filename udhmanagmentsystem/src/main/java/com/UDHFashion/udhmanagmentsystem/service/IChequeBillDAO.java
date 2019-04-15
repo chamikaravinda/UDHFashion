@@ -10,4 +10,6 @@ public interface IChequeBillDAO {
 
 	public abstract List<ChequePayment> getAllChequePaymentDetails();
 
+	boolean deleteChequePayment(int id);
+
 }

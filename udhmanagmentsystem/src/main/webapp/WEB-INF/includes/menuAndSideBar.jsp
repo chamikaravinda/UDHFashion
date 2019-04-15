@@ -183,7 +183,7 @@ tr.shown td.details-control {
 								<li><a href="addShop"><i class="fa fa-plus-square"></i> Add
 										Suppliers</a></li>
 								<li><a href="viewShop"><i class="fa fa-users"
-										aria-hidden="true"></i> View Suppliers</a></li>
+										aria-hidden="true"></i> All Suppliers</a></li>
 								<li class="submenu"><a href="#"><i
 										class="fa fa-briefcase"></i><span> Accounts</span><span
 										class="menu-arrow"></span></a>
