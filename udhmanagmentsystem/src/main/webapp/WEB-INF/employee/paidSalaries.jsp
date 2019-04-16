@@ -9,6 +9,7 @@
 <%@page import="com.UDHFashion.udhmanagmentsystem.model.Shop"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,17 @@
 <title>Salary Sheet</title>
 </head>
 <body>
+	<%
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect("login");
+		} else {
+			User user = (User) session.getAttribute("user");
+			if (user.getRole().equals("casher")) {
+				response.sendRedirect("/error");
+			}
 
+		}
+	%>
 	<!-- Salary payment succesfull message -->
 	<script type="text/javascript">
 		function salarySuccesfull() {
@@ -33,7 +44,7 @@
 	<!-- Update salarySheet successfull message -->
 	<script type="text/javascript">
 		function succesfull() {
-			swal("Successful","Salary Update Succesfull", "success");
+			swal("Successful", "Salary Update Succesfull", "success");
 
 		}
 	</script>
@@ -43,7 +54,7 @@
 			window.onload = succesfull;
 		</script>
 	</c:if>
-	
+
 	<div class="content-page">
 
 		<!-- Start content -->

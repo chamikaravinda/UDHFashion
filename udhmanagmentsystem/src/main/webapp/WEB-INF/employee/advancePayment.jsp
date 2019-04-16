@@ -2,7 +2,19 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
 
+<%
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect("login");
+	} else {
+		User user = (User) session.getAttribute("user");
+		if (user.getRole().equals("casher")) {
+			response.sendRedirect("/error");
+		}
+
+	}
+%>
 <!-- advance payment Unsuccesfull message -->
 <script type="text/javascript">
 	function Unsuccesful() {

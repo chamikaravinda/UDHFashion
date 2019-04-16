@@ -2,6 +2,8 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +11,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect("login");
+	} else {
+		User user = (User) session.getAttribute("user");
+		if (user.getRole().equals("casher")) {
+			response.sendRedirect("/error");
+		}
 
+	}
+%>	
 
 	<!-- Add employee unsuccess message -->
 	<script type="text/javascript">

@@ -2,7 +2,8 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,17 @@
 </head>
 <body>
 
+	<%
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect("login");
+		} else {
+			User user = (User) session.getAttribute("user");
+			if (user.getRole().equals("casher")) {
+				response.sendRedirect("/error");
+			}
 
+		}
+	%>
 
 	<div class="content-page">
 
@@ -71,62 +82,64 @@
 
 							<div class="card-body">
 
-								<form:form method="POST" action="submitUpdateEmployee" modelAttribute="employee" >
-								<div class="form-group">
-									
-									
-										<label for="exampleInputEmail1">Employee No </label> <form:input
-											type="text" path="empNo" class="form-control"
-											 aria-describedby="emailHelp"
-											placeholder="" readonly="true" required="required"/> 
+								<form:form method="POST" action="submitUpdateEmployee"
+									modelAttribute="employee">
+									<div class="form-group">
+
+
+										<label for="exampleInputEmail1">Employee No </label>
+										<form:input type="text" path="empNo" class="form-control"
+											aria-describedby="emailHelp" placeholder="" readonly="true"
+											required="required" />
 									</div>
 
-								<div class="form-row">
-									
-									
-									
-									<div class="form-group col-md-4">
-										<label for="exampleInputEmail1">Employee Name</label> <form:input
-											type="text" path="empName" class="form-control"
-											 aria-describedby="numberlHelp"
-											placeholder="" required="required"/>
+									<div class="form-row">
+
+
+
+										<div class="form-group col-md-4">
+											<label for="exampleInputEmail1">Employee Name</label>
+											<form:input type="text" path="empName" class="form-control"
+												aria-describedby="numberlHelp" placeholder=""
+												required="required" />
+
+										</div>
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Address</label>
+											<form:input type="text" path="empAddress"
+												class="form-control" placeholder="" required="required" />
+										</div>
+
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">BasicSalary</label>
+											<form:input type="text" path="basicSalary"
+												class="form-control" placeholder="" required="required" />
+										</div>
 
 									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Address</label> <form:input
-											type="text" path="empAddress" class="form-control"
-											 placeholder="" required="required"/>
+
+
+									<div class="form-row">
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Job date</label>
+											<form:input type="Date" path="jobDate" class="form-control"
+												placeholder="" required="required" />
+										</div>
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Telephone</label>
+											<form:input type="number" path="contactNum"
+												class="form-control" placeholder="" required="required" />
+										</div>
+										<div class="form-group col-md-4">
+											<label for="exampleInputPassword1">Guardian Telephone</label>
+											<form:input type="number" path="gContactNum"
+												class="form-control" placeholder="" required="required" />
+										</div>
 									</div>
-									
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">BasicSalary</label> <form:input
-											type="text" path="basicSalary" class="form-control"
-											 placeholder="" required="required"/>
-									</div>
-									
-								</div>
-								
-										
-								<div class="form-row">
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Job date</label> <form:input
-											type="Date" path="jobDate" class="form-control"
-											 placeholder=""  required="required"/>
-									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Telephone</label> <form:input
-											type="number" path="contactNum" class="form-control"
-											 placeholder="" required="required"/>
-									</div>
-									<div class="form-group col-md-4">
-										<label for="exampleInputPassword1">Guardian Telephone</label> <form:input
-											type="number" path="gContactNum" class="form-control"
-											 placeholder="" required="required"/>
-									</div>
-								</div>
-								
+
 									<div style="margin-left: 500px">
-										<button type="submit" class="btn btn-primary">Update Employee</button>
+										<button type="submit" class="btn btn-primary">Update
+											Employee</button>
 									</div>
 
 								</form:form>
