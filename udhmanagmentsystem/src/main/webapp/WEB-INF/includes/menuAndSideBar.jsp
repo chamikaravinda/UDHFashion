@@ -82,25 +82,11 @@ tr.shown td.details-control {
 
 			<ul class="list-inline float-right mb-0">
 				<li class="list-inline-item dropdown notif"><a
-					class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"
-					href="#" role="button" aria-haspopup="false" aria-expanded="false">
-						<i class="fa fa-fw fa-bell-o"></i><span class="notif-bullet"></span>
-				</a>
-					<div
-						class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-lg">
-						<!-- item-->
-
-
-
-
-
-					</div></li>
-
-				<li class="list-inline-item dropdown notif"><a
 					class="nav-link dropdown-toggle nav-user" data-toggle="dropdown"
 					href="#" role="button" aria-haspopup="false" aria-expanded="false">
-						<img src="assets/images/avatars/admin.png" alt="Profile image"
-						class="avatar-rounded" style="margin-top:4px">
+
+						<i class="fa fa-user fa-2x" aria-hidden="true"
+						style="margin: 2px; size: 200%"></i>
 				</a>
 					<div class="dropdown-menu dropdown-menu-right profile-dropdown">
 						<!-- item-->
@@ -111,19 +97,14 @@ tr.shown td.details-control {
 						</div>
 
 						<!-- item-->
-						<a href="editUser?id=${sessionScope.user.id}" class="dropdown-item notify-item">
-							<i class="fa fa-user"></i> <span>Profile</span>
+						<a href="editUser?id=${sessionScope.user.id}"
+							class="dropdown-item notify-item"> <i class="fa fa-user"></i>
+							<span>Profile</span>
 						</a>
 
 						<!-- item-->
 						<a href="logout" class="dropdown-item notify-item"> <i
 							class="fa fa-power-off"></i> <span>Logout</span>
-						</a>
-
-						<!-- item-->
-						<a target="_blank" href="https://www.pikeadmin.com"
-							class="dropdown-item notify-item"> <i
-							class="fa fa-external-link"></i> <span>Pike Admin</span>
 						</a>
 					</div></li>
 
@@ -158,105 +139,111 @@ tr.shown td.details-control {
 						<!-- Sales -->
 						<li class="submenu"><a href="newSales"><i
 								class="fa fa-shopping-cart "></i><span> New Sale</span> </a></li>
+						<c:if test="${sessionScope.user.role == 'casher'}">
+						<li class="submenu"><a href="returnNote"><i
+									class="fa fa-sticky-note"></i><span> Return Item </span> </a></li>
+						</c:if>		
+						<c:if test="${sessionScope.user.role != 'casher'}">
+							<!-- Stocks -->
+							<li class="submenu"><a href="stockView"><i
+									class="fa fa-cubes"></i><span> Stocks </span> </a></li>
 
-						<!-- Stocks -->
-						<li class="submenu"><a href="stockView"><i
-								class="fa fa-cubes"></i><span> Stocks </span> </a></li>
+							<!-- Sales -->
 
-						<!-- Sales -->
+							<li class="submenu"><a href="#"><i
+									class="fa fa-area-chart" aria-hidden="true"></i><span>Sales</span>
+									<span class="menu-arrow"></span></a>
+								<ul class="list-unstyled">
+									<li><a href="viewAllSales"><i class="fa fa-table"
+											aria-hidden="true"></i></i> All Sale</a></li>
+									<li><a href="returnNote"><i class="fa fa-sticky-note"
+											aria-hidden="true"></i> Return Note</a></li>
 
-						<li class="submenu"><a href="#"><i
-								class="fa fa-area-chart" aria-hidden="true"></i><span>Sales</span>
-								<span class="menu-arrow"></span></a>
-							<ul class="list-unstyled">
-								<li><a href="viewAllSales"><i class="fa fa-table"
-										aria-hidden="true"></i></i> All Sale</a></li>
-								<li><a href="returnNote"><i class="fa fa-sticky-note"
-										aria-hidden="true"></i> Return Note</a></li>
+								</ul></li>
 
-							</ul></li>
-
-						<!-- Suppliers -->
-						<li class="submenu"><a href="#"><i class="fa fa-truck"></i>
-								<span> Suppliers </span> <span class="menu-arrow"></span></a>
-							<ul class="list-unstyled">
-								<li><a href="addShop"><i class="fa fa-plus-square"></i> Add
-										Suppliers</a></li>
-								<li><a href="viewShop"><i class="fa fa-users"
-										aria-hidden="true"></i> All Suppliers</a></li>
-								<li class="submenu"><a href="#"><i
-										class="fa fa-briefcase"></i><span> Accounts</span><span
-										class="menu-arrow"></span></a>
-									<ul class="list-unstyled">
-										<li><a href="allCreditBills"><i
-												class="fa fa-credit-card-alt"></i> Credit Bills</a></li>
-										<li><a href="paidBills"><i class="fa fa-check-square"></i> Paid
-												Bills</a></li>
-										<li><a href="newPayment"><i class="fa fa-plus" aria-hidden="true"></i></i> New
-												Payments</a></li>
-										<li><a href="cashPayments"><i class="fa fa-money"></i> Cash
-												Payments</a></li>
-										<li><a href="cheqPayments"><i class="fa fa-book" aria-hidden="true"></i> Cheque
-												Payments</a></li>
-									</ul></li>
-							</ul></li>
-
-
-						<!-- Employees -->
-						<li class="submenu"><a href="#"><i class="fa fa-user"
-								aria-hidden="true"></i><span>Employee</span><span
-								class="menu-arrow"></span></a>
-							<ul class="list-unstyled">
-								<li><a href="addEmployee"><i class="fa fa-plus-square"></i> Add
-										Employee</a></li>
-								<li><a href="viewEmployee"><i class="fa fa-user"
-										aria-hidden="true"></i> All Employee</a></li>
-								<li><a href="employeeSalarySheet"><i
-										class="fa fa-money" aria-hidden="true"></i> Salary Payments</a></li>
-								<li><a href="advancePay"><i class="fa fa-ticket"
-										aria-hidden="true"></i> Advance Payment</a></li>
-								<li><a href="attendance"><i class="fa fa-list-alt"
-										aria-hidden="true"></i> Attendance</a></li>
-								<li><a href="employeePaidSalarySheet"><i class="fa fa-check" aria-hidden="true"></i> Paid Salaries</a></li>
+							<!-- Suppliers -->
+							<li class="submenu"><a href="#"><i class="fa fa-truck"></i>
+									<span> Suppliers </span> <span class="menu-arrow"></span></a>
+								<ul class="list-unstyled">
+									<li><a href="addShop"><i class="fa fa-plus-square"></i>
+											Add Suppliers</a></li>
+									<li><a href="viewShop"><i class="fa fa-users"
+											aria-hidden="true"></i> All Suppliers</a></li>
+									<li class="submenu"><a href="#"><i
+											class="fa fa-briefcase"></i><span> Accounts</span><span
+											class="menu-arrow"></span></a>
+										<ul class="list-unstyled">
+											<li><a href="allCreditBills"><i
+													class="fa fa-credit-card-alt"></i> Credit Bills</a></li>
+											<li><a href="paidBills"><i
+													class="fa fa-check-square"></i> Paid Bills</a></li>
+											<li><a href="newPayment"><i class="fa fa-plus"
+													aria-hidden="true"></i></i> New Payments</a></li>
+											<li><a href="cashPayments"><i class="fa fa-money"></i>
+													Cash Payments</a></li>
+											<li><a href="cheqPayments"><i class="fa fa-book"
+													aria-hidden="true"></i> Cheque Payments</a></li>
+										</ul></li>
+								</ul></li>
 
 
-							</ul></li>
+							<!-- Employees -->
+							<li class="submenu"><a href="#"><i class="fa fa-user"
+									aria-hidden="true"></i><span>Employee</span><span
+									class="menu-arrow"></span></a>
+								<ul class="list-unstyled">
+									<li><a href="addEmployee"><i class="fa fa-plus-square"></i>
+											Add Employee</a></li>
+									<li><a href="viewEmployee"><i class="fa fa-user"
+											aria-hidden="true"></i> All Employee</a></li>
+									<li><a href="employeeSalarySheet"><i
+											class="fa fa-money" aria-hidden="true"></i> Salary Payments</a></li>
+									<li><a href="advancePay"><i class="fa fa-ticket"
+											aria-hidden="true"></i> Advance Payment</a></li>
+									<li><a href="attendance"><i class="fa fa-list-alt"
+											aria-hidden="true"></i> Attendance</a></li>
+									<li><a href="employeePaidSalarySheet"><i
+											class="fa fa-check" aria-hidden="true"></i> Paid Salaries</a></li>
 
-						<!-- Banks-->
-						<li class="submenu"><a href="#"><i
-								class="fa fa-university " aria-hidden="true"></i><span> Bank
-									Accounts</span><span class="menu-arrow"></span></a>
-							<ul class="list-unstyled">
-								<li><a href="allAccounts"><i class="fa fa-line-chart"></i> All
-										Accounts</a></li>
-								<li><a href="addBanks"><i class="fa fa-plus"></i> Add
-										Account</a></li>
-								<li><a href="allDeposits"><i class="fa fa-inr"></i> Deposits</a></li>
-								<li><a href="allWithdraws"><i
-										class="fa fa-credit-card "></i> Withdraws</a></li>
-							</ul></li>
+
+								</ul></li>
+
+							<!-- Banks-->
+							<li class="submenu"><a href="#"><i
+									class="fa fa-university " aria-hidden="true"></i><span>
+										Bank Accounts</span><span class="menu-arrow"></span></a>
+								<ul class="list-unstyled">
+									<li><a href="allAccounts"><i class="fa fa-line-chart"></i>
+											All Accounts</a></li>
+									<li><a href="addBanks"><i class="fa fa-plus"></i> Add
+											Account</a></li>
+									<li><a href="allDeposits"><i class="fa fa-inr"></i>
+											Deposits</a></li>
+									<li><a href="allWithdraws"><i
+											class="fa fa-credit-card "></i> Withdraws</a></li>
+								</ul></li>
 
 
-						<!-- Expences -->
-						<li class="submenu"><a href="#"><i
-								class="fa fa-pie-chart"></i><span> Expenditures</span><span
-								class="menu-arrow"></span></a>
-							<ul class="list-unstyled">
-								<li><a href="addShopExpenditures"><i
-										class="fa fa-plus-square"></i> Shop Exp :</a></li>
-								<li><a href="viewShopExpenditures"><i
-										class="fa fa-info-circle" aria-hidden="true"></i> All Shop Exp
-										:</a></li>
-								<li><a href="addPersonalExpenditures"><i
-										class="fa fa-plus-square"></i> Personal</a></li>
-								<li><a href="viewPexpenditures"><i
-										class="fa fa-info-circle" aria-hidden="true"></i> All Personal
-										Exp :</a></li>
-							</ul></li>
+							<!-- Expences -->
+							<li class="submenu"><a href="#"><i
+									class="fa fa-pie-chart"></i><span> Expenditures</span><span
+									class="menu-arrow"></span></a>
+								<ul class="list-unstyled">
+									<li><a href="addShopExpenditures"><i
+											class="fa fa-plus-square"></i> Shop Exp :</a></li>
+									<li><a href="viewShopExpenditures"><i
+											class="fa fa-info-circle" aria-hidden="true"></i> All Shop
+											Exp :</a></li>
+									<li><a href="addPersonalExpenditures"><i
+											class="fa fa-plus-square"></i> Personal</a></li>
+									<li><a href="viewPexpenditures"><i
+											class="fa fa-info-circle" aria-hidden="true"></i> All
+											Personal Exp :</a></li>
+								</ul></li>
 							<!-- Settings -->
 							<li class="submenu"><a href="settings"><i
-								class="fa fa-wrench"></i><span> Settings </span> </a></li>
-							
+									class="fa fa-wrench"></i><span> Settings </span> </a></li>
+						</c:if>
 
 					</ul>
 

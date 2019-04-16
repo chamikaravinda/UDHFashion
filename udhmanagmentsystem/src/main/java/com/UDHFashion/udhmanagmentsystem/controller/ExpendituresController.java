@@ -35,7 +35,7 @@ public class ExpendituresController {
 
 	@RequestMapping(value = "/addShopExpenditures", method = RequestMethod.GET)
 	public String addShopExpenditures(Model model) {
-
+		model.addAttribute("ShopExpenditures",new ShopExpenditures());
 		return "expenditures/addShopExpenditures";
 	}
 

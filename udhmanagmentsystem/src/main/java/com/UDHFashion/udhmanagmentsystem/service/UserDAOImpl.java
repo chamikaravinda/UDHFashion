@@ -11,8 +11,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.UDHFashion.udhmanagmentsystem.model.PayiedSalary;
-import com.UDHFashion.udhmanagmentsystem.model.Salary;
 import com.UDHFashion.udhmanagmentsystem.model.User;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 
