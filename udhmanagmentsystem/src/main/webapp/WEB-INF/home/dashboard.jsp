@@ -27,96 +27,114 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<!-- Dashboard content  -->
-
-					<div class="row">
-						<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-							<div class="card-box noradius noborder bg-default">
-								<i class="fa fa-file-text-o float-right text-white"></i>
-								<h6 class="text-white text-uppercase m-b-20">Items</h6>
-								<h1 class="m-b-20 text-white counter">${num}</h1>
-								<a href="addStock" class="text-white"> <span>Add New</span></a>
-
-							</div>
-						</div>
-
-						<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-							<div class="card-box noradius noborder bg-warning">
-								<i class="fa fa-building-o float-right text-white"></i>
-								<h6 class="text-white text-uppercase m-b-20">Suppliers</h6>
-								<h1 class="m-b-20 text-white counter">${allSuppliers}</h1>
-								<a href="addShop" class="text-white"> <span>Add New</span></a>
-
-							</div>
-						</div>
-
-						<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-							<div class="card-box noradius noborder bg-info">
-								<i class="fa fa-user-o float-right text-white"></i>
-								<h6 class="text-white text-uppercase m-b-20">Prasent Employees</h6>
-								<h1 class="m-b-20 text-white counter">${currentSize}</h1>
-								<a href="addEmployee" class="text-white"> <span>Add
-										New</span></a>
-							</div>
-						</div>
-
-						<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-							<div class="card-box noradius noborder bg-danger">
-								<i class="fa fa-bar-chart float-right text-white"></i>
-								<h6 class="text-white text-uppercase m-b-20">Daily Profit</h6>
-								<h1 class="m-b-20 text-white counter">${todaysProfite}</h1>
-								</br>
-							</div>
-						</div>
-
-						<!-- Bar Chart -->
-						<div class="col-12">
-							<div class="card mb-3">
-								<div class="card-header">
-									<h3>
-										<i class="fa fa-users"></i> Daily profit
-									</h3>
-
+					<c:if test="${sessionScope.user.role != 'casher'}">
+						<div class="row">
+							<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+								<div class="card-box noradius noborder bg-default">
+									<i class="fa fa-file-text-o float-right text-white"></i>
+									<h6 class="text-white text-uppercase m-b-20">Items</h6>
+									<h1 class="m-b-20 text-white counter">${num}</h1>
+									<a href="addStock" class="text-white"> <span>Add New</span></a>
 
 								</div>
+							</div>
 
-								<div class="card-body">
+							<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+								<div class="card-box noradius noborder bg-warning">
+									<i class="fa fa-building-o float-right text-white"></i>
+									<h6 class="text-white text-uppercase m-b-20">Suppliers</h6>
+									<h1 class="m-b-20 text-white counter">${allSuppliers}</h1>
+									<a href="addShop" class="text-white"> <span>Add New</span></a>
 
-									<table id="example1"
-										class="table table-bordered table-responsive-xl table-hover display">
-										<thead>
-											<tr>
-												<th>Date</th>
-												<th>Expenditure Amount</th>
-												<th>Business Amount</th>
-												<th>Net Profit</th>
+								</div>
+							</div>
 
-											</tr>
-										</thead>
-										<tbody>
-											
-												<c:forEach var="result" items="${getDailyBusiness}">
+							<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+								<div class="card-box noradius noborder bg-info">
+									<i class="fa fa-user-o float-right text-white"></i>
+									<h6 class="text-white text-uppercase m-b-20">Prasent
+										Employees</h6>
+									<h1 class="m-b-20 text-white counter">${currentSize}</h1>
+									<a href="addEmployee" class="text-white"> <span>Add
+											New</span></a>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+								<div class="card-box noradius noborder bg-danger">
+									<i class="fa fa-bar-chart float-right text-white"></i>
+									<h6 class="text-white text-uppercase m-b-20">Daily Profit</h6>
+									<h1 class="m-b-20 text-white counter">${todaysProfite}</h1>
+									</br>
+								</div>
+							</div>
+
+							<!-- Bar Chart -->
+							<div class="col-12">
+								<div class="card mb-3">
+									<div class="card-header">
+										<h3>
+											<i class="fa fa-users"></i> Daily profit
+										</h3>
+
+
+									</div>
+
+									<div class="card-body">
+
+										<table id="example1"
+											class="table table-bordered table-responsive-xl table-hover display">
+											<thead>
 												<tr>
-
-													<td>${result.date}</td>
-													<td>${result.expenseAmount}</td>
-													<td>${result.bussinesAmount}</td>
-													<td>${result.netProfite}</td>
+													<th>Date</th>
+													<th>Expenditure Amount</th>
+													<th>Business Amount</th>
+													<th>Net Profit</th>
 
 												</tr>
+											</thead>
+											<tbody>
 
-												<tr>
-											</c:forEach>
-										</tbody>
-									</table>
+												<c:forEach var="result" items="${getDailyBusiness}">
+													<tr>
 
+														<td>${result.date}</td>
+														<td>${result.expenseAmount}</td>
+														<td>${result.bussinesAmount}</td>
+														<td>${result.netProfite}</td>
+
+													</tr>
+
+													<tr>
+												</c:forEach>
+											</tbody>
+										</table>
+
+									</div>
 								</div>
+								<!-- end card-->
 							</div>
-							<!-- end card-->
+							<!-- end it -->
+
 						</div>
-						<!-- end it -->
-
-					</div>
-
+					</c:if>
+					<c:if test="${sessionScope.user.role == 'casher'}">
+						<br><br><br>
+						<div class="row">
+							<div class="offset-md-2 col-md-4">
+								<h3>
+									<a href="newSales"><i class="fa fa-shopping-cart "></i><span>
+											New Sale</span> </a>
+								</h3>
+							</div>
+							<div class="col-md-4">
+								<h3>
+									<a href="returnNote"><i class="fa fa-sticky-note"></i><span>
+											Return Item </span> </a>
+								</h3>
+							</div>
+						</div>
+					</c:if>
 					<h1>${msg}</h1>
 				</div>
 			</div>

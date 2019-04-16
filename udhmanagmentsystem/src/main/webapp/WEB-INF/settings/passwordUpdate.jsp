@@ -90,14 +90,16 @@
 					<div class=" col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<div class="text-right">
+								<c:if test="${sessionScope.user.role != 'casher'}">
+									<div class="text-right">
 
-									<p>
-										<a href="deleteUser?id=${user.id}"><i class="fa fa-trash"
-											aria-hidden="true"></i> Delete User</a>
-									</p>
+										<p>
+											<a href="deleteUser?id=${user.id}"><i class="fa fa-trash"
+												aria-hidden="true"></i> Delete User</a>
+										</p>
 
-								</div>
+									</div>
+								</c:if>
 								<br>
 								<div>
 									<form:form method="post" action="passwordUpdate"
