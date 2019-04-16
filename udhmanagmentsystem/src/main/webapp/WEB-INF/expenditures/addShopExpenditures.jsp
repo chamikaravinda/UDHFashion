@@ -2,10 +2,13 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <script>
+	
 </script>
 
 <meta charset="ISO-8859-1">
@@ -13,7 +16,17 @@
 </head>
 <body>
 
+	<%
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect("login");
+		} else {
+			User user = (User) session.getAttribute("user");
+			if (user.getRole().equals("casher")) {
+				response.sendRedirect("/error");
+			}
 
+		}
+	%>
 
 	<div class="content-page">
 
@@ -28,14 +41,18 @@
 						<div class="breadcrumb-holder">
 							<h1 class="main-title float-left">Add Shop Expenditures</h1>
 							<ol class="breadcrumb float-right">
-									<li class="breadcrumb-item">Home</li>
-							<li class="breadcrumb-item active">Expenditures</li>
+								<li class="breadcrumb-item">Home</li>
+								<li class="breadcrumb-item active">Expenditures</li>
 							</ol>
 							<div class="clearfix"></div>
 						</div>
 					</div>
 				</div>
-				<br><br><br><br><br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
 				<!-- end row -->
 
 				<div class="row">
@@ -62,7 +79,7 @@
 
 										</div>
 									</div>
-										
+
 									<div class="form-row">
 										<div class="form-group col-md-4">
 											<label for="exampleInputPassword1">Name</label> <input
@@ -81,9 +98,9 @@
 										</div>
 									</div>
 
-										<div style="margin-left: 500px">
-											<button type="submit" class="btn btn-primary">Add</button>
-										</div>
+									<div style="margin-left: 500px">
+										<button type="submit" class="btn btn-primary">Add</button>
+									</div>
 								</form>
 
 							</div>

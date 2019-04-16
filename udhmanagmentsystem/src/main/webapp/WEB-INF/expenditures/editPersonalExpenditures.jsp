@@ -2,6 +2,7 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
 
 <script>
 	function validator() {
@@ -37,7 +38,17 @@
 </head>
 <body>
 
+	<%
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect("login");
+		} else {
+			User user = (User) session.getAttribute("user");
+			if (user.getRole().equals("casher")) {
+				response.sendRedirect("/error");
+			}
 
+		}
+	%>
 
 	<div class="content-page">
 
@@ -86,11 +97,11 @@
 												aria-describedby="emailHelp" placeholder=""
 												required="required" />
 										</div>
-										
+
 									</div>
 
 									<div class="form-row">
-										
+
 										<div class="form-group col-md-4">
 											<label for="exampleInputPassword1">Reason</label>
 											<form:input type="text" path="reason" class="form-control"

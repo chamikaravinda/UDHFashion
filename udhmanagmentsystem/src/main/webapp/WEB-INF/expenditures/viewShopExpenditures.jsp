@@ -9,7 +9,19 @@
 <%@page import="com.UDHFashion.udhmanagmentsystem.model.Shop"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
 
+<%
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect("login");
+	} else {
+		User user = (User) session.getAttribute("user");
+		if (user.getRole().equals("casher")) {
+			response.sendRedirect("/error");
+		}
+
+	}
+%>
 <!-- added success message -->
 <script type="text/javascript">
 	function addedsuccesfully() {

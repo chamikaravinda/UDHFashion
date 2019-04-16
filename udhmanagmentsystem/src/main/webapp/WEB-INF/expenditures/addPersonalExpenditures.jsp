@@ -2,6 +2,7 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +12,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect("login");
+		} else {
+			User user = (User) session.getAttribute("user");
+			if (user.getRole().equals("casher")) {
+				response.sendRedirect("/error");
+			}
 
-
+		}
+	%>
 
 	<div class="content-page">
 
@@ -34,7 +44,11 @@
 						</div>
 					</div>
 				</div>
-				<br><br><br><br><br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
 				<!-- end row -->
 
 				<div class="row">
@@ -45,35 +59,32 @@
 							<div class="card-body">
 
 								<form method="POST" action="submitPersonalExpenditures"
-									modelAttribute="PersonalExpenditures" >
+									modelAttribute="PersonalExpenditures">
 
-									
-										<div class="form-group ">
-											<label for="exampleInputEmail1">Date</label> <input
-												type="Date" name="date" class="form-control" id="date"
-												aria-describedby="numberlHelp" placeholder="Date"
-												required>
 
-										</div>
-										
-										<div class="form-group ">
-											<label for="exampleInputEmail1">Reason</label> <input
-												type="text" name="reason" class="form-control" id="reason"
-												aria-describedby="numberlHelp" placeholder="Reason"
-												required>
-
-										</div>
 									<div class="form-group ">
-											<label for="exampleInputEmail1">Amount</label> <input
-												type="number" name="amount" class="form-control" id="amount"
-												aria-describedby="numberlHelp" placeholder="Bill No"
-												required>
+										<label for="exampleInputEmail1">Date</label> <input
+											type="Date" name="date" class="form-control" id="date"
+											aria-describedby="numberlHelp" placeholder="Date" required>
 
-										</div>
+									</div>
 
-										<div style="margin-left: 500px">
-											<button type="submit" class="btn btn-primary">Add</button>
-										</div>
+									<div class="form-group ">
+										<label for="exampleInputEmail1">Reason</label> <input
+											type="text" name="reason" class="form-control" id="reason"
+											aria-describedby="numberlHelp" placeholder="Reason" required>
+
+									</div>
+									<div class="form-group ">
+										<label for="exampleInputEmail1">Amount</label> <input
+											type="number" name="amount" class="form-control" id="amount"
+											aria-describedby="numberlHelp" placeholder="Bill No" required>
+
+									</div>
+
+									<div style="margin-left: 500px">
+										<button type="submit" class="btn btn-primary">Add</button>
+									</div>
 								</form>
 
 							</div>
