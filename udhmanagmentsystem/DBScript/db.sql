@@ -57,8 +57,10 @@ CREATE TABLE bank_accounts
     account_number VARCHAR(30),
     account_type VARCHAR(30),
     current_balance VARCHAR(30),
- 
-     CONSTRAINT bank_account_pk PRIMARY KEY(id,bank_name,account_number));
+ 	status VARCHAR(30),
+ 	
+     CONSTRAINT bank_account_pk PRIMARY KEY(id,bank_name,account_number)
+     );
 
 
 CREATE TABLE bank_deposites

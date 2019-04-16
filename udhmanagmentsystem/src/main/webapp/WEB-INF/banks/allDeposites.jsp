@@ -2,7 +2,8 @@
 <!-- added success message -->
 <script type="text/javascript">
 	function addedsuccesfully() {
-		swal("Deposite Added Succesfully");
+		swal("Successful", "Deposite Added Succesfully", "success");
+
 	}
 </script>
 

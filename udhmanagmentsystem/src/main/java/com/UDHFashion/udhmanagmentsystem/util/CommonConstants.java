@@ -56,14 +56,14 @@ public class CommonConstants {
 
 	
 	/*---------------------------Bank queries-------------------------------*/
-	public final static String INSERT_BANK_DETAILS = "INSERT INTO bank_accounts(bank_name,account_number,account_type,current_balance) VALUES(?,?,?,?)";
-	public final static String GET_ALL_BANK_ACCOUNT_DETAILS = "SELECT * FROM bank_accounts";
+	public final static String INSERT_BANK_DETAILS = "INSERT INTO bank_accounts(bank_name,account_number,account_type,current_balance,status) VALUES(?,?,?,?,?)";
+	public final static String GET_ALL_BANK_ACCOUNT_DETAILS = "SELECT * FROM bank_accounts WHERE status='OPEN' ORDER BY id DESC" ;
 	public final static String GET_BANK_ACCOUNT = "SELECT * FROM bank_accounts WHERE id = ? ";
 	public final static String UPDATE_BANK_ACCOUNT = "UPDATE bank_accounts SET bank_name = ? , account_number = ?, account_type = ?, current_balance = ? WHERE id = ?";
 	public final static String INSERT_BANK_WITHDRAW = "INSERT INTO bank_withdraws(date,amount,account) VALUES(?,?,?)";
 	public final static String UPDATE_BANK_ACCOUNT_BALANCE = "UPDATE bank_accounts SET current_balance = ? WHERE id = ?";
 	public final static String GET_ALL_DEPOSITE_DETAILS = "SELECT * FROM bank_deposites ORDER BY id DESC";
-
+	public final static String REMOVE_BANK_ACCOUNT = "UPDATE bank_accounts SET status='CLOSED' WHERE id = ?";
 	public final static String INSERT_BANK_DEPOSIT = "INSERT INTO bank_deposites(date,amount,account) VALUES(?,?,?)";
 	public final static String GET_ALL_WITHDRAW_DETAILS = "SELECT * FROM bank_withdraws ORDER BY id DESC";
 

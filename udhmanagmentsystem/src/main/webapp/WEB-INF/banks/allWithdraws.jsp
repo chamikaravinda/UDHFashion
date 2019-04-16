@@ -2,7 +2,7 @@
 <!-- added success message -->
 <script type="text/javascript">
 	function addedsuccesfully() {
-		swal("Withdraw Added Succesfully");
+		swal("Successful", "Withdraw Added Succesfully", "success");
 	}
 </script>
 

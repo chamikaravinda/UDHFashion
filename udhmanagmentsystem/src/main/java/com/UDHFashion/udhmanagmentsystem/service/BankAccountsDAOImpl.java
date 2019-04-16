@@ -28,7 +28,7 @@ public class BankAccountsDAOImpl implements IBankAccountDAO {
 
 		try {
 			int update = jdbcTemplate.update(CommonConstants.INSERT_BANK_DETAILS, account.getBankName(),
-					account.getAccountNumber(), account.getAccountType(), account.getCurrentBalance());
+					account.getAccountNumber(), account.getAccountType(), account.getCurrentBalance(),account.getStatus());
 
 			if (update == 1) {
 				return true;
@@ -87,6 +87,17 @@ public class BankAccountsDAOImpl implements IBankAccountDAO {
 	public boolean UpdateAccounts(BankAccount account) {
 		int update = jdbcTemplate.update(CommonConstants.UPDATE_BANK_ACCOUNT, account.getBankName(),
 				account.getAccountNumber(), account.getAccountType(), account.getCurrentBalance(),account.getId());
+
+		if (update == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean RemoveAccount(int id) {
+		int update = jdbcTemplate.update(CommonConstants.REMOVE_BANK_ACCOUNT, id);
 
 		if (update == 1) {
 			return true;

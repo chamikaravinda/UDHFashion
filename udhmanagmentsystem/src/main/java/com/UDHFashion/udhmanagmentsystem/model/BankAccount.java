@@ -7,6 +7,7 @@ public class BankAccount{
 	private String accountNumber;
 	private String accountType;
 	private Double currentBalance;
+	private String status;
 	
 	public int getId() {
 		return id;
@@ -38,6 +39,12 @@ public class BankAccount{
 	}
 	public void setCurrentBalance(double currentBalance) {
 		this.currentBalance = currentBalance;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

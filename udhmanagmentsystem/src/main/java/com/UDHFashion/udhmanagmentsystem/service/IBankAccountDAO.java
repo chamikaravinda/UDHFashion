@@ -19,4 +19,5 @@ public interface IBankAccountDAO {
 	boolean AddBanKWithdraws(BankWithdraws withdraws);
 	boolean UpdateBankBalanceAfterWithdraw(BankWithdraws deposit);
 	List<BankWithdraws> GetAllWithdraws();
+	boolean RemoveAccount(int id);
 }

@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.UDHFashion.udhmanagmentsystem.model.Billitems;
 import com.UDHFashion.udhmanagmentsystem.model.DailyBussiness;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 
