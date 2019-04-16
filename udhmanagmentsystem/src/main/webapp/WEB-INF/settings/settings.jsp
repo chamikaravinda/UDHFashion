@@ -1,5 +1,17 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
 
+<%
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect("login");
+	} else {
+		User user = (User) session.getAttribute("user");
+		if (user.getRole().equals("casher")) {
+			response.sendRedirect("/error");
+		}
+
+	}
+%>
 <!-- added success message -->
 <script type="text/javascript">
 	function addedsuccesfully() {
@@ -80,11 +92,12 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-md-4">
-									<span><h5>User Accounts</h5><br>
-										<a href="addUser" class="btn btn-sm btn-primary" role="button"
-										aria-pressed="true"><i class="fa fa-plus" aria-hidden="true"></i> New User</a></span>
+									<span><h5>User Accounts</h5> <br> <a href="addUser"
+										class="btn btn-sm btn-primary" role="button"
+										aria-pressed="true"><i class="fa fa-plus"
+											aria-hidden="true"></i> New User</a></span>
 								</div>
-								
+
 							</div>
 							<br> <br>
 							<div class="table-responsive">

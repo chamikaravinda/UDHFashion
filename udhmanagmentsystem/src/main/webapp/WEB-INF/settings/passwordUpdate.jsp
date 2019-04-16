@@ -2,6 +2,20 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
+
+<%
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect("login");
+	} else {
+		User user = (User) session.getAttribute("user");
+		User editUser = (User) request.getAttribute("user");
+		if (user.getRole().equals("casher") && user.getId() != editUser.getId()) {
+			response.sendRedirect("/error");
+		}
+
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,11 +36,10 @@
 		</script>
 	</c:if>
 
-<!--incorrect current password error message -->
+	<!--incorrect current password error message -->
 	<script type="text/javascript">
 		function incorrectPassword() {
-			swal("Unsuccessful", "Current Password is incorrect",
-					"error");
+			swal("Unsuccessful", "Current Password is incorrect", "error");
 		}
 	</script>
 
@@ -35,7 +48,7 @@
 			window.onload = incorrectPassword;
 		</script>
 	</c:if>
-	
+
 	<!-- Password miss match error message -->
 	<script type="text/javascript">
 		function passwordmissmatch() {
@@ -49,8 +62,8 @@
 			window.onload = passwordmissmatch;
 		</script>
 	</c:if>
-	
-	
+
+
 	<div class="content-page">
 
 		<!-- Start content -->

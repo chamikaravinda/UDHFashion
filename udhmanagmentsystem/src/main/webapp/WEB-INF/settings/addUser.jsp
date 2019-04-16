@@ -2,17 +2,23 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
+
+	<%
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect("login");
+		} else {
+			User user = (User) session.getAttribute("user");
+			if (user.getRole().equals("casher")) {
+				response.sendRedirect("/error");
+			}
+
+		}
+	%>
 	<!-- added success message -->
 	<script type="text/javascript">
 		function addedsuccesfully() {
-			swal("Successful","User Adding Succesfully","success");
+			swal("Successful", "User Adding Succesfully", "success");
 		}
 	</script>
 
@@ -25,7 +31,7 @@
 	<!-- add error message -->
 	<script type="text/javascript">
 		function updateerror() {
-			swal("Unsuccessful","Unexpected Error occured","error");
+			swal("Unsuccessful", "Unexpected Error occured", "error");
 		}
 	</script>
 
@@ -38,7 +44,8 @@
 	<!-- Username taken error message -->
 	<script type="text/javascript">
 		function usernameerror() {
-			swal("Unsuccessful","Username already in use.Choose another username","error");
+			swal("Unsuccessful",
+					"Username already in use.Choose another username", "error");
 		}
 	</script>
 
@@ -51,7 +58,8 @@
 	<!-- Password miss match error message -->
 	<script type="text/javascript">
 		function passwordmissmatch() {
-			swal("Unsuccessful","Password and Confirm Password don't match","error");
+			swal("Unsuccessful", "Password and Confirm Password don't match",
+					"error");
 		}
 	</script>
 
