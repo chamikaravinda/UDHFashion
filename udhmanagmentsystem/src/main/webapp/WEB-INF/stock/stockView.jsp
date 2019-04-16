@@ -2,11 +2,23 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
 
+<%
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect("login");
+	} else {
+		User user = (User) session.getAttribute("user");
+		if (user.getRole().equals("casher")) {
+			response.sendRedirect("/error");
+		}
+
+	}
+%>
 <!-- Item delete success message -->
 <script type="text/javascript">
 	function deletesuccesfully() {
-		swal("Successful","Item Deleted Succesfully","success");
+		swal("Successful", "Item Deleted Succesfully", "success");
 	}
 </script>
 
@@ -19,7 +31,7 @@
 <!-- Item edit success message -->
 <script type="text/javascript">
 	function updateSuccesfully() {
-		swal("Successful","Item Updated Succesfully","success");
+		swal("Successful", "Item Updated Succesfully", "success");
 	}
 </script>
 
@@ -32,7 +44,7 @@
 <!-- Returned Items added successful message -->
 <script type="text/javascript">
 	function returnItemsAddedSuccesfully() {
-		swal("Successful","Retruned Items Added Succesfully","success");
+		swal("Successful", "Retruned Items Added Succesfully", "success");
 	}
 </script>
 
@@ -45,7 +57,7 @@
 <!--  Items added successful message -->
 <script type="text/javascript">
 	function ItemsAddedSuccesfully() {
-		swal("Successful","Item Added Succesfully","success");
+		swal("Successful", "Item Added Succesfully", "success");
 	}
 </script>
 
@@ -114,13 +126,19 @@
 											<tr>
 												<td>${result.itemCode}</td>
 												<td>${result.itemDescription}</td>
-												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.grossPrice}" /></td>
-												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.price}" /></td>
-												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.discount}" /></td>
-												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.netPrice}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##"
+														value="${result.grossPrice}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##"
+														value="${result.price}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##"
+														value="${result.discount}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##"
+														value="${result.netPrice}" /></td>
 												<td>${result.itemQuantity}</td>
-												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.netProfit}" /></td>
-												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.estimatedNetProfit}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##"
+														value="${result.netProfit}" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##"
+														value="${result.estimatedNetProfit}" /></td>
 												<td>${result.shopId}</td>
 												<td><form method="POST" action="editItem"
 														modelAttribute="item">

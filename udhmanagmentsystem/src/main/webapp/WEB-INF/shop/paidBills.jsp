@@ -8,7 +8,19 @@
 <%@page import="com.UDHFashion.udhmanagmentsystem.model.Shop"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
 
+<%
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect("login");
+	} else {
+		User user = (User) session.getAttribute("user");
+		if (user.getRole().equals("casher")) {
+			response.sendRedirect("/error");
+		}
+
+	}
+%>
 
 
 <!--  to sweet alerts-->
@@ -17,7 +29,7 @@
 <!-- cash pay success message -->
 <script type="text/javascript">
 	function CreditBillCashPaySuccesfull() {
-		swal("Successful","Credit Bill Paid By Cash Succesfully","success");
+		swal("Successful", "Credit Bill Paid By Cash Succesfully", "success");
 	}
 </script>
 
@@ -30,7 +42,7 @@
 <!-- cash pay success message -->
 <script type="text/javascript">
 	function CashPaySuccesfull() {
-		swal("Successful","Cash Payment Succesfull","success");
+		swal("Successful", "Cash Payment Succesfull", "success");
 	}
 </script>
 
@@ -43,7 +55,7 @@
 <!-- cheque pay success message -->
 <script type="text/javascript">
 	function ChequePaySuccesfull() {
-		swal("Successful","Cheque Payment Succesfull","success");
+		swal("Successful", "Cheque Payment Succesfull", "success");
 	}
 </script>
 
@@ -56,7 +68,7 @@
 <!-- cheque pay success message -->
 <script type="text/javascript">
 	function CreditBillChequePaySuccesfull() {
-		swal("Successful","Credit Bill Paid By Cheque Succesfully","success");
+		swal("Successful", "Credit Bill Paid By Cheque Succesfully", "success");
 	}
 </script>
 
@@ -81,7 +93,7 @@
 <!-- delete success message -->
 <script type="text/javascript">
 	function deletesuccesfully() {
-		swal("Successful","Credit Bill Deleted Succesfully","success");
+		swal("Successful", "Credit Bill Deleted Succesfully", "success");
 	}
 </script>
 
@@ -94,7 +106,7 @@
 <!-- delete unsuccess message -->
 <script type="text/javascript">
 	function deleteunsuccesfull() {
-		swal("Unsuccessful","Paid Bill Delete Unsuccesfull","error");
+		swal("Unsuccessful", "Paid Bill Delete Unsuccesfull", "error");
 	}
 </script>
 
@@ -160,7 +172,8 @@
 												<td>${result.billNo}</td>
 												<td>${result.billDate}</td>
 												<td>${result.shopName }</td>
-												<td>Rs.<fmt:formatNumber type="number" pattern="###.##" value="${result.billAmount }" /></td>
+												<td>Rs.<fmt:formatNumber type="number" pattern="###.##"
+														value="${result.billAmount }" /></td>
 												<td>${result.paymentDate }</td>
 												<td>${result.paymentMethod }</td>
 

@@ -11,7 +11,19 @@
 <%@page import="java.util.ArrayList"%>
 
 
+<%@ page import="com.UDHFashion.udhmanagmentsystem.model.User"%>
 
+<%
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect("login");
+	} else {
+		User user = (User) session.getAttribute("user");
+		if (user.getRole().equals("casher")) {
+			response.sendRedirect("/error");
+		}
+
+	}
+%>
 <div class="content-page">
 
 	<!-- Start content -->
@@ -47,8 +59,8 @@
 								<div class="row">
 									<div class="form-row col-md-5 ">
 										<label for="exampleInputEmail1">Bill No</label>
-										<form:input type="text"  class="form-control"
-											path="billNo" aria-describedby="emailHelp" placeholder=""
+										<form:input type="text" class="form-control" path="billNo"
+											aria-describedby="emailHelp" placeholder=""
 											required="required" />
 									</div>
 									<div class="form-row offset-md-1 col-md-5 ">
@@ -58,10 +70,11 @@
 											required="required" />
 
 									</div>
-									
-									<div class="form-group col-md-5"><br>
-										<label for="sel1">Shop Name</label> <form:select path="shopName"
-											class="form-control" id="shopId" required="required">
+
+									<div class="form-group col-md-5">
+										<br> <label for="sel1">Shop Name</label>
+										<form:select path="shopName" class="form-control" id="shopId"
+											required="required">
 
 											<c:forEach var="result" items="${shopList}">
 
@@ -72,18 +85,19 @@
 										</form:select>
 									</div>
 
-									<div class="form-row offset-md-1 col-md-5 "><br>										
-										<label for="exampleInputEmail1">Amount</label>
+									<div class="form-row offset-md-1 col-md-5 ">
+										<br> <label for="exampleInputEmail1">Amount</label>
 										<form:input type="text" path="billAmount" class="form-control"
 											aria-describedby="numberlHelp" placeholder=""
 											required="required" />
 
 									</div>
-									
-									<form:input type="hidden" path="id"/>
-									
-									<br/><br/>
-									
+
+									<form:input type="hidden" path="id" />
+
+									<br />
+									<br />
+
 									<div class="offset-md-5">
 										<button type="submit" class="btn btn-primary">Update
 											Bill</button>
