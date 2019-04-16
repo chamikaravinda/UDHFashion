@@ -154,6 +154,7 @@
 																<input type="hidden" name="billId" value="${result.billId}"> 
 																<input type="hidden" name="itemNo" value="${result.itemNo}">
 																<input type="hidden" name="qty" value="${result.qty}">
+																<input type="hidden" name="cashireId" value="${result.cashireId}">
 																<input type="hidden" name="amount" value="${result.amount}"> 
 																<input type="hidden" name="price" value="${result.price}"> 
 																<input type="hidden" name="reduseDiscount" value="${result.reduseDiscount}">
@@ -189,7 +190,7 @@
 
 				<!-- Start the  Return  Note  -->
 
-				<form method="POST" action="printNote">
+				<form method="POST" action="printNote" modelAttribute="print_item">
 
 					<div class="col-12" style="margin: 60px">
 						<div class="card mb-3">
@@ -223,7 +224,8 @@
 								</table>
 
 								<div style="margin-left: 150px">
-
+									
+									
 									<button type="submit" class="btn btn-primary">Print
 										Note</button>
 
