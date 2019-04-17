@@ -56,6 +56,7 @@ public class TempReturnBillItemDAOImpl implements TempReturnBillItemDAO {
 			billItems.setItemNo((String) row.get("itemNo"));
 
 			billItems.setQty((Integer) row.get("qty"));
+		//	billItems.setCashireId((Integer) row.get("cashireId"));   
 
 			billItems.setAmount((Double) row.get("amount"));
 

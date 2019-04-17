@@ -81,6 +81,8 @@ public class ITempReturnBillDAOImpl implements TempReturnBillDAO {
 						bill.setTotalDiscount(rs.getDouble("totalDiscount"));
 						bill.setBalance(rs.getDouble("balance"));
 						bill.setNoOfItem(rs.getInt("noOfItem"));
+						
+						
 
 						return bill;
 					}

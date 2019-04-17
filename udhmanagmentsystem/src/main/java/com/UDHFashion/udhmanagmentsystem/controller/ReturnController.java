@@ -3,6 +3,8 @@ package com.UDHFashion.udhmanagmentsystem.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import com.UDHFashion.udhmanagmentsystem.model.Billitems;
 import com.UDHFashion.udhmanagmentsystem.model.Item;
 import com.UDHFashion.udhmanagmentsystem.model.TempBill;
 import com.UDHFashion.udhmanagmentsystem.model.TempBillitems;
+import com.UDHFashion.udhmanagmentsystem.model.User;
 import com.UDHFashion.udhmanagmentsystem.service.BillDAO;
 import com.UDHFashion.udhmanagmentsystem.service.IBillItemDAO;
 import com.UDHFashion.udhmanagmentsystem.service.IItemDAO;
@@ -26,6 +29,7 @@ import com.UDHFashion.udhmanagmentsystem.service.TempBillDAO;
 import com.UDHFashion.udhmanagmentsystem.service.TempBillitemsDAO;
 import com.UDHFashion.udhmanagmentsystem.service.TempReturnBillDAO;
 import com.UDHFashion.udhmanagmentsystem.service.TempReturnBillItemDAO;
+import com.itextpdf.kernel.log.SystemOutCounter;
 
 @Controller
 public class ReturnController {
@@ -53,7 +57,7 @@ public class ReturnController {
 
 	@Autowired
 	PrintNoteItemDAO servicereturnPrintNoteitem;
-	
+
 	@Autowired
 	TempReturnBillDAO tempReturnbill;
 
@@ -77,10 +81,7 @@ public class ReturnController {
 
 		Bill billSearch = new Bill();
 		billSearch = serviceBill.getBillById(billId);
-		
-//		TempBill tempreturnBill= new TempBill();
-//		tempreturnBill =tempReturnbill.getTempReturnBillById(billId); //to update the UI after click return button
-		
+
 		TempBill tempBill = new TempBill();
 		tempBill.setId(billSearch.getId());
 		tempBill.setDate(billSearch.getDate());
@@ -90,7 +91,7 @@ public class ReturnController {
 		tempBill.setTotalDiscount(billSearch.getTotalDiscount());
 		tempBill.setNoOfItem(billSearch.getNoOfItem());
 
-		long tempId=serviceInsertReturnBill.insertTempReturnBill(tempBill);
+		long tempId = serviceInsertReturnBill.insertTempReturnBill(tempBill);
 
 		List<Billitems> billSearchitem = new ArrayList<Billitems>();
 		billSearchitem = serviceBillitem.getBillitem(billId);
@@ -99,7 +100,7 @@ public class ReturnController {
 
 		List<TempBillitems> bill_item = serviceInsertReturnBillitem.getTempReturnBillitem(billId);
 
-		TempBill bill = serviceInsertReturnBillitem.getTemBillById((int)tempId);
+		TempBill bill = serviceInsertReturnBillitem.getTemBillById((int) tempId);
 
 		redir.addFlashAttribute("bill_item", bill_item);
 		redir.addFlashAttribute("billSearch", bill);
@@ -117,10 +118,12 @@ public class ReturnController {
 
 		servicereturnPrintNoteitem.insertPrintNoteItem(returnBillItem);
 
+		System.out.println("Cashire ID :" + returnBillItem.getCashireId());
+
 		List<TempBillitems> return_bill_item = serviceReturnbillitem.getTempReturnBillitem(returnBillItem.getBillId());
 		List<Billitems> printNote_item = servicereturnPrintNoteitem.getAllPrintNoteItem();
 		TempBill bill = serviceInsertReturnBillitem.getTemBillById(returnBillItem.getBillId());
-		
+
 		redir.addFlashAttribute("bill_item", return_bill_item);
 		redir.addFlashAttribute("billSearch", bill);
 		redir.addFlashAttribute("printNote_item", printNote_item);
@@ -130,11 +133,16 @@ public class ReturnController {
 	}
 
 	@RequestMapping(value = "/printNote", method = RequestMethod.POST)
-	public String printNote(Model model) {
+	public ModelAndView printNote(ModelAndView model,HttpServletRequest request) {
+
+		User user = (User) request.getSession().getAttribute("user");
+		int cashireId = user.getId(); //get the current Cashire ID 
 
 		servicereturnPrintNoteitem.deleteTempReturnBillitem();
+		tempReturnbill.deleteTempReturnBill(cashireId);
 
-		return "home/dashboard";
+		model.setViewName("redirect:/returnNote");
+		return model;
 	}
 
 }
