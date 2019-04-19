@@ -48,18 +48,27 @@ public class BillItemsDAOImpl implements IBillItemDAO {
 			billItems.setItemNo((String) row.get("itemNo"));
 			billItems.setBillId((int) row.get("billId"));
 			billItems.setPrice((Double) row.get("price"));
-
 			billItems.setQty((Integer) row.get("qty"));
 			billItems.setReduseDiscount((Double) row.get("reduseDiscount"));
-
 			billItems.setAmount((Double) row.get("amount"));
-
 			result.add(billItems);
 		}
 
 	
 
 		return result;
+	}
+	
+	@Override
+	public boolean deleteBillitem(int id) {
+
+		int deleteTempReturnBillitem = jdbcTemplate.update(CommonConstants.DELETE_BILL_ITEM, id);
+
+		if (deleteTempReturnBillitem == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

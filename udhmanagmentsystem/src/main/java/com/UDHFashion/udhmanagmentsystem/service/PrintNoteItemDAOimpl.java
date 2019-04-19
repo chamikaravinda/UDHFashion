@@ -20,25 +20,20 @@ public class PrintNoteItemDAOimpl implements PrintNoteItemDAO {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public boolean insertPrintNoteItem(TempBillitems item) {
+	public boolean insertPrintNoteItem(TempBillitems item, int cashierID) {
 
-			try {
-				jdbcTemplate.update(CommonConstants.INSERT_PRINT_RETURN_BILL_ITEM_DETAILS, 
-						item.getItemNo(), 
-						item.getPrice(),
-						item.getQty(),
-						item.getBillId(),
-						item.getReduseDiscount(),
-						item.getAmount());
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
-			
+		try {
+			jdbcTemplate.update(CommonConstants.INSERT_PRINT_RETURN_BILL_ITEM_DETAILS, item.getId(), item.getItemNo(),
+					item.getPrice(), item.getQty(), item.getBillId(), item.getReduseDiscount(), item.getAmount(),
+					cashierID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 
 		}
 		System.out.println("Succefulyy added to the P return Bill item Table");
 		return true;
-		
+
 	}
 
 	@Override
@@ -60,26 +55,28 @@ public class PrintNoteItemDAOimpl implements PrintNoteItemDAO {
 			result.add(billItems);
 		}
 
-		System.out.println("Temp Return  bill item Bill ID :"+billId);
-		
+		System.out.println("Temp Return  bill item Bill ID :" + billId);
+
 		return result;
 	}
-	
+
 	@Override
-	public boolean deleteTempReturnBillitem() {
+	public boolean deleteTempReturnBillitem(int cashierID) {
 
-		int deleteTempReturnBillitem = jdbcTemplate.update(CommonConstants.DELETE_PRINT_RETURN_BILL_ITEM_DETAILS);
-
-		if (deleteTempReturnBillitem == 1) {
+		try {
+			int deleteTempReturnBillitem = jdbcTemplate.update(CommonConstants.DELETE_PRINT_RETURN_BILL_ITEM_DETAILS,
+					cashierID);
 			return true;
-		} else {
+		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
+
 	}
 
 	@Override
-	public List<Billitems> getAllPrintNoteItem() {
-		List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.GET_PRINT_RETURN_BILL_ITEM_DETAILS);
+	public List<Billitems> getAllPrintNoteItem(int casherID) {
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(CommonConstants.GET_PRINT_RETURN_BILL_ITEM_DETAILS,casherID);
 
 		List<Billitems> result = new ArrayList<Billitems>();
 
@@ -92,6 +89,7 @@ public class PrintNoteItemDAOimpl implements PrintNoteItemDAO {
 			billitems.setQty((Integer) row.get("qty"));
 			billitems.setBillId((Integer) row.get("billId"));
 			billitems.setAmount((Double) row.get("amount"));
+			billitems.setReduseDiscount((Double) row.get("reduseDiscount"));
 
 			result.add(billitems);
 		}

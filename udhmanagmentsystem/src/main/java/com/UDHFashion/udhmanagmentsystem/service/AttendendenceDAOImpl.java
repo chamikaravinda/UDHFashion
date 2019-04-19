@@ -201,11 +201,8 @@ public class AttendendenceDAOImpl implements IAttendenceDAO {
 					new Object[] { dateDB }, new BeanPropertyRowMapper(Attendence.class));
 			return todayAttendence;
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
 			return null;
 		} catch (Exception e) {
-
-			e.printStackTrace();
 			return null;
 		}
 	}

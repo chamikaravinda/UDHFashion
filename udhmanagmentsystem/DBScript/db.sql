@@ -349,7 +349,7 @@ CREATE TABLE temp_return_bill_items
 	billId  int,
 	reduseDiscount  DOUBLE,
 	amount DOUBLE,
-	
+	cashireId int,
 	
 	
 	
@@ -369,11 +369,7 @@ CREATE TABLE print_note_items
 	billId  int,
 	reduseDiscount  DOUBLE,
 	amount DOUBLE,
-	
-	
-	
-	
-	
+	cashireId int,
 	
 	CONSTRAINT printNote_items_pk PRIMARY KEY (id)
 	

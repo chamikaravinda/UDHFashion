@@ -10,10 +10,10 @@ public interface PrintNoteItemDAO {
 
 	public abstract List<Billitems> getPrintNoteItem(int billId);
 
-	public abstract List<Billitems> getAllPrintNoteItem();
+	boolean insertPrintNoteItem(TempBillitems item, int cashierID);
 
-	public boolean deleteTempReturnBillitem();
+	boolean deleteTempReturnBillitem(int cashierID);
 
-	boolean insertPrintNoteItem(TempBillitems item);
+	List<Billitems> getAllPrintNoteItem(int casherID);
 
 }

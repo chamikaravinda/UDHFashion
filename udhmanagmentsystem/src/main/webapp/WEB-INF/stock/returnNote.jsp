@@ -2,23 +2,44 @@
 <%@ include file="../includes/menuAndSideBar.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-<script>
-	function validator(){
-		
-		var grossPrice = document.getElementById("grossPrice").value;
-		var tagAmount = document.getElementById("tagAmount").value;
-		var discount = document.getElementById("discount").value;
-		var netPrice = document.getElementById("netPrice").value;
-		var quantity = document.getElementById("quantity").value;
-		
-		if( grossPrice == null || grossPrice == "" ){
-			alert("You cannot keep the gross price value "))
-		}
-		
-		}		
+<!-- Bill search unexpected error -->
+<script type="text/javascript">
+	function unExpectedError() {
+		swal("Unsuccessful", "Unexpected Error Occured while searching the bill", "error");
 	}
 </script>
+
+<c:if test="${error == 1}">
+	<script type="text/javascript">
+		window.onload = unExpectedError;
+	</script>
+</c:if>
+
+<!-- Bill invalid error -->
+<script type="text/javascript">
+	function invalidBill() {
+		swal("Unsuccessful", "No Data is available for entered bill Number", "error");
+	}
+</script>
+
+<c:if test="${error == 2}">
+	<script type="text/javascript">
+		window.onload = invalidBill;
+	</script>
+</c:if>
+
+<!-- Bill Print unexpected error -->
+<script type="text/javascript">
+	function unExpectedErrorPrint() {
+		swal("Unsuccessful", "Unexpected Error occured while printing the bill", "error");
+	}
+</script>
+
+<c:if test="${error == 3}">
+	<script type="text/javascript">
+		window.onload = unExpectedErrorPrint;
+	</script>
+</c:if>
 
 <div class="content-page">
 
@@ -226,8 +247,8 @@
 								<div style="margin-left: 150px">
 									
 									
-									<button type="submit" class="btn btn-primary">Print
-										Note</button>
+									<a href="printNotete?id=${billSearch.id}" class="btn btn-primary">Print
+										Note</a>
 
 								</div>
 

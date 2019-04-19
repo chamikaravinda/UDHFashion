@@ -15,4 +15,6 @@ public interface BillDAO {
 
 	public abstract Bill getBillById(int id);
 
+	boolean updateBill(Bill bill);
+
 }

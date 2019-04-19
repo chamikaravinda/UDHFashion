@@ -24,12 +24,13 @@ public class TempReturnBillItemDAOImpl implements TempReturnBillItemDAO {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public boolean insertTempReturnBillItems(List<Billitems> items) {
+	public boolean insertTempReturnBillItems(List<Billitems> items, int cashierID) {
 
 		for (Billitems item : items) {
 			try {
-				jdbcTemplate.update(CommonConstants.INSERT_TEMP_RETURN_BILL_ITEM_DETAILS, item.getItemNo(),
-						item.getPrice(), item.getQty(), item.getBillId(), item.getReduseDiscount(), item.getAmount());
+				jdbcTemplate.update(CommonConstants.INSERT_TEMP_RETURN_BILL_ITEM_DETAILS, item.getId(),
+						item.getItemNo(), item.getPrice(), item.getQty(), item.getBillId(), item.getReduseDiscount(),
+						item.getAmount(), cashierID);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
@@ -52,13 +53,13 @@ public class TempReturnBillItemDAOImpl implements TempReturnBillItemDAO {
 
 			TempBillitems billItems = new TempBillitems();
 			billItems.setId((int) row.get("id"));
-			billItems.setBillId((int) row.get("billId"));
 			billItems.setItemNo((String) row.get("itemNo"));
-
+			billItems.setBillId((int) row.get("billId"));
+			billItems.setPrice((Double) row.get("price"));
 			billItems.setQty((Integer) row.get("qty"));
-		//	billItems.setCashireId((Integer) row.get("cashireId"));   
-
+			billItems.setReduseDiscount((Double) row.get("reduseDiscount"));
 			billItems.setAmount((Double) row.get("amount"));
+			billItems.setCashireId((int) row.get("cashireId"));
 
 			result.add(billItems);
 		}
@@ -76,6 +77,20 @@ public class TempReturnBillItemDAOImpl implements TempReturnBillItemDAO {
 		if (deleteTempReturnBillitem == 1) {
 			return true;
 		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteTempReturnBillitems(int cashierID) {
+
+		try {
+			int deleteTempReturnBillitem = jdbcTemplate.update(CommonConstants.DELETE_TEMP_RETURN_BILL_ITEMS_CASHIER_ID,
+					cashierID);
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -104,6 +119,5 @@ public class TempReturnBillItemDAOImpl implements TempReturnBillItemDAO {
 				});
 
 	}
-
 
 }

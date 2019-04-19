@@ -15,4 +15,6 @@ public interface TempReturnBillDAO {
 
 	public abstract TempBill getTempReturnBillById(int id);
 
+	boolean updateBillDetails(TempBill tempBill);
+
 }

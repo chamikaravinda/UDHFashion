@@ -103,7 +103,7 @@
 										<tr>
 
 											<th>Item No</th>
-											<th>Price</th>
+											<th>Unit Price</th>
 											<th>Quantity</th>
 											<th>Reduce Discount</th>
 											<th>Amount</th>
@@ -121,7 +121,7 @@
 												<c:set var="total" value="${0}" />
 
 												<c:forEach var="result" items="${itemList1}">
-													<c:set var="total" value="${total + result.price}" />
+													<c:set var="total" value="${total + (result.price * result.qty  )}" />
 												</c:forEach>
 												<c:set var="totalDis" value="${0}" />
 												<c:forEach var="resultDis" items="${itemList1}">

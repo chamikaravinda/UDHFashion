@@ -17,13 +17,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.UDHFashion.udhmanagmentsystem.model.Bill;
 import com.UDHFashion.udhmanagmentsystem.model.Billitems;
+import com.UDHFashion.udhmanagmentsystem.model.DailyBussiness;
 import com.UDHFashion.udhmanagmentsystem.model.Item;
 import com.UDHFashion.udhmanagmentsystem.model.TempBill;
 import com.UDHFashion.udhmanagmentsystem.model.TempBillitems;
 import com.UDHFashion.udhmanagmentsystem.model.User;
 import com.UDHFashion.udhmanagmentsystem.service.BillDAO;
+import com.UDHFashion.udhmanagmentsystem.service.DailyBussinessDAOImpl;
 import com.UDHFashion.udhmanagmentsystem.service.IBillItemDAO;
 import com.UDHFashion.udhmanagmentsystem.service.IItemDAO;
+import com.UDHFashion.udhmanagmentsystem.service.ItemDAOImpl;
 import com.UDHFashion.udhmanagmentsystem.service.PrintNoteItemDAO;
 import com.UDHFashion.udhmanagmentsystem.service.TempBillDAO;
 import com.UDHFashion.udhmanagmentsystem.service.TempBillitemsDAO;
@@ -44,16 +47,10 @@ public class ReturnController {
 	IBillItemDAO serviceBillitem;
 
 	@Autowired
-	TempReturnBillDAO serviceInsertReturnBill;
+	TempReturnBillDAO serviceReturnBill;
 
 	@Autowired
-	TempReturnBillItemDAO serviceInsertReturnBillitem;
-
-	@Autowired
-	TempReturnBillItemDAO serviceReturnbillitem;
-
-	@Autowired
-	TempReturnBillItemDAO serviceDeleteReturnBillitem;
+	TempReturnBillItemDAO serviceReturnBillitem;
 
 	@Autowired
 	PrintNoteItemDAO servicereturnPrintNoteitem;
@@ -61,68 +58,109 @@ public class ReturnController {
 	@Autowired
 	TempReturnBillDAO tempReturnbill;
 
+	@Autowired
+	ItemDAOImpl itemService;
+
+	@Autowired
+	DailyBussinessDAOImpl serviceDailyBussines;
+
+	// show return page
 	@RequestMapping(value = "/returnNote", method = RequestMethod.GET)
 	public String returnNote(Model model) {
 
 		return "stock/returnNote";
 	}
 
-	@RequestMapping(value = "/return", method = RequestMethod.GET)
-	public String returnItemView(Model model) {
-
-		List<Item> item = iItem.getAllItemDetails();
-		model.addAttribute("itemList", item);
-
-		return "stock/returnItem";
-	}
-
+	// search bill
 	@RequestMapping(value = "/billSearch", method = RequestMethod.POST)
-	public ModelAndView billSearch(@RequestParam("billId") int billId, ModelAndView model, RedirectAttributes redir) {
+	public ModelAndView billSearch(@RequestParam("billId") int billId, ModelAndView model, RedirectAttributes redir,
+			HttpServletRequest request) {
 
-		Bill billSearch = new Bill();
-		billSearch = serviceBill.getBillById(billId);
+		User user = (User) request.getSession().getAttribute("user");
+		int cashireId = user.getId();
 
-		TempBill tempBill = new TempBill();
-		tempBill.setId(billSearch.getId());
-		tempBill.setDate(billSearch.getDate());
-		tempBill.setCashireId(billSearch.getCashireId());
-		tempBill.setGrossAmount(billSearch.getGrossAmount());
-		tempBill.setNetAmount(billSearch.getNetAmount());
-		tempBill.setTotalDiscount(billSearch.getTotalDiscount());
-		tempBill.setNoOfItem(billSearch.getNoOfItem());
+		if (serviceReturnBill.deleteTempReturnBill(cashireId)) {
+			if (serviceReturnBillitem.deleteTempReturnBillitems(cashireId)) {
+				if (servicereturnPrintNoteitem.deleteTempReturnBillitem(cashireId)) {
 
-		long tempId = serviceInsertReturnBill.insertTempReturnBill(tempBill);
+					Bill billSearch = new Bill();
+					billSearch = serviceBill.getBillById(billId);
+					if (billSearch != null) {
 
-		List<Billitems> billSearchitem = new ArrayList<Billitems>();
-		billSearchitem = serviceBillitem.getBillitem(billId);
+						TempBill tempBill = new TempBill();
+						tempBill.setId(billSearch.getId());
+						tempBill.setDate(billSearch.getDate());
+						tempBill.setCashireId(billSearch.getCashireId());
+						tempBill.setGrossAmount(billSearch.getGrossAmount());
+						tempBill.setNetAmount(billSearch.getNetAmount());
+						tempBill.setTotalDiscount(billSearch.getTotalDiscount());
+						tempBill.setNoOfItem(billSearch.getNoOfItem());
 
-		serviceInsertReturnBillitem.insertTempReturnBillItems(billSearchitem);
+						long tempId = serviceReturnBill.insertTempReturnBill(tempBill);
 
-		List<TempBillitems> bill_item = serviceInsertReturnBillitem.getTempReturnBillitem(billId);
+						List<Billitems> billSearchitem = new ArrayList<Billitems>();
+						billSearchitem = serviceBillitem.getBillitem(billId);
 
-		TempBill bill = serviceInsertReturnBillitem.getTemBillById((int) tempId);
+						serviceReturnBillitem.insertTempReturnBillItems(billSearchitem, cashireId);
 
-		redir.addFlashAttribute("bill_item", bill_item);
-		redir.addFlashAttribute("billSearch", bill);
-		model.setViewName("redirect:/returnNote");
-		return model;
+						List<TempBillitems> bill_item = serviceReturnBillitem.getTempReturnBillitem(billId);
+
+						TempBill bill = serviceReturnBillitem.getTemBillById((int) tempId);
+
+						redir.addFlashAttribute("bill_item", bill_item);
+						redir.addFlashAttribute("billSearch", bill);
+						model.setViewName("redirect:/returnNote");
+						return model;
+					} else {
+						redir.addFlashAttribute("error", 2);
+						model.setViewName("redirect:/returnNote");
+						return model;
+					}
+
+				} else {
+					redir.addFlashAttribute("error", 1);
+					model.setViewName("redirect:/returnNote");
+					return model;
+				}
+			} else {
+				redir.addFlashAttribute("error", 1);
+				model.setViewName("redirect:/returnNote");
+				return model;
+			}
+		} else {
+			redir.addFlashAttribute("error", 1);
+			model.setViewName("redirect:/returnNote");
+			return model;
+		}
 	}
 
+	// add item to return note
 	@RequestMapping(value = "/toReturnNote", method = RequestMethod.POST)
 	public ModelAndView addToReturnNote(@ModelAttribute("item") TempBillitems returnBillItem, ModelAndView model,
-			RedirectAttributes redir) {
+			RedirectAttributes redir, HttpServletRequest request) {
 
-		serviceDeleteReturnBillitem.deleteTempReturnBillitem(returnBillItem.getId());
+		User user = (User) request.getSession().getAttribute("user");
+		int cashireId = user.getId();
 
-		// insert delete item to the printNote table have to write code
+		serviceReturnBillitem.deleteTempReturnBillitem(returnBillItem.getId());
 
-		servicereturnPrintNoteitem.insertPrintNoteItem(returnBillItem);
+		servicereturnPrintNoteitem.insertPrintNoteItem(returnBillItem, cashireId);
 
 		System.out.println("Cashire ID :" + returnBillItem.getCashireId());
 
-		List<TempBillitems> return_bill_item = serviceReturnbillitem.getTempReturnBillitem(returnBillItem.getBillId());
-		List<Billitems> printNote_item = servicereturnPrintNoteitem.getAllPrintNoteItem();
-		TempBill bill = serviceInsertReturnBillitem.getTemBillById(returnBillItem.getBillId());
+		List<TempBillitems> return_bill_item = serviceReturnBillitem.getTempReturnBillitem(returnBillItem.getBillId());
+		List<Billitems> printNote_item = servicereturnPrintNoteitem.getAllPrintNoteItem(cashireId);
+		TempBill bill = serviceReturnBillitem.getTemBillById(returnBillItem.getBillId());
+
+		// update Tempory bill
+
+		bill.setGrossAmount(bill.getGrossAmount() - (returnBillItem.getPrice() * returnBillItem.getQty()));
+		bill.setNetAmount(bill.getNetAmount() - (returnBillItem.getAmount()));
+		bill.setTotalDiscount(bill.getTotalDiscount() - returnBillItem.getReduseDiscount());
+		bill.setNoOfItem(bill.getNoOfItem() - returnBillItem.getQty());
+		bill.setBalance(bill.getBalance() + bill.getNetAmount());
+
+		serviceReturnBill.updateBillDetails(bill);
 
 		redir.addFlashAttribute("bill_item", return_bill_item);
 		redir.addFlashAttribute("billSearch", bill);
@@ -132,17 +170,85 @@ public class ReturnController {
 
 	}
 
-	@RequestMapping(value = "/printNote", method = RequestMethod.POST)
-	public ModelAndView printNote(ModelAndView model,HttpServletRequest request) {
+	// add return items to stock
+	@RequestMapping(value = "/return", method = RequestMethod.GET)
+	public String returnItemView(Model model) {
+
+		List<Item> item = iItem.getAllItemDetails();
+		model.addAttribute("itemList", item);
+
+		return "stock/returnItem";
+	}
+
+	@RequestMapping(value = "/printNotete", method = RequestMethod.GET)
+	public ModelAndView printNote(@RequestParam("id") int billID, ModelAndView model, HttpServletRequest request,
+			RedirectAttributes redir) {
 
 		User user = (User) request.getSession().getAttribute("user");
-		int cashireId = user.getId(); //get the current Cashire ID 
+		int cashireId = user.getId();
 
-		servicereturnPrintNoteitem.deleteTempReturnBillitem();
-		tempReturnbill.deleteTempReturnBill(cashireId);
+		// update origina bill
+		TempBill bill = serviceReturnBillitem.getTemBillById(billID);
 
-		model.setViewName("redirect:/returnNote");
-		return model;
+		Bill updatingBill = serviceBill.getBillById(bill.getId());
+
+		updatingBill.setBalance(bill.getBalance());
+		updatingBill.setDate(bill.getDate());
+		updatingBill.setCashireId(bill.getCashireId());
+		updatingBill.setGrossAmount(bill.getGrossAmount());
+		updatingBill.setNetAmount(bill.getNetAmount());
+		updatingBill.setTotalDiscount(bill.getTotalDiscount());
+		updatingBill.setBalance(bill.getBalance());
+		updatingBill.setNoOfItem(bill.getNoOfItem());
+		updatingBill.setId(bill.getId());
+
+		if (serviceBill.updateBill(updatingBill)) {
+			// update original bill items
+
+			List<Billitems> printNote_item = servicereturnPrintNoteitem.getAllPrintNoteItem(cashireId);
+
+			double bussinessAmount = 0;
+			double netProfite = 0;
+
+			for (Billitems item : printNote_item) {
+				serviceBillitem.deleteBillitem(item.getId());
+				Item originalitem = itemService.getItemById(item.getItemNo());
+				netProfite = netProfite+(originalitem.getNetProfit() * item.getQty());
+				bussinessAmount=bussinessAmount+ item.getAmount();
+			}
+
+			// update daily profite
+			DailyBussiness dailyBussiness = new DailyBussiness();
+			dailyBussiness.setDate(bill.getDate());
+			dailyBussiness.setBussinesAmount(-(bussinessAmount));
+			dailyBussiness.setExpenseAmount(0);
+			dailyBussiness.setNetProfite(-netProfite);
+			dailyBussiness.setReturnAmount(bussinessAmount);
+
+			if (serviceDailyBussines.updateDailyEntry(dailyBussiness)) {
+				if (serviceReturnBill.deleteTempReturnBill(cashireId)) {
+					if (serviceReturnBillitem.deleteTempReturnBillitems(cashireId)) {
+						List<Billitems> returningItems = servicereturnPrintNoteitem.getAllPrintNoteItem(cashireId);
+						if (servicereturnPrintNoteitem.deleteTempReturnBillitem(cashireId)) {
+							model.addObject("items", returningItems);
+							model.setViewName("ReturnNoteInvoice");
+							return model;
+						}
+					}
+				}
+
+			}
+
+			redir.addFlashAttribute("error", 3);
+			model.setViewName("redirect:/returnNote");
+			return model;
+
+		} else {
+			redir.addFlashAttribute("error", 3);
+			model.setViewName("redirect:/returnNote");
+			return model;
+		}
+
 	}
 
 }

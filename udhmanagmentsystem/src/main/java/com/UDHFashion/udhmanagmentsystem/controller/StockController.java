@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.UDHFashion.udhmanagmentsystem.model.Barcode;
 import com.UDHFashion.udhmanagmentsystem.model.Item;
 import com.UDHFashion.udhmanagmentsystem.model.Shop;
+import com.UDHFashion.udhmanagmentsystem.model.updateShop;
 import com.UDHFashion.udhmanagmentsystem.service.IBarcodeDAO;
 import com.UDHFashion.udhmanagmentsystem.service.IItemDAO;
 import com.UDHFashion.udhmanagmentsystem.service.IShopDAO;
@@ -143,9 +144,14 @@ public class StockController {
 
 	@RequestMapping(value = "/stockView", method = RequestMethod.GET)
 	public String ShowStockView(Model model) {
-		List<Item> item = iItem.getAllItemDetails();
-
-		model.addAttribute("stockList", item);
+		List<Item> items = iItem.getAllItemDetails();
+		for(Item item :items) {
+			
+			updateShop shop =iShop.getShopById(item.getShopId());
+			item.setShopName(shop.getName());
+			
+		}
+		model.addAttribute("stockList", items);
 
 		return "stock/stockView";
 	}

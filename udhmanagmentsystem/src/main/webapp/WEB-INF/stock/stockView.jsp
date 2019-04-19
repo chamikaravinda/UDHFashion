@@ -113,7 +113,7 @@
 											<th>Quantity</th>
 											<th>Net Profit</th>
 											<th>Estimated Net Profit</th>
-											<th>Shop Id</th>
+											<th>Shop</th>
 											<td><span><i class="fa fa-pencil-square"
 													aria-hidden="true"></i></span></td>
 											<td><span><i class="fa fa-trash"
@@ -139,7 +139,7 @@
 														value="${result.netProfit}" /></td>
 												<td>Rs.<fmt:formatNumber type="number" pattern="###.##"
 														value="${result.estimatedNetProfit}" /></td>
-												<td>${result.shopId}</td>
+												<td>${result.shopName}</td>
 												<td><form method="POST" action="editItem"
 														modelAttribute="item">
 														<input name="itemCode" type="hidden"

@@ -207,8 +207,8 @@ public class SalesController {
 		tempBillitems.setItemNo(itemList.getItemCode());
 		tempBillitems.setPrice(itemList.getPrice());
 		tempBillitems.setQty(quantity);
-		tempBillitems.setReduseDiscount(itemList.getDiscount());
-		tempBillitems.setAmount(tempBillitems.getPrice() * quantity - tempBillitems.getReduseDiscount() * quantity);
+		tempBillitems.setReduseDiscount(itemList.getDiscount() * quantity);
+		tempBillitems.setAmount(tempBillitems.getPrice() * quantity - tempBillitems.getReduseDiscount());
 		tempBillitems.setCashireId(cashireId);
 
 		// System.out.println("User ID is : "+tempBillitems.getCashireId());

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -15,6 +16,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 import com.UDHFashion.udhmanagmentsystem.model.Bill;
 import com.UDHFashion.udhmanagmentsystem.model.Item;
+import com.UDHFashion.udhmanagmentsystem.model.TempBill;
 import com.UDHFashion.udhmanagmentsystem.util.CommonConstants;
 import com.mysql.jdbc.Statement;
 
@@ -82,26 +84,48 @@ public class IBillDAOImpl implements BillDAO {
 	@Override
 	public Bill getBillById(int id) {
 
-		return (Bill) jdbcTemplate.queryForObject(CommonConstants.GET_BILL_BY_NO, new Object[] { id },
-				new RowMapper<Bill>() {
+		try {
+			return (Bill) jdbcTemplate.queryForObject(CommonConstants.GET_BILL_BY_NO, new Object[] { id },
+					new RowMapper<Bill>() {
 
-					@Override
-					public Bill mapRow(ResultSet rs, int rwNumber) throws SQLException {
-						Bill bill = new Bill();
+						@Override
+						public Bill mapRow(ResultSet rs, int rwNumber) throws SQLException {
+							Bill bill = new Bill();
 
-						bill.setId(rs.getInt("id"));
-						bill.setDate(rs.getString("date"));
-						bill.setCashireId(rs.getInt("cashireId"));
-						bill.setGrossAmount(rs.getDouble("grossAmount"));
-						bill.setNetAmount(rs.getDouble("netAmount"));
-						bill.setTotalDiscount(rs.getDouble("totalDiscount"));
-						bill.setBalance(rs.getDouble("balance"));
-						bill.setNoOfItem(rs.getInt("noOfItem"));
+							bill.setId(rs.getInt("id"));
+							bill.setDate(rs.getString("date"));
+							bill.setCashireId(rs.getInt("cashireId"));
+							bill.setGrossAmount(rs.getDouble("grossAmount"));
+							bill.setNetAmount(rs.getDouble("netAmount"));
+							bill.setTotalDiscount(rs.getDouble("totalDiscount"));
+							bill.setBalance(rs.getDouble("balance"));
+							bill.setNoOfItem(rs.getInt("noOfItem"));
 
-						return bill;
-					}
-				});
+							return bill;
+						}
+					});
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("No bill for the number");
+			return null;
+		}
 
+	}
+
+	@Override
+	public boolean updateBill(Bill bill) {
+
+		int updateShop = jdbcTemplate.update(CommonConstants.UPDATE_BILL_DETAILS, bill.getDate(), bill.getCashireId(),
+				bill.getGrossAmount(), bill.getNetAmount(), bill.getTotalDiscount(), bill.getBalance(),
+				bill.getNoOfItem(), bill.getId());
+
+		if (updateShop == 1) {
+
+			return true;
+
+		} else {
+
+			return false;
+		}
 	}
 
 }

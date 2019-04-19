@@ -10,6 +10,7 @@ public interface IBillItemDAO {
 	
 	public boolean insertBillItems(ArrayList<Billitems> items);
 	public abstract List<Billitems>getBillitem(int billId);
+	boolean deleteBillitem(int id);
 	
 	
 

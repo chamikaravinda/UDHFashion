@@ -11,10 +11,13 @@ public interface TempReturnBillItemDAO {
 
 	public abstract List<TempBillitems> getTempReturnBillitem(int billId);
 
-	boolean insertTempReturnBillItems(List<Billitems> items);
 
 	boolean deleteTempReturnBillitem(int id);
 
 	TempBill getTemBillById(int id);
+
+	boolean deleteTempReturnBillitems(int cashierID);
+
+	boolean insertTempReturnBillItems(List<Billitems> items, int cashierID);
 
 }

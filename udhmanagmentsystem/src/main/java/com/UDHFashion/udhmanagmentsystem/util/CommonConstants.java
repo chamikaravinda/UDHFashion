@@ -113,12 +113,14 @@ public class CommonConstants {
 	public final static String INSERT_BILL_DETAILS = "INSERT INTO bill(date,cashireId,grossAmount,netAmount,totalDiscount,balance,noOfItem,returnAmount ) VALUES(?,?,?,?,?,?,?,?)";
 	public final static String GET_ALL_BILL_DETAILS = "SELECT * FROM bill";
 	public final static String DELETE_BILL_DETAILS_ID = "DELETE FROM bill WHERE cashireId= ?";
-
 	public final static String GET_BILL_BY_NO = "SELECT * FROM bill WHERE id = ?";
+	public final static String UPDATE_BILL_DETAILS = "UPDATE bill set date=?,cashireId=?,grossAmount=?,netAmount=?,totalDiscount=?,balance=?,noOfItem=? WHERE id=?";
 
+	
 	/*-------------------------- Bill items --------------------------------------*/
 	public final static String INSERT_BILL_ITEMS = "INSERT INTO bill_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
 	public final static String GET_BILLITEM_DETAILS = "SELECT * FROM bill_items WHERE billId=?";
+	public final static String DELETE_BILL_ITEM = "DELETE FROM bill_items WHERE id= ?";
 	
 
 	/*---------------------------Daily Business-----------------------------------*/
@@ -156,10 +158,10 @@ public class CommonConstants {
   
 	/*-------------PritnNoteReturnItems---------------------------------*/
 	
-	public final static String INSERT_PRINT_RETURN_BILL_ITEM_DETAILS = "INSERT INTO  print_note_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
-	public final static String GET_PRINT_RETURN_BILL_ITEM_DETAILS = "SELECT * FROM  print_note_items ";
+	public final static String INSERT_PRINT_RETURN_BILL_ITEM_DETAILS = "INSERT INTO  print_note_items(id,itemNo,price,qty,billId,reduseDiscount,amount,cashireId)VALUES(?,?,?,?,?,?,?,?)";
+	public final static String GET_PRINT_RETURN_BILL_ITEM_DETAILS = "SELECT * FROM  print_note_items WHERE cashireId=? ";
 	
-	public final static String DELETE_PRINT_RETURN_BILL_ITEM_DETAILS="DELETE FROM  print_note_items";
+	public final static String DELETE_PRINT_RETURN_BILL_ITEM_DETAILS="DELETE FROM  print_note_items WHERE cashireId=?";
 	
 
 
@@ -168,13 +170,15 @@ public class CommonConstants {
 	public final static String GET_ALL_TEMP_RETURN_BILL_DETAILS = "SELECT * FROM temp_return_bill where cashireId=?";
 	public final static String DELETE_TEMP_RETURN_BILL_DETAILS_ID = "DELETE FROM temp_return_bill WHERE cashireId= ?";
 	public final static String GET_TEM_BILL_BY_ID = "SELECT * FROM temp_return_bill WHERE id = ?";
+	public final static String UPDATE_TEMP_RETURN_BILL_DETAILS = "UPDATE temp_return_bill set date=?,cashireId=?,grossAmount=?,netAmount=?,totalDiscount=?,balance=?,noOfItem=? WHERE id=?";
 
 
 	/*---------------------------Temporary Return Bill Items-------------------------------*/
 	
 	
-	public final static String INSERT_TEMP_RETURN_BILL_ITEM_DETAILS = "INSERT INTO temp_return_bill_items(itemNo,price,qty,billId,reduseDiscount,amount)VALUES(?,?,?,?,?,?)";
+	public final static String INSERT_TEMP_RETURN_BILL_ITEM_DETAILS = "INSERT INTO temp_return_bill_items(id,itemNo,price,qty,billId,reduseDiscount,amount,cashireId)VALUES(?,?,?,?,?,?,?,?)";
 	public final static String GET_TEMP_RETURN_BILL_ITEM_DETAILS = "SELECT * FROM temp_return_bill_items WHERE billId=?";	
 	public final static String DELETE_TEMP_RETURN_BILL_ITEM_DETAILS="DELETE FROM temp_return_bill_items WHERE id= ?";
+	public final static String DELETE_TEMP_RETURN_BILL_ITEMS_CASHIER_ID = "DELETE FROM temp_return_bill_items WHERE cashireId= ?";
 
 }
